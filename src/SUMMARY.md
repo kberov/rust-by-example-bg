@@ -4,7 +4,7 @@
 
 - [Здравей Свят](hello.md)
     - [Коментари](hello/comment.md)
-    - [Форматиран изход на екрана](hello/print.md)
+    - [Форматиран изход](hello/print.md)
         - [Debug](hello/print/print_debug.md)
         - [Display](hello/print/print_display.md)
             - [Проверка: Списък](hello/print/print_display/testcase_list.md)

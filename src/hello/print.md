@@ -1,96 +1,99 @@
-# Formatted print
+# Форматиране
 
-Printing is handled by a series of [`macros`][macros] defined in
-[`std::fmt`][fmt] some of which include:
+Отпечатването на текст в конзолата се управлява от набор [`макроси`][macros], описани в пакета [`std::fmt`][fmt].
+Някои от тях са:
 
-* `format!`: write formatted text to [`String`][string]
-* `print!`: same as `format!` but the text is printed to the console
+* `format!`: пише форматиран текст в [`String`][string]
+* `print!`: също като `format!`, но текстът бива изведен на конзолата
   (io::stdout).
-* `println!`: same as `print!` but a newline is appended.
-* `eprint!`: same as `print!` but the text is printed to the standard error
-  (io::stderr).
-* `eprintln!`: same as `eprint!` but a newline is appended.
+* `println!`: като `print!`, но накрая се добавя и нов ред.
+* `eprint!`: също като `print!`, но текстът се отпечатва в потока за 
+стандартни грешки  (io::stderr).
+* `eprintln!`: също като `eprint!` но накрая се добавя и нов ред. 
 
-All parse text in the same fashion. As a plus, Rust checks formatting
-correctness at compile time.
+Всички макроси обработват текста по един и същи начин. Освен това Ръст
+проверява правилността на форматирането по време на компилиране. 
 
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
-    // In general, the `{}` will be automatically replaced with any
-    // arguments. These will be stringified.
+    // Знаците `{}` ще бъдат автоматично заменени с каквито и да са подадени
+    // аргументи. А самите аргументи ще бъдат превърнати в низове.
     println!("{} days", 31);
 
-    // Positional arguments can be used. Specifying an integer inside `{}`
-    // determines which additional argument will be replaced. Arguments start
-    // at 0 immediately after the format string.
-    println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
+    // Може да се използват местата на аргументите. Указвайки число между
+    // `{}`, определяте кой по ред аргумент да бъде сложен там
+    // Броенето на аргументите започва от 0 непосредствено след 
+    // форматирания низ.
+    println!("{0}, това е {1}. {1}, това е {0}", "Alice", "Bob");
 
-    // As can named arguments.
+    // Както и именувани аргументи.
     println!("{subject} {verb} {object}",
-             object="the lazy dog",
-             subject="the quick brown fox",
-             verb="jumps over");
+             object="мързеливото куче",
+             subject="бързата кафява котка",
+             verb="скача върху");
 
-    // Different formatting can be invoked by specifying the format character
-    // after a `:`.
-    println!("Base 10:               {}",   69420); // 69420
-    println!("Base 2 (binary):       {:b}", 69420); // 10000111100101100
-    println!("Base 8 (octal):        {:o}", 69420); // 207454
-    println!("Base 16 (hexadecimal): {:x}", 69420); // 10f2c
-    println!("Base 16 (hexadecimal): {:X}", 69420); // 10F2C
+    // Може да се приложи различно форматиране чрез знак за формат
+    // след двуеточие `:`.
+    println!("Основа 10:                   {}",   69420); // 69420
+    println!("Основа  2 (двоично):         {:b}", 69420); // 10000111100101100
+    println!("Основа  8 (осмично):         {:o}", 69420); // 207454
+    println!("Основа 16 (шестнадесетично): {:x}", 69420); // 10f2c
+    println!("Основа 16 (шестнадесетично): {:X}", 69420); // 10F2C
 
-    // You can right-justify text with a specified width. This will
-    // output "    1". (Four white spaces and a "1", for a total width of 5.)
-    println!("{number:>5}", number=1);
+    // Можете да равнявате текст надясно като укажете ширината. Следното ще
+    // изведе "    1". (Четири празноти и "1" с обща ширина 5.)
+    println!("{number:>5}", число=1);
 
-    // You can pad numbers with extra zeroes,
+    // Можете да указвате отстъпи с нули,
     println!("{number:0>5}", number=1); // 00001
-    // and left-adjust by flipping the sign. This will output "10000".
+    // и да подравнявате вляво като обърнете знака – `<`.
+    // Следното ще изведе "10000".
     println!("{number:0<5}", number=1); // 10000
 
-    // You can use named arguments in the format specifier by appending a `$`.
-    println!("{number:0>width$}", number=1, width=5);
+    // Можете да използвате именувани аргументи за формат
+    // като долепите знака $ отзад.
+    println!("{number:0>width$}", number=1, width=5);   
 
-    // Rust even checks to make sure the correct number of arguments are used.
+    // Ръст дори проверява дали са подадени нужния брой аргументи.
     println!("My name is {0}, {1} {0}", "Bond");
-    // FIXME ^ Add the missing argument: "James"
+    // FIXME ^ Добавете липсващия аргумент: "James"
 
-    // Only types that implement fmt::Display can be formatted with `{}`. User-
-    // defined types do not implement fmt::Display by default.
+    // Само типове, осъществяващи fmt::Display могат да бъдат форматирани с `{}`.
+    // Потребителските типове не осъществятват fmt::Display по подразбиране.
 
-    #[allow(dead_code)] // disable `dead_code` which warn against unused module
+    #[allow(dead_code)] // изключва предупрежденията за `dead_code` (мъртъв код)
+    // Нещо обявено и неизползвано по-късно.
     struct Structure(i32);
 
-    // This will not compile because `Structure` does not implement
+    // Следното няма да се компилира, защото `Structure` не осъществява
     // fmt::Display.
     // println!("This struct `{}` won't print...", Structure(3));
-    // TODO ^ Try uncommenting this line
+    // TODO ^ Разкоментирайте горния ред.
 
-    // For Rust 1.58 and above, you can directly capture the argument from a
-    // surrounding variable. Just like the above, this will output
-    // "    1", 4 white spaces and a "1".
-    let number: f64 = 1.0;
+    // От Ръст 1.58 нагоре можете да ползвате вече обявена променлива
+    // Както и по-горе следното ще произведе
+    // "    1", 4 празноти и "1",
+    let число: f64 = 1.0; // и името на променливата може да е с български букви!
     let width: usize = 5;
-    println!("{number:>width$}");
+    println!("{число:>width$}");
 }
 ```
 
-[`std::fmt`][fmt] contains many [`traits`][traits] which govern the display
-of text. The base form of two important ones are listed below:
+Пакетът [`std::fmt`][fmt] съдържа много [отличители (`traits`)][отличители],
+управляващи показването на текст. Ето два от важните.
 
-* `fmt::Debug`: Uses the `{:?}` marker. Format text for debugging purposes.
-* `fmt::Display`: Uses the `{}` marker. Format text in a more elegant, user
-  friendly fashion.
+* `fmt::Debug`: Използва обозначението `{:?}`. Форматира текст с цел разбор на грешки.
+* `fmt::Display`: Използва обозначението `{}`.  Форматира текст по-разбираемо за потребителя.
 
-Here, we used `fmt::Display` because the std library provides implementations
-for these types. To print text for custom types, more steps are required.
+Тук използвахме `fmt::Display`, понеже стандартната библиотека (std) 
+осъществява тези типове. За да представите като текст потребителски типове, са нужни повече стъпки.
 
-Implementing the `fmt::Display` trait automatically implements the
-[`ToString`] trait which allows us to [convert] the type to [`String`][string].
+Като осъществите отличителя `fmt::Display` автоматично осъществявате отличителя
+[`ToString`], който ни позволява да [превърнем] типа в  [низ(`String`)][string].
 
-In *line 43*, `#[allow(dead_code)]` is an [attribute] which only apply to the module after it.
+`#[allow(dead_code)]` на *ред 47*,  е [атрибут], който важи само за модула след него.
 
-### Activities
+### Упражнения
 
 * Fix the issue in the above code (see FIXME) so that it runs without
   error.
@@ -109,8 +112,8 @@ In *line 43*, `#[allow(dead_code)]` is an [attribute] which only apply to the mo
 [macros]: ../macros.md
 [string]: ../std/str.md
 [structs]: ../custom_types/structs.md
-[traits]: https://doc.rust-lang.org/std/fmt/#formatting-traits
+[отличители]: https://doc.rust-lang.org/std/fmt/#formatting-traits
 [`ToString`]: https://doc.rust-lang.org/std/string/trait.ToString.html
-[convert]: ../conversion/string.md
-[attribute]: ../attribute.md
+[превърнем]: ../conversion/string.md
+[атрибут]: ../attribute.md
 [dead_code]: ../attribute/unused.md

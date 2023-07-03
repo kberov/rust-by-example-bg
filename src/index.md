@@ -4,14 +4,11 @@
 сигурност, скорост и едновременност на изпълнението. Той постига тези цели
 бидейки сигурен по отношение на паметта без да използва събирач на отпадъците.
 
-Rust by Example (RBE) is a collection of runnable examples that illustrate various Rust
-concepts and standard libraries. To get even more out of these examples, don't forget
-to [install Rust locally][install] and check out the [official docs][std]. 
-Additionally for the curious, you can also [check out the source code for this site][home].
+Rust в примери (RВП) е набор от изпълними примери, които представят различни понятия в Rust и стандартните му библиотеки.За да ги разберете напълно, трябва да [инсталирате Ръст на вашето сметало][install] и да преглеждате своевремменно [представителната документация][std]. По-любитните могат да прегледат и [изходния код на този сайт][home].
 
-Now let's begin!
+Сега да започваме!
 
-- [Hello World](hello.md) - Start with a traditional Hello World program.
+- [Здравей, Свят](hello.md) - Да започнем с обичайната програма „Здравей, Свят“.
 
 - [Primitives](primitives.md) - Learn about signed integers, unsigned integers and other primitives.
 

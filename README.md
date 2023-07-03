@@ -1,4 +1,4 @@
-# Rust By Example
+# Rust в примери
 
 [![Build Status][travis-badge]][travis-repo]
 
@@ -27,13 +27,13 @@ mdbook serve
 За да изпълните примерите, трябва да сте свързани към интернет, но можете и да
 четете на собственѿо си сметало.
 
-## Contributing
+## Принос
 
-Please see the [CONTRIBUTING.md] file for more details.
+Моля, вѵте файла [CONTRIBUTING.md] за повече подробности.
 
 [CONTRIBUTING.md]: https://github.com/rust-lang/rust-by-example/blob/master/CONTRIBUTING.md
 
-## Translations to other languages
+## Преводи на други езици
 
 * [Chinese](https://github.com/rust-lang-cn/rust-by-example-cn)
 * [Japanese](https://github.com/rust-lang-ja/rust-by-example-ja)

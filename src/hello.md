@@ -1,49 +1,48 @@
-# Hello World
+# Здравей, Свят
 
-This is the source code of the traditional Hello World program.
+Ето изходния код на обичайната програма „Здравей, Свят“
 
 ```rust,editable
-// This is a comment, and is ignored by the compiler.
-// You can test this code by clicking the "Run" button over there ->
-// or if you prefer to use your keyboard, you can use the "Ctrl + Enter"
-// shortcut.
+// Това е коментар. Компилаторът го подминава.
+// Можете да пробвате кода, като натиснете бутона "Run" ей тук ->
+// или, ако предпочитате да ползвате клавиатура, използвате клавишното
+// съчетание "Ctrl + Enter"
 
-// This code is editable, feel free to hack it!
-// You can always return to the original code by clicking the "Reset" button ->
+// Кодът може да бъде променян. Променете го.
+// Винаги можете да го върнете в началния му вид, като натиснете бутона "Reset" ->
 
-// This is the main function.
+// Това е главната функция.
 fn main() {
-    // Statements here are executed when the compiled binary is called.
+    // Твърденията тук се изпъллняват, когато се запусне компилираният двоичен файл.
 
-    // Print text to the console.
-    println!("Hello World!");
+    // Извежда текст в конзолата (командния ред).
+    println!("Здравей, Свят!");
 }
 ```
 
-`println!` is a [*macro*][macros] that prints text to the
-console.
+`println!` е [*макрос*][макроси], който `отпечатва` текст в конзолата.
 
-A binary can be generated using the Rust compiler: `rustc`.
+От изходния код може да бъде създаден изпълним файл чрез компилатора на Ръст: `rustc`.
 
 ```bash
 $ rustc hello.rs
 ```
 
-`rustc` will produce a `hello` binary that can be executed.
+`rustc` ще произведе двоичен изпълним файл `hello`, който може да бъде изпълнен в конзолата.
 
 ```bash
 $ ./hello
-Hello World!
+Здравей, Свят!
 ```
 
-### Activity
+### упражнение
 
-Click 'Run' above to see the expected output. Next, add a new
-line with a second `println!` macro so that the output shows:
+Натиснете 'Run' по-горе, за да видите очаквания изход. След това добавете нов
+ред с твърдение `println!` макрос, така че изходът да бъде:
 
 ```text
-Hello World!
-I'm a Rustacean!
+Здравей, Свят!
+Аз съм Ръстафар!
 ```
 
-[macros]: macros.md
+[макроси]: macros.md

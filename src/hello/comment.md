@@ -1,42 +1,43 @@
-# Comments
+# Коментари
 
-Any program requires comments, and Rust supports
-a few different varieties:
+Всяка програма се нуждае от коментари. Ръст поддържа няколко разновидности:
 
-* *Regular comments* which are ignored by the compiler:
-  * `// Line comments which go to the end of the line.`
-  * `/* Block comments which go to the closing delimiter. */`
-* *Doc comments* which are parsed into HTML library [documentation][docs]:
-  * `/// Generate library docs for the following item.`
-  * `//! Generate library docs for the enclosing item.`
+* *Обикновени коментари* – компилаторът ги пренебрегва:
+  * `// Едноредови коментари – продължават до края на реда.`
+  * `/* Блокови коментари – продължават до затварящия ограничител. */`
+* *коментари за документация* – биват превърнати в HTML –
+[документация за библиотеки][docs]:
+  * `/// Създава документация за библиотеката за точката, следваща коментара.`
+  * `//! Създава документация за библиотеката за точката, около коментара.`
 
 ```rust,editable
 fn main() {
-    // This is an example of a line comment.
-    // There are two slashes at the beginning of the line.
-    // And nothing written after these will be read by the compiler.
+    // Това е пример за едноредов коментар
+    // В началѿо на реда има две наклонени черти.
+    // Всичко след тях до края на реда ще бъде пропуснато от компилатора.
 
     // println!("Hello, world!");
 
-    // Run it. See? Now try deleting the two slashes, and run it again.
+    // Изпълнете примера. Виждате ли? Сега изтриийте наклонените черти и
+    // изпълнете примера отново.
 
     /*
-     * This is another type of comment, a block comment. In general,
-     * line comments are the recommended comment style. But block comments
-     * are extremely useful for temporarily disabling chunks of code.
-     * /* Block comments can be /* nested, */ */ so it takes only a few
-     * keystrokes to comment out everything in this main() function.
-     * /*/*/* Try it yourself! */*/*/
+     * Това е друг вид коментар – блоков коментар. Като цяло едноредовите
+     * коментари се препоръчват повече. Но блоковите коментари са 
+     * изключително полезни за временно „изключване” на части от
+     * програмния код.
+     * /* Блоковите коментари могат да /* се внедряват, */ */ един в друг.
+     * Така лесно можете да коментирате всичко в main().
+     * /*/*/* Проверете сами! */*/*/
      */
 
     /*
-    Note: The previous column of `*` was entirely for style. There's
-    no actual need for it.
+    Note: Колконката със звездички `*` по-горе е само за прегледност.
+    Не е задължителна.
     */
 
-    // You can manipulate expressions more easily with block comments
-    // than with line comments. Try deleting the comment delimiters
-    // to change the result:
+    // По-лесно е да променяте изразите чрез блокови коментари. 
+    // Махнете коментара на следващия ред, за да промените резултата.
     let x = 5 + /* 90 + */ 5;
     println!("Is `x` 10 or 100? x = {}", x);
 }
@@ -44,6 +45,6 @@ fn main() {
 
 ### See also:
 
-[Library documentation][docs]
+[документация за библиотеки][docs]
 
 [docs]: ../meta/doc.md

@@ -12,7 +12,7 @@ Learn Rust with examples (Live code editor included)
 If you'd like to read Rust by Example, you can visit <https://doc.rust-lang.org/rust-by-example/>
 to read it online.
 
-If you'd like to read it locally, [install Rust], and then:
+Ако искате да прочетете книгата на вашето сметало, [инсталирайте Rust], и после изпълнете:
 
 ```bash
 git clone https://github.com/rust-lang/rust-by-example
@@ -22,10 +22,10 @@ mdbook build
 mdbook serve
 ```
 
-[install Rust]: https://www.rust-lang.org/tools/install
+[инсталирайте Rust]: https://www.rust-lang.org/tools/install
 
-To be able to run the examples, you must be connected to the internet; you can
-read all content offline, however!
+За да изпълните примерите, трябва да сте свързани към интернет, но можете и да
+четете на собственѿо си сметало.
 
 ## Contributing
 

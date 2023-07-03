@@ -1,8 +1,8 @@
-# Rust by Example
+# Rust в примери
 
-[Rust][rust] is a modern systems programming language focusing on safety, speed,
-and concurrency. It accomplishes these goals by being memory safe without using 
-garbage collection.
+[Rust][rust] е модерен системен език за програмиране, целящ
+сигурност, скорост и едновременност на изпълнението. Той постига тези цели
+бидейки сигурен по отношение на паметта без да използва събирач на отпадъците.
 
 Rust by Example (RBE) is a collection of runnable examples that illustrate various Rust
 concepts and standard libraries. To get even more out of these examples, don't forget

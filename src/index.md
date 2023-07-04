@@ -1,8 +1,8 @@
 # Rust в примери
 
 [Rust][rust] е модерен системен език за програмиране, целящ
-сигурност, скорост и едновременност на изпълнението. Той постига тези цели
-бидейки сигурен по отношение на паметта без да използва събирач на отпадъците.
+безопасност, скорост и едновременност на изпълнението. Той постига тези цели
+чрез безопасен достъп до паметта и без да използва събирач на отпадъците.
 
 Rust в примери (RВП) е набор от изпълними примери, които представят различни понятия в Rust и стандартните му библиотеки.За да ги разберете напълно, трябва да [инсталирате Ръст на вашето сметало][install] и да преглеждате своевремменно [представителната документация][std]. По-любитните могат да прегледат и [изходния код на този сайт][home].
 
@@ -10,54 +10,54 @@ Rust в примери (RВП) е набор от изпълними приме�
 
 - [Здравей, Свят](hello.md) - Да започнем с обичайната програма „Здравей, Свят“.
 
-- [Primitives](primitives.md) - Learn about signed integers, unsigned integers and other primitives.
+- [Прости типове](primitives.md) - Цели числа със знак и без знак и други прости данни.
 
-- [Custom Types](custom_types.md) - `struct` and `enum`.
+- [Потребителски типове](custom_types.md) - `struct` and `enum`.
 
-- [Variable Bindings](variable_bindings.md) - mutable bindings, scope, shadowing.
+- [Обвързване на променливи](variable_bindings.md) - менѝми обвързвания, обсег, засенчване.
 
-- [Types](types.md) - Learn about changing and defining types.
+- [Типове](types.md) - Промяна и определяне на типове.
 
-- [Conversion](conversion.md)
+- [Превръщане](conversion.md)
 
-- [Expressions](expression.md)
+- [Изрази](expression.md)
 
-- [Flow of Control](flow_control.md) - `if`/`else`, `for`, and others.
+- [Управление на програмния поток](flow_control.md) - `if`/`else`, `for`, и други.
 
-- [Functions](fn.md) - Learn about Methods, Closures and Higher Order Functions.
+- [Функции](fn.md) - Методи, затваряния и функции от по-висок порядък.
 
-- [Modules](mod.md) - Organize code using modules
+- [Модули](mod.md) - Подредба на кода в модули
 
-- [Crates](crates.md) - A crate is a compilation unit in Rust. Learn to create a library.
+- [Кошове](crates.md) - Кошът е компилационна едининца в Ръст. Как се прави библиотека.
 
-- [Cargo](cargo.md) - Go through some basic features of the official Rust package management tool.
+- [Cargo](cargo.md) - Преглед на основните свойства на представителното средство за управление на пакети в Ръст.
 
-- [Attributes](attribute.md) - An attribute is metadata applied to some module, crate or item.
+- [Атрибути](attribute.md) - Атрибутът представлява парче метададанни приложени върху някой модул, кош, или нещо си.
 
-- [Generics](generics.md) - Learn about writing a function or data type which can work for multiple types of arguments.
+- [Обобщения](generics.md) - Как се пише функция, или тип данни, пододящ за множество типове аргументи.
 
-- [Scoping rules](scope.md) - Scopes play an important part in ownership, borrowing, and lifetimes.
+- [Правила за обсег на действие](scope.md) - Обсегът е важен при присвояване, заемане и времетраене.
 
-- [Traits](trait.md) - A trait is a collection of methods defined for an unknown type: `Self`
+- [Отличител](trait.md) - Отличителят е набор от определени методи, за непознат тип: `Self`
 
-- [Macros](macros.md)
+- [Макроси](macros.md)
 
-- [Error handling](error.md) - Learn Rust way of handling failures.
+- [Обработка на грешки](error.md) - Начинът на Ръст да се справя с провалите.
 
-- [Std library types](std.md) - Learn about some custom types provided by `std` library.
+- [Типове от стандартната библиотека](std.md) - За някои потребителски в стандартната библиотека (`std`).
 
-- [Std misc](std_misc.md) - More custom types for file handling, threads.
+- [Разни в std](std_misc.md) - Още потребителски типове, нишки.
 
-- [Testing](testing.md) - All sorts of testing in Rust.
+- [Проверки](testing.md) - Всички видове проверки в Rust.
 
-- [Unsafe Operations](unsafe.md)
+- [Опасни действия](unsafe.md)
 
-- [Compatibility](compatibility.md)
+- [Съвместимост](compatibility.md)
 
-- [Meta](meta.md) - Documentation, Benchmarking.
+- [Отвъд](meta.md) - Documentation, Benchmarking.
 
 
 [rust]: https://www.rust-lang.org/
 [install]: https://www.rust-lang.org/tools/install
 [std]: https://doc.rust-lang.org/std/
-[home]: https://github.com/rust-lang/rust-by-example
+[home]:https://github.com/kberov/rust-by-example-bg 

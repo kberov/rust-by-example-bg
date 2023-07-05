@@ -113,6 +113,7 @@ fn main() {
 [string]: ../std/str.md
 [structs]: ../custom_types/structs.md
 [отличители]: https://doc.rust-lang.org/std/fmt/#formatting-traits
+[traits]: https://doc.rust-lang.org/std/fmt/#formatting-traits
 [`ToString`]: https://doc.rust-lang.org/std/string/trait.ToString.html
 [превърнем]: ../conversion/string.md
 [атрибут]: ../attribute.md

@@ -7,12 +7,12 @@
 use std::fmt;
 
 // Описваме структура, за която ще осъществим `fmt::Display`
-// Това е разнороден списък, именуван `Structure`,
+// Това е разнороден списък², именуван `Structure`,
 // който съдържа един член от тип `i32`.
 struct Structure(i32);
 
-// За да използваме означението `{}`, трябва ръчно да осъществим `fmt::Display`
-// за този тип.
+// За да използваме означението `{}`, трябва ръчно да осъществим  `impl fmt::Display`
+// за типa `for Structure`.
 impl fmt::Display for Structure {
     // Този отличител изисква да се осъществи метода `fmt` с точно тази сигнатура.
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -28,15 +28,15 @@ impl fmt::Display for Structure {
 
 `fmt::Display` може да е по-изчистен от `fmt::Debug` но се появяват някои
 затруднения за библиотеката `std`. Как би трябвало да се показват неопределени
-типове?  Например ако `std` осъществеше един начин за показване за всички
-`Vec<T>`, какъв щеше да е той? Би ли бил някой от тези двата?
+типове?  Например ако `std` осъществеше един единствен начин за показване за
+всички `Vec<T>`, какъв щеше да е той? Би ли бил някой от тези двата?
 
 * `Vec<path>`: `/:/etc:/home/username:/bin` (split on `:`)
 * `Vec<number>`: `1,2,3` (split on `,`)
 
 Не, защото няма съвършен начин за показване на всички типове и библиотеката
 `std` не налага никакъв. `fmt::Display` не е осъществен за `Vec<T>` и за
-никакви обобщени съдържащи типове[^containers]. В тези случаи (показване на
+никакви *обобщени съдържащи типове[^containers]*. В тези случаи (показване на
 обобщени съдържащи типове) се налага да ползваме `fmt::Debug`.
 
 Това не е пречка все пак, защото за всеки *съдържащ тип*, който *не е* обобщен,
@@ -58,7 +58,7 @@ impl fmt::Display for MinMax {
     }
 }
 
-// Описваме структура с именувани полета за сравнение.
+// Описваме структура с именувани полета, за да я сравним.
 #[derive(Debug)]
 struct Point2D {
     x: f64,
@@ -95,7 +95,7 @@ fn main() {
 
     // Грешка. `Debug` и `Display` са осъществени, но `{:b}`
     // изисква осъществяване на `fmt::Binary`. Следното няма да работи.
-    // println!("Как изглежда Point2D като двоично: {:b}?", point);
+    // println!("Как изглежда Point2D, представен двоично: {:b}?", point);
 }
 ```
 
@@ -103,22 +103,22 @@ fn main() {
 `std::fmt`предоставя много такива [отличители][traits] и всеки трябва да бъде
 осъществен поотделно. Това е описано поддробно в [`std::fmt`][fmt].
 
-### Activity
+### Упражнение
 
-After checking the output of the above example, use the `Point2D` struct as a
-guide to add a `Complex` struct to the example. When printed in the same
-way, the output should be:
+След като проверите изхода от горния пример, използвайте структурата `Point2D` като ръководство, за да добавите нова структура – `Complex` към примера. При отпечатване изходът трябва да изглежда така:
 
 ```txt
 Display: 3.3 + 7.2i
 Debug: Complex { real: 3.3, imag: 7.2 }
 ```
 
-### See also:
+### Вижте също:
 
-[`derive`][derive], [`std::fmt`][fmt], [`macros`][macros], [`struct`][structs],[разнородни списъци][tuples], [`trait`][traits], and [`use`][use]
+[`derive`][derive], [`std::fmt`][fmt], [`macros`][macros], [`struct`][structs], [`trait`][traits], and [`use`][use]
 
 [^containers]: обобщени съдържащи типове – generic containers
+
+[^tuples]: разнороден списък – tuple, вижте [разнородни списъци][tuples]
 
 [derive]: ../../trait/derive.md
 [fmt]: https://doc.rust-lang.org/std/fmt/

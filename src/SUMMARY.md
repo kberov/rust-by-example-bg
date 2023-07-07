@@ -2,7 +2,7 @@
 
 [Въведение](index.md)
 
-- [Здравей Свят](hello.md)
+- [Здравей, Свят](hello.md)
     - [Коментари](hello/comment.md)
     - [Форматиран изход](hello/print.md)
         - [Debug](hello/print/print_debug.md)
@@ -89,7 +89,7 @@
 
 - [Cargo](cargo.md)
     - [Зависимости](cargo/deps.md)
-    - [Уговорки(конвенции)](cargo/conventions.md)
+    - [Уговорки (конвенции)](cargo/conventions.md)
     - [Проверки (Тестове)](cargo/test.md)
     - [Скриптове за изграждане](cargo/build_scripts.md)
 

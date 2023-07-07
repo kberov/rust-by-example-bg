@@ -1,37 +1,38 @@
-# Formatting
+# Форматиране 
 
-We've seen that formatting is specified via a *format string*:
+Видяхме, че форматирането се указва чрез *низ за формат*:
 
 * `format!("{}", foo)` -> `"3735928559"`
 * `format!("0x{:X}", foo)` -> [`"0xDEADBEEF"`][deadbeef]
 * `format!("0o{:o}", foo)` -> `"0o33653337357"`
 
-The same variable (`foo`) can be formatted differently depending on which
-*argument type* is used: `X` vs `o` vs *unspecified*.
+Една и съща променлива (`foo`) може да бъде форматирана по различен начин в
+зависимост от това какъв *тип аргумент* се използва `X`, `o` или *неустановен*.
 
-This formatting functionality is implemented via traits, and there is one trait
-for each argument type. The most common formatting trait is `Display`, which
-handles cases where the argument type is left unspecified: `{}` for instance.
+Тази функционалност за форматиране се осъществява чрез отличители и за всеки
+тип аргумент се осъществява различен отличител. Най-често използваният
+отличител за форматиране е `Display`. `Display` обработва случаите, когато типът
+на аргумента не е указан, например `{}`.
 
 ```rust,editable
 use std::fmt::{self, Formatter, Display};
 
 struct City {
     name: &'static str,
-    // Latitude
+    // Географска ширина
     lat: f32,
-    // Longitude
+    // Географска дължина
     lon: f32,
 }
 
 impl Display for City {
-    // `f` is a buffer, and this method must write the formatted string into it.
+    // `f` е склад¹ и този метод трябва да пише форматирания низ в него.
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         let lat_c = if self.lat >= 0.0 { 'N' } else { 'S' };
         let lon_c = if self.lon >= 0.0 { 'E' } else { 'W' };
 
-        // `write!` is like `format!`, but it will write the formatted string
-        // into a buffer (the first argument).
+        // макросът `write!` е като `format!`, но той пише форматирания низ
+        // в склад (първия аргумент – `f`).
         write!(f, "{}: {:.3}°{} {:.3}°{}",
                self.name, self.lat.abs(), lat_c, self.lon.abs(), lon_c)
     }
@@ -57,20 +58,20 @@ fn main() {
         Color { red: 0, green: 3, blue: 254 },
         Color { red: 0, green: 0, blue: 0 },
     ] {
-        // Switch this to use {} once you've added an implementation
-        // for fmt::Display.
+        // Променете кода да използва {},
+        // след като осъществите fmt::Display за Color.
         println!("{:?}", color);
     }
 }
 ```
 
-You can view a [full list of formatting traits][fmt_traits] and their argument
-types in the [`std::fmt`][fmt] documentation.
+Можете да видите [пълния списък отличители за форматиране][fmt_traits] и
+техните типове аргументи в документацията за [`std::fmt`][fmt].
 
-### Activity
+### Упражнение
 
-Add an implementation of the `fmt::Display` trait for the `Color` struct above
-so that the output displays as:
+Осъществете `fmt::Display` за труктурата `Color`, така че изходът да изглежда
+така:
 
 ```text
 RGB (128, 255, 90) 0x80FF5A
@@ -78,15 +79,22 @@ RGB (0, 3, 254) 0x0003FE
 RGB (0, 0, 0) 0x000000
 ```
 
-Two hints if you get stuck:
+Три съвета в случай на затруднения:
 
-* You [may need to list each color more than once][named_parameters].
-* You can [pad with zeros to a width of 2][fmt_width] with `:0>2`.
+* Формулата за изчисляване на цветове в цветовото пространство ЧЗС е както
+  следва: `RGB = (R*65536)+(G*256)+B , (където R е червено (RED), G е зелено
+  (GREEN) и B е синьо (BLUE))`. Повече за ЧЗС и изчислението
+  на цветовете: [RGB Color Codes Chart][rgb_color].
+* Може да искате [да покажете всеки цвят повече от веднъж][named_parameters].
+* Можете да [създадете отстъп с две нули][fmt_width] с `:0>2`.
 
-### See also:
+### Вижте също:
 
 [`std::fmt`][fmt]
 
+[^buffer]: склад – buffer
+
+[rgb_color]: https://www.rapidtables.com/web/color/RGB_Color.html#rgb-format
 [named_parameters]: https://doc.rust-lang.org/std/fmt/#named-parameters
 [deadbeef]: https://en.wikipedia.org/wiki/Deadbeef#Magic_debug_values
 [fmt]: https://doc.rust-lang.org/std/fmt/

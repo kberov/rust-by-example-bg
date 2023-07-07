@@ -5,53 +5,53 @@
 [travis-badge]: https://travis-ci.com/rust-lang/rust-by-example.svg?branch=master
 [travis-repo]: https://travis-ci.com/rust-lang/rust-by-example
 
-Learn Rust with examples (Live code editor included)
+Да научим Ръст чрез примери (с включен редактор наживо)
 
-## Using
+## Употреба
 
-If you'd like to read Rust by Example, you can visit <https://doc.rust-lang.org/rust-by-example/>
-to read it online.
+Ако желаете да четете „Rust by Example”, посетете <https://doc.rust-lang.org/rust-by-example/>,
+за да я прочетете в мрежата.
 
-Ако искате да прочетете книгата на вашето сметало, [инсталирайте Rust], и после изпълнете:
+Ако искате да прочетете този превод на книгата на вашето сметало,
+[инсталирайте Ръст], и после изпълнете:
 
 ```bash
-git clone https://github.com/rust-lang/rust-by-example
-cd rust-by-example
+git clone https://github.com/kberov/rust-by-example-bg
+cd rust-by-example-bg
 cargo install mdbook
 mdbook build
 mdbook serve
 ```
 
-[инсталирайте Rust]: https://www.rust-lang.org/tools/install
+[инсталирайте Ръст]: https://www.rust-lang.org/tools/install
 
 За да изпълните примерите, трябва да сте свързани към интернет, но можете и да
-четете на собственѿо си сметало.
+четете на собственoто си сметало.
 
 ## Принос
 
-Моля, вѵте файла [CONTRIBUTING.md] за повече подробности.
+Моля, вижте файла [CONTRIBUTING.md] за повече подробности.
 
-[CONTRIBUTING.md]: https://github.com/rust-lang/rust-by-example/blob/master/CONTRIBUTING.md
+[CONTRIBUTING.md]: https://github.com/kberov/rust-by-example-bg/blob/master/CONTRIBUTING.md
 
 ## Преводи на други езици
 
+* [Bulgarian](https://github.com/kberov/rust-by-example-bg)
 * [Chinese](https://github.com/rust-lang-cn/rust-by-example-cn)
 * [Japanese](https://github.com/rust-lang-ja/rust-by-example-ja)
 * [French](https://github.com/Songbird0/FR_RBE)
 * [Russian](https://github.com/ruRust/rust-by-example)
 * [Vietnamese](https://github.com/EyesCrypto-Insights/rust-by-example-vn)
 
-## License
+## Лиценз
 
-Rust by Example is licensed under either of
+Преводът на „Ръст в примери” е лицензиран по ваш избор:
 
-* Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+* Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) или
   <http://www.apache.org/licenses/LICENSE-2.0>)
-* MIT license ([LICENSE-MIT](LICENSE-MIT) or
-  <http://opensource.org/licenses/MIT>)
+* MIT license ([LICENSE-MIT](LICENSE-MIT) или
+  <http://opensource.org/licenses/MIT>).
 
-at your option.
-
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in Rust by Example by you, as defined in the Apache-2.0 license, shall be
-dually licensed as above, without any additional terms or conditions.
+Освен ако кажете изрично нещо различно, всеки съзнателен принос към Превода на
+„Ръст в примери”, както е определен в лиценза Apache-2.0, се лицензира двуяко
+както по-горе, без никакви допълнителни правила и условия.

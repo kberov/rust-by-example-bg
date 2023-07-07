@@ -1,57 +1,58 @@
-# Debug
+# За разбор на грешки (Debug)
 
-All types which want to use `std::fmt` formatting `traits` require an
-implementation to be printable. Automatic implementations are only provided
-for types such as in the `std` library. All others *must* be manually
-implemented somehow.
+Всички типове, които искат да ползват [отличители (`traits`)][отличители] за
+форматиране от `std::fmt` трябва да осъществят съответния отличител, за да
+бъдат печатаеми. Само типовете от стандартната библиотека `std` осъществяват
+тези отличители. Всички останали типове *трябва* някак да ги осъществят.
 
-The `fmt::Debug` `trait` makes this very straightforward. *All* types can
-`derive` (automatically create) the `fmt::Debug` implementation. This is
-not true for `fmt::Display` which must be manually implemented.
+С помощта на отличителя `fmt::Debug` лесно се _създават негови производни_
+(`derive`). *Всички* типове могат да осъществят автоматично `fmt::Debug` – да
+станат призводни на `fmt::Debug`. За разлика, `fmt::Display` трябва да се
+осъществи на ръка.
 
 ```rust
-// This structure cannot be printed either with `fmt::Display` or
-// with `fmt::Debug`.
+// Тази структура не може да бъде отпечатана нито с `fmt::Display`
+// нито с `fmt::Debug`.
 struct UnPrintable(i32);
 
-// The `derive` attribute automatically creates the implementation
-// required to make this `struct` printable with `fmt::Debug`.
+// Атрибутът `derive` автоматично създава необходимото осъществяване
+// (необходимия изписан код), за да направи тази структура (`struct`) печатаема с
+// `fmt::Debug`.
 #[derive(Debug)]
 struct DebugPrintable(i32);
 ```
 
-All `std` library types are automatically printable with `{:?}` too:
+Всички типове от библиотеката `std` са печатаеми чрез означението `{:?}`:
 
 ```rust,editable
-// Derive the `fmt::Debug` implementation for `Structure`. `Structure`
-// is a structure which contains a single `i32`.
+// `Structure` става производна  на `fmt::Debug`. `Structure` е структура,
+// която съдържа единица данни от типа `i32`.
 #[derive(Debug)]
 struct Structure(i32);
 
-// Put a `Structure` inside of the structure `Deep`. Make it printable
-// also.
+// Поставяме `Structure` в структурата `Deep`, която също правим печатаема.
 #[derive(Debug)]
 struct Deep(Structure);
 
 fn main() {
-    // Printing with `{:?}` is similar to with `{}`.
-    println!("{:?} months in a year.", 12);
+    // Печатането чрез `{:?}` е подобно на печатането чрез `{}`.
+    println!("В една година има {:?} месеца.", 12);
     println!("{1:?} {0:?} is the {actor:?} name.",
              "Slater",
              "Christian",
              actor="actor's");
 
-    // `Structure` is printable!
-    println!("Now {:?} will print!", Structure(3));
+    // `Structure` е печатаема!
+    println!("Сега {:?} ще се отпечати!", Structure(3));
 
-    // The problem with `derive` is there is no control over how
-    // the results look. What if I want this to just show a `7`?
+    // Проблемът с `derive` е, че не можем да да управляваме външния вид
+    // на отпечатаното. Ами ако искаме да покажем просто `7`?
     println!("Now {:?} will print!", Deep(Structure(7)));
 }
 ```
 
-So `fmt::Debug` definitely makes this printable but sacrifices some elegance.
-Rust also provides "pretty printing" with `{:#?}`.
+ `fmt::Debug` определено прави типовете печатаеми, но грубо.
+Ръст предоставя и „красиво отпечатване” с помощта на `{:#?}`.
 
 ```rust,editable
 #[derive(Debug)]
@@ -65,20 +66,20 @@ fn main() {
     let age = 27;
     let peter = Person { name, age };
 
-    // Pretty print
+    // Красиво отпечатване
     println!("{:#?}", peter);
 }
 ```
 
-One can manually implement `fmt::Display` to control the display.
+ Можем ръчно да осъществим `fmt::Display`, ако искаме да управляваме показването.
 
-### See also:
+### Вижте също:
 
 [`attributes`][attributes], [`derive`][derive], [`std::fmt`][fmt],
-and [`struct`][structs]
+[`struct`][structs] и [`traits`][отличители]
 
 [attributes]: https://doc.rust-lang.org/reference/attributes.html
 [derive]: ../../trait/derive.md
 [fmt]: https://doc.rust-lang.org/std/fmt/
 [structs]: ../../custom_types/structs.md
-
+[отличители]: ../../trait.md

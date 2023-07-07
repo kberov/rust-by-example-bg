@@ -81,11 +81,12 @@ RGB (0, 0, 0) 0x000000
 
 Три съвета в случай на затруднения:
 
-* Формулата за изчисляване на цветове в цветовото пространство RGB е както
-  следва: RGB = (R\*65536)+(G\*256)+B , (където R е червено (RED), G е зелено
-  (GREEN) и B е синьо (BLUE))[^rgbformula].
+* Формулата за изчисляване на цветове в цветовото пространство ЧЗС е както
+  следва: `RGB = (R*65536)+(G*256)+B , (където R е червено (RED), G е зелено
+  (GREEN) и B е синьо (BLUE))`. Повече за ЧЗС и изчислението
+  на цветовете: [RGB Color Codes Chart][rgb_color].
 * Може да искате [да покажете всеки цвят повече от веднъж][named_parameters].
-* Можете да [създадете отстъп с до две нули][fmt_width] с `:0>2`.
+* Можете да [създадете отстъп с две нули][fmt_width] с `:0>2`.
 
 ### Вижте също:
 
@@ -93,8 +94,7 @@ RGB (0, 0, 0) 0x000000
 
 [^buffer]: склад – buffer
 
-[^rgbformula]: Повече за цветовото пространство и изчислението на цветовете: [RGB Color Codes Chart](https://www.rapidtables.com/web/color/RGB_Color.html)
-
+[rgb_color]: https://www.rapidtables.com/web/color/RGB_Color.html#rgb-format
 [named_parameters]: https://doc.rust-lang.org/std/fmt/#named-parameters
 [deadbeef]: https://en.wikipedia.org/wiki/Deadbeef#Magic_debug_values
 [fmt]: https://doc.rust-lang.org/std/fmt/

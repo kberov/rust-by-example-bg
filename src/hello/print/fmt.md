@@ -79,20 +79,17 @@ RGB (0, 3, 254) 0x0003FE
 RGB (0, 0, 0) 0x000000
 ```
 
-Три съвета в случай на затруднения:
+Three hints if you get stuck:
 
-* Формулата за изчисляване на цветове в цветовото пространство ЧЗС е както
-  следва: `RGB = (R*65536)+(G*256)+B , (където R е червено (RED), G е зелено
-  (GREEN) и B е синьо (BLUE))`. Повече за ЧЗС и изчислението
-  на цветовете: [RGB Color Codes Chart][rgb_color].
-* Може да искате [да покажете всеки цвят повече от веднъж][named_parameters].
-* Можете да [създадете отстъп с две нули][fmt_width] с `:0>2`.
+* The formula for calculating a color in the RGB color space is:
+`RGB = (R*65536)+(G*256)+B , (when R is RED, G is GREEN and B is BLUE)`.
+For more see [RGB color format & calculation][rgb_color].
+* You [may need to list each color more than once][named_parameters].
+* You can [pad with zeros to a width of 2][fmt_width] with `:0>2`.
 
 ### Вижте също:
 
 [`std::fmt`][fmt]
-
-[^buffer]: склад – buffer
 
 [rgb_color]: https://www.rapidtables.com/web/color/RGB_Color.html#rgb-format
 [named_parameters]: https://doc.rust-lang.org/std/fmt/#named-parameters

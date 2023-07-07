@@ -1,53 +1,51 @@
-# Literals and operators
+# Буквални стойности и оператори
 
-Integers `1`, floats `1.2`, characters `'a'`, strings `"abc"`, booleans `true`
-and the unit type `()` can be expressed using literals.
+Целите числа могат да бъдат представени и като шестнадесетични, осмични или
+двоични, като се използват следните представки: `0x`, `0o` или `0b`.
 
-Integers can, alternatively, be expressed using hexadecimal, octal or binary
-notation using these prefixes respectively: `0x`, `0o` or `0b`.
+В числовите буквални стойности могат да се ползват подчертавки за по-добра
+четимост, например:
+`1_000` е същото като `1000`, а `0.000_001` е `0.000001`.
 
-Underscores can be inserted in numeric literals to improve readability, e.g.
-`1_000` is the same as `1000`, and `0.000_001` is the same as `0.000001`.
+Ръст поддържа и [експоненциално записване][enote]: `1e6`, `7.6e-4`. Използваният
+тип е `f64`.
 
-Rust also supports scientific [E-notation][enote], e.g. `1e6`, `7.6e-4`. The
-associated type is `f64`.
+Трябва да кажем на компилатора типа на буквалната стойност, който желаем да  ползваме.
+Засега ще ползваме наставката `u32`, за да укажем, че числото е цяло, 32-битово
+и без знак. С наставката `i32` ще указваме 32-битово цяло число със знак.
 
-We need to tell the compiler the type of the literals we use. For now,
-we'll use the `u32` suffix to indicate that the literal is an unsigned 32-bit
-integer, and the `i32` suffix to indicate that it's a signed 32-bit integer.
-
-The operators available and their precedence [in Rust][rust op-prec] are similar
-to other [C-like languages][op-prec].
+Операторите и предимството, с което се изпълняват [в Ръст][rust op-prec] са подобни на другите
+[подобни на C][op-prec] езици.
 
 ```rust,editable
 fn main() {
-    // Integer addition
+    // Сбор на цели числа
     println!("1 + 2 = {}", 1u32 + 2);
 
-    // Integer subtraction
+    // Разлика от цели числа
     println!("1 - 2 = {}", 1i32 - 2);
-    // TODO ^ Try changing `1i32` to `1u32` to see why the type is important
+    // ЗАДАЧА ^ Променете `1i32` на `1u32`, за да видите защо е важен типа.
 
-    // Scientific notation
+    // Научно записване
     println!("1e4 is {}, -2.5e-3 is {}", 1e4, -2.5e-3);
 
-    // Short-circuiting boolean logic
+    // Съкратено логическо записване
     println!("true AND false is {}", true && false);
     println!("true OR false is {}", true || false);
     println!("NOT true is {}", !true);
 
-    // Bitwise operations
+    // Побитови действия
     println!("0011 AND 0101 is {:04b}", 0b0011u32 & 0b0101);
     println!("0011 OR 0101 is {:04b}", 0b0011u32 | 0b0101);
     println!("0011 XOR 0101 is {:04b}", 0b0011u32 ^ 0b0101);
     println!("1 << 5 is {}", 1u32 << 5);
     println!("0x80 >> 2 is 0x{:x}", 0x80u32 >> 2);
 
-    // Use underscores to improve readability!
+    // Използвайте подчертавки за по-добра четимост!
     println!("One million is written as {}", 1_000_000u32);
 }
 ```
 
-[enote]: https://en.wikipedia.org/wiki/Scientific_notation#E_notation
+[enote]:https://bg.wikipedia.org/wiki/Експоненциален_запис
 [rust op-prec]: https://doc.rust-lang.org/reference/expressions.html#expression-precedence
 [op-prec]: https://en.wikipedia.org/wiki/Operator_precedence#Programming_languages

@@ -7,7 +7,8 @@
 Тези списъци могат да съдържат всякакъв брой стойности.
 
 ```rust,editable
-// Разнородните може да се ползват като аргументи и като стойност за връщане.
+
+// Разнородните могат да бъдат ползвани като аргументи и като стойност за връщане.
 fn reverse(pair: (i32, bool)) -> (bool, i32) {
     //  С помощта на `let` можем да присвоим отделните членове на променливи.
     let (int_param, bool_param) = pair;
@@ -52,7 +53,7 @@ fn main() {
     // кръгли скоби. Така компилаторът може да я отличи от обикновена буквална
     // стойност, оградена със скоби.
     println!("Едночленен разнороден списък: {:?}", (5u32,));
-    println!("Прсто едно цяло число: {:?}", (5u32));
+    println!("Просто едно цяло число: {:?}", (5u32));
 
     // Разнородните списъци могат да бъдат разлагани на отделни променливи.
     let tuple = (1, "hello", 4.5, true);
@@ -67,8 +68,8 @@ fn main() {
 
 ### Упражнения
 
-1. *Преговор*: Добавете отличието `fmt::Display` към структурата `Matrix` в
-   примера горе, така че, ако използвате формата `{}`, да видите следния изход:
+1. *Преговор*: Добавете `fmt::Display` към структурата `Matrix` в примера горе,
+   така че, ако използвате формата `{}`, да видите следния изход:
 
    ```text
    ( 1.1 1.2 )
@@ -77,16 +78,16 @@ fn main() {
 
    За да си припомните, може да се върнете на примера с [отпечатване чрез
    `fmt::Display`][print_display].
-2. Add a `transpose` function using the `reverse` function as a template, which
-   accepts a matrix as an argument, and returns a matrix in which two elements
-   have been swapped. For example:
+2. Добавете функция `transpose`[^transpose], която приема `matrix` като аргумент и връща
+   матрица, чиито два елемента са обърнати. Използвайте `reverse` за образец[^template].
+   Пример:
 
    ```rust,ignore
    println!("Matrix:\n{}", matrix);
    println!("Transpose:\n{}", transpose(matrix));
    ```
 
-   Results in the output:
+   Изход:
 
    ```text
    Matrix:
@@ -96,5 +97,9 @@ fn main() {
    ( 1.1 2.1 )
    ( 1.2 2.2 )
    ```
+
+[^transpose] transpose – размествам, премествам от тдругата страна
+
+[^template] образец (шаблон) – template
 
 [print_display]: ../hello/print/print_display.md

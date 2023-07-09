@@ -13,7 +13,7 @@
 - [Първични типове](primitives.md)
     - [Буквални стойности и оператори](primitives/literals.md)
     - [Разнородни списъци](primitives/tuples.md)
-    - [Списъци и отрязъци](primitives/array.md)
+    - [Поредици и отрязъци](primitives/array.md)
 
 - [Потребителски типове](custom_types.md)
     - [Структури](custom_types/structs.md)

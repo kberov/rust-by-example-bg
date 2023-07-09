@@ -1,61 +1,75 @@
-# Primitives
+# Първични типове
 
-Rust provides access to a wide variety of `primitives`. A sample includes:
+Ръст предоставя голямо ранообразие от първични (основни) типове[^primitives]. Ето някои:
 
-### Scalar Types
+### Прости Типове[^scalar_types]
 
-* Signed integers: `i8`, `i16`, `i32`, `i64`, `i128` and `isize` (pointer size)
-* Unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128` and `usize` (pointer
-  size)
-* Floating point: `f32`, `f64`
-* `char` Unicode scalar values like `'a'`, `'α'` and `'∞'` (4 bytes each)
-* `bool` either `true` or `false`
-* The unit type `()`, whose only possible value is an empty tuple: `()`
 
-Despite the value of a unit type being a tuple, it is not considered a compound
-type because it does not contain multiple values.
+* Цели числа със знак: `i8`, `i16`, `i32`, `i64`, `i128` и `isize` (размер за указател)
+* Цели числа без знак: `u8`, `u16`, `u32`, `u64`, `u128` и `usize` (размер за указател)
+* Числа с плаваща запетая: `f32`, `f64`
+* `char` Единични стойности от Уникод като `'ѫ'`, `'a'`, `'α'` и `'∞'` (всяка заема 4 байта)
+* `bool` С възможни стойности `true` или `false`
+* Типът единица[^unit] `()`, чиято единствена възможна стойност е празен разнороден списък[^tuple]: `()`
 
-### Compound Types
+Въпреки че стойността на единичния тип е разнороден списък, той не се смята за
+съставен тип[^compound], тъй като не съдържа множество стойности.
 
-* Arrays like `[1, 2, 3]`
-* Tuples like `(1, true)`
+### Съставни Типове
 
-Variables can always be *type annotated*. Numbers may additionally be annotated
-via a *suffix* or *by default*. Integers default to `i32` and floats to `f64`.
-Note that Rust can also infer types from context.
+* Еднородни списъци – `[1, 2, 3]`
+* Разнородни списъци – `(1, true)`
+
+Променливите винаги може да се *отбелязват с тип*. Числата могат да се
+отбелязват с *наставка* или *по подразбиране*. Целите числа по подразбиране са
+с тип `i32`, а тези с плаваща запетая – `f64`.
+Обърнете внимание че Ръст може да отгатва типа в зависимост от текущата употреба[^context].
+
 
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
-    // Variables can be type annotated.
+    // Типът на променливите може да се отбелязва.
     let logical: bool = true;
 
-    let a_float: f64 = 1.0;  // Regular annotation
-    let an_integer   = 5i32; // Suffix annotation
+    let a_float: f64 = 1.0;  // Обичайно отбелязване
+    let an_integer   = 5i32; // Отбелязване чрез наставка
 
-    // Or a default will be used.
+    // И ли се ползва тип по подразбиране.
     let default_float   = 3.0; // `f64`
     let default_integer = 7;   // `i32`
 
-    // A type can also be inferred from context.
-    let mut inferred_type = 12; // Type i64 is inferred from another line.
+    // Типът може да бъде отгатнат в зависимост от употребата на променливата.
+    let mut inferred_type = 12; // Типът i64 е отгатнат от друг ред.
     inferred_type = 4294967296i64;
 
-    // A mutable variable's value can be changed.
+    // Стойността на менѝмите променливи може да бъде променяна.
     let mut mutable = 12; // Mutable `i32`
     mutable = 21;
 
-    // Error! The type of a variable can't be changed.
+    // Грешка! Типа на променливата не може да се променя.
     mutable = true;
 
-    // Variables can be overwritten with shadowing.
+    // Променливите могат да се презаписват чрез засенчване.
     let mutable = true;
 }
 ```
 
-### See also:
+### Вижте също:
 
 [the `std` library][std], [`mut`][mut], [`inference`][inference], and
 [`shadowing`][shadowing]
+
+[^primitives]: първични типове – основни типове – primitives
+
+[^scalar_types]: прости (единични, скаларни) типове - scalar types
+
+[^unit]: типът единица – unit type
+
+[^tuple]: разнороден списък – tuple
+
+[^compound]: съставен тип – compound type
+
+[^context]: текущата употреба, контекста – context
 
 [std]: https://doc.rust-lang.org/std/
 [mut]: variable_bindings/mut.md

@@ -33,7 +33,7 @@ impl List {
         // поведението на този метод зависи от варианта на `self`
         // Типът на`self` е `&List`, а типът на `*self` е `List`.
         // За предпочитане е да се търси съответствие с `T` вместо с `&T`.
-        // След Рѫждьо 2018 тук можем да ползваме `self` както и tail
+        // След Ръждьо 2018 тук можем да ползваме `self` както и tail
         // по-долу (без препратка). `&s` и `ref tail` ще бъдат отгатнати. 
         // Вижте https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/default-match-bindings.html
         match *self {

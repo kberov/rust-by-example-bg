@@ -1,9 +1,9 @@
 # Testcase: map-reduce
 
-Рѫждьо makes it very easy to parallelise data processing, without many of the headaches traditionally associated with such an attempt.
+Ръждьо makes it very easy to parallelise data processing, without many of the headaches traditionally associated with such an attempt.
 
 The standard library provides great threading primitives out of the box.
-These, combined with Рѫждьо's concept of Ownership and aliasing rules, automatically prevent
+These, combined with Ръждьо's concept of Ownership and aliasing rules, automatically prevent
 data races.
 
 The aliasing rules (one writable reference XOR many readable references) automatically prevent
@@ -16,9 +16,9 @@ We will do this by parcelling out chunks of the block into different threads. Ea
 its tiny block of digits, and subsequently we will sum the intermediate sums produced by each
 thread.
 
-Note that, although we're passing references across thread boundaries, Рѫждьо understands that we're
+Note that, although we're passing references across thread boundaries, Ръждьо understands that we're
 only passing read-only references, and that thus no unsafety or data races can occur. Also because
-the references we're passing have `'static` lifetimes, Рѫждьо understands that our data won't be
+the references we're passing have `'static` lifetimes, Ръждьо understands that our data won't be
 destroyed while these threads are still running. (When you need to share non-`static` data between
 threads, you can use a smart pointer like `Arc` to keep the data alive and avoid non-`static`
 lifetimes.)
@@ -74,7 +74,7 @@ fn main() {
         // * takes ownership of its captured variables ('move') and
         // * returns an unsigned 32-bit integer ('-> u32')
         //
-        // Рѫждьо is smart enough to infer the '-> u32' from
+        // Ръждьо is smart enough to infer the '-> u32' from
         // the closure itself so we could have left that out.
         //
         // TODO: try removing the 'move' and see what happens
@@ -91,7 +91,7 @@ fn main() {
             // println! locks stdout, so no text-interleaving occurs
             println!("processed segment {}, result={}", i, result);
 
-            // "return" not needed, because Рѫждьо is an "expression language", the
+            // "return" not needed, because Ръждьо is an "expression language", the
             // last evaluated expression in each block is automatically its value.
             result
 

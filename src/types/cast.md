@@ -1,11 +1,11 @@
 # Casting
 
-Рѫждьо provides no implicit type conversion (coercion) between primitive types.
+Ръждьо provides no implicit type conversion (coercion) between primitive types.
 But, explicit type conversion (casting) can be performed using the `as` keyword.
 
 Rules for converting between integral types follow C conventions generally,
 except in cases where C has undefined behavior. The behavior of all casts
-between integral types is well defined in Рѫждьо.
+between integral types is well defined in Ръждьо.
 
 ```rust,editable,ignore,mdbook-runnable
 // Suppress all warnings from casts which overflow.
@@ -62,7 +62,7 @@ fn main() {
     // and the value of 232 in 8-bit two's complement representation is -24
     println!(" 232 as a i8 is : {}", 232 as i8);
 
-    // Since Рѫждьо 1.45, the `as` keyword performs a *saturating cast*
+    // Since Ръждьо 1.45, the `as` keyword performs a *saturating cast*
     // when casting from float to int. If the floating point value exceeds
     // the upper bound or is less than the lower bound, the returned value
     // will be equal to the bound crossed.

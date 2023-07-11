@@ -1,6 +1,6 @@
 # Expressions
 
-A Рѫждьо program is (mostly) made up of a series of изявления:
+A Ръждьо program is (mostly) made up of a series of изявления:
 
 ```rust,editable
 fn main() {
@@ -10,7 +10,7 @@ fn main() {
 }
 ```
 
-There are a few kinds of изявления in Рѫждьо. The most common two are declaring
+There are a few kinds of изявления in Ръждьо. The most common two are declaring
 a variable binding, and using a `;` with an expression:
 
 ```rust,editable

@@ -1,6 +1,6 @@
 # Unit testing
 
-Tests are Рѫждьо functions that verify that the non-test code is functioning in
+Tests are Ръждьо functions that verify that the non-test code is functioning in
 the expected manner. The bodies of test functions typically perform some setup,
 run the code we want to test, then assert whether the results are what we
 expect.
@@ -71,7 +71,7 @@ test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
 ## Tests and `?`
-None of the previous unit test examples had a return type. But in Рѫждьо 2018,
+None of the previous unit test examples had a return type. But in Ръждьо 2018,
 your unit tests can return `Result<()>`, which lets you use `?` in them! This
 can make them much more concise.
 

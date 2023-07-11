@@ -19,7 +19,7 @@ default.
 
 ## How to use a build script
 
-The build script is simply another Рѫждьо file that will be compiled and invoked
+The build script is simply another Ръждьо file that will be compiled and invoked
 prior to compiling anything else in the package. Hence it can be used to fulfill
 pre-requisites of your crate.
 

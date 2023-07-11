@@ -1,11 +1,11 @@
 # Dependencies
 
 Most programs have dependencies on some libraries. If you have ever managed
-dependencies by hand, you know how much of a pain this can be. Luckily, the Рѫждьо
+dependencies by hand, you know how much of a pain this can be. Luckily, the Ръждьо
 ecosystem comes standard with `cargo`! `cargo` can manage dependencies for a
 project.
 
-To create a new Рѫждьо project,
+To create a new Ръждьо project,
 
 ```sh
 # A binary
@@ -57,7 +57,7 @@ The `authors` field is a list of authors used when publishing the crate.
 The `[dependencies]` section lets you add dependencies for your project.
 
 For example, suppose that we want our program to have a great CLI. You can find
-lots of great packages on [crates.io](https://crates.io) (the official Рѫждьо
+lots of great packages on [crates.io](https://crates.io) (the official Ръждьо
 package registry). One popular choice is [clap](https://crates.io/crates/clap).
 As of this writing, the most recent published version of `clap` is `2.27.1`. To
 add a dependency to our program, we can simply add the following to our

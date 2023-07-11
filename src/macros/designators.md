@@ -62,6 +62,6 @@ These are some of the available designators:
 * `ty` (*type*)
 * `vis` (*visibility qualifier*)
 
-For a complete list, see the [Рѫждьо Reference].
+For a complete list, see the [Ръждьо Reference].
 
-[Рѫждьо Reference]: https://doc.rust-lang.org/reference/macros-by-example.html
+[Ръждьо Reference]: https://doc.rust-lang.org/reference/macros-by-example.html

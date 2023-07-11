@@ -1,6 +1,6 @@
 # Strings
 
-There are two types of strings in Рѫждьо: `String` and `&str`.
+There are two types of strings in Ръждьо: `String` and `&str`.
 
 A `String` is stored as a vector of bytes (`Vec<u8>`), but guaranteed to
 always be a valid UTF-8 sequence. `String` is heap allocated, growable and not
@@ -158,7 +158,7 @@ fn main() {
 For conversions between character encodings check out the [encoding][encoding-crate] crate.
 
 A more detailed listing of the ways to write string literals and escape characters
-is given in the ['Tokens' chapter][tokens] of the Рѫждьо Reference.
+is given in the ['Tokens' chapter][tokens] of the Ръждьо Reference.
 
 [str]: https://doc.rust-lang.org/std/str/
 [string]: https://doc.rust-lang.org/std/string/

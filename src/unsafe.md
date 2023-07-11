@@ -2,7 +2,7 @@
 
 As an introduction to this section, to borrow from [the official docs][unsafe],
 "one should try to minimize the amount of unsafe code in a code base." With that
-in mind, let's get started! Unsafe annotations in Рѫждьо are used to bypass
+in mind, let's get started! Unsafe annotations in Ръждьо are used to bypass
 protections put in place by the compiler; specifically, there are four primary
 things that unsafe is used for:
 

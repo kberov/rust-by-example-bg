@@ -1,6 +1,6 @@
 # Operator Overloading
 
-In Рѫждьо, many of the operators can be overloaded via traits. That is, some operators can
+In Ръждьо, many of the operators can be overloaded via traits. That is, some operators can
 be used to accomplish different tasks based on their input arguments. This is possible
 because operators are syntactic sugar for method calls. For example, the `+` operator in
 `a + b` calls the `add` method (as in `a.add(b)`). This `add` method is part of the `Add`

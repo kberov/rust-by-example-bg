@@ -104,7 +104,7 @@ fn main() {
     //rectangle.translate(1.0, 0.0);
     // TODO ^ Try uncommenting this line
 
-    // Okay! Mutable objects can call mutable methods
+    // Okay! Mutable предмети can call mutable methods
     square.translate(1.0, 1.0);
 
     let pair = Pair(Box::new(1), Box::new(2));

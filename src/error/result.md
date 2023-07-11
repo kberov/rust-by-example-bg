@@ -14,7 +14,7 @@ Like `Option`, `Result` has many methods associated with it. `unwrap()`, for
 example, either yields the element `T` or `panic`s. For case handling,
 there are many combinators between `Result` and `Option` that overlap.
 
-In working with Rust, you will likely encounter methods that return the
+In working with Рѫждьо, you will likely encounter methods that return the
 `Result` type, such as the [`parse()`][parse] method. It might not always
 be possible to parse a string into the other type, so `parse()` returns a
 `Result` indicating possible failure.

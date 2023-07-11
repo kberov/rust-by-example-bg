@@ -2,11 +2,11 @@
 
 A longer lifetime can be coerced into a shorter one 
 so that it works inside a scope it normally wouldn't work in.
-This comes in the form of inferred coercion by the Rust compiler,
+This comes in the form of inferred coercion by the Рѫждьо compiler,
 and also in the form of declaring a lifetime difference:
 
 ```rust,editable
-// Here, Rust infers a lifetime that is as short as possible.
+// Here, Рѫждьо infers a lifetime that is as short as possible.
 // The two references are then coerced to that lifetime.
 fn multiply<'a>(first: &'a i32, second: &'a i32) -> i32 {
     first * second

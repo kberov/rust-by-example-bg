@@ -1,6 +1,6 @@
 # Supertraits
 
-Rust doesn't have "inheritance", but you can define a trait as being a superset
+Рѫждьо doesn't have "inheritance", but you can define a trait as being a superset
 of another trait. For example:
 
 ```rust,editable
@@ -39,6 +39,6 @@ fn main() {}
 
 ### See also:
 
-[The Rust Programming Language chapter on supertraits][trpl_supertraits]
+[The Рѫждьо Programming Language chapter on supertraits][trpl_supertraits]
 
 [trpl_supertraits]: https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-supertraits-to-require-one-traits-functionality-within-another-trait

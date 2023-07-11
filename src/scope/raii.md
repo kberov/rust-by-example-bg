@@ -1,7 +1,7 @@
 # RAII
 
-Variables in Rust do more than just hold data in the stack: they also *own*
-resources, e.g. `Box<T>` owns memory in the heap. Rust enforces [RAII][raii]
+Variables in Рѫждьо do more than just hold data in the stack: they also *own*
+resources, e.g. `Box<T>` owns memory in the heap. Рѫждьо enforces [RAII][raii]
 (Resource Acquisition Is Initialization), so whenever an object goes out of
 scope, its destructor is called and its owned resources are freed.
 
@@ -66,7 +66,7 @@ No leaks here!
 
 ## Destructor
 
-The notion of a destructor in Rust is provided through the [`Drop`] trait. The
+The notion of a destructor in Рѫждьо is provided through the [`Drop`] trait. The
 destructor is called when the resource goes out of scope. This trait is not
 required to be implemented for every type, only implement it for your type if
 you require its own destructor logic.

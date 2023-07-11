@@ -1,6 +1,6 @@
 # Expressions
 
-A Rust program is (mostly) made up of a series of statements:
+A Рѫждьо program is (mostly) made up of a series of statements:
 
 ```rust,editable
 fn main() {
@@ -10,7 +10,7 @@ fn main() {
 }
 ```
 
-There are a few kinds of statements in Rust. The most common two are declaring
+There are a few kinds of statements in Рѫждьо. The most common two are declaring
 a variable binding, and using a `;` with an expression:
 
 ```rust,editable

@@ -9,7 +9,7 @@ is for type parameters.
 
 A type parameter is specified as generic by the use of angle brackets and upper
 [camel case][camelcase]: `<Aaa, Bbb, ...>`. "Generic type parameters" are
-typically represented as `<T>`. In Rust, "generic" also describes anything that
+typically represented as `<T>`. In Рѫждьо, "generic" also describes anything that
 accepts one or more generic type parameters `<T>`. Any type specified as a 
 generic type parameter is generic, and everything else is concrete (non-generic).
 

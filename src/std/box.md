@@ -1,6 +1,6 @@
 # Box, stack and heap
 
-All values in Rust are stack allocated by default. Values can be *boxed*
+All values in Рѫждьо are stack allocated by default. Values can be *boxed*
 (allocated on the heap) by creating a `Box<T>`. A box is a smart pointer to a
 heap allocated value of type `T`. When a box goes out of scope, its destructor
 is called, the inner object is destroyed, and the memory on the heap is freed.

@@ -3,7 +3,7 @@
 Sometimes it simplifies the code to mask all of the different errors with a
 single type of error.  We'll show this with a custom error.
 
-Rust allows us to define our own error types. In general, a "good" error type:
+Рѫждьо allows us to define our own error types. In general, a "good" error type:
 
 * Represents different errors with the same type
 * Presents nice error messages to the user

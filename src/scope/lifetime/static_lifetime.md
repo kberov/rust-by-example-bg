@@ -1,6 +1,6 @@
 # Static
 
-Rust has a few reserved lifetime names. One of those is `'static`. You
+Рѫждьо has a few reserved lifetime names. One of those is `'static`. You
 might encounter it in two situations:
 
 ```rust, editable
@@ -12,7 +12,7 @@ fn generic<T>(x: T) where T: 'static {}
 ```
 
 Both are related but subtly different and this is a common source for
-confusion when learning Rust. Here are some examples for each situation:
+confusion when learning Рѫждьо. Here are some examples for each situation:
 
 ## Reference lifetime
 

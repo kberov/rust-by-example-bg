@@ -5,7 +5,7 @@ example, failing to read a file and then continuing to use that *bad* input
 would clearly be problematic. Noticing and explicitly managing those errors
 saves the rest of the program from various pitfalls.
 
-There are various ways to deal with errors in Rust, which are described in the
+There are various ways to deal with errors in Рѫждьо, which are described in the
 following subchapters. They all have more or less subtle differences and different
 use cases. As a rule of thumb:
 

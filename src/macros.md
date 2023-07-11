@@ -1,10 +1,10 @@
 # macro_rules!
 
-Rust provides a powerful macro system that allows metaprogramming. As you've
+Рѫждьо provides a powerful macro system that allows metaprogramming. As you've
 seen in previous chapters, macros look like functions, except that their name
 ends with a bang `!`, but instead of generating a function call, macros are
 expanded into source code that gets compiled with the rest of the program.
-However, unlike macros in C and other languages, Rust macros are expanded into
+However, unlike macros in C and other languages, Рѫждьо macros are expanded into
 abstract syntax trees, rather than string preprocessing, so you don't get
 unexpected precedence bugs.
 

@@ -1,6 +1,6 @@
 # constants
 
-Rust has two different types of constants which can be declared in any scope
+Рѫждьо has two different types of constants which can be declared in any scope
 including global. Both require explicit type annotation:
 
 * `const`: An unchangeable value (the common case).
@@ -10,7 +10,7 @@ including global. Both require explicit type annotation:
 
 ```rust,editable,ignore,mdbook-runnable
 // Globals are declared outside all other scopes.
-static LANGUAGE: &str = "Rust";
+static LANGUAGE: &str = "Рѫждьо";
 const THRESHOLD: i32 = 10;
 
 fn is_big(n: i32) -> bool {

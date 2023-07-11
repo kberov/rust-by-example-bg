@@ -95,7 +95,7 @@ impl VeryVerboseEnumOfThingsToDoWithNumbers {
 
 To learn more about enums and type aliases, you can read the
 [stabilization report][aliasreport] from when this feature was stabilized into
-Rust.
+Рѫждьо.
 
 ### See also:
 

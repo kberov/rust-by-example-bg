@@ -1,9 +1,9 @@
 # use
 
-The `use` declaration can be used so manual scoping isn't needed:
+С обявлението `use` (*ползвам*) избягваме ръчното задаване на видимостта[^scoping]:
 
 ```rust,editable
-// An attribute to hide warnings for unused code.
+// Скриваме предупрежденията за неизползван код.
 #![allow(dead_code)]
 
 enum Status {
@@ -17,32 +17,34 @@ enum Work {
 }
 
 fn main() {
-    // Explicitly `use` each name so they are available without
-    // manual scoping.
+    // Изрично `use` (указваме, че ще ползваме) всяко име.
+    // Така избягваме изписването на пълния път до него.
     use crate::Status::{Poor, Rich};
-    // Automatically `use` each name inside `Work`.
+    // Автоматично `use` (използваме) всяко име от `Work`.
     use crate::Work::*;
 
-    // Equivalent to `Status::Poor`.
+    // Същото като `Status::Poor`.
     let status = Poor;
-    // Equivalent to `Work::Civilian`.
+    // Същото като `Work::Civilian`.
     let work = Civilian;
 
     match status {
-        // Note the lack of scoping because of the explicit `use` above.
-        Rich => println!("The rich have lots of money!"),
-        Poor => println!("The poor have no money..."),
+        // Забележете, че вариантите са видими, понеже ползвахме `use` горе.
+        Rich => println!("Богатият има много пари"),
+        Poor => println!("Бедният няма пари..."),
     }
 
     match work {
-        // Note again the lack of scoping.
-        Civilian => println!("Civilians work!"),
-        Soldier  => println!("Soldiers fight!"),
+        // Отново не указваме видимостта (пълния път до вариантите).
+        Civilian => println!("Цивилните работят!"),
+        Soldier  => println!("Войниците се бият!"),
     }
 }
 ```
 
-### See also:
+[^scoping]: указване на видимостта – scoping; видимост, обсег – scope
+
+### Вижте също:
 
 [`match`][match] and [`use`][use] 
 

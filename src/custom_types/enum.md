@@ -1,44 +1,46 @@
-# Enums
+# Броячи
 
-The `enum` keyword allows the creation of a type which may be one of a few
-different variants. Any variant which is valid as a `struct` is also valid in
-an `enum`.
+Ключовата дума `enum`[^enum] позволява създаването на тип, който може да
+представлява един от няколко различни варианта. Всеки вариант, който може да
+бъде действителна[^valid] структура, може да бъде действителен и в брояч
+(`enum`).
 
 ```rust,editable
-// Create an `enum` to classify a web event. Note how both
-// names and type information together specify the variant:
-// `PageLoad != PageUnload` and `KeyPress(char) != Paste(String)`.
-// Each is different and independent.
+// Създаваме `enum`, за да определим някакво събитие в уеб.
+// Забележете как името и типа на данните заедно определят варианта:
+// `PageLoad != PageUnload` и `KeyPress(char) != Paste(String)`.
+// Всеки вариант е различен и независим.
 enum WebEvent {
-    // An `enum` variant may either be `unit-like`,
+    // Всеки `enum` вариант може да бъде:
+    // празна единица `unit`;
     PageLoad,
     PageUnload,
-    // like tuple structs,
+    // списъчна структура `tuple`;
     KeyPress(char),
     Paste(String),
-    // or c-like structures.
+    // или стурктура като тези в езика C.
     Click { x: i64, y: i64 },
 }
 
-// A function which takes a `WebEvent` enum as an argument and
-// returns nothing.
+// Функция, която приема брояч `WebEvent` като аргумент
+// и не връща нищо.
 fn inspect(event: WebEvent) {
     match event {
-        WebEvent::PageLoad => println!("page loaded"),
-        WebEvent::PageUnload => println!("page unloaded"),
-        // Destructure `c` from inside the `enum` variant.
-        WebEvent::KeyPress(c) => println!("pressed '{}'.", c),
-        WebEvent::Paste(s) => println!("pasted \"{}\".", s),
-        // Destructure `Click` into `x` and `y`.
+        WebEvent::PageLoad => println!("заредихте страницата"),
+        WebEvent::PageUnload => println!("Напуснахте страницата"),
+        // Разлагаме (изваждаме) `c` от `enum` варианта.
+        WebEvent::KeyPress(c) => println!("натиснахте '{}'.", c),
+        WebEvent::Paste(s) => println!("поставихте \"{}\".", s),
+        // Разлагаме `Click` на `x` и `y`.
         WebEvent::Click { x, y } => {
-            println!("clicked at x={}, y={}.", x, y);
+            println!("Натиснахте място с координати x={}, y={}.", x, y);
         },
     }
 }
 
 fn main() {
     let pressed = WebEvent::KeyPress('x');
-    // `to_owned()` creates an owned `String` from a string slice.
+    // `to_owned()` създава *притежаван* `String` от низов отрязък.
     let pasted  = WebEvent::Paste("my text".to_owned());
     let click   = WebEvent::Click { x: 20, y: 80 };
     let load    = WebEvent::PageLoad;
@@ -53,11 +55,11 @@ fn main() {
 
 ```
 
-## Type aliases
+## Прякори на типове
 
-If you use a type alias, you can refer to each enum variant via its alias.
-This might be useful if the enum's name is too long or too generic, and you
-want to rename it.
+Ако ползвате прякор[^alias] на тип, можете да се обръщате към всеки вариант от
+брояча чрез неговия прякор. Това може да се окаже полезно, ако името на брояча
+е твърде дълго или твърде общо и искате да го промените.
 
 ```rust,editable
 enum VeryVerboseEnumOfThingsToDoWithNumbers {
@@ -65,17 +67,18 @@ enum VeryVerboseEnumOfThingsToDoWithNumbers {
     Subtract,
 }
 
-// Creates a type alias
+// Създаваме прякор на типа
 type Operations = VeryVerboseEnumOfThingsToDoWithNumbers;
 
 fn main() {
-    // We can refer to each variant via its alias, not its long and inconvenient
-    // name.
+    // Можем да достъпваме всеки вариант чрез прякора на брояча.
+    // По-кратко и удобно е.
     let x = Operations::Add;
 }
 ```
 
-The most common place you'll see this is in `impl` blocks using the `Self` alias.
+Най-често ще виждате използването на прякори в блоковете за осъществяване
+`impl`, където се ползва прякора `Self`.
 
 ```rust,editable
 enum VeryVerboseEnumOfThingsToDoWithNumbers {
@@ -93,13 +96,19 @@ impl VeryVerboseEnumOfThingsToDoWithNumbers {
 }
 ```
 
-To learn more about enums and type aliases, you can read the
-[stabilization report][aliasreport] from when this feature was stabilized into
-Рѫждьо.
+За да научите повече за брояите и типовите прякори, може да прочетете [отчета
+за стабилизация][aliasreport]. Оттогава е стабилна тази способност[^feature] на Рѫждьо.
 
-### See also:
+### Вижте също:
 
 [`match`][match], [`fn`][fn], and [`String`][str], ["Type alias enum variants" RFC][type_alias_rfc]
+
+[^enum]: брояч – enum. От enumerator – буквално „изброител” (бел. прев.)  
+
+[^valid]: действителен - valid (бел. прев.)
+
+[^feature]: способност, възможност – feature (бел. прев.)
+
 
 [c_struct]: https://en.wikipedia.org/wiki/Struct_(C_programming_language)
 [match]: ../flow_control/match.md

@@ -5,7 +5,7 @@ them.  The drawback is that the underlying error type is only known at runtime a
 [statically determined][dynamic_dispatch].
 
 The stdlib helps in boxing our errors by having `Box` implement conversion from
-any type that implements the `Error` trait into the trait object `Box<Error>`,
+any type that implements the `Error` trait into the trait предмет `Box<Error>`,
 via [`From`][from].
 
 ```rust,editable

@@ -6,7 +6,7 @@ passing предмети by value (`T`), предмети can be passed by refer
 
 The compiler statically guarantees (via its borrow checker) that references 
 *always* point to valid предмети. That is, while references to an object
-exist, the object cannot be destroyed.
+exist, the предмет cannot be destroyed.
 
 ```rust,editable,ignore,mdbook-runnable
 // This function takes ownership of a box and destroys it

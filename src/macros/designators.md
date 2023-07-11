@@ -57,7 +57,7 @@ These are some of the available designators:
 * `literal` is used for literal constants
 * `pat` (*pattern*)
 * `path`
-* `stmt` (*statement*)
+* `stmt` (*изявлениe*)
 * `tt` (*token tree*)
 * `ty` (*type*)
 * `vis` (*visibility qualifier*)

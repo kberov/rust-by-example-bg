@@ -35,7 +35,7 @@ fn main() {
 Let's check that `panic!` doesn't leak memory.
 
 <!-- REUSE-IgnoreStart -->
-<!-- Prevent REUSE from parsing the copyright statement in the sample code -->
+<!-- Prevent REUSE from parsing the copyright изявлениe in the sample code -->
 ```shell
 $ rustc panic.rs && valgrind ./panic
 ==4401== Memcheck, a memory error detector

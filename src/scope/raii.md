@@ -42,7 +42,7 @@ fn main() {
 Of course, we can double check for memory errors using [`valgrind`][valgrind]:
 
 <!-- REUSE-IgnoreStart -->
-<!-- Prevent REUSE from parsing the copyright statement in the sample code -->
+<!-- Prevent REUSE from parsing the copyright изявлениe in the sample code -->
 ```shell
 $ rustc raii.rs && valgrind ./raii
 ==26873== Memcheck, a memory error detector

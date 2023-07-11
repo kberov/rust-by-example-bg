@@ -4,9 +4,9 @@ A Рѫждьо program is (mostly) made up of a series of изявления:
 
 ```rust,editable
 fn main() {
-    // statement
-    // statement
-    // statement
+    // изявлениe
+    // изявлениe
+    // изявлениe
 }
 ```
 

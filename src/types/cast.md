@@ -1,89 +1,93 @@
-# Casting
+# Превръщане на типове
 
-Ръждьо provides no implicit type conversion (coercion) between primitive types.
-But, explicit type conversion (casting) can be performed using the `as` keyword.
+Ръждьо няма мълчаливо превръщане насила[^coercion] между първичните типове. Но
+изрично превръщане[^casting] може да се прави с помощта на ключовата дума `as`.
 
-Rules for converting between integral types follow C conventions generally,
-except in cases where C has undefined behavior. The behavior of all casts
-between integral types is well defined in Ръждьо.
+Правилата за превръщане между целочислените стойности следват тези в C като
+цяло освен в случаите, където в C поведенеието е неопределено. Поведението при
+превръщане между всички целочислени типове е строго определено в Ръждьо.
 
 ```rust,editable,ignore,mdbook-runnable
-// Suppress all warnings from casts which overflow.
+// Подтискаме всички предупреждения за препълващи превръщания.
 #![allow(overflowing_literals)]
 
 fn main() {
     let decimal = 65.4321_f32;
 
-    // Error! No implicit conversion
+    // Грешка! Няма мълчаливо превръщане
     let integer: u8 = decimal;
-    // FIXME ^ Comment out this line
+    // ПОПРАВИМЕ ^ Да се коментира този ред
 
-    // Explicit conversion
+    // Изрично превръщане
     let integer = decimal as u8;
     let character = integer as char;
 
-    // Error! There are limitations in conversion rules.
-    // A float cannot be directly converted to a char.
+    // Грешка ! Има някои ограничения при превръщане.
+    // Число с плаваща запетая не може да се превърне
+    // направо в писмен знак `char`.
     let character = decimal as char;
-    // FIXME ^ Comment out this line
+    // ПОПРАВИМЕ ^ Да се коментира този ред
 
-    println!("Casting: {} -> {} -> {}", decimal, integer, character);
+    println!("Превръщане: {} -> {} -> {}", decimal, integer, character);
 
-    // when casting any value to an unsigned type, T,
-    // T::MAX + 1 is added or subtracted until the value
-    // fits into the new type
+    // Когато се превръща каквато и да е стойност към тип без знак, T,
+    // T::MAX + 1 се добавя докато стойността не се побере в новия тип.
 
-    // 1000 already fits in a u16
-    println!("1000 as a u16 is: {}", 1000 as u16);
+    // 1000 се побира в u16
+    println!("1000 като u16 е: {}", 1000 as u16);
 
     // 1000 - 256 - 256 - 256 = 232
-    // Under the hood, the first 8 least significant bits (LSB) are kept,
-    // while the rest towards the most significant bit (MSB) get truncated.
-    println!("1000 as a u8 is : {}", 1000 as u8);
+    // Подробности: първите 8 най-малко значими (младши) битове (LSB) се
+    // запазват, а старшите (MSB) се орязват.
+    println!("1000 като u8 е : {}", 1000 as u8);
     // -1 + 256 = 255
-    println!("  -1 as a u8 is : {}", (-1i8) as u8);
+    println!("  -1 като u8 е : {}", (-1i8) as u8);
 
-    // For positive numbers, this is the same as the modulus
-    println!("1000 mod 256 is : {}", 1000 % 256);
+    // За положителни числа това е същото като получаване на остатък
+    println!("Остатꙑкът от 1000, делено на 256, е: {}", 1000 % 256);
 
-    // When casting to a signed type, the (bitwise) result is the same as
-    // first casting to the corresponding unsigned type. If the most significant
-    // bit of that value is 1, then the value is negative.
+    // Когато превръщаме към тип със знак, побитовия резултат е същият като
+    // първото преобразуване към съответстващия тип без знак. Ако най-значимият
+    // бит на стойността е 1, то стойността е отрицателна.
 
-    // Unless it already fits, of course.
-    println!(" 128 as a i16 is: {}", 128 as i16);
+    // Освен, разбира се, когато стойността се побира в типа.
+    println!(" 128 като i16 е: {}", 128 as i16);
 
-    // In boundary case 128 value in 8-bit two's complement representation is -128
+    // В граничния случай стойността 128 в 8 бита two's complement representation is -128
     println!(" 128 as a i8 is : {}", 128 as i8);
 
-    // repeating the example above
-    // 1000 as u8 -> 232
-    println!("1000 as a u8 is : {}", 1000 as u8);
-    // and the value of 232 in 8-bit two's complement representation is -24
+    // повтаряме примера от горе
+    // 1000 като u8 -> 232
+    println!("1000 като u8 е : {}", 1000 as u8);
+    // и стойностт на 232 в 8 бита two's complement representation is -24
     println!(" 232 as a i8 is : {}", 232 as i8);
 
-    // Since Ръждьо 1.45, the `as` keyword performs a *saturating cast*
-    // when casting from float to int. If the floating point value exceeds
-    // the upper bound or is less than the lower bound, the returned value
-    // will be equal to the bound crossed.
+    // От Ръждьо 1.45, ключовата дума `as` работи като *наситено превръщане*,
+    // когато превръщаме от тип с плаваща запетая към целочислен тип. Ако
+    // дробната стойност надвишава горната граница или е по-малка от долната
+    // граница, върнатата стойност ще бъде равна на прескочената граница.
 
-    // 300.0 as u8 is 255
-    println!(" 300.0 as u8 is : {}", 300.0_f32 as u8);
-    // -100.0 as u8 is 0
-    println!("-100.0 as u8 is : {}", -100.0_f32 as u8);
-    // nan as u8 is 0
-    println!("   nan as u8 is : {}", f32::NAN as u8);
+    // 300.0 като u8 е 255
+    println!(" 300.0 като u8 е: {}", 300.0_f32 as u8);
+    // -100.0 като u8 е 0
+    println!("-100.0 като u8 е: {}", -100.0_f32 as u8);
+    // NAN като u8 е 0
+    println!(" НАН   като u8 е: {}", f32::NAN as u8);
 
-    // This behavior incurs a small runtime cost and can be avoided
-    // with unsafe methods, however the results might overflow and
-    // return **unsound values**. Use these methods wisely:
+    // Това поведение има малка цена по време на изпълнение и може да бъде
+    // избегнато чрез опасни методи. Обаче резултатът може да прелее и да върне
+    // **безсмислени** стойности. Използвайте тези методи разумно.
     unsafe {
-        // 300.0 as u8 is 44
-        println!(" 300.0 as u8 is : {}", 300.0_f32.to_int_unchecked::<u8>());
-        // -100.0 as u8 is 156
-        println!("-100.0 as u8 is : {}", (-100.0_f32).to_int_unchecked::<u8>());
-        // nan as u8 is 0
-        println!("   nan as u8 is : {}", f32::NAN.to_int_unchecked::<u8>());
+        // 300.0 като u8 е 44
+        println!(" 300.0 като u8 е : {}", 300.0_f32.to_int_unchecked::<u8>());
+        // -100.0 като u8 е 156
+        println!("-100.0 като u8 е : {}", (-100.0_f32).to_int_unchecked::<u8>());
+        //  NАН като u8 е 0
+        println!("   NAN като u8 е : {}", f32::NAN.to_int_unchecked::<u8>());
     }
 }
 ```
+
+[^coercion]: мълчаливо превръщане насила (между първичните типове) – coercion 
+
+[^casting]: изрично превръщане – casting

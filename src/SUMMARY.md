@@ -25,7 +25,7 @@
 
 - [Обвързване на променливи](variable_bindings.md)
     - [Менѝмост](variable_bindings/mut.md)
-    - [Обсег и засенчване](variable_bindings/scope.md)
+    - [Видимост и засенчване](variable_bindings/scope.md)
     - [Първо обявете](variable_bindings/declare.md)
     - [Замразяване](variable_bindings/freeze.md)
 
@@ -114,7 +114,7 @@
     - [Параметри от призрачен тип](generics/phantom.md)
         - [Случай: разясняване на едно цяло (`unit`)](generics/phantom/testcase_units.md)
 
-- [Правила за обсег](scope.md)
+- [Правила за видимост](scope.md)
     - [RAII](scope/raii.md)
     - [Собственост и премествания](scope/move.md)
         - [Менѝмост](scope/move/mut.md)

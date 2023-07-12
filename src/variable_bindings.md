@@ -1,11 +1,13 @@
-# Variable Bindings
+# Обвързване на променливи
 
-Ръждьо provides type safety via static typing. Variable bindings can be type
-annotated when declared. However, in most cases, the compiler will be able
-to infer the type of the variable from the context, heavily reducing the
-annotation burden.
+Ръждьо предоставя безопасност чрез статично типизиране. Когато обвързваме
+променлива със стойност[^var_binding], типът може да бъде указан при
+обявяването на променливата. В повечето случаи, обаче, компилаторът ще успее да
+отгатне типа на променливата от употребата ѝ, като с това силно намалява
+нуждата от изрично отбелязване на типа.
 
-Values (like literals) can be bound to variables, using the `let` binding.
+Стойностите (включително и буквалните) могат да бъдат обвързани с променливи с
+помощта на оператора `let`.
 
 ```rust,editable
 fn main() {
@@ -13,19 +15,23 @@ fn main() {
     let a_boolean = true;
     let unit = ();
 
-    // copy `an_integer` into `copied_integer`
+    // копираме `an_integer` в `copied_integer`
     let copied_integer = an_integer;
 
-    println!("An integer: {:?}", copied_integer);
-    println!("A boolean: {:?}", a_boolean);
-    println!("Meet the unit value: {:?}", unit);
+    println!("Цяло число: {:?}", copied_integer);
+    println!("Булева променлива: {:?}", a_boolean);
+    println!("Запознайте се с единичната (празна) стойност `unit`: {:?}", unit);
 
-    // The compiler warns about unused variable bindings; these warnings can
-    // be silenced by prefixing the variable name with an underscore
+    // Компилаторът предупреждава за неизползвани обвързвания.
+    // Тези предупреждения могат да бъдат спрени, като започнем името
+    // на променливата с подчертавка.
     let _unused_variable = 3u32;
 
     let noisy_unused_variable = 2u32;
-    // FIXME ^ Prefix with an underscore to suppress the warning
-    // Please note that warnings may not be shown in a browser
+    // ПОПРАВИМЕ ^ Поставете подчертавка    , за да подтиснете предупреждението.
+    // Забележете, че предупрежеденията може да не се покажат,
+    // ако пуснете програмата направо от уеб-четеца.
 }
 ```
+
+[^var_binding]: обвързване на променлива (със стойност) – variable binding

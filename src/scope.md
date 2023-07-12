@@ -1,4 +1,4 @@
-# Scoping rules
+# Правила за видимост 
 
 Scopes play an important part in ownership, borrowing, and lifetimes.
 That is, they indicate to the compiler when borrows are valid, when 

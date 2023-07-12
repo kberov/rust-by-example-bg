@@ -1,7 +1,8 @@
-# Mutability
+# Менѝмост
 
-Variable bindings are immutable by default, but this can be overridden using
-the `mut` modifier.
+Обвързването на променлива е непроменяемо[^immutable] по подразбирне. Но с
+помощта на променителя[^modifier] `mut`, промяната на стойността може да бъде
+разрешена.
 
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
@@ -19,5 +20,8 @@ fn main() {
     _immutable_binding += 1;
 }
 ```
+Компилаторът ще изведе подробни описания на грешките, свързани с менимостта на променливите.
 
-The compiler will throw a detailed diagnostic about mutability errors.
+[^immutable]: (не)променяемо, (не)менѝмо – (im)mutable. (Не)менѝмост, (не)променяемост – (im)mutability
+
+[^modifier]: променител, ~модификатор~ - modifier

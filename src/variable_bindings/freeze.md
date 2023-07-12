@@ -1,24 +1,25 @@
-# Freezing
+# Замразяване
 
-When data is bound by the same name immutably, it also *freezes*. *Frozen* data can't be 
-modified until the immutable binding goes out of scope:
+Когато данни са обвързани с променлива неизменяемо, това *ги замразява*.
+*Замразени* данни не могат да бъдат променяни, докато непроменимото обвързване
+излезе извън видимост.
 
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
     let mut _mutable_integer = 7i32;
 
     {
-        // Shadowing by immutable `_mutable_integer`
+        // Засенчване чрез неменимо обвързване `_mutable_integer`
         let _mutable_integer = _mutable_integer;
 
-        // Error! `_mutable_integer` is frozen in this scope
+        // Грешка! `_mutable_integer` is frozen in this scope
         _mutable_integer = 50;
-        // FIXME ^ Comment out this line
+        // ПОПРАВИМЕ ^ Да се коментира този ред
 
-        // `_mutable_integer` goes out of scope
+        // `_mutable_integer` излиза от обхват
     }
 
-    // Ok! `_mutable_integer` is not frozen in this scope
+    // Ok! `_mutable_integer` не е замразено тук
     _mutable_integer = 3;
 }
 ```

@@ -1,46 +1,49 @@
-# Scope and Shadowing
+# Видимост и засенчване
 
-Variable bindings have a scope, and are constrained to live in a *block*. A
-block is a collection of изявления enclosed by braces `{}`. 
+Обвързването на дадена променлива е с определена видимост. Видимостта (в какво
+пространство е видима (достъпна) една променлива) е ограничена от обгръщащия я
+*блок*. Блокът е набор от изявления, ограден с фигурни скоби `{}`. 
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
-    // This binding lives in the main function
+    // Това обвързване е видимо във функцията `main`.
     let long_lived_binding = 1;
 
-    // This is a block, and has a smaller scope than the main function
+    // Това е блок и има по-малка видмост от функцията `main`.
     {
-        // This binding only exists in this block
+        // Това обвързване съществува само в този блок.
         let short_lived_binding = 2;
 
-        println!("inner short: {}", short_lived_binding);
+        println!("вътрешна краткосрочна видимост: {}", short_lived_binding);
     }
-    // End of the block
+    // Край на блока
 
-    // Error! `short_lived_binding` doesn't exist in this scope
-    println!("outer short: {}", short_lived_binding);
-    // FIXME ^ Comment out this line
+    // Грешка! `short_lived_binding` не съществува в тази област на видимост.
+    println!("външна краткосрочна видимост: {}", short_lived_binding);
+    // ПОПРАВИМЕ ^ Да се коментира този ред.
 
-    println!("outer long: {}", long_lived_binding);
+    println!("външна дългосрочна: {}", long_lived_binding);
 }
 ```
-Also, [variable shadowing][variable-shadow] is allowed.
+[Засенчване на променливи][variable-shadow] също е разрешено.
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
     let shadowed_binding = 1;
 
     {
-        println!("before being shadowed: {}", shadowed_binding);
+        println!("Преди засенчване: {}", shadowed_binding);
 
-        // This binding *shadows* the outer one
+        // Тази променлива засенчва *засенчва* външната.
         let shadowed_binding = "abc";
 
-        println!("shadowed in inner block: {}", shadowed_binding);
+        println!("засенчена във вътрешния блок: {}", shadowed_binding);
     }
-    println!("outside inner block: {}", shadowed_binding);
+    println!("във външния блок: {}", shadowed_binding);
 
-    // This binding *shadows* the previous binding
+    // Това обвързване *засенчва* предишното обвързване.
     let shadowed_binding = 2;
-    println!("shadowed in outer block: {}", shadowed_binding);
+    println!("засенчена във външния блок: {}", shadowed_binding);
+ 
 }
 ```
 [variable-shadow]: https://en.wikipedia.org/wiki/Variable_shadowing
+

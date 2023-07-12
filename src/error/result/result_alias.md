@@ -1,7 +1,7 @@
 # aliases for `Result`
 
 How about when we want to reuse a specific `Result` type many times?
-Recall that Rust allows us to create [aliases][typealias]. Conveniently,
+Recall that Ръждьо allows us to create [aliases][typealias]. Conveniently,
 we can define one for the specific `Result` in question.
 
 At a module level, creating aliases can be particularly helpful. Errors

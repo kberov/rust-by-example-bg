@@ -1,6 +1,6 @@
 # Unpacking options with `?`
 
-You can unpack `Option`s by using `match` statements, but it's often easier to
+You can unpack `Option`s by using `match` изявления, but it's often easier to
 use the `?` operator. If `x` is an `Option`, then evaluating `x?` will return
 the underlying value if `x` is `Some`, otherwise it will terminate whatever
 function is being executed and return `None`.
@@ -36,7 +36,7 @@ impl Person {
 
     // Gets the area code of the phone number of the person's job, if it exists.
     fn work_phone_area_code(&self) -> Option<u8> {
-        // This would need many nested `match` statements without the `?` operator.
+        // This would need many nested `match` изявления without the `?` operator.
         // It would take a lot more code - try writing it yourself and see which
         // is easier.
         self.job?.phone_number?.area_code

@@ -1,6 +1,6 @@
 # Combinators: `and_then`
 
-`map()` was described as a chainable way to simplify `match` statements. 
+`map()` was described as a chainable way to simplify `match` изявления. 
 However, using `map()` on a function that returns an `Option<T>` results 
 in the nested `Option<Option<T>>`. Chaining multiple calls together can 
 then become confusing. That's where another combinator called `and_then()`, 

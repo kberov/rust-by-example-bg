@@ -30,8 +30,8 @@ I got 3 arguments: ["1", "2", "3"].
 ## Crates
 
 Alternatively, there are numerous crates that can provide extra functionality
-when creating command-line applications. The [Rust Cookbook] exhibits best
+when creating command-line applications. The [Ръждьо Cookbook] exhibits best
 practices on how to use one of the more popular command line argument crates,
 `clap`.
 
-[Rust Cookbook]: https://rust-lang-nursery.github.io/rust-cookbook/cli/arguments.html
+[Ръждьо Cookbook]: https://rust-lang-nursery.github.io/rust-cookbook/cli/arguments.html

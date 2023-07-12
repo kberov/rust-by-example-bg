@@ -1,6 +1,6 @@
 # Aliasing
 
-The `type` statement can be used to give a new name to an existing type. Types
+The `type` изявлениe can be used to give a new name to an existing type. Types
 must have `UpperCamelCase` names, or the compiler will raise a warning. The
 exception to this rule are the primitive types: `usize`, `f32`, etc.
 

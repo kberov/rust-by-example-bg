@@ -71,7 +71,7 @@ fn main() {
 ```
 
 ```shell
-$ ./match_args Rust
+$ ./match_args Ръждьо
 This is not the answer.
 $ ./match_args 42
 This is the answer!

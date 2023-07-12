@@ -36,7 +36,7 @@ struct Rectangle {
 impl Rectangle {
     // This is a method
     // `&self` is sugar for `self: &Self`, where `Self` is the type of the
-    // caller object. In this case `Self` = `Rectangle`
+    // caller предмет. In this case `Self` = `Rectangle`
     fn area(&self) -> f64 {
         // `self` gives access to the struct fields via the dot operator
         let Point { x: x1, y: y1 } = self.p1;
@@ -54,7 +54,7 @@ impl Rectangle {
         2.0 * ((x1 - x2).abs() + (y1 - y2).abs())
     }
 
-    // This method requires the caller object to be mutable
+    // This method requires the caller предмет to be mutable
     // `&mut self` desugars to `self: &mut Self`
     fn translate(&mut self, x: f64, y: f64) {
         self.p1.x += x;
@@ -104,7 +104,7 @@ fn main() {
     //rectangle.translate(1.0, 0.0);
     // TODO ^ Try uncommenting this line
 
-    // Okay! Mutable objects can call mutable methods
+    // Okay! Mutable предмети can call mutable methods
     square.translate(1.0, 1.0);
 
     let pair = Pair(Box::new(1), Box::new(2));

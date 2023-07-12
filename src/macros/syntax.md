@@ -1,6 +1,6 @@
 # Syntax
 
-In following subsections, we will show how to define macros in Rust.
+In following subsections, we will show how to define macros in Ръждьо.
 There are three basic ideas:
 
 - [Patterns and Designators][designators]

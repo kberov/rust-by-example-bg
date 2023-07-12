@@ -89,7 +89,7 @@ fn main() {
 }
 ```
 
-More importantly, some Rust types can't be written out. For example, every
+More importantly, some Ръждьо types can't be written out. For example, every
 closure has its own unnamed concrete type. Before `impl Trait` syntax, you had
 to allocate on the heap in order to return a closure. But now you can do it all
 statically, like this:

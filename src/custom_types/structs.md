@@ -1,15 +1,17 @@
-# Structures
+# Структури
 
-There are three types of structures ("structs") that can be created using the
-`struct` keyword:
+Има три вида структури (structs), които могат да бъдат създавани с ключовата
+дума `struct`:
 
-* Tuple structs, which are, basically, named tuples.
-* The classic [C structs][c_struct]
-* Unit structs, which are field-less, are useful for generics.
+* Списъчни структури, които са просто именувани разнородни списъци;
+* Класически – [същите като в C][c_struct];
+* Единични (Unit) структури, които нямат полета и са полезни за обобщения.
 
 ```rust,editable
-// An attribute to hide warnings for unused code.
+// Атрибут за скриване на предупрежденията за неизползван код.
 #![allow(dead_code)]
+// Спираме предупрежденията за необичайни знаци.
+#![allow(uncommon_codepoints)]
 
 #[derive(Debug)]
 struct Person {
@@ -17,83 +19,95 @@ struct Person {
     age: u8,
 }
 
-// A unit struct
+// Единична структура
 struct Unit;
 
-// A tuple struct
+// Списъчна структура
 struct Pair(i32, f32);
 
-// A struct with two fields
+// Структура с две полета
 struct Point {
     x: f32,
     y: f32,
 }
 
-// Structs can be reused as fields of another struct
-struct Rectangle {
-    // A rectangle can be specified by where the top left and bottom right
-    // corners are in space.
-    top_left: Point,
-    bottom_right: Point,
+// Структурите могат да бъдат преизползвани като полета в други структури.
+struct Четирѭгълник {
+    // Четирѭгълникът може да се опише като се укаже къде се намират горния ляв
+    // и долния десен ъгъл в пространството.
+    горе_ляво: Point,
+    долу_дясно: Point,
 }
 
 fn main() {
-    // Create struct with field init shorthand
+    // Могат да се създават структури, като за стойности на полетата се подадат
+    // променливи със същите имена.
     let name = String::from("Peter");
     let age = 27;
     let peter = Person { name, age };
 
-    // Print debug struct
+    // отпечатваме структурата 
     println!("{:?}", peter);
 
-    // Instantiate a `Point`
+    // Създаваме нова структура с тип `Point`
     let point: Point = Point { x: 10.3, y: 0.4 };
 
-    // Access the fields of the point
-    println!("point coordinates: ({}, {})", point.x, point.y);
+    // Достъпваме полетата на point
+    println!("Координати на точката: ({}, {})", point.x, point.y);
 
-    // Make a new point by using struct update syntax to use the fields of our
-    // other one
-    let bottom_right = Point { x: 5.2, ..point };
+    // Създаваме нова "точка", като използваме правописа за обновяване чрез
+    // използване на полетата на старата.
+    let долу_дясно = Point { x: 5.2, ..point };
 
-    // `bottom_right.y` will be the same as `point.y` because we used that field
-    // from `point`
-    println!("second point: ({}, {})", bottom_right.x, bottom_right.y);
+    // `долу_дясно.y` ще има същата стойност като `point.y` защото
+    // използвахме това поле от `point`
+    println!("Втора точка: ({}, {})", долу_дясно.x, долу_дясно.y);
 
-    // Destructure the point using a `let` binding
+    // Разлагаме точката в променливи left_edge и top_edge, като използваме
+    // *обвързване* чрез `let`
     let Point { x: left_edge, y: top_edge } = point;
 
-    let _rectangle = Rectangle {
-        // struct instantiation is an expression too
-        top_left: Point { x: left_edge, y: top_edge },
-        bottom_right: bottom_right,
+    let _rectangle = Четирѭгълник {
+        // създаването на структура също е израз (връща стойност)
+        горе_ляво: Point { x: left_edge, y: top_edge },
+        // ползваме променлива с името на полето, за да му дадем стойност
+        долу_дясно,
     };
 
-    // Instantiate a unit struct
+    // Създаваме инстанция (нов предмет) на единичната структура Unit.
     let _unit = Unit;
 
-    // Instantiate a tuple struct
+    // Инстанциираме нов Pair - списъчна структура
     let pair = Pair(1, 0.1);
 
-    // Access the fields of a tuple struct
+    // Достъп до стойностите на полетата на предмета на списъчната структура
     println!("pair contains {:?} and {:?}", pair.0, pair.1);
 
-    // Destructure a tuple struct
+    // Разлагаме чрез списъчна структура
     let Pair(integer, decimal) = pair;
 
     println!("pair contains {:?} and {:?}", integer, decimal);
 }
 ```
 
-### Activity
+## Бележки на преводача
 
-1. Add a function `rect_area` which calculates the area of a `Rectangle` (try
-   using nested destructuring).
-2. Add a function `square` which takes a `Point` and a `f32` as arguments, and
-   returns a `Rectangle` with its top left corner on the point, and a width and
-   height corresponding to the `f32`.
+Обвързването (`binding`) в Ръждьо е същото като присвояване на стойност на променлива в
+другите езици. Тук `обвързваме` дадена стойност с име.
 
-### See also
+Виждаме, че можем да ползваме азбука дори в имената на структурите и функциите,
+не само на променливите.
+
+### Упражнения
+
+1. Добавете функция `rect_area`, която изчислява площта на един `Четирѭгълник`
+   ( опитайте да ползвате вложено разлагане).
+2. Добавете функция `square`, която приема променлива от тип `Point` и
+   променлива от тип `f32` като аргументи, и връща тип `Четирѭгълник`, чиито
+   горен ляв ъгъл е същият кто точката, а ширината и дължината съответстват на
+   подадената променлива от тип `f32`.
+
+### Вижте също
 
 [`attributes`][attributes], and [destructuring][destructuring]
 

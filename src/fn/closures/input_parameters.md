@@ -1,6 +1,6 @@
 # As input parameters
 
-While Rust chooses how to capture variables on the fly mostly without type
+While Ръждьо chooses how to capture variables on the fly mostly without type
 annotation, this ambiguity is not allowed when writing functions. When
 taking a closure as an input parameter, the closure's complete type must be
 annotated using one of a few `traits`, and they're determined by what the

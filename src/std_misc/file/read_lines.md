@@ -45,7 +45,7 @@ Here we pass ownership of the open `File` to a `BufReader` struct. `BufReader` u
 buffer to reduce intermediate allocations.
 
 We also update `read_lines` to return an iterator instead of allocating new
-`String` objects in memory for each line.
+`String` предмети in memory for each line.
 
 ```rust,no_run
 use std::fs::File;
@@ -86,4 +86,3 @@ generic `read_lines()` method with the same generic constraint, using the `where
 
 This process is more efficient than creating a `String` in memory with all of the file's
 contents. This can especially cause performance issues when working with larger files.
-

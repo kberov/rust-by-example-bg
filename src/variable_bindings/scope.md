@@ -1,7 +1,7 @@
 # Scope and Shadowing
 
 Variable bindings have a scope, and are constrained to live in a *block*. A
-block is a collection of statements enclosed by braces `{}`. 
+block is a collection of изявления enclosed by braces `{}`. 
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
     // This binding lives in the main function

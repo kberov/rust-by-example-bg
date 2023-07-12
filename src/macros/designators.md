@@ -57,11 +57,11 @@ These are some of the available designators:
 * `literal` is used for literal constants
 * `pat` (*pattern*)
 * `path`
-* `stmt` (*statement*)
+* `stmt` (*изявлениe*)
 * `tt` (*token tree*)
 * `ty` (*type*)
 * `vis` (*visibility qualifier*)
 
-For a complete list, see the [Rust Reference].
+For a complete list, see the [Ръждьо Reference].
 
-[Rust Reference]: https://doc.rust-lang.org/reference/macros-by-example.html
+[Ръждьо Reference]: https://doc.rust-lang.org/reference/macros-by-example.html

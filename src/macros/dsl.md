@@ -1,7 +1,7 @@
 # Domain Specific Languages (DSLs)
 
-A DSL is a mini "language" embedded in a Rust macro. It is completely valid
-Rust because the macro system expands into normal Rust constructs, but it looks
+A DSL is a mini "language" embedded in a Ръждьо macro. It is completely valid
+Ръждьо because the macro system expands into normal Ръждьо constructs, but it looks
 like a small language. This allows you to define concise or intuitive syntax for
 some special functionality (within bounds).
 
@@ -20,7 +20,7 @@ macro_rules! calculate {
 
 fn main() {
     calculate! {
-        eval 1 + 2 // hehehe `eval` is _not_ a Rust keyword!
+        eval 1 + 2 // hehehe `eval` is _not_ a Ръждьо keyword!
     }
 
     calculate! {

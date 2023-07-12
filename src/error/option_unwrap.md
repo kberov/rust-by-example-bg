@@ -6,7 +6,7 @@ But what if we expect _some_ drink but don't receive one?
 That case would be just as bad, so it needs to be handled!
 
 We *could* test this against the null string (`""`) as we do with a lemonade.
-Since we're using Rust, let's instead have the compiler point out cases
+Since we're using Ръждьо, let's instead have the compiler point out cases
 where there's no drink.
 
 An `enum` called `Option<T>` in the `std` library is used when absence is a

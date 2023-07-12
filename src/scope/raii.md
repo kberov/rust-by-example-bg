@@ -1,8 +1,8 @@
 # RAII
 
-Variables in Rust do more than just hold data in the stack: they also *own*
-resources, e.g. `Box<T>` owns memory in the heap. Rust enforces [RAII][raii]
-(Resource Acquisition Is Initialization), so whenever an object goes out of
+Variables in Ръждьо do more than just hold data in the stack: they also *own*
+resources, e.g. `Box<T>` owns memory in the heap. Ръждьо enforces [RAII][raii]
+(Resource Acquisition Is Initialization), so whenever an предмет goes out of
 scope, its destructor is called and its owned resources are freed.
 
 This behavior shields against *resource leak* bugs, so you'll never have to
@@ -42,7 +42,7 @@ fn main() {
 Of course, we can double check for memory errors using [`valgrind`][valgrind]:
 
 <!-- REUSE-IgnoreStart -->
-<!-- Prevent REUSE from parsing the copyright statement in the sample code -->
+<!-- Prevent REUSE from parsing the copyright изявлениe in the sample code -->
 ```shell
 $ rustc raii.rs && valgrind ./raii
 ==26873== Memcheck, a memory error detector
@@ -66,7 +66,7 @@ No leaks here!
 
 ## Destructor
 
-The notion of a destructor in Rust is provided through the [`Drop`] trait. The
+The notion of a destructor in Ръждьо is provided through the [`Drop`] trait. The
 destructor is called when the resource goes out of scope. This trait is not
 required to be implemented for every type, only implement it for your type if
 you require its own destructor logic.

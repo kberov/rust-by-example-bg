@@ -1,55 +1,56 @@
-# Testcase: linked-list
+# Проверка: свързан списък
 
-A common way to implement a linked-list is via `enums`:
+Често свързаните списъци се осъществяват чрез `enum`:
 
 ```rust,editable
 use crate::List::*;
 
 enum List {
-    // Cons: Tuple struct that wraps an element and a pointer to the next node
+    // Cons: Списъчна структура, съдържаща един член от списъка и указател към
+    // следващия възел
     Cons(u32, Box<List>),
-    // Nil: A node that signifies the end of the linked list
+    // Nil: Възел, обозначаващ края на свързания списък
     Nil,
 }
 
-// Methods can be attached to an enum
+// Към брояча могат да се прикачват методи
 impl List {
-    // Create an empty list
+    // Създава празен списък
     fn new() -> List {
-        // `Nil` has type `List`
+        // Типът на `Nil` е `List`
         Nil
     }
 
-    // Consume a list, and return the same list with a new element at its front
+    // Приема списък и връща същия списък с нов член в началото му
     fn prepend(self, elem: u32) -> List {
-        // `Cons` also has type List
+        // Типът на `Cons` също е List
         Cons(elem, Box::new(self))
     }
 
-    // Return the length of the list
+    // Връща дължината на списъка
     fn len(&self) -> u32 {
-        // `self` has to be matched, because the behavior of this method
-        // depends on the variant of `self`
-        // `self` has type `&List`, and `*self` has type `List`, matching on a
-        // concrete type `T` is preferred over a match on a reference `&T`
-        // after Rust 2018 you can use self here and tail (with no ref) below as well,
-        // rust will infer &s and ref tail. 
-        // See https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/default-match-bindings.html
+        // Трябва да проверим за съответствие със `self`, защото
+        // поведението на този метод зависи от варианта на `self`
+        // Типът на`self` е `&List`, а типът на `*self` е `List`.
+        // За предпочитане е да се търси съответствие с `T` вместо с `&T`.
+        // След Ръждьо 2018 тук можем да ползваме `self` както и tail
+        // по-долу (без препратка). `&s` и `ref tail` ще бъдат отгатнати. 
+        // Вижте https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/default-match-bindings.html
         match *self {
-            // Can't take ownership of the tail, because `self` is borrowed;
-            // instead take a reference to the tail
+            // Не можем да овладеем (take ownership of) `tail`, защото `self`
+            // е взет на заем; вместо това вземаме препратка към `tail`
             Cons(_, ref tail) => 1 + tail.len(),
-            // Base Case: An empty list has zero length
+            // Основен случай: Празният списък е с нулева дължина
             Nil => 0
         }
     }
 
-    // Return representation of the list as a (heap allocated) string
+    // Връща представяне на списъка като низ (от динамичната памет)
     fn stringify(&self) -> String {
         match *self {
             Cons(head, ref tail) => {
-                // `format!` is similar to `print!`, but returns a heap
-                // allocated string instead of printing to the console
+                // `format!` е подобен на `print!`, но връща низ
+                // от динамичната памет вместо да печати вконзолата.
                 format!("{}, {}", head, tail.stringify())
             },
             Nil => {
@@ -60,21 +61,21 @@ impl List {
 }
 
 fn main() {
-    // Create an empty linked list
+    // Създаваме празен свързан списък 
     let mut list = List::new();
 
-    // Prepend some elements
+    // добавяме няколко члена в началото на списъка
     list = list.prepend(1);
     list = list.prepend(2);
     list = list.prepend(3);
 
-    // Show the final state of the list
-    println!("linked list has length: {}", list.len());
+    // Показваме окончателното състояние на списъка
+    println!("свързаният списък е с дължина {}.", list.len());
     println!("{}", list.stringify());
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`Box`][box] and [methods][methods]
 

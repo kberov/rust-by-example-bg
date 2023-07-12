@@ -2,7 +2,7 @@
 
 Some lifetime patterns are overwhelmingly common and so the borrow checker
 will allow you to omit them to save typing and to improve readability.
-This is known as elision. Elision exists in Rust solely because these patterns
+This is known as elision. Elision exists in Ръждьо solely because these patterns
 are common.
 
 The following code shows a few examples of elision. For a more comprehensive

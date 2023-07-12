@@ -59,6 +59,6 @@ fn main() {
 
 ### See also:
 
-[The Rust Programming Language chapter on Fully Qualified syntax][trpl_fqsyntax]
+[The Ръждьо Programming Language chapter on Fully Qualified syntax][trpl_fqsyntax]
 
 [trpl_fqsyntax]: https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#fully-qualified-syntax-for-disambiguation-calling-methods-with-the-same-name

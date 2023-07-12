@@ -3,7 +3,7 @@
 Closures are functions that can capture the enclosing environment. For
 example, a closure that captures the `x` variable:
 
-```Rust
+```Ръждьо
 |val| val + x
 ```
 

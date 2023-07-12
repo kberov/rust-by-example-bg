@@ -108,7 +108,7 @@ For documentation, `rustdoc` is widely used by the community. It's what is used 
 
 ### See also:
 
-- [The Rust Book: Making Useful Documentation Comments][book]
+- [The Ръждьо Book: Making Useful Documentation Comments][book]
 - [The rustdoc Book][rustdoc-book]
 - [The Reference: Doc comments][ref-comments]
 - [RFC 1574: API Documentation Conventions][api-conv]

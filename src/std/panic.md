@@ -2,7 +2,7 @@
 
 The `panic!` macro can be used to generate a panic and start unwinding
 its stack. While unwinding, the runtime will take care of freeing all the
-resources *owned* by the thread by calling the destructor of all its objects.
+resources *owned* by the thread by calling the destructor of all its предмети.
 
 Since we are dealing with programs with only one thread, `panic!` will cause the
 program to report the panic message and exit.
@@ -35,7 +35,7 @@ fn main() {
 Let's check that `panic!` doesn't leak memory.
 
 <!-- REUSE-IgnoreStart -->
-<!-- Prevent REUSE from parsing the copyright statement in the sample code -->
+<!-- Prevent REUSE from parsing the copyright изявлениe in the sample code -->
 ```shell
 $ rustc panic.rs && valgrind ./panic
 ==4401== Memcheck, a memory error detector

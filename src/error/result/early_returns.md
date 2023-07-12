@@ -2,7 +2,7 @@
 
 In the previous example, we explicitly handled the errors using combinators.
 Another way to deal with this case analysis is to use a combination of
-`match` statements and *early returns*.
+`match` изявления and *early returns*.
 
 That is, we can simply stop executing the function and return the error if
 one occurs. For some, this form of code can be easier to both read and

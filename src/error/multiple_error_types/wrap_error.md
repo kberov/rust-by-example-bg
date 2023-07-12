@@ -36,7 +36,7 @@ impl error::Error for DoubleError {
         match *self {
             DoubleError::EmptyVec => None,
             // The cause is the underlying implementation error type. Is implicitly
-            // cast to the trait object `&error::Error`. This works because the
+            // cast to the trait предмет `&error::Error`. This works because the
             // underlying type already implements the `Error` trait.
             DoubleError::Parse(ref e) => Some(e),
         }

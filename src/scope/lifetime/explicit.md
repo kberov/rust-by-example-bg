@@ -2,7 +2,7 @@
 
 The borrow checker uses explicit lifetime annotations to determine
 how long references should be valid. In cases where lifetimes are not
-elided[^1], Rust requires explicit annotations to determine what the 
+elided[^1], Ръждьо requires explicit annotations to determine what the 
 lifetime of a reference should be. The syntax for explicitly annotating 
 a lifetime uses an apostrophe character as follows: 
 

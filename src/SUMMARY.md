@@ -21,7 +21,7 @@
         - [use](custom_types/enum/enum_use.md)
         - [Като в C](custom_types/enum/c_like.md)
         - [Проверка: свързан списък](custom_types/enum/testcase_linked_list.md)
-    - [непроменливи](custom_types/constants.md)
+    - [Константи](custom_types/constants.md)
 
 - [Обвързване на променливи](variable_bindings.md)
     - [Менѝмост](variable_bindings/mut.md)

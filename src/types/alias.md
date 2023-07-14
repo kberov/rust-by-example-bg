@@ -1,11 +1,12 @@
-# Aliasing
+# Прякори
 
-The `type` изявлениe can be used to give a new name to an existing type. Types
-must have `UpperCamelCase` names, or the compiler will raise a warning. The
-exception to this rule are the primitive types: `usize`, `f32`, etc.
+Изявлениeто `type` може да се използва за задаване на ново име на съществуващ
+вече тип. Типовете трябва да имат имена от вида `UpperCamelCase`. Ако не
+спазите това правило, компилаторът ще ви покаже предупреждение. Изключение от
+него са първичните типове.
 
 ```rust,editable
-// `NanoSecond`, `Inch`, and `U64` are new names for `u64`.
+// `NanoSecond`, `Inch`, и `U64` са нови имена за `u64`.
 type NanoSecond = u64;
 type Inch = u64;
 type U64 = u64;
@@ -15,18 +16,19 @@ fn main() {
     let nanoseconds: NanoSecond = 5 as U64;
     let inches: Inch = 2 as U64;
 
-    // Note that type aliases *don't* provide any extra type safety, because
-    // aliases are *not* new types
-    println!("{} nanoseconds + {} inches = {} unit?",
+    // Забележете, че прякорите *не* предоставят повече безопасност по
+    // отношение на типизирането, понеже те не са нови типове.
+    println!("{} наносекунди + {} инчове = {} мерна единица?",
+
              nanoseconds,
              inches,
              nanoseconds + inches);
 }
 ```
 
-The main use of aliases is to reduce boilerplate; for example the `io::Result<T>` type
-is an alias for the `Result<T, io::Error>` type.
+Прякорите се използват най-вече за намаляване на писането. Например типа
+`io::Result<T>` е псевдоним  на `Result<T, io::Error>`.
 
-### See also:
+### Вижте също:
 
-[Attributes](../attribute.md)
+[Атрибути](../attribute.md)

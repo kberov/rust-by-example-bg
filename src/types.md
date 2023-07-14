@@ -1,13 +1,13 @@
-# Types
+# Типове
 
-Ръждьо provides several mechanisms to change or define the type of primitive and
-user defined types. The following sections cover:
-* [Casting] between primitive types
-* Specifying the desired type of [literals]
-* Using [type inference]
-* [Aliasing] types
+Ръждьо предоставя няколко начина за промяна или задаване типа на първични и
+потребителски типове. Следните раздели покриват:
+* [Изрично привеждане] между първични типове
+* Указване на желания тип на [буквални стойности]
+* Чрез [отгатване на типа]
+* Задаване на [прякор] на типа 
 
-[Casting]: types/cast.md
-[literals]: types/literals.md
-[type inference]: types/inference.md
-[Aliasing]: types/alias.md
+[Изрично привеждане]: types/cast.md
+[буквални стойности]: types/literals.md
+[отгатване на типа]: types/inference.md
+[прякор]: types/alias.md

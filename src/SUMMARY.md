@@ -30,10 +30,10 @@
     - [Замразяване](variable_bindings/freeze.md)
 
 - [Типове](types.md)
-    - [Casting](types/cast.md)
-    - [Literals](types/literals.md)
-    - [Inference](types/inference.md)
-    - [Aliasing](types/alias.md)
+    - [Привеждане към тип](types/cast.md)
+    - [Буквални](types/literals.md)
+    - [Отгатване](types/inference.md)
+    - [Прякори](types/alias.md)
 
 - [Превръщане](conversion.md)
     - [`From` и `Into`](conversion/from_into.md)
@@ -42,7 +42,7 @@
 
 - [Изрази](expression.md)
 
-- [Управление на програмния поток](flow_control.md)
+- [Програмен поток](flow_control.md)
     - [if/else](flow_control/if_else.md)
     - [loop](flow_control/loop.md)
         - [Nesting and labels](flow_control/loop/nested.md)

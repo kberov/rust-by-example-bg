@@ -1,28 +1,27 @@
-# Inference
+# Отгатване
 
-The type inference engine is pretty smart. It does more than looking at the
-type of the value expression
-during an initialization. It also looks at how the variable is used afterwards 
-to infer its type. Here's an advanced example of type inference:
+Двигателят за отгатване на типа е доста умен. Не просто гледа типа на връщаната
+стойност от израза при задаване на първоначална стойност. Гледа и начина, по
+който се използва променливата след това, за да отгатне типа ѝ. Ето един
+по-сложен пример за отгатване на типа.
 
 ```rust,editable
 fn main() {
-    // Because of the annotation, the compiler knows that `elem` has type u8.
+    // Благодарение на отбелязването с наставка, компилаторът знае, че
+    // типът на `elem` е u8.
     let elem = 5u8;
 
-    // Create an empty vector (a growable array).
+    // Създаване на вектор (поредица, с променлива дължина).
     let mut vec = Vec::new();
-    // At this point the compiler doesn't know the exact type of `vec`, it
-    // just knows that it's a vector of something (`Vec<_>`).
+    // Тук компилаторът все още не знае типа на `vec`. Знае само, че това е
+    // вектор, съдържащ нещо си (`Vec<_>`).
 
-    // Insert `elem` in the vector.
+    // Добавяме `elem` към вектора.
     vec.push(elem);
-    // Aha! Now the compiler knows that `vec` is a vector of `u8`s (`Vec<u8>`)
-    // TODO ^ Try commenting out the `vec.push(elem)` line
+    // Аха! Сега компилаторът знае, че това е вектор от членове с тип `u8` (`Vec<u8>`).
+    // ЗАДАЧА ^ Коментирайте реда с `vec.push(elem)`.
 
     println!("{:?}", vec);
 }
 ```
-
-No type annotation of variables was needed, the compiler is happy and so is the
-programmer!
+Не бе нужно да отбелязваме типа на променливата. Компилаторът е щастлив, и програмистът – също.

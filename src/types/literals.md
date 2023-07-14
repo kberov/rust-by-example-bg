@@ -1,40 +1,39 @@
-# Literals
+# Буквални стойности
 
-Numeric literals can be type annotated by adding the type as a suffix. As an example, 
-to specify that the literal `42` should have the type `i32`, write `42i32`.
+Типът на числовите буквални стойнсти може да бъде указан като наставка.
+Например, за да укажете, че буквалната стойност 42 ще бъде от тип `i32`,
+напишете `42i32`.
 
-The type of unsuffixed numeric literals will depend on how they are used. If no
-constraint exists, the compiler will use `i32` for integers, and `f64` for
-floating-point numbers.
+Типът на буквалните без наставка ще зависи от начина им на използване. Ако няма
+някакви ограничения, компилаторът ще използва `i32` за цели числа и `f64` за
+десетични дроби.
 
 ```rust,editable
 fn main() {
-    // Suffixed literals, their types are known at initialization
+    // Буквални с наставки. Типовете им се знаят отначало.
     let x = 1u8;
     let y = 2u32;
     let z = 3f32;
 
-    // Unsuffixed literals, their types depend on how they are used
+    // Буквални без наставка. Типовете им ще зависят от по-нататъшната употреба.
     let i = 1;
     let f = 1.0;
 
-    // `size_of_val` returns the size of a variable in bytes
-    println!("size of `x` in bytes: {}", std::mem::size_of_val(&x));
-    println!("size of `y` in bytes: {}", std::mem::size_of_val(&y));
-    println!("size of `z` in bytes: {}", std::mem::size_of_val(&z));
-    println!("size of `i` in bytes: {}", std::mem::size_of_val(&i));
-    println!("size of `f` in bytes: {}", std::mem::size_of_val(&f));
+    // `size_of_val` връща размера на дадена променлива в байтове.
+    println!("размерът на `x` в байтове: {}", std::mem::size_of_val(&x));
+    println!("размерът на `y` в байтове: {}", std::mem::size_of_val(&y));
+    println!("размерът на `z` в байтове: {}", std::mem::size_of_val(&z));
+    println!("размерът на ` i` в байтове: {}", std::mem::size_of_val(&i));
+    println!("размерът на `f` в байтове: {}", std::mem::size_of_val(&f));
 }
 ```
 
-There are some concepts used in the previous code that haven't been explained
-yet, here's a brief explanation for the impatient readers:
+Някои понятия в кода не са обяснени. Ето кратко обяснение за нетърпеливите читатели:
 
-* `std::mem::size_of_val` is a function, but called with its *full path*. Code
-  can be split in logical units called *modules*. In this case, the
-  `size_of_val` function is defined in the `mem` module, and the `mem` module
-  is defined in the `std` *crate*. For more details, see
-  [modules][mod] and [crates][crate].
+* `std::mem::size_of_val`  е функция, но извикана с *пълния ѝ път*. Програмният
+  код може да бъде разпределен в логически единици, наречени *модули*. В този
+  случай функцията `size_of_val` е описана в модула `mem`, а модулът `mem` е
+  описан в *коша* `std`. За подробности вижте [Модули][mod] и [Кошове][crate].
 
 [mod]: ../mod.md
 [crate]: ../crates.md

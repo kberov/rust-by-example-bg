@@ -1,14 +1,13 @@
-# Conversion
+# Превръщане
 
-Primitive types can be converted to each other through [casting].
+Първичните типове могат да бъдат превръщани от един в друг чрез [привеждане].
 
-Ръждьо addresses conversion between custom types (i.e., `struct` and `enum`)
-by the use of [traits]. The generic
-conversions will use the [`From`] and [`Into`] traits. However there are more
-specific ones for the more common cases, in particular when converting to and
-from `String`s.
+Ръждьо се справя с превръщането между потребителски типове (да речем `struct` и
+`enum`) чрез [отличители]. Обобщените превръщания ще ползват отличителите [`From`]
+и [`Into`]. Но има и по-особени за най-честите случаи – когато се превръща от и
+към низове (`String`).
 
-[casting]: types/cast.md
-[traits]: trait.md
+[привеждане]: types/cast.md
+[отличители]: trait.md
 [`From`]: https://doc.rust-lang.org/std/convert/trait.From.html
 [`Into`]: https://doc.rust-lang.org/std/convert/trait.Into.html

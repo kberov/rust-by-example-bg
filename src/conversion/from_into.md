@@ -1,24 +1,24 @@
-# `From` and `Into`
+# `From` и `Into`
 
-The [`From`] and [`Into`] traits are inherently linked, and this is actually part of
-its implementation. If you are able to convert type A from type B, then it
-should be easy to believe that we should be able to convert type B to type A.
+Отличителите [`From`] и [`Into`] са същностно свързани и тази връзка е част от
+начина, по който са осъществени. Ако можете да превърнете тип А в тип Б, то
+би трябвало лесно да превърнете и тип Б в А.
 
-## `From`
+## `From` – От
 
-The [`From`] trait allows for a type to define how to create itself from another
-type, hence providing a very simple mechanism for converting between several
-types. There are numerous implementations of this trait within the standard
-library for conversion of primitive and common types.
+Отличителят [`From`] дава възможност даден тип да опише как да създаде себе си
+от друг тип. Така имаме прост начин за превръщане между няколко различни типа.
+Има множество осъществявания на този отличител в стандартната библиотека за
+превръщане от един към друг на първични и често използвани типове.
 
-For example we can easily convert a `str` into a `String`
+Ето как лесно да превърнем `str` в `String`
 
 ```rust
 let my_str = "hello";
 let my_string = String::from(my_str);
 ```
 
-We can do similar for defining a conversion for our own type.
+Може да опишем наше собствено превръщане за наш си тип.
 
 ```rust,editable
 use std::convert::From;
@@ -40,15 +40,15 @@ fn main() {
 }
 ```
 
-## `Into`
+## `Into` – Къмто/Във
 
-The [`Into`] trait is simply the reciprocal of the `From` trait. That is, if you
-have implemented the `From` trait for your type, `Into` will call it when
-necessary.
+Отличителят [`Into`] е просто обратното на отличителя  `From`. Това означава,
+че ако сте осъществили `From` за вашия тип, `Into` ще извика вашето
+осъществяване, когато е нужно. 
 
-Using the `Into` trait will typically require specification of the type to
-convert into as the compiler is unable to determine this most of the time.
-However this is a small trade-off considering we get the functionality for free.
+Когато използваме отличителя `Into` обикновено се налага да  указваме типа към
+който превръщаме, тъй като компилаторът често не може да го определи. Но това е нищо,
+имайки предвидвид какво получаваме безплатно.
 
 ```rust,editable
 use std::convert::Into;

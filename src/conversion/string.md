@@ -1,11 +1,12 @@
-# To and from Strings
+# Към и от низове
 
-## Converting to String
+## Превръщане към String
 
-To convert any type to a `String` is as simple as implementing the [`ToString`]
-trait for the type. Rather than doing so directly, you should implement the
-[`fmt::Display`][Display] trait which automagically provides [`ToString`] and
-also allows printing the type as discussed in the section on [`print!`][print].
+За да превърнем от всякакъв тип към низ (`String`), трябва просто да осъществим
+отличителя [`ToString`] за дадения тип. Вместо да го правим наистина, по-добре
+да осъществим [`fmt::Display`][Display], който автоматично предоставя
+[`ToString`] и позволява отпечатване на типа, както обсъдихме вече в раздела за
+[`print!`][print].
 
 ```rust,editable
 use std::fmt;
@@ -26,17 +27,17 @@ fn main() {
 }
 ```
 
-## Parsing a String
+## Разбор на String
 
-One of the more common types to convert a string into a number. The idiomatic
-approach to this is to use the [`parse`] function and either to arrange for
-type inference or to specify the type to parse using the 'turbofish' syntax.
-Both alternatives are shown in the following example.
+Един от най-често срещаните случаи на превръщане е този на низ към число.
+Идиоматичният подход би бил да се ползва функцията [`parse`] и да улесните
+отгатването на типа или да укажете типа за извличане чрез правописа[^syntax]
+„турбофиш”[^turbofish]. И двата начина са показани в следващия пример.
 
-This will convert the string into the type specified as long as the [`FromStr`]
-trait is implemented for that type. This is implemented for numerous types
-within the standard library. To obtain this functionality on a user defined type
-simply implement the [`FromStr`] trait for that type.
+Това ще превърне низа в указания тип, доколкото е осъществен отличителя
+[`FromStr`] за този тип. Много типове в стандартната библиотека осъществяват
+този отличител. За да имаме това действие за потребителски тип, просто
+осъществяваме [`FromStr`] за типа.
 
 ```rust,editable
 fn main() {
@@ -47,6 +48,14 @@ fn main() {
     println!("Sum: {:?}", sum);
 }
 ```
+## Бележки на преводача
+
+разбор – parsing
+правя разбор на нещо – parse
+
+[^syntax]: правопис – syntax
+
+[^turbofish]: метод::<Тип>(); **::<Тип>** напомня на риба.
 
 [`ToString`]: https://doc.rust-lang.org/std/string/trait.ToString.html
 [Display]: https://doc.rust-lang.org/std/fmt/trait.Display.html

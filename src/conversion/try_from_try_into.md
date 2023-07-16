@@ -1,8 +1,11 @@
 # `TryFrom` и `TryInto`
 
-Подобно на  [`From` и `Into`][from-into], [`TryFrom`] и [`TryInto`] са обобщени отличители за превръщане между типове. За разлика от тях те се ползват за превръщания, който може да не успеят. Затова те връщат [`Result`].
+Подобно на [`From` и `Into`][from-into], [`TryFrom`] и [`TryInto`] са обобщени
+отличители за превръщане между типове. За разлика от [`From` и
+`Into`][from-into], [`TryFrom`] и [`TryInto`] се ползват за превръщания, които
+може да не успеят. Затова те връщат [`Result`].
 
-[from-into]: from_into.html
+[from-into]: from_into.md
 [`TryFrom`]: https://doc.rust-lang.org/std/convert/trait.TryFrom.html
 [`TryInto`]: https://doc.rust-lang.org/std/convert/trait.TryInto.html
 [`Result`]: https://doc.rust-lang.org/std/result/enum.Result.html

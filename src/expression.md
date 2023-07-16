@@ -1,6 +1,6 @@
-# Expressions
+# Изрази
 
-A Ръждьо program is (mostly) made up of a series of изявления:
+Програмите в Ръждьо се състоят (най-вече) от изявления[^statements]:
 
 ```rust,editable
 fn main() {
@@ -10,25 +10,25 @@ fn main() {
 }
 ```
 
-There are a few kinds of изявления in Ръждьо. The most common two are declaring
-a variable binding, and using a `;` with an expression:
+Има няколко вида изявления в Ръждьо. Най-често срещаните са обявяване на
+променлива и използване на точка и запетая (`;`) с израз:
 
 ```rust,editable
 fn main() {
-    // variable binding
+    // обвързваме променливата x със стойността 5
     let x = 5;
 
-    // expression;
+    // израз;
     x;
     x + 1;
     15;
 }
 ```
 
-Blocks are expressions too, so they can be used as values in
-assignments. The last expression in the block will be assigned to the
-place expression such as a local variable. However, if the last expression of the block ends with a
-semicolon, the return value will be `()`.
+Блоковете също са изрази, така, че те могат да бъдат използвни като стойност за
+присвояване на променлива. Стойността, върната от последния израз в блока ще
+бъде присвоена на вероятно очакващата я променлива.[^rvalue] Но! Ако последният
+израз в блока, завършва с точка и запетая, върнатата стойност ще бъде `()`.[^unit]
 
 ```rust,editable
 fn main() {
@@ -38,12 +38,13 @@ fn main() {
         let x_squared = x * x;
         let x_cube = x_squared * x;
 
-        // This expression will be assigned to `y`
+        // Този израз ще бъде присвоен на `y`
         x_cube + x_squared + x
     };
 
     let z = {
-        // The semicolon suppresses this expression and `()` is assigned to `z`
+        // Точката и запетаята подтискат този израз. Като следствие на `z` е
+        // присвоена стойността `()`
         2 * x;
     };
 
@@ -52,3 +53,13 @@ fn main() {
     println!("z is {:?}", z);
 }
 ```
+
+## Бел. Прев.
+
+[^statements]: изявления – statements
+
+[^rvalue]: Не е обяснено какво всъщност е израз (изявление, което връща
+  присвоима стойност). Да се разясни:
+  https://en.wikipedia.org/wiki/Value_(computer_science)#lrvalue
+
+[^unit]: `()` – празна единична стойност - като `void` в другите езици

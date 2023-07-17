@@ -1,17 +1,17 @@
-# for loops
+# Превъртане чрез `for` 
 
-## for and range
+## for и range
 
-The `for in` construct can be used to iterate through an `Iterator`.
-One of the easiest ways to create an iterator is to use the range
-notation `a..b`. This yields values from `a` (inclusive) to `b`
-(exclusive) in steps of one.
+Действието `for in` може да се използва за повторение чрез [`Iterator`][iter]
+(повторител). Един от най-лесните начини да се създаде повторител е като се
+използва означението за *обсег*[^range] `a..b`. Така създаваме стойности от `a`
+(включително) до `b`(без `b`), където стъпката е една стойност.
 
-Let's write FizzBuzz using `for` instead of `while`.
+Да напишем FizzBuzz като използваме `for` вместо `while`.
 
 ```rust,editable
 fn main() {
-    // `n` will take the values: 1, 2, ..., 100 in each iteration
+    // `n` ще приеме стойностите: 1, 2, ..., 100 при всяко повторение
     for n in 1..101 {
         if n % 15 == 0 {
             println!("fizzbuzz");
@@ -26,13 +26,13 @@ fn main() {
 }
 ```
 
-Alternatively, `a..=b` can be used for a range that is inclusive on both ends.
-The above can be written as:
+Ако искаме обсегът да включва и първата, и последната стойност, трябва да
+ползваме означението `a..=b`. Горното може да бъде написано така:
 
 ```rust,editable
 fn main() {
-    // `n` will take the values: 1, 2, ..., 100 in each iteration
-    for n in 1..=100 {
+    // `n` ще приеме стойностите: 1, 2, ..., 101 при всяко повторение
+    for n in 1..=101 {
         if n % 15 == 0 {
             println!("fizzbuzz");
         } else if n % 3 == 0 {
@@ -46,19 +46,20 @@ fn main() {
 }
 ```
 
-## for and iterators
+## for и повторителите
 
-The `for in` construct is able to interact with an `Iterator` in several ways.
-As discussed in the section on the [Iterator][iter] trait, by default the `for`
-loop will apply the `into_iter` function to the collection. However, this is
-not the only means of converting collections into iterators.
+Действието `for in` може да си взаимодейства с даден `Iterator` по няколко
+начина. Както се разисква в раздела за отличителя [Iterator][iter], цикълът
+`for` ще приложи метода `into_iter` върху сбирка от неща, които има за
+обхождане. Това обаче не е единственият начин за превръщане на сбирки в
+повторители.
 
-`into_iter`, `iter` and `iter_mut` all handle the conversion of a collection
-into an iterator in different ways, by providing different views on the data
-within.
+Методите `into_iter`, `iter` и `iter_mut` превръщат някаква сбирка от неща в
+повторител по различни начини, като предоставят различен поглед (и възможност
+за действие) върху данните в набора.
 
-* `iter` - This borrows each element of the collection through each iteration.
-  Thus leaving the collection untouched and available for reuse after the loop.
+* `iter` *заема* всеки член от набора при всяко повторение. Така наборът остава
+непроменен и може да се ползва след приключване на повторенията.
 
 ```rust,editable
 fn main() {
@@ -66,9 +67,9 @@ fn main() {
 
     for name in names.iter() {
         match name {
-            &"Ferris" => println!("There is a rustacean among us!"),
-            // TODO ^ Try deleting the & and matching just "Ferris"
-            _ => println!("Hello {}", name),
+            &"Ferris" => println!("Има ръждар помежду ни!"),
+            // ЗАДАЧА ^ Изтрийте  знака & и сравнете само с "Ferris"
+            _ => println!("Здрасти {}", name),
         }
     }
     
@@ -76,29 +77,24 @@ fn main() {
 }
 ```
 
-* `into_iter` - This consumes the collection so that on each iteration the exact
-  data is provided. Once the collection has been consumed it is no longer
-  available for reuse as it has been 'moved' within the loop.
-
+* `into_iter` *употребява* набора, така че на всяка стъпка имаме на разположение самата стойност. След употребата наборът повече не може да се ползва, понеже бива *преместен*[^moved] вътре в цикъла.
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
     let names = vec!["Bob", "Frank", "Ferris"];
 
     for name in names.into_iter() {
         match name {
-            "Ferris" => println!("There is a rustacean among us!"),
-            _ => println!("Hello {}", name),
+            "Ferris" => println!("Има ръждар помежду ни!"),
+            _ => println!("Здрасти {}", name),
         }
     }
     
     println!("names: {:?}", names);
-    // FIXME ^ Comment out this line
+    // ЗАПОПРАВКА ^ Коментирайте този ред
 }
 ```
 
-* `iter_mut` - This mutably borrows each element of the collection, allowing for
-  the collection to be modified in place.
-
+* `iter_mut` *заема* всеки член като менѝм и така позволява сбирката да бъде променяна на място.
 ```rust,editable
 fn main() {
     let mut names = vec!["Bob", "Frank", "Ferris"];
@@ -114,12 +110,27 @@ fn main() {
 }
 ```
 
-In the above snippets note the type of `match` branch, that is the key
-difference in the types of iteration. The difference in type then of course
-implies differing actions that are able to be performed.
+Обърнете внимание на начините, по които правим сравнение в откъсите по-горе -
+разклонението в `match`. Това е ключовата разлика между трите различни начина
+за сравнение. Различният вид сравнение предполага възможност за извършване на
+различни действия върху данните.
 
-### See also:
+## Бел. прев.
+[^range]: обсег – range; означението за обсег – range notation
+
+[^moved] преместен – moved. Виж [Собственост и премествания][move]
+
+повторител – итератор – iterator
+
+набор, сбирка, колекция – collection
+
+заема, взема на заем – borrows
+
+употребява (параметри, поредица, набор и т.н.) – consumes (parameters, array, collection etc.)
+
+### Вижте също:
 
 [Iterator][iter]
 
 [iter]: ../trait/iter.md
+[move]: ../scope/move.md

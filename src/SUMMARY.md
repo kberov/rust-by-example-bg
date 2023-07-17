@@ -48,7 +48,7 @@
         - [Влагане и отметки](flow_control/loop/nested.md)
         - [Връщане на стойност](flow_control/loop/return.md)
     - [while](flow_control/while.md)
-    - [for и range](flow_control/for.md)
+    - [for](flow_control/for.md)
     - [match](flow_control/match.md)
         - [Разлагане](flow_control/match/destructuring.md)
             - [tuples](flow_control/match/destructuring/destructure_tuple.md)

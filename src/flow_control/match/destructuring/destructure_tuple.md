@@ -1,27 +1,28 @@
-# tuples
+# Разнородни
 
-Tuples can be destructured in a `match` as follows:
+Разнородните списъци могат да бъдат разложени в  `match` както следва:
 
 ```rust,editable
 fn main() {
     let triple = (0, -2, 3);
-    // TODO ^ Try different values for `triple`
+    // ЗАДАЧА ^ Пробвайте различни стойности за `triple`
 
-    println!("Tell me about {:?}", triple);
-    // Match can be used to destructure a tuple
+    println!("Кажи ми нещо за {:?}", triple);
+    // Може да се използва сравнение за разлагане на разнороден списък
     match triple {
-        // Destructure the second and third elements
-        (0, y, z) => println!("First is `0`, `y` is {:?}, and `z` is {:?}", y, z),
-        (1, ..)  => println!("First is `1` and the rest doesn't matter"),
-        (.., 2)  => println!("last is `2` and the rest doesn't matter"),
-        (3, .., 4)  => println!("First is `3`, last is `4`, and the rest doesn't matter"),
-        // `..` can be used to ignore the rest of the tuple
-        _      => println!("It doesn't matter what they are"),
-        // `_` means don't bind the value to a variable
+        // Изваждаме втория и третия член
+        (0, y, z) => println!("Първият е `0`, `y` е {:?}, и `z` е {:?}", y, z),
+        (1, ..)  => println!("Първият е  `1`, а останалите нямат значение"),
+        (.., 2)  => println!("Последният е`2`, а останалите нямат значение"),
+        (3, .., 4)  => println!("First is `3`, последният е `4`,
+        а останалите нямат значение"),
+        // `..` може да се използва за пренебрегване на останите членове
+        _      => println!("Няма значение какви са"),
+        // `_` означва „Не обвързвай стойността с променлива!”
     }
 }
 ```
 
-### See also:
+### Вижте също:
 
-[Tuples](../../../primitives/tuples.md)
+[Разнородни списъци](../../../primitives/tuples.md)

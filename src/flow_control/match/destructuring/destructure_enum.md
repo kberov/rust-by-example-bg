@@ -1,4 +1,4 @@
-# enums
+# Броячи
 
 An `enum` is destructured similarly:
 

@@ -1,6 +1,6 @@
 # arrays/slices
 
-Like tuples, arrays and slices can be destructured this way:
+Подобно на ранородните, поредиците и отрязъците могат да бъдат разложени така:
 
 ```rust,editable
 fn main() {
@@ -8,11 +8,11 @@ fn main() {
     let array = [1, -2, 6];
 
     match array {
-        // Binds the second and the third elements to the respective variables
+        // Обвързва втория и третия член със съответните променливи
         [0, second, third] =>
             println!("array[0] = 0, array[1] = {}, array[2] = {}", second, third),
 
-        // Single values can be ignored with _
+        // Отделни стойности могат да бъдат пренебрегнати с _
         [1, _, third] => println!(
             "array[0] = 1, array[2] = {} and array[1] was ignored",
             third
@@ -43,6 +43,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
-[Arrays and Slices](../../../primitives/array.md) and [Binding](../binding.md) for `@` sigil
+[Поредици и отрязъци](../../../primitives/array.md) и
+[Програмен поток/match/Обвързване](../binding.md) за знака `@`

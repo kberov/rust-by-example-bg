@@ -1,4 +1,4 @@
-# pointers/ref
+# Указатели и препратки
 
 For pointers, a distinction needs to be made between destructuring
 and dereferencing as they are different concepts which are used

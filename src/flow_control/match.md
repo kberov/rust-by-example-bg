@@ -1,35 +1,36 @@
 # match
 
-Ръждьо provides pattern matching via the `match` keyword, which can be used like
-a C `switch`. The first matching arm is evaluated and all possible values must be
-covered.
+
+Ръждьо предоставя възможност зa сравнение на стойности чрез ключовата дума
+`match`, която може да се ползва както `switch` в езика C. Изпълнява се първото
+съвпадащо разклонение и всички възможни стойности трябва да са покрити (описани). 
 
 ```rust,editable
 fn main() {
     let number = 13;
-    // TODO ^ Try different values for `number`
+    // ЗАДАЧА ^ Пробвайте различни стойности за `number`
 
-    println!("Tell me about {}", number);
+    println!("Кажи нещо за {}", number);
     match number {
-        // Match a single value
-        1 => println!("One!"),
-        // Match several values
-        2 | 3 | 5 | 7 | 11 => println!("This is a prime"),
-        // TODO ^ Try adding 13 to the list of prime values
-        // Match an inclusive range
-        13..=19 => println!("A teen"),
-        // Handle the rest of cases
-        _ => println!("Ain't special"),
-        // TODO ^ Try commenting out this catch-all arm
+        // Съвпадение по единична стойност
+        1 => println!("Едно!"),
+        // Съвпадение по няколко стойности
+        2 | 3 | 5 | 7 | 11 => println!("Това е просто число"),
+        // ЗАДАЧА ^ Добавете 13 към списъка с простите числа
+        // Съвпадение в обсег от стойности (включително)
+        13..=19 => println!("Юноша"),
+        // Обработка на останалите случаи
+        _ => println!("Нищо особено"),
+        // ЗАДАЧА ^ Коментирайте това разклонение, покриващо всички случаи.
     }
 
     let boolean = true;
-    // Match is an expression too
+    // `match` е също и израз.
     let binary = match boolean {
-        // The arms of a match must cover all the possible values
+        // Разклоненията трябва да покриват всички възможни стойности.
         false => 0,
         true => 1,
-        // TODO ^ Try commenting out one of these arms
+        // ЗАДАЧА ^ Коментирайте едно от разклоненията
     };
 
     println!("{} -> {}", boolean, binary);

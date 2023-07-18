@@ -36,7 +36,7 @@ impl fmt::Display for Structure {
 
 Не, защото няма съвършен начин за показване на всички типове и библиотеката
 `std` не налага никакъв. `fmt::Display` не е осъществен за `Vec<T>` и за
-никакви *обобщени съдържащи типове[^containers]*. В тези случаи (показване на
+никакви *обобщени съдържащи типове*[^containers]. В тези случаи (показване на
 обобщени съдържащи типове) се налага да ползваме `fmt::Debug`.
 
 Това не е пречка все пак, защото за всеки *съдържащ тип*, който *не е* обобщен,
@@ -113,10 +113,7 @@ fn main() {
 Display: 3.3 + 7.2i
 Debug: Complex { real: 3.3, imag: 7.2 }
 ```
-
-### Вижте също:
-
-[`derive`][derive], [`std::fmt`][fmt], [`macros`][macros], [`struct`][structs], [`trait`][traits], and [`use`][use]
+## Бел. Прев.
 
 [^containers]: обобщени съдържащи типове – generic containers
 
@@ -127,6 +124,11 @@ Debug: Complex { real: 3.3, imag: 7.2 }
 [^signature]: описание (на функция/метод) – signature
 
 [^syntax]: правопис – syntax
+
+
+### Вижте също:
+
+[`derive`][derive], [`std::fmt`][fmt], [`macros`][macros], [`struct`][structs], [`trait`][traits], and [`use`][use]
 
 [derive]: ../../trait/derive.md
 [fmt]: https://doc.rust-lang.org/std/fmt/

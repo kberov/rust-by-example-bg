@@ -1,65 +1,71 @@
-# Указатели и препратки
+# Указатели и `ref`
 
-For pointers, a distinction needs to be made between destructuring
-and dereferencing as they are different concepts which are used
-differently from languages like C/C++.
+За указателите трябва да се направи разлика между разлагане и
+*дерефериране*[^dereferencing], тъй като те са различни понятия, които се
+ползват по различен начин от езици като C/C++.
 
- * Dereferencing uses `*`
- * Destructuring uses `&`, `ref`, and `ref mut`
+ * При дереферирането ползваме знака `*`
+ * При разлагане ползваме `&`, `ref`, и `ref mut`
 
 ```rust,editable
 fn main() {
-    // Assign a reference of type `i32`. The `&` signifies there
-    // is a reference being assigned.
+    // Обвързваме препратка към данни от тип `i32`. `&` означава, че
+    // присвояваме препратка.
     let reference = &4;
 
     match reference {
-        // If `reference` is pattern matched against `&val`, it results
-        // in a comparison like:
+        // Ако `reference` се сравни с `&val`, сравнението е:
         // `&i32`
         // `&val`
-        // ^ We see that if the matching `&`s are dropped, then the `i32`
-        // should be assigned to `val`.
-        &val => println!("Got a value via destructuring: {:?}", val),
+        // ^ Виждаме, че ако махнем `&`, то тогава стойностт от тип `i32`
+        // би трябвало да се присвои на `val`.
+        &val => println!("Получих стойност чрез разлагане: {:?}", val),
     }
 
-    // To avoid the `&`, you dereference before matching.
+    // За да се избегне ползването на `&`, трябва да дереферираме преди да сравним.
     match *reference {
-        val => println!("Got a value via dereferencing: {:?}", val),
+        val => println!("Получих стойност чрез дерефериране: {:?}", val),
     }
 
-    // What if you don't start with a reference? `reference` was a `&`
-    // because the right side was already a reference. This is not
-    // a reference because the right side is not one.
+    // Какво, ако нямаме препратка към данни? Препратка към данните имахме в
+    // горния пример (`&4`), защото дясната страна вече беше препратка. Това тук
+    // не е препратка, защото дясната част на присвояването (`3`) не е препратка.
     let _not_a_reference = 3;
 
-    // Ръждьо provides `ref` for exactly this purpose. It modifies the
-    // assignment so that a reference is created for the element; this
-    // reference is assigned.
+    // Ръждьо предоставя ключовата дума `ref` точно с тази цел. Присвояването се
+    // променя така, че се създава препратка към стойността от дясната страна и
+    // тази препратка бива обвързана с променливата.
     let ref _is_a_reference = 3;
 
-    // Accordingly, by defining 2 values without references, references
-    // can be retrieved via `ref` and `ref mut`.
+    // Съответно ако опишем две стойности без препратки, можем да получим
+    // препратки към тези стойности чрез `ref` и `ref mut`.
     let value = 5;
     let mut mut_value = 6;
 
-    // Use `ref` keyword to create a reference.
+    // Използвайте ключовата дума `ref`, за да създадете препратка.
     match value {
-        ref r => println!("Got a reference to a value: {:?}", r),
+        ref r => println!("Получих препратка към стойност: {:?}", r),
     }
 
-    // Use `ref mut` similarly.
+    // По подобен наичн използвайте `ref mut`.
     match mut_value {
         ref mut m => {
-            // Got a reference. Gotta dereference it before we can
-            // add anything to it.
+            // Получихме препратка. Трябваше да достъпим стойността пряко, пред
+            // да можем да добавим нещо към нея.
             *m += 10;
-            println!("We added 10. `mut_value`: {:?}", m);
+            println!("Добавихме 10. `mut_value`: {:?}", m);
         },
     }
 }
 ```
 
-### See also:
+## Бел. прев.
+
+[^dereferencing]: дерефериране, пряк достъп (до данните от препратката) –
+  dereferencing; дереферирам, достъпвам пряко – dereference
+
+ЗАДАЧА! да се прегледа и ако трябва да се преработи!!!
+
+### Вижте също:
 
 [The ref pattern](../../../scope/borrow/ref.md)

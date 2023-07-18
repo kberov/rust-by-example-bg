@@ -1,10 +1,10 @@
-# arrays/slices
+# Поредици и отрязъци
 
-Подобно на ранородните, поредиците и отрязъците могат да бъдат разложени така:
+Подобно на разнородните, поредиците и отрязъците могат да бъдат разложени така:
 
 ```rust,editable
 fn main() {
-    // Try changing the values in the array, or make it a slice!
+    // Променете стойностите в поредицата или я превърнете в отрязък!
     let array = [1, -2, 6];
 
     match array {
@@ -18,23 +18,23 @@ fn main() {
             third
         ),
 
-        // You can also bind some and ignore the rest
+        // Също можете да обвържете някои и да пренебрегнете останалите
         [-1, second, ..] => println!(
             "array[0] = -1, array[1] = {} and all the other ones were ignored",
             second
         ),
-        // The code below would not compile
+        // Това долу няма да се компилира
         // [-1, second] => ...
 
-        // Or store them in another array/slice (the type depends on
-        // that of the value that is being matched against)
+        // Или да ги съхраните в поредица, или резен (типът зависи  от
+        // стойността на това с което се сравнява)
         [3, second, tail @ ..] => println!(
             "array[0] = 3, array[1] = {} and the other elements were {:?}",
             second, tail
         ),
 
-        // Combining these patterns, we can, for example, bind the first and
-        // last values, and store the rest of them in a single array
+        // Съчетавайки тези подходи, можем например да обвържем първата и
+        // последната стойност, а остатъка да съхраним в отделен списък
         [first, middle @ .., last] => println!(
             "array[0] = {}, middle = {:?}, array[2] = {}",
             first, middle, last

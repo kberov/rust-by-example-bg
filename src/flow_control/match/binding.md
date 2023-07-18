@@ -48,7 +48,7 @@ fn main() {
 ```
 
 ### See also:
-[функции][functions], [броячи][enums] and [`Option`][option]
+[функции][functions], [броячи][enums] и [`Option`][option]
 
 [functions]: ../../fn.md
 [enums]: ../../custom_types/enum.md

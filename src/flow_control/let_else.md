@@ -1,15 +1,16 @@
 # let-else
 
 
-> 🛈 stable since: rust 1.65
+> 🛈 за постоянно от: rust 1.65
 >
-> 🛈 you can target specific edition by compiling like this
+> 🛈 Можете да изберете определено издание като компилирате така
 > `rustc --edition=2021 main.rs`
 
 
-With `let`-`else`, a refutable pattern can match and bind variables
-in the surrounding scope like a normal `let`, or else diverge (e.g. `break`,
-`return`, `panic!`) when the pattern doesn't match.
+С `let`-`else`, *дадено опровержимо сравнение*[^refutable] може да успее и по
+този начин да обвърже променливи от обкръжаващия блока код като обикновено
+изявление `let`, или да се разклони (напр. чрез `break`, `return`, `panic!`),
+когато сравнението не успее.
 
 ```rust
 use std::str::FromStr;
@@ -29,10 +30,10 @@ fn main() {
     assert_eq!(get_count_item("3 chairs"), (3, "chairs"));
 }
 ```
-
-The scope of name bindings is the main thing that makes this different from
-`match` or `if let`-`else` expressions. You could previously approximate these
-patterns with an unfortunate bit of repetition and an outer `let`:
+Видимостта на обвързаните променливи е главното, по което `let`-`else` се
+различава от изразите `match` или `if let`-`else`. Преди въвеждането на
+`let`-`else` можеше да се постигне нещо подобно с повече повторения и външно
+`let`:
 
 ```rust
 # use std::str::FromStr;
@@ -53,8 +54,12 @@ patterns with an unfortunate bit of repetition and an outer `let`:
 # 
 # assert_eq!(get_count_item("3 chairs"), (3, "chairs"));
 ```
+Бел. Прев.
 
-### See also:
+[^refutable]: опровержимо сравнение – a refutable pattern. Това е сравнение,
+  което може да не успее, например  '0' ..= '9' няма да съвпадне с 'А'.
+
+### Вижте също:
 
 [option][option], [match][match], [if let][if_let] and the [let-else RFC][let_else_rfc].
 

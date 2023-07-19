@@ -1,7 +1,7 @@
 # while let
 
-Similar to `if let`, `while let` can make awkward `match` sequences
-more tolerable. Consider the following sequence that increments `i`:
+Подобно на `if let`, `while let` може да направи неудобните последователни изявления `match` по-поносими
+more tolerable. Да разгледаме следната последователност от действия, увеличаваща `i`:
 
 ```rust
 // Make `optional` of type `Option<i32>`
@@ -28,7 +28,7 @@ loop {
 }
 ```
 
-Using `while let` makes this sequence much nicer:
+Ако използваме `while let`, нещата изглеждат по-добре:
 
 ```rust,editable
 fn main() {
@@ -48,8 +48,8 @@ fn main() {
         // ^ Less rightward drift and doesn't require
         // explicitly handling the failing case.
     }
-    // ^ `if let` had additional optional `else`/`else if`
-    // clauses. `while let` does not have these.
+    // ^ `if let` имаше допълнителни условия `else`/`else if`
+    // `while let` няма такива.
 }
 ```
 

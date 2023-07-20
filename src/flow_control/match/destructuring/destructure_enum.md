@@ -1,17 +1,18 @@
-# enums
+# Броячи
 
-An `enum` is destructured similarly:
+`enum` се разлага по подобен начин:
 
 ```rust,editable
 // `allow` required to silence warnings because only
 // one variant is used.
 #[allow(dead_code)]
 enum Color {
-    // These 3 are specified solely by their name.
+    // Тези три са определени само по име.
     Red,
     Blue,
     Green,
-    // These likewise tie `u32` tuples to different names: color models.
+    // Тези обвързват разнордни списъци от стойности `u32` към различни имена:
+    // цветови пространства.
     RGB(u32, u32, u32),
     HSV(u32, u32, u32),
     HSL(u32, u32, u32),
@@ -45,10 +46,10 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
-[`#[allow(...)]`][allow], [color models][color_models] and [`enum`][enum]
+[`#[allow(...)]`][allow], [Цветови модел][color_models] и [`enum`][enum]
 
 [allow]: ../../../attribute/unused.md
-[color_models]: https://en.wikipedia.org/wiki/Color_model
+[color_models]:https://bg.wikipedia.org/wiki/Цветови_модел 
 [enum]: ../../../custom_types/enum.md

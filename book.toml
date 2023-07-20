@@ -1,6 +1,6 @@
 [book]
 title = "Rust в примери"
-description = "Rust в примери (RВП) представлява набор от работещи примери, онагледяващи различни понятия и стандартни библиѿеки в Rust."
+description = "Rust в примери (RВП) представлява набор от работещи примери, онагледяващи различни понятия и стандартни библиотеки в Rust."
 author = "Общността на Rust"
 
 [output.html.playpen]
@@ -12,7 +12,7 @@ line-numbers = true
 enable = true
 
 [output.html]
-git-repository-url = "https://github.com/rust-lang/rust-by-example"
+git-repository-url = "https://github.com/kberov/rust-by-example-bg"
 
 [rust]
 edition = "2021"

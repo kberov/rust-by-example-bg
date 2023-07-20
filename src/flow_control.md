@@ -1,4 +1,4 @@
-# Flow of Control
+# Управление на програмния поток
+Неразделна част от всеки език за програмиране са начините за управление на програмния поток: 
+`if`/`else`, `for`, и други. Да поговорим за тях в Ръждьо.
 
-An integral part of any programming language are ways to modify control flow:
-`if`/`else`, `for`, and others. Let's talk about them in Ръждьо.

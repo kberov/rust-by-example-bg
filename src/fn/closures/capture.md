@@ -1,16 +1,16 @@
-# Capturing
+# Прихващане
 
-Closures are inherently flexible and will do what the functionality requires
-to make the closure work without annotation. This allows capturing to
-flexibly adapt to the use case, sometimes moving and sometimes borrowing.
-Closures can capture variables:
+Затварянията са много гъвкави и правят всичко възможно да си вършат работата
+без допълнителни указания. Това позволява прихващането на променливи да бъде
+нагаждано според както е необходимо – чрез *преместване* или чрез *заемане*.
+Затварянията могат да прихващат променливи като:
 
-* by reference: `&T`
-* by mutable reference: `&mut T`
-* by value: `T`
+* препратки: `&T`
+* меними препратки: `&mut T`
+* стойност: `T`
 
-They preferentially capture variables by reference and only go lower when
-required.
+Променливите биват прихващани най-вече като препратки, а другояче – само
+по необходимост.
 
 ```rust,editable
 fn main() {
@@ -18,77 +18,81 @@ fn main() {
     
     let color = String::from("green");
 
-    // A closure to print `color` which immediately borrows (`&`) `color` and
-    // stores the borrow and closure in the `print` variable. It will remain
-    // borrowed until `print` is used the last time. 
+    // Затваряне, отпечатващо `color`, което незабавно заема (`&`) `color`.
+    // Заетото и затварянето се съхраняват в променливата `print`.
+    // Променливата остава заета, до посленото извикване на `print`. 
     //
-    // `println!` only requires arguments by immutable reference so it doesn't
-    // impose anything more restrictive.
+    // `println!` изисква аргументи само като неменими препратки, така че
+    // не налага допълнителни ограничения.
     let print = || println!("`color`: {}", color);
 
-    // Call the closure using the borrow.
+    // Извикваме затварянето, използвайки заетата променлива.
     print();
 
-    // `color` can be borrowed immutably again, because the closure only holds
-    // an immutable reference to `color`. 
+    // `color` може да бъде заета отново, защото `print` държи само неменима
+    // препратка към `color`. 
     let _reborrow = &color;
     print();
 
-    // A move or reborrow is allowed after the final use of `print`
+    // пресместване или заемане на `color` отново е разрешено след последното
+    // ползване на `print`
     let _color_moved = color;
 
 
     let mut count = 0;
-    // A closure to increment `count` could take either `&mut count` or `count`
-    // but `&mut count` is less restrictive so it takes that. Immediately
-    // borrows `count`.
+    // Затваряне, което да увеличи стойността на `count` може да заеме `&mut
+    // count` или `count`, но `&mut count` е по-малко ограничаващо, така че прави
+    // това. Незабавно заема `count`.
     //
-    // A `mut` is required on `inc` because a `&mut` is stored inside. Thus,
-    // calling the closure mutates the closure which requires a `mut`.
+    // Задължително е `inc` да е `mut`, защото съхраняваме в него менима
+    // препратка (`&mut`). Като извикваме затварянето, ние го променяме и
+    // затова трябва да го опишем като менимо – `mut`.
     let mut inc = || {
         count += 1;
         println!("`count`: {}", count);
     };
 
-    // Call the closure using a mutable borrow.
+    // Извикваме затварянето, използвайки менимо заемане.
     inc();
 
-    // The closure still mutably borrows `count` because it is called later.
-    // An attempt to reborrow will lead to an error.
+    // Затварянето `inc` все още заема `count` като менима променлива, защото
+    // се извиква отново по-късно.
+    // Ако се опитаме да я заемем пак, това ще доведе до грешка.
     // let _reborrow = &count; 
-    // ^ TODO: try uncommenting this line.
+    // ^ ЗАДАЧА: разкоментирайте този ред.
     inc();
 
-    // The closure no longer needs to borrow `&mut count`. Therefore, it is
-    // possible to reborrow without an error
+    // `inc` вече не заема `&mut count`. Затова можем да я заемем без грешка.
     let _count_reborrowed = &mut count; 
 
     
-    // A non-copy type.
+    // Некопируем тип
     let movable = Box::new(3);
 
-    // `mem::drop` requires `T` so this must take by value. A copy type
-    // would copy into the closure leaving the original untouched.
-    // A non-copy must move and so `movable` immediately moves into
-    // the closure.
+    // `mem::drop` изисква `T`, така, че следващият код ще прихване `movable`
+    // по стойност (ще го премести вътре в затварянето). Ако типа беше
+    // копируем, щеше да се копира в затварянето, а първоизточникът да си
+    // остане недокоснат.
+    // Некопируем тип задължително бива преместен и затова `movable` незабавно
+    // се мести в затварянето.
     let consume = || {
         println!("`movable`: {:?}", movable);
         mem::drop(movable);
     };
 
-    // `consume` consumes the variable so this can only be called once.
+    // `consume` изяжда променливата, затова може да бъде извикана само веднъж.
     consume();
     // consume();
-    // ^ TODO: Try uncommenting this line.
+    // ^ ЗАДАЧА: разкоментирайте този ред.
 }
 ```
 
-Using `move` before vertical pipes forces closure
-to take ownership of captured variables:
+Ако напишем `move` преди отвесните чертички, караме затварянето да овладее
+прихванатите променливи:
 
 ```rust,editable
 fn main() {
-    // `Vec` has non-copy semantics.
+    // `Vec` е некопируем.
     let haystack = vec![1, 2, 3];
 
     let contains = move |needle| haystack.contains(needle);
@@ -97,19 +101,19 @@ fn main() {
     println!("{}", contains(&4));
 
     // println!("There're {} elements in vec", haystack.len());
-    // ^ Uncommenting above line will result in compile-time error
-    // because borrow checker doesn't allow re-using variable after it
-    // has been moved.
+    // ^ Ако разкоментирате горния ред, ще получите грешка при компилацията,
+    // защото проверителят на заемите не позволява повторното използване на
+    // променливи, след като са преместени.
     
-    // Removing `move` from closure's signature will cause closure
-    // to borrow _haystack_ variable immutably, hence _haystack_ is still
-    // available and uncommenting above line will not cause an error.
+    // Ако премахнете `move` от обявлението на затварянето, то ще заеме
+    // haystack като неменима препратка, така че haystack ще може да се ползва.
+    // Тогава, ако разкоментирате реда с println! по-горе, няма да има грешка.
 }
 ```
 
-### See also:
+### Вижте също:
 
-[`Box`][box] and [`std::mem::drop`][drop]
+[`Box`][box] и [`std::mem::drop`][drop]
 
 [box]: ../../std/box.md
 [drop]: https://doc.rust-lang.org/std/mem/fn.drop.html

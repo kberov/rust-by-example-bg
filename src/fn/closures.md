@@ -1,47 +1,47 @@
-# Closures
+# Затваряния
 
-Closures are functions that can capture the enclosing environment. For
-example, a closure that captures the `x` variable:
+Затварянията са функции, които могат да прихващат неща от обкръжаващата ги
+среда. Например, ето едно затваряне, което прихваща променливата `x`:
 
 ```Ръждьо
 |val| val + x
 ```
+Правописът и способностите на затварянията ги правят много удобни за ползване „в движение”. Извикването на затваряне е точно като извикването на функция. Само дето входните и връщаните типове *могат* да бъдат отгатнати, а имената на входните променливи *трябва* да се указват.
 
-The syntax and capabilities of closures make them very convenient for
-on the fly usage. Calling a closure is exactly like calling a function.
-However, both input and return types *can* be inferred and input
-variable names *must* be specified.
 
-Other characteristics of closures include:
-* using `||` instead of `()` around input variables.
-* optional body delimination (`{}`) for a single expression (mandatory otherwise).
-* the ability to capture the outer environment variables.
+Други отличителни белези на затварянията са:
+* ползват се `||` вместо `()` около входните променливи.
+* незадължително ограждане на тялото с`{}`, когато тялото е само един израз (иначе е задължително).
+* възможността да се прихващат променливи от обкръжаващия обхват.
 
 ```rust,editable
 fn main() {
     let outer_var = 42;
     
-    // A regular function can't refer to variables in the enclosing environment
+    // Обикновена функция не може да се обръща към променливи от обкръжаващата
+    // среда
     //fn function(i: i32) -> i32 { i + outer_var }
-    // TODO: uncomment the line above and see the compiler error. The compiler
-    // suggests that we define a closure instead.
+    // ЗАДАЧА: разкоментирайте горния ред и вижте грешката при компилиране.
+    // Компилаторът предлага да напишете затваряне вместо функция.
 
-    // Closures are anonymous, here we are binding them to references
-    // Annotation is identical to function annotation but is optional
-    // as are the `{}` wrapping the body. These nameless functions
-    // are assigned to appropriately named variables.
+    // Затварянията са безименни, тук ги обвързваме към препратки. Отбелязването
+    // на входни и изходни типове е еднакво с това на функциите, но е
+    // по желание. По желание е и обгръщането на тялото с `{}`, когато се
+    // състои само от един израз. Тези безименни функции, могат да се присвояват
+    // на подходящо именувани променливи.
     let closure_annotated = |i: i32| -> i32 { i + outer_var };
     let closure_inferred  = |i     |          i + outer_var  ;
 
-    // Call the closures.
+    // Извикваме затварянията.
     println!("closure_annotated: {}", closure_annotated(1));
     println!("closure_inferred: {}", closure_inferred(1));
-    // Once closure's type has been inferred, it cannot be inferred again with another type.
+    // След като веднъж е бил отгатнат типа на входноизходните данни на
+    // затварянето, той не може да бъде отгатнат отново като друг тип.
     //println!("cannot reuse closure_inferred with another type: {}", closure_inferred(42i64));
-    // TODO: uncomment the line above and see the compiler error.
+    // ЗАДАЧА: разкоментирайте горния ред и вижте грешката при компилиране.
 
-    // A closure taking no arguments which returns an `i32`.
-    // The return type is inferred.
+    // Затваряне, без аргументи, връщащо стойност от тип `i32`.
+    // Връщаният тип е отгатнат.
     let one = || 1;
     println!("closure returning one: {}", one());
 

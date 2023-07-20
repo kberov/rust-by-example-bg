@@ -1,4 +1,4 @@
-# Generics
+# Обобщения 
 
 *Generics* is the topic of generalizing types and functionalities to broader
 cases. This is extremely useful for reducing code duplication in many ways,

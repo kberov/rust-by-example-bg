@@ -1,4 +1,4 @@
-# Ownership and moves
+# Ownership and moves Собственост и премествания
 
 Because variables are in charge of freeing their own resources, 
 **resources can only have one owner**. This also prevents resources 

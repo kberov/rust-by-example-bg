@@ -1,29 +1,30 @@
-# Nesting and labels
+# Влагане и отметки 
 
-It's possible to `break` or `continue` outer loops when dealing with nested
-loops. In these cases, the loops must be annotated with some `'label`, and the
-label must be passed to the `break`/`continue` изявлениe.
+Възможно е да `break`(прекъснем) или `continue`(продължим) външни цикли, когато
+имаме вложени цикли. В тези случаи циклите трябва да се отбележат с някаква
+отметка (`'белег`) и отметката трябва да се подаде на изявлението
+`break` или `continue`. 
 
 ```rust,editable
-#![allow(unreachable_code)]
+#![allow(unreachable_code, unused_labels)]
 
 fn main() {
-    'outer: loop {
-        println!("Entered the outer loop");
+    'външен: loop {
+        println!("Влязохме във външния цикъл…");
 
-        'inner: loop {
-            println!("Entered the inner loop");
+        'вътрешен: loop {
+            println!("Влязохме във вътрешния цикъл…");
 
-            // This would break only the inner loop
+            // Това ще прекъсне само вътрешния цикъл
             //break;
 
-            // This breaks the outer loop
-            break 'outer;
+            // Това прекъсва външния цикъл
+            break 'външен;
         }
 
-        println!("This point will never be reached");
+        println!("Никога няма да стигнем тук.");
     }
 
-    println!("Exited the outer loop");
+    println!("Излязохме от външния цикъл.");
 }
 ```

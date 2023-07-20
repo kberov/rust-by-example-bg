@@ -1,37 +1,46 @@
 # if/else
 
-Branching with `if`-`else` is similar to other languages. Unlike many of them,
-the boolean condition doesn't need to be surrounded by parentheses, and each
-condition is followed by a block. `if`-`else` conditionals are expressions,
-and, all branches must return the same type.
+Разклоняването чрез `if`-`else` е подобно на другите езици. За разлика от много
+от тях условието не е нужно да бъде оградено със скоби и всяко условно
+разклонение е задължително следвано от блок. Условията `if`-`else` са *изрази*[^expressions] и
+всички разклонения трябва да връщат данни с един и същи тип.
 
 ```rust,editable
 fn main() {
     let n = 5;
 
     if n < 0 {
-        print!("{} is negative", n);
+        print!("{} е отрицателно", n);
     } else if n > 0 {
-        print!("{} is positive", n);
+        print!("{} е положително", n);
     } else {
-        print!("{} is zero", n);
+        print!("{} е нула", n);
     }
 
     let big_n =
         if n < 10 && n > -10 {
-            println!(", and is a small number, increase ten-fold");
+            println!(", и е малко число, да го увеличим  десет пъти…");
 
-            // This expression returns an `i32`.
+            // Този израз връща данни от тип `i32`.
             10 * n
         } else {
-            println!(", and is a big number, halve the number");
+            println!(", и е голямо число, да го намалим наполовина…");
 
-            // This expression must return an `i32` as well.
+            // Този израз трябва също да върне `i32`.
             n / 2
-            // TODO ^ Try suppressing this expression with a semicolon.
+            // ЗАДАЧА ^ Опитайте да подтиснете този израз с точка и запетая.
         };
-    //   ^ Don't forget to put a semicolon here! All `let` bindings need it.
+    //   ^ Не забравяйте да поставите ; тук!
+    // Всички обвързвания на променливи го изискват.
 
     println!("{} -> {}", n, big_n);
 }
 ```
+
+### Вижте също
+[Изрази][expressions]
+
+
+[^expressions]: `if`-`else` са изрази – това означава, че връщат стойност (бел. прев.)
+
+[expressions]: ../../expression.md 

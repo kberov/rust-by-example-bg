@@ -1,39 +1,40 @@
-# As input parameters
+# Като входни параметри
 
-While Ръждьо chooses how to capture variables on the fly mostly without type
-annotation, this ambiguity is not allowed when writing functions. When
-taking a closure as an input parameter, the closure's complete type must be
-annotated using one of a few `traits`, and they're determined by what the
-closure does with captured value. In order of decreasing restriction,
-they are:
+Ръждьо избира как да прихваща променливи в движение и почти без да е нужно
+отбелязване на типа. Тази неопределеност не се позволява, когато пишем функции.
+Когато се приема затваряне като входен параметър, трябва да се окаже пълния тип
+на затварянето, като се използва някой от наличните вече отличители.
+Отличителят се определя от това какво прави затварянето с прихванатите
+стойности.
 
-* `Fn`: the closure uses the captured value by reference (`&T`)
-* `FnMut`: the closure uses the captured value by mutable reference (`&mut T`)
-* `FnOnce`: the closure uses the captured value by value (`T`)
+Ето кои са те, подредени по нарастване на ограниченията.
 
-On a variable-by-variable basis, the compiler will capture variables in the
-least restrictive manner possible.
+* `Fn`: прихванатите стойности се използват като препратки (`&T`)
+* `FnMut`: прихванатите стойности се използват като меними препратки (`&mut T`)
+* `FnOnce`: прихванатите стойности се използват като стойности (`T`)
 
-For instance, consider a parameter annotated as `FnOnce`. This specifies
-that the closure *may* capture by `&T`, `&mut T`, or `T`, but the compiler
-will ultimately choose based on how the captured variables are used in the
-closure.
+Компилаторът ще прихване променливите по възможност по-най-малко ограничаващия начин. Това се прави променлива по променлива.
 
-This is because if a move is possible, then any type of borrow should also
-be possible. Note that the reverse is not true. If the parameter is
-annotated as `Fn`, then capturing variables by `&mut T` or `T` are not
-allowed. However, `&T` is allowed.
+Нека разгледаме един параметър, отбелязан като `FnOnce`. Това указва, че
+затварянето *би могло* да прихване околните променливи като `&T`, `&mut T`, или
+`T`, но компилаторът в крайна сметка ще избере в зависимот от начина на
+използване на променливите в затварянето.
 
-In the following example, try swapping the usage of `Fn`, `FnMut`, and
-`FnOnce` to see what happens:
+Това е така защото е възможно да се случи преместване на стойността, тогава
+също ще е възможно заемането на всеки тип. Забележете, че обратното не е вярно.
+Ако параметърът е отбелязан като `Fn`, тогава прихващане на променливи като
+`&mut T` или `T` е невъзможно. Само прихващане като `&T` е позволено.
+
+В следващия пример, заменете използвания отличител, с `Fn`, `FnMut` и `FnOnce`,
+за да видите какво се случва: 
 
 ```rust,editable
-// A function which takes a closure as an argument and calls it.
-// <F> denotes that F is a "Generic type parameter"
+// Функция, приемаща затваряне като параметър и го извиква.
+// <F> означава, че F е „параметър с обобщен тип”
 fn apply<F>(f: F) where
-    // The closure takes no input and returns nothing.
+    // Зтварянето не приема нищо и не връща нищо.
     F: FnOnce() {
-    // ^ TODO: Try changing this to `Fn` or `FnMut`.
+    // ^ ЗАДАЧА: Променете това на `Fn` или `FnMut`.
 
     f();
 }
@@ -50,31 +51,31 @@ fn main() {
     use std::mem;
 
     let greeting = "hello";
-    // A non-copy type.
-    // `to_owned` creates owned data from borrowed one
+    // Некопируем тип.
+    // `to_owned` създава собствени днни от заети данни
     let mut farewell = "goodbye".to_owned();
 
-    // Capture 2 variables: `greeting` by reference and
-    // `farewell` by value.
+    // Прихващаме 2 променливи: `greeting` като препратка и `farewell` като
+    // стойност.
     let diary = || {
-        // `greeting` is by reference: requires `Fn`.
+        // `greeting` е препратка: изисква `Fn`.
         println!("I said {}.", greeting);
 
-        // Mutation forces `farewell` to be captured by
-        // mutable reference. Now requires `FnMut`.
+        // Промяната прави `farewell` да бъде прихваната като менима препратка
+        // Сега е нужен `FnMut`.
         farewell.push_str("!!!");
         println!("Then I screamed {}.", farewell);
         println!("Now I can sleep. zzzzz");
 
-        // Manually calling drop forces `farewell` to
-        // be captured by value. Now requires `FnOnce`.
+        // Ако извикаме `drop` ръчно, `farewell` ще бъде прихваната като
+        // стойност. Сега ни трябва `FnOnce`.
         mem::drop(farewell);
     };
 
-    // Call the function which applies the closure.
+    // Извикваме функцията, която прилага затварянето.
     apply(diary);
 
-    // `double` satisfies `apply_to_3`'s trait bound
+    // `double` удовлетворява ограниченията на отличителя за `apply_to_3`
     let double = |x| 2 * x;
 
     println!("3 doubled: {}", apply_to_3(double));

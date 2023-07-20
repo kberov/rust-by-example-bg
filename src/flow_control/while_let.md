@@ -1,16 +1,17 @@
 # while let
 
-Подобно на `if let`, `while let` може да направи неудобните последователни изявления `match` по-поносими
-more tolerable. Да разгледаме следната последователност от действия, увеличаваща `i`:
+Подобно на `if let`, `while let` може да направи неудобните последователни
+изявления `match` по-поносими. Да разгледаме следната последователност от
+действия, увеличаваща `i`:
 
 ```rust
-// Make `optional` of type `Option<i32>`
+// Правим променлива `optional` от тип `Option<i32>`
 let mut optional = Some(0);
 
-// Repeatedly try this test.
+// пробваме няколко пъти.
 loop {
     match optional {
-        // If `optional` destructures, evaluate the block.
+        // Ако `optional` е разложимо, влизаме във блока.
         Some(i) => {
             if i > 9 {
                 println!("Greater than 9, quit!");
@@ -19,11 +20,11 @@ loop {
                 println!("`i` is `{:?}`. Try again.", i);
                 optional = Some(i + 1);
             }
-            // ^ Requires 3 indentations!
+            // ^ Изисква 3 отстъпа!
         },
-        // Quit the loop when the destructure fails:
+        // Напускаме повторенията ако разлагането не успее:
         _ => { break; }
-        // ^ Why should this be required? There must be a better way!
+        // ^ Защо това е задължително? Трябва д аима по-добър начин!
     }
 }
 ```
@@ -32,7 +33,7 @@ loop {
 
 ```rust,editable
 fn main() {
-    // Make `optional` of type `Option<i32>`
+    // Правим променлива `optional` от тип `Option<i32>`
     let mut optional = Some(0);
 
     // This reads: "while `let` destructures `optional` into

@@ -1,4 +1,4 @@
-# Functions
+# Функции
 
 Functions are declared using the `fn` keyword. Its arguments are type
 annotated, just like variables, and, if the function returns a value, the

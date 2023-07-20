@@ -1,6 +1,6 @@
-# structs
+# Структури
 
-Similarly, a `struct` can be destructured as shown:
+Подобно, една `struct` може да се разложи така:
 
 ```rust,editable
 fn main() {
@@ -9,30 +9,29 @@ fn main() {
         y: u32,
     }
 
-    // Try changing the values in the struct to see what happens
+    // Променяйте стойностите в структурата, за да видите какво става
     let foo = Foo { x: (1, 2), y: 3 };
 
     match foo {
         Foo { x: (1, b), y } => println!("First of x is 1, b = {},  y = {} ", b, y),
 
-        // you can destructure structs and rename the variables,
-        // the order is not important
+        // Можете да разлагате структури и да преименувате променливи. Редът не е важен
         Foo { y: 2, x: i } => println!("y is 2, i = {:?}", i),
 
-        // and you can also ignore some variables:
+        // Също може да пропускате някои променливи:
         Foo { y, .. } => println!("y = {}, we don't care about x", y),
-        // this will give an error: pattern does not mention field `x`
+        // Това ще даде грешка: написаното не споменава полето `x`
         //Foo { y } => println!("y = {}", y),
     }
 
     let faa = Foo { x: (1, 2), y: 3 };
 
-    // You do not need a match block to destructure structs:
+    //  Структура може да се разлага и без `match` блок:
     let Foo { x : x0, y: y0 } = faa;
     println!("Outside: x0 = {x0:?}, y0 = {y0}");
 }
 ```
 
-### See also:
+### Вижте също:
 
 [Structs](../../../custom_types/structs.md)

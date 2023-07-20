@@ -1,11 +1,12 @@
-# Binding
+# Обвързване
 
-Indirectly accessing a variable makes it impossible to branch and use that
-variable without re-binding. `match` provides the `@` sigil for binding values to
-names:
+При косвения достъп до променливи (съответно сравнение чрез буквални стойности)
+е невъзможно в разклонението да се използва тази променлива (или стойност)
+без обвързване наново. `match` предоставя знака `@` за обвързване на стойности
+с имена:
 
 ```rust,editable
-// A function `age` which returns a `u32`.
+// Функция `age`, връщаща стойност от тип `u32`.
 fn age() -> u32 {
     15
 }
@@ -15,18 +16,18 @@ fn main() {
 
     match age() {
         0             => println!("I haven't celebrated my first birthday yet"),
-        // Could `match` 1 ..= 12 directly but then what age
-        // would the child be? Instead, bind to `n` for the
-        // sequence of 1 ..= 12. Now the age can be reported.
+        // можехме направо да сравним 1 ..= 12, но тогава на каква възраст би
+        // било едно новородонео? Затова, обвързваме `n` с последователността
+        // 1 ..= 12. Сега можем да кажем каква е възрастта.
         n @ 1  ..= 12 => println!("I'm a child of age {:?}", n),
         n @ 13 ..= 19 => println!("I'm a teen of age {:?}", n),
-        // Nothing bound. Return the result.
+        // Няма обвързване. Връщаме стойността.
         n             => println!("I'm an old person of age {:?}", n),
     }
 }
 ```
 
-You can also use binding to "destructure" `enum` variants, such as `Option`:
+Можете да ползвате обвързване за разлагане на варианти на броячи, например `Option`:
 
 ```rust,editable
 fn some_number() -> Option<u32> {
@@ -47,7 +48,7 @@ fn main() {
 ```
 
 ### See also:
-[`functions`][functions], [`enums`][enums] and [`Option`][option]
+[функции][functions], [броячи][enums] и [`Option`][option]
 
 [functions]: ../../fn.md
 [enums]: ../../custom_types/enum.md

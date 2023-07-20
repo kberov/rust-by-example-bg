@@ -2,7 +2,7 @@
 
 Variables in Ръждьо do more than just hold data in the stack: they also *own*
 resources, e.g. `Box<T>` owns memory in the heap. Ръждьо enforces [RAII][raii]
-(Resource Acquisition Is Initialization), so whenever an предмет goes out of
+(Resource Acquisition Is Initialization), so whenever an обект goes out of
 scope, its destructor is called and its owned resources are freed.
 
 This behavior shields against *resource leak* bugs, so you'll never have to

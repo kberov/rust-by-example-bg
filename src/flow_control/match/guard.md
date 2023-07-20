@@ -1,6 +1,6 @@
-# Guards
+# Стражи
 
-A `match` *guard* can be added to filter the arm.
+В `match` може да се добавят *стражи* за допълнителни проверки в разклоненията за сравнение.
 
 ```rust,editable
 #[allow(dead_code)]
@@ -11,21 +11,20 @@ enum Temperature {
 
 fn main() {
     let temperature = Temperature::Celsius(35);
-    // ^ TODO try different values for `temperature`
+    // ^ ЗАДАЧА Пробвайте различни стойности за `temperature`
 
     match temperature {
-        Temperature::Celsius(t) if t > 30 => println!("{}C is above 30 Celsius", t),
-        // The `if condition` part ^ is a guard
-        Temperature::Celsius(t) => println!("{}C is below 30 Celsius", t),
+        Temperature::Celsius(t) if t > 30 => println!("{}°C е над 30 по Целзий", t),
+        // Чатта с условието `if` ^ е страж
+        Temperature::Celsius(t) => println!("{}°C е под 30 по Целзий", t),
 
-        Temperature::Fahrenheit(t) if t > 86 => println!("{}F is above 86 Fahrenheit", t),
-        Temperature::Fahrenheit(t) => println!("{}F is below 86 Fahrenheit", t),
+        Temperature::Fahrenheit(t) if t > 86 => println!("{}°F е над 86 по Фаренхайт", t),
+        Temperature::Fahrenheit(t) => println!("{}°F е под 86 по Фаренхайт", t),
     }
 }
 ```
 
-Note that the compiler won't take guard conditions into account when checking
-if all patterns are covered by the match expression.
+Забележете, че компилаторът не отчита стражите при проверка за изчерпателност на сравненията.
 
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
@@ -40,7 +39,8 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
-[Tuples](../../primitives/tuples.md)
-[Enums](../../custom_types/enum.md)
+[Разнородни списъци](../../primitives/tuples.md),
+[Броячи](../../custom_types/enum.md)
+

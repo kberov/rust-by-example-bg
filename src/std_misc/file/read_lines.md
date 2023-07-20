@@ -45,7 +45,7 @@ Here we pass ownership of the open `File` to a `BufReader` struct. `BufReader` u
 buffer to reduce intermediate allocations.
 
 We also update `read_lines` to return an iterator instead of allocating new
-`String` предмети in memory for each line.
+`String` обекти in memory for each line.
 
 ```rust,no_run
 use std::fs::File;

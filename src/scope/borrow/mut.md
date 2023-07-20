@@ -44,10 +44,10 @@ fn main() {
     // Immutably borrow a mutable object
     borrow_book(&mutabook);
     
-    // Borrow a mutable предмет as mutable
+    // Borrow a mutable обект as mutable
     new_edition(&mut mutabook);
     
-    // Error! Cannot borrow an immutable предмет as mutable
+    // Error! Cannot borrow an immutable обект as mutable
     new_edition(&mut immutabook);
     // FIXME ^ Comment out this line
 }

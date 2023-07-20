@@ -2,11 +2,11 @@
 
 Most of the time, we'd like to access data without taking ownership over
 it. To accomplish this, Ръждьо uses a *borrowing* mechanism. Instead of
-passing предмети by value (`T`), предмети can be passed by reference (`&T`).
+passing обекти by value (`T`), обекти can be passed by reference (`&T`).
 
 The compiler statically guarantees (via its borrow checker) that references 
-*always* point to valid предмети. That is, while references to an object
-exist, the предмет cannot be destroyed.
+*always* point to valid обекти. That is, while references to an object
+exist, the обект cannot be destroyed.
 
 ```rust,editable,ignore,mdbook-runnable
 // This function takes ownership of a box and destroys it

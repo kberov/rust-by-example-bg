@@ -1,13 +1,14 @@
-# Destructuring
+# Разлагане
 
-A `match` block can destructure items in a variety of ways.
+Блокът `match` може да *разлага*[^destructure] неща по различни начини.
 
-* [Destructuring Tuples][tuple]
-* [Destructuring Arrays and Slices][slice]
-* [Destructuring Enums][enum]
-* [Destructuring Pointers][refs]
-* [Destructuring Structures][struct]
+* [Разлагане на разнородни][tuple]
+* [Разлагане на поредици и отрязъци][slice]
+* [Разлагане на броячи][enum]
+* [Разлагане на указатели][refs]
+* [Разлагане на структури][struct]
 
+[^destructuring]: разлагам – destructure, разлагане (на обекти в отделни променливи) – destructuring
 
 [enum]: destructuring/destructure_enum.md
 [refs]: destructuring/destructure_pointers.md

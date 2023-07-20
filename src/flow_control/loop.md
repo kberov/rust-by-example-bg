@@ -1,36 +1,38 @@
 # loop
 
-Ръждьо provides a `loop` keyword to indicate an infinite loop.
+Ръждьо предоставя ключовата дума `loop`[^loop], за описване на безкраен цикъл.
 
-The `break` изявлениe can be used to exit a loop at anytime, whereas the
-`continue` изявлениe can be used to skip the rest of the iteration and start a
-new one.
+С изявлениeто `break` можем да излезем от цикъла по всяко време, а с
+изявлениeто `continue` можем да пропуснем останалите изявления в повторението и
+да започнем ново.
 
 ```rust,editable
 fn main() {
     let mut count = 0u32;
 
-    println!("Let's count until infinity!");
+    println!("Нека броим до безкрайност!");
 
-    // Infinite loop
+    // Безкраен цикъл
     loop {
         count += 1;
 
         if count == 3 {
-            println!("three");
+            println!("три");
 
-            // Skip the rest of this iteration
+            // Пропускаме остатъка от повторението
             continue;
         }
 
         println!("{}", count);
 
         if count == 5 {
-            println!("OK, that's enough");
+            println!("Добре, стига толкова");
 
-            // Exit this loop
+            // Излизаме от този цикъл
             break;
         }
     }
 }
 ```
+
+[^loop]: loop – клуп, примка, гайка; правя затворена верига, [зациклям](https://eurodict.com/dictionary/loop-42323). Безкрайно повтаряща се поредица от изявления (бел. прев.)

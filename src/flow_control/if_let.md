@@ -1,68 +1,68 @@
 # if let
 
-For some use cases, when matching enums, `match` is awkward. For example:
+В някои случаи, когато сравняваме броячи, `match` е неудобен. Например:
 
 ```rust
-// Make `optional` of type `Option<i32>`
+// Създаваме променлива `optional` от тип `Option<i32>`
 let optional = Some(7);
 
 match optional {
     Some(i) => {
-        println!("This is a really long string and `{:?}`", i);
-        // ^ Needed 2 indentations just so we could destructure
-        // `i` from the option.
+        println!("Това енаистина дълъг ред и `{:?}`", i);
+        // ^ Трябват ни два отстъпа, само за да извадим `i` от брояча за избор.
     },
     _ => {},
-    // ^ Required because `match` is exhaustive. Doesn't it seem
-    // like wasted space?
+    // ^ Нали `match` е изчерпателен. Изглежда само пилеем код.
 };
 
 ```
 
-`if let` is cleaner for this use case and in addition allows various
-failure options to be specified:
+`if let` е по-чист в този случай и също позволява различни възможности за
+обработка на грешки:
 
 ```rust,editable
 fn main() {
-    // All have type `Option<i32>`
+    // Всички са от тип `Option<i32>`
     let number = Some(7);
     let letter: Option<i32> = None;
     let emoticon: Option<i32> = None;
 
-    // The `if let` construct reads: "if `let` destructures `number` into
-    // `Some(i)`, evaluate the block (`{}`).
+    // Конструкцията `if let` се чете така:
+    // Ако `let` разложи `number` в `Some(i)`, изпълни този блок (`{}`).
     if let Some(i) = number {
         println!("Matched {:?}!", i);
     }
 
-    // If you need to specify a failure, use an else:
+    // Ако трябва да укажете какво се случва иначе, използвайте `else`:
     if let Some(i) = letter {
         println!("Matched {:?}!", i);
     } else {
-        // Destructure failed. Change to the failure case.
+        // Разлагането не успя. Влизаме в случая за обработка на грешката.
         println!("Didn't match a number. Let's go with a letter!");
     }
 
-    // Provide an altered failing condition.
+    // Предоставяме друг вид неуспех.
     let i_like_letters = false;
 
     if let Some(i) = emoticon {
         println!("Matched {:?}!", i);
-    // Destructure failed. Evaluate an `else if` condition to see if the
-    // alternate failure branch should be taken:
+    // Разлагането не успя. Оценяваме условието `else if`, за да видим даля
+    // влизаме в другото условие:
     } else if i_like_letters {
-        println!("Didn't match a number. Let's go with a letter!");
+        println!("Не уцелихме число. Да пробваме с буква!");
     } else {
-        // The condition evaluated false. This branch is the default:
-        println!("I don't like letters. Let's go with an emoticon :)!");
+    // Условието бе оценено като false. Това е разклонението по
+    // подразбиране:
+        println!(" Не харесвам букви. Да ползваме емотикон :)!");
     }
 }
 ```
 
-In the same way, `if let` can be used to match any enum value:
+По същия начин `if let` може да се ползва за сравнение нв всяка стойност на
+брояч:
 
 ```rust,editable
-// Our example enum
+// Примерен брояч
 enum Foo {
     Bar,
     Baz,
@@ -70,12 +70,12 @@ enum Foo {
 }
 
 fn main() {
-    // Create example variables
+    // Създаваме примерни променливи
     let a = Foo::Bar;
     let b = Foo::Baz;
     let c = Foo::Qux(100);
     
-    // Variable a matches Foo::Bar
+    // Променливата a съвпада с Foo::Bar
     if let Foo::Bar = a {
         println!("a is foobar");
     }
@@ -86,43 +86,50 @@ fn main() {
         println!("b is foobar");
     }
     
-    // Variable c matches Foo::Qux which has a value
-    // Similar to Some() in the previous example
+    // Променливата 'c' съвпада с Foo::Qux, който има стойност, подобна на Some()
+    // от предишния пример
     if let Foo::Qux(value) = c {
         println!("c is {}", value);
     }
 
-    // Binding also works with `if let`
+    // Обвързването чрез @ също работи с `if let`
     if let Foo::Qux(value @ 100) = c {
         println!("c is one hundred");
     }
 }
 ```
 
-Another benefit is that `if let` allows us to match non-parameterized enum variants. This is true even in cases where the enum doesn't implement or derive `PartialEq`. In such cases `if Foo::Bar == a` would fail to compile, because instances of the enum cannot be equated, however `if let` will continue to work.
+Допълнителна полза е, че `if let` ни позволява да сравняваме непараметризирани
+варианти на броячи. Това е вярно дори в случаите, когато броячът не осъществява
+или не *извежда*[^derive] `PartialEq`. В тези случаи, дори ако `if Foo::Bar ==
+a` не се компилира, защото вариантите на брояча не могат да бъдат сравнявани,
+`if let` ще си работи.
 
-Would you like a challenge? Fix the following example to use `if let`:
+Искате ли предизвикателство? Поправете следния пример като използвате `if let`:
 
 ```rust,editable,ignore,mdbook-runnable
-// This enum purposely neither implements nor derives PartialEq.
-// That is why comparing Foo::Bar == a fails below.
+// Този брояч нарочно нито осъществява нито извежда PartialEq.
+// Ето защо  сравнението Foo::Bar == a дава грешка.
 enum Foo {Bar}
 
 fn main() {
     let a = Foo::Bar;
 
-    // Variable a matches Foo::Bar
+    // Променливата a съвпада с Foo::Bar
     if Foo::Bar == a {
-    // ^-- this causes a compile-time error. Use `if let` instead.
+    // ^-- това причинява грешка по време на компилация. Използвайте `if let`.
         println!("a is foobar");
     }
 }
 ```
 
+[^derive] извежда – [derive][derive]
+
 ### See also:
 
 [`enum`][enum], [`Option`][option], and the [RFC][if_let_rfc]
 
+[derive]: ../../trait/derive.md
 [enum]: ../custom_types/enum.md
 [if_let_rfc]: https://github.com/rust-lang/rfcs/pull/160
 [option]: ../std/option.md

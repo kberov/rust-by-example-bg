@@ -42,6 +42,7 @@ mdbook serve
 * [French](https://github.com/Songbird0/FR_RBE)
 * [Russian](https://github.com/ruRust/rust-by-example)
 * [Vietnamese](https://github.com/EyesCrypto-Insights/rust-by-example-vn)
+* [Portuguese](https://github.com/nazarepiedady/rust-com-exemplos)
 
 ## Лиценз
 

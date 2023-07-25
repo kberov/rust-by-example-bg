@@ -1,20 +1,20 @@
 # Iterator::any
 
-`Iterator::any` is a function which when passed an iterator, will return
-`true` if any element satisfies the predicate. Otherwise `false`. Its
-signature:
+`Iterator::any` е функция, на която като подадем повторител, ще върне `true`, ако
+някой от членовете му удовлетворява твърдението. Иначе – `false`. Ето неговото
+обявление:
 
 ```rust,ignore
 pub trait Iterator {
-    // The type being iterated over.
+    // Типът, върху който се извършва повторението.
     type Item;
 
-    // `any` takes `&mut self` meaning the caller may be borrowed
-    // and modified, but not consumed.
+    // `any` приема `&mut self`, което означава, че извикващият може да бъде
+    // заеман и променян, но не и употребяван (изяждан - б.пр.)
     fn any<F>(&mut self, f: F) -> bool where
-        // `FnMut` meaning any captured variable may at most be
-        // modified, not consumed. `Self::Item` states it takes
-        // arguments to the closure by value.
+        // `FnMut` означава, че всяка прихваната променлива може да бъде
+        // най-много променяна, но не и употребявана. `Self::Item` означава, че
+        // аргументите към затварянето се приемат по стойност.
         F: FnMut(Self::Item) -> bool;
 }
 ```

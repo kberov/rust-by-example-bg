@@ -70,9 +70,9 @@
         - [Безименен тип](fn/closures/anonymity.md)
         - [Входни функции](fn/closures/input_functions.md)
         - [Като изходни параметри](fn/closures/output_parameters.md)
-        - [Examples in `std`](fn/closures/closure_examples.md)
+        - [Примери в `std`](fn/closures/closure_examples.md)
             - [Iterator::any](fn/closures/closure_examples/iter_any.md)
-            - [Searching through iterators](fn/closures/closure_examples/iter_find.md)
+            - [Търсене чрез повторители](fn/closures/closure_examples/iter_find.md)
     - [Функции от по-висок порядък](fn/hof.md)
     - [Diverging functions](fn/diverging.md)
 

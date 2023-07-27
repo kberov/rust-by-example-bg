@@ -43,6 +43,7 @@ fn main() {
     println!("Find 2 in array1: {:?}", array1.iter()     .find(|&&x| x == 2));
     // `into_iter()` за поредици дава `&i32`
     println!("Find 2 in array2: {:?}", array2.into_iter().find(|&x| x == 2));
+    // ^ ЗАПОПРАВКА: да се промени кода, така че да работи за издание 2021
 }
 ```
 

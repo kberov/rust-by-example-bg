@@ -46,6 +46,7 @@ fn main() {
     println!("2 in array1: {}", array1.iter()     .any(|&x| x == 2));
     // `into_iter()` за поредици дава `i32`.
     println!("2 in array2: {}", array2.into_iter().any(|x| x == 2));
+    // ^ ЗАПОПРАВКА: да се промени кода, така че да работи за издание 2021
 }
 ```
 ## Бел. прев.

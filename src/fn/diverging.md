@@ -1,4 +1,4 @@
-# Diverging functions
+# Разклоняващи функции
 
 Diverging functions never return. They are marked using `!`, which is an empty type.
 

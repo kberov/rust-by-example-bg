@@ -1,19 +1,19 @@
-# Разклоняващи функции
+# Разклоняващи функции[^diverging]
 
-Diverging functions never return. They are marked using `!`, which is an empty type.
+Разклоняващите функции никога не завършват/връщат. Техния тип за връщане се
+отбелязва с `!`, което означава празен тип.
 
 ```rust
 fn foo() -> ! {
-    panic!("This call never returns.");
+    panic!("Това извикване няма да завърши");
 }
 ```
+Обратно на всички други типове, от този тип не може да бъде създаден обект,
+защото множеството от всичките му възможни стойности е празно. Забележете, че
+той е различен от типа `()`, който има точно една празна стойност.[^never_type]
 
-As opposed to all the other types, this one cannot be instantiated, because the
-set of all possible values this type can have is empty. Note that, it is
-different from the `()` type, which has exactly one possible value.
-
-For example, this function returns as usual, although there is no information
-in the return value.
+Ето например следната функция връща както обикновено, макар да няма никакви
+данни във върнатата стойност.
 
 ```rust
 fn some_fn() {
@@ -22,39 +22,40 @@ fn some_fn() {
 
 fn main() {
     let _a: () = some_fn();
-    println!("This function returns and you can see this line.");
+    println!("Функцията 'some_fn()' връща и затова виждате този ред.");
 }
 ```
 
-As opposed to this function, which will never return the control back to the caller.
+А тази няма никога да върне управлението обратно към извикващата.
 
 ```rust,ignore
 #![feature(never_type)]
 
 fn main() {
-    let x: ! = panic!("This call never returns.");
-    println!("You will never see this line!");
+    let x: ! = panic!("Това извикване никога не връща.");
+    println!("Никога няма да видите този ред!");
 }
 ```
 
-Although this might seem like an abstract concept, it is in fact very useful and
-often handy. The main advantage of this type is that it can be cast to any other
-one and therefore used at places where an exact type is required, for instance
-in `match` branches. This allows us to write code like this:
+Макар това свойство да изглежда като отвлечено понятие, в действителност е
+много полезно и често удобно. Главното предимство на този тип е, че може да
+бъде приведен към всеки друг и така да бъде ползван на места, където е нужен
+точно определен тип, например в разклонения на `match`. Това ни позволява да
+пишем код като следния.
 
 ```rust
 fn main() {
     fn sum_odd_numbers(up_to: u32) -> u32 {
         let mut acc = 0;
         for i in 0..up_to {
-            // Notice that the return type of this match expression must be u32
-            // because of the type of the "addition" variable.
+            // Забележете, че типа на този израз за сравнение трябва да бъде u32
+            // заради типа на променливата "addition".
             let addition: u32 = match i%2 == 1 {
-                // The "i" variable is of type u32, which is perfectly fine.
+                // Променливата "i" е от тип u32, което си е съвсем наред.
                 true => i,
-                // On the other hand, the "continue" expression does not return
-                // u32, but it is still fine, because it never returns and therefore
-                // does not violate the type requirements of the match expression.
+                // От друга страна изразът "continue" не връща u32, но отново е
+                // наред, защото той никога не връща и затова не нарушава
+                // изискванията за типа на израза за сравнение `match`.
                 false => continue,
             };
             acc += addition;
@@ -64,6 +65,20 @@ fn main() {
     println!("Sum of odd numbers up to 9 (excluding): {}", sum_odd_numbers(9));
 }
 ```
+Това е също връщаният тип на функции, които въртят безкрайно (напр. `loop {}`)
+като мрежови сървъри или функции, които прекъсват текущия процес, например
+`exit()`.
 
-It is also the return type of functions that loop forever (e.g. `loop {}`) like
-network servers or functions that terminate the process (e.g. `exit()`).
+[^diverging] Разклоняващи функции, защото разклоняват программния поток, а и
+често се използват в изрази за сравнение `match`, които се разклоняват именно
+благодарение на типа „Никога”. (б.пр.)
+
+[^never_type]: В книгата „Езикът за програмиране Ръст” този тип е наречен
+  „типът Никога”, тъй като, когато се използва като тип за връщане от функция,
+  тя никога не връща контрола на програмата към обкръжаващия я програмен код.
+  Вижте [„The Never Type that Never Returns”][never_type]. (б.пр.)
+
+[never_type]: https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html?highlight=Never#the-never-type-that-never-returns
+
+
+

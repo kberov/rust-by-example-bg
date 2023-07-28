@@ -74,7 +74,7 @@
             - [Iterator::any](fn/closures/closure_examples/iter_any.md)
             - [Търсене чрез повторители](fn/closures/closure_examples/iter_find.md)
     - [Функции от по-висок порядък](fn/hof.md)
-    - [Diverging functions](fn/diverging.md)
+    - [Разклоняващи функции](fn/diverging.md)
 
 - [Модули](mod.md)
     - [Видимост](mod/visibility.md)

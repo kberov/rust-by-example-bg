@@ -1,7 +1,7 @@
-# The `use` declaration
+# Обявлението `use`
 
-The `use` declaration can be used to bind a full path to a new name, for easier
-access. It is often used like this:
+Обявлението `use` може да бъде използвано за обвързване на пълен път с ново име
+за по-лесен достъп. Често се използва така:
 
 ```rust,editable,ignore
 use crate::deeply::nested::{
@@ -15,10 +15,11 @@ fn main() {
 }
 ```
 
-You can use the `as` keyword to bind imports to a different name:
+Може да използвате ключовата дума `as`, за да обвържете внасяния[^imports] с
+нови имена:
 
 ```rust,editable
-// Bind the `deeply::nested::function` path to `other_function`.
+// Обвързваме пътя `deeply::nested::function` с `other_function`.
 use deeply::nested::function as other_function;
 
 fn function() {
@@ -34,17 +35,17 @@ mod deeply {
 }
 
 fn main() {
-    // Easier access to `deeply::nested::function`
+    // Улеснен достъп до `deeply::nested::function`
     other_function();
 
     println!("Entering block");
     {
-        // This is equivalent to `use deeply::nested::function as function`.
-        // This `function()` will shadow the outer one.
+        // Това е същото като `use deeply::nested::function as function`.
+        // Тази `function()` ще засенчи другата.
         use crate::deeply::nested::function;
 
-        // `use` bindings have a local scope. In this case, the
-        // shadowing of `function()` is only in this block.
+        // Обвързвянията от вида `use` имат местен обхват. В този случай
+        // засенчаването на `function()` е само в този блок.
         function();
 
         println!("Leaving block");
@@ -53,3 +54,5 @@ fn main() {
     function();
 }
 ```
+
+[^imports]: вмасяне (на имена (модули и функции)) в текущия блок (код или файл) на обхват (б.пр.)

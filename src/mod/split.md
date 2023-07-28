@@ -1,7 +1,6 @@
-# File hierarchy
+# Иерархия на файловете 
 
-Modules can be mapped to a file/directory hierarchy. Let's break down the
-[visibility example][visibility] in files:
+Модулите могат да бъдат организирани във файлова иерархия. Да разбием примера от раздел [Видимост][visibility] във файлове:
 
 ```shell
 $ tree .
@@ -13,11 +12,11 @@ $ tree .
 └── split.rs
 ```
 
-In `split.rs`:
+В `split.rs`:
 
 ```rust,ignore
-// This declaration will look for a file named `my.rs` and will
-// insert its contents inside a module named `my` under this scope
+// Това обявление ще търси файл с име `my.rs` и ще вмъкне неговото съдържание в
+// модул с име `my` в този обхват
 mod my;
 
 fn function() {
@@ -36,12 +35,11 @@ fn main() {
 
 ```
 
-In `my.rs`:
+В `my.rs`:
 
 ```rust,ignore
-// Similarly `mod inaccessible` and `mod nested` will locate the `nested.rs`
-// and `inaccessible.rs` files and insert them here under their respective
-// modules
+// По подобен начин `mod inaccessible` и `mod nested` ще намерят файловете
+// `nested.rs` и `inaccessible.rs` и ще ги вмъкнат тук в съответните им модули
 mod inaccessible;
 pub mod nested;
 
@@ -60,7 +58,7 @@ pub fn indirect_access() {
 }
 ```
 
-In `my/nested.rs`:
+В `my/nested.rs`:
 
 ```rust,ignore
 pub fn function() {
@@ -73,7 +71,7 @@ fn private_function() {
 }
 ```
 
-In `my/inaccessible.rs`:
+В `my/inaccessible.rs`:
 
 ```rust,ignore
 #[allow(dead_code)]
@@ -82,7 +80,7 @@ pub fn public_function() {
 }
 ```
 
-Let's check that things still work as before:
+Да проверим дали всичко работи както преди:
 
 ```shell
 $ rustc split.rs && ./split

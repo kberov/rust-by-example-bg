@@ -1,7 +1,8 @@
-# `super` and `self`
+# `super` и `self`
 
-The `super` and `self` keywords can be used in the path to remove ambiguity
-when accessing items and to prevent unnecessary hardcoding of paths.
+Ключовите думи `super` и `self` мод да се ползват в пътя, за да избегнете
+неясноти при достъпа до неща от даден модул и, за да избегнете ненужни буквални
+изписвания на пътища.
 
 ```rust,editable
 fn function() {
@@ -26,23 +27,24 @@ mod my {
     }
     
     pub fn indirect_call() {
-        // Let's access all the functions named `function` from this scope!
+        // Да достъпим всички функции от този обхват с име `function`!
         print!("called `my::indirect_call()`, that\n> ");
         
-        // The `self` keyword refers to the current module scope - in this case `my`.
-        // Calling `self::function()` and calling `function()` directly both give
-        // the same result, because they refer to the same function.
+        // Ключовата дума `self` се отнася до текущия модул – в този случай `my`.
+        // Извикването `self::function()` и извикването `function()` са едно и
+        // също, защото се отнасят до една и съща функция.
         self::function();
         function();
         
-        // We can also use `self` to access another module inside `my`:
+        // Можем да ползваме `self` и за да достъпим друг модул в `my`:
         self::cool::function();
         
-        // The `super` keyword refers to the parent scope (outside the `my` module).
+        // Ключовата дума `super` се отнася до родителския обхват
+        // (извън модула`my`).
         super::function();
         
-        // This will bind to the `cool::function` in the *crate* scope.
-        // In this case the crate scope is the outermost scope.
+        // Това ще създаде прякор root_function за `cool::function` в обхвата
+        // на целия *кош*. В този случай обхвата на коша е най-външния обхват.
         {
             use crate::cool::function as root_function;
             root_function();

@@ -1,8 +1,12 @@
 # Modules
 
-Ръждьо provides a powerful module system that can be used to hierarchically split
-code in logical units (modules), and manage visibility (public/private) between
-them.
+Ръждьо предоставя мощна модулна уредба[^system], която може да се използва за
+разпределяне на кода в иерархия от логически обособени единици (модули) и
+управление на видимостта (частна/обща)[^priv_pub] между тях.
 
-A module is a collection of items: functions, structs, traits, `impl` blocks,
-and even other modules.
+Модулът е съвкупност от неща: функции структури, отличители, блокове за
+осъществяване (`impl`) и дори други модули.
+
+[^system] уредба – system (б.пр.)
+
+[^priv_pub] частна/обща видимост – visibility (private/public) (б.пр.)

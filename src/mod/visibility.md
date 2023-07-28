@@ -1,30 +1,30 @@
-# Visibility
+# Видимост
 
-By default, the items in a module have private visibility, but this can be
-overridden with the `pub` modifier. Only the public items of a module can be
-accessed from outside the module scope.
+По подразбиране нещата в един модул имат частна видмост, но това може да се
+промени чрез използване на променителя `pub`. Само общите неща (обозначени с
+`pub`) могат да се достъпят отвън – код, който е извън обхвата на модула.
 
 ```rust,editable
-// A module named `my_mod`
+// Модул с име `my_mod`
 mod my_mod {
-    // Items in modules default to private visibility.
+    // Нещата в модулите по подразбиране имат частна видимост
+    // (не са видими отвън).
     fn private_function() {
-        println!("called `my_mod::private_function()`");
+        println!("извикахме `my_mod::private_function()`");
     }
 
-    // Use the `pub` modifier to override default visibility.
+    // Използваме променителя `pub` да отменим подразбираната видимост.
     pub fn function() {
-        println!("called `my_mod::function()`");
+        println!("извикахме `my_mod::function()`");
     }
 
-    // Items can access other items in the same module,
-    // even when private.
+    // Нещата могат да достъпват други неща в същия модул, дори да са частни.
     pub fn indirect_access() {
-        print!("called `my_mod::indirect_access()`, that\n> ");
+        print!("извикахме `my_mod::indirect_access()`, която извиква\n> ");
         private_function();
     }
 
-    // Modules can also be nested
+    // Модулите могат също да бъдат вложени
     pub mod nested {
         pub fn function() {
             println!("called `my_mod::nested::function()`");
@@ -32,97 +32,100 @@ mod my_mod {
 
         #[allow(dead_code)]
         fn private_function() {
-            println!("called `my_mod::nested::private_function()`");
+            println!("извикахме `my_mod::nested::private_function()`");
         }
 
-        // Functions declared using `pub(in path)` syntax are only visible
-        // within the given path. `path` must be a parent or ancestor module
+        // Функции, обявени чрез `pub(in път)` са видими само в подадения път.
+        // `път` трябва да бъде родителски или прародителски модул
         pub(in crate::my_mod) fn public_function_in_my_mod() {
-            print!("called `my_mod::nested::public_function_in_my_mod()`, that\n> ");
+            print!("извикахме `my_mod::nested::public_function_in_my_mod()`, \
+            която извика\n> ");
             public_function_in_nested();
         }
 
-        // Functions declared using `pub(self)` syntax are only visible within
-        // the current module, which is the same as leaving them private
+        // Функции, обявени чрез `pub(self)` са видими само в текущия модул,
+        // което е същото като да ги оставим частни
         pub(self) fn public_function_in_nested() {
-            println!("called `my_mod::nested::public_function_in_nested()`");
+            println!("извикахме `my_mod::nested::public_function_in_nested()`");
         }
 
-        // Functions declared using `pub(super)` syntax are only visible within
-        // the parent module
+        // Функции, обявени чрез `pub(super)` са видими само в родителския модул
         pub(super) fn public_function_in_super_mod() {
             println!("called `my_mod::nested::public_function_in_super_mod()`");
         }
     }
 
     pub fn call_public_function_in_my_mod() {
-        print!("called `my_mod::call_public_function_in_my_mod()`, that\n> ");
+        print!("извикахме `my_mod::call_public_function_in_my_mod()`, \
+        която извиква\n> ");
         nested::public_function_in_my_mod();
         print!("> ");
         nested::public_function_in_super_mod();
     }
 
-    // pub(crate) makes functions visible only within the current crate
+    // pub(crate) прави функциите видими само в текущия кош
     pub(crate) fn public_function_in_crate() {
-        println!("called `my_mod::public_function_in_crate()`");
+        println!("извикахме `my_mod::public_function_in_crate()`");
     }
 
-    // Nested modules follow the same rules for visibility
+    // Вложените модули следват същите правила за видимост
     mod private_nested {
         #[allow(dead_code)]
         pub fn function() {
-            println!("called `my_mod::private_nested::function()`");
+            println!("извикавхме `my_mod::private_nested::function()`");
         }
 
-        // Private parent items will still restrict the visibility of a child item,
-        // even if it is declared as visible within a bigger scope.
+        // Частните родителски неща продължават да ограничават видимостта на
+        // дъщерните неща, дори да са обявени като видими в по-широк обхват.
         #[allow(dead_code)]
         pub(crate) fn restricted_function() {
-            println!("called `my_mod::private_nested::restricted_function()`");
+            println!("извикахме \
+            `my_mod::private_nested::restricted_function()`");
         }
     }
 }
 
 fn function() {
-    println!("called `function()`");
+    println!("извикахме `function()`");
 }
 
 fn main() {
-    // Modules allow disambiguation between items that have the same name.
+    // Модулите ни позволяват да различаваме неща с еднакви имена.
     function();
     my_mod::function();
 
-    // Public items, including those inside nested modules, can be
-    // accessed from outside the parent module.
+    // Общите неща, включително тези от вложените модули, могат да се достъпят
+    // извън родителския модул.
     my_mod::indirect_access();
     my_mod::nested::function();
     my_mod::call_public_function_in_my_mod();
 
-    // pub(crate) items can be called from anywhere in the same crate
+    // Нещата, обявени чрез `pub(crate)` могат да се извикат отвсякъде
+    // в същия кош
     my_mod::public_function_in_crate();
 
-    // pub(in path) items can only be called from within the module specified
-    // Error! function `public_function_in_my_mod` is private
+    // Нещата, обявени чрез `pub(in path)` могат да се извикват
+    // само в указания модул
+    // Грешка! Функцията `public_function_in_my_mod` е частна
     //my_mod::nested::public_function_in_my_mod();
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА ^ Разкоментирйте този ред
 
-    // Private items of a module cannot be directly accessed, even if
-    // nested in a public module:
-
-    // Error! `private_function` is private
+    // Частните неща за даден модул не могат да се достъпят пряко, дори да са
+    // вложени в общ модул:
+    // Грешка! `private_function` е частна
     //my_mod::private_function();
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА ^ Try uncommenting this line
 
-    // Error! `private_function` is private
+    // Грешка! `private_function` е частна
     //my_mod::nested::private_function();
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА ^ Разкоментирйте този ред
 
-    // Error! `private_nested` is a private module
+    // Грешка! `private_nested` е частен модул
     //my_mod::private_nested::function();
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА ^ Разкоментирйте този ред
 
-    // Error! `private_nested` is a private module
+    // Грешка! `private_nested` е частен модул
     //my_mod::private_nested::restricted_function();
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА ^ Разкоментирйте този ред
 }
 ```

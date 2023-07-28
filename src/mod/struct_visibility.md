@@ -1,24 +1,24 @@
-# Struct visibility
+# Видимост на структури 
 
-Structs have an extra level of visibility with their fields. The visibility 
-defaults to private, and can be overridden with the `pub` modifier. This 
-visibility only matters when a struct is accessed from outside the module 
-where it is defined, and has the goal of hiding information (encapsulation).
+Структурите имат допълнително ниво на видимост заедно с техните полета.
+Видимостта по подразбиране е частна и може да бъде променена чрез `pub`. Тази
+видимост има значение когато структурата бива достъпена извън модула, в който е
+описана епредназначена за скриване на данни (капсулиране).
 
 ```rust,editable
 mod my {
-    // A public struct with a public field of generic type `T`
+    // Обща (общодостъпна) структура с общо поле и обобщен тип `T`
     pub struct OpenBox<T> {
         pub contents: T,
     }
 
-    // A public struct with a private field of generic type `T`
+    // Обща (общодостъпна) структура с частно поле и обобщен тип `T`
     pub struct ClosedBox<T> {
         contents: T,
     }
 
     impl<T> ClosedBox<T> {
-        // A public constructor method
+        // Общодостъпен конструктор
         pub fn new(contents: T) -> ClosedBox<T> {
             ClosedBox {
                 contents: contents,
@@ -28,31 +28,31 @@ mod my {
 }
 
 fn main() {
-    // Public structs with public fields can be constructed as usual
+    // Общите структури с общи полета могат да се създават както обикновено
     let open_box = my::OpenBox { contents: "public information" };
 
-    // and their fields can be normally accessed.
-    println!("The open box contains: {}", open_box.contents);
+    // и техните полета могат да се достъпват.
+    println!("Отворената кутия съдържа: {}", open_box.contents);
 
-    // Public structs with private fields cannot be constructed using field names.
-    // Error! `ClosedBox` has private fields
-    //let closed_box = my::ClosedBox { contents: "classified information" };
-    // TODO ^ Try uncommenting this line
+    // Общите структури с частни полета не могат да се създават с частни полета.
+    // Грешка! `ClosedBox` има частни полета
+    //let closed_box = my::ClosedBox { contents: "тайни данни" };
+    // ЗАДАЧА ^ Разкоментирйте този ред
 
-    // However, structs with private fields can be created using
-    // public constructors
+    // Обаче структури с частни полета може да се създават с помощта на
+    // общодостъпни конструктори,
     let _closed_box = my::ClosedBox::new("classified information");
 
-    // and the private fields of a public struct cannot be accessed.
-    // Error! The `contents` field is private
-    //println!("The closed box contains: {}", _closed_box.contents);
-    // TODO ^ Try uncommenting this line
+    // но частнитв полета на обща структура не може да се достъпват.
+    // Грешка! Полето `contents` е частно
+    //println!("Затворената кутия съдържа: {}", _closed_box.contents);
+    // ЗАДАЧА ^ Разкоментирйте този ред
 }
 ```
 
 ### See also:
 
-[generics][generics] and [methods][methods]
+[Обобщения][generics] и [методи][methods]
 
 [generics]: ../generics.md
 [methods]: ../fn/methods.md

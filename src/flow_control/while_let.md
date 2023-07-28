@@ -11,7 +11,7 @@ let mut optional = Some(0);
 // пробваме няколко пъти.
 loop {
     match optional {
-        // Ако `optional` е разложимо, влизаме във блока.
+        // Ако `optional` е разложимо, влизаме в блока.
         Some(i) => {
             if i > 9 {
                 println!("Greater than 9, quit!");

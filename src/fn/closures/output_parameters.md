@@ -1,20 +1,21 @@
-# As output parameters
+# Като изходни параметри 
 
-Closures as input parameters are possible, so returning closures as
-output parameters should also be possible. However, anonymous
-closure types are, by definition, unknown, so we have to use
-`impl Trait` to return them.
+Възможно е да се приемат затваряния като входни параметри, значи би трябвало да
+е възможно и да връщаме затваряния. Но, както занем, типовете на затварянията
+нямат имена и са незвестни, от което следва, че трябва да опишем типа за връщане
+като `impl ИмеНаОтличител`, за да върнем затваряне.
 
-The valid traits for returning a closure are:
+Възможните отличители за връщане на затваряне:
 
 * `Fn`
 * `FnMut`
 * `FnOnce`
 
-Beyond this, the `move` keyword must be used, which signals that all captures
-occur by value. This is required because any captures by reference would be
-dropped as soon as the function exited, leaving invalid references in the
-closure.
+Освен това, трябва да се ползва ключовата дума `move`. Това подсказва, че
+всички прихващания са по стойност. Това се налага, понеже прихващанията като
+препратки ще бъдат изхвърлени (паметта ще бъде освободена (б. пр.)), когато
+функцията върне и така биха останали недействителни препратки във върнатото
+затваряне.
 
 ```rust,editable
 fn create_fn() -> impl Fn() {
@@ -48,7 +49,7 @@ fn main() {
 
 ### See also:
 
-[`Fn`][fn], [`FnMut`][fnmut], [Generics][generics] and [impl Trait][impltrait].
+[`Fn`][fn], [`FnMut`][fnmut], [Generics][generics] and [impl ИмеНаОтличител][impltrait].
 
 [fn]: https://doc.rust-lang.org/std/ops/trait.Fn.html
 [fnmut]: https://doc.rust-lang.org/std/ops/trait.FnMut.html

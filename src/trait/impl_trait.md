@@ -1,4 +1,4 @@
-# `impl Trait`
+# `impl ИмеНаОтличител`
 
 `impl Trait` can be used in two locations:
 

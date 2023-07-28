@@ -1,24 +1,24 @@
-# Input functions
+# Входни функции
 
-Since closures may be used as arguments, you might wonder if the same can be said
-about functions. And indeed they can! If you declare a function that takes a
-closure as parameter, then any function that satisfies the trait bound of that
-closure can be passed as a parameter.
+Понеже затварянията могат да бъдат използвани като аргументи, може би се чудите
+дали същото важи и за функциите. И наистина – да! Ако обявите функция, приемаща
+затваряне като параметър, тогава всяка функция, удовлетворяваща *пределите*[^bounds] на
+отличителя за това затваряне, може да бъде подадена като параметър.
 
 ```rust,editable
-// Define a function which takes a generic `F` argument
-// bounded by `Fn`, and calls it
+// Описваме функция, която приема обобщен аргумент `F` о-пределен от `Fn`,
+// и го извиква като функция
 fn call_me<F: Fn()>(f: F) {
     f();
 }
 
-// Define a wrapper function satisfying the `Fn` bound
+// Описваме функция-обвивка, удовлетворяваща пределите на `Fn`
 fn function() {
     println!("I'm a function!");
 }
 
 fn main() {
-    // Define a closure satisfying the `Fn` bound
+    // Описваме затваряне, удовлетворяващо пределите на `Fn`
     let closure = || println!("I'm a closure!");
 
     call_me(closure);
@@ -26,12 +26,14 @@ fn main() {
 }
 ```
 
-As an additional note, the `Fn`, `FnMut`, and `FnOnce` `traits` dictate how
-a closure captures variables from the enclosing scope.
+В допълнение отличителите (`traits`) `Fn`, `FnMut`, и `FnOnce` нареждат как
+затварянето прихваща променливите от околния видим обхват.
+
+[^bounds] предели – bounds
 
 ### See also:
 
-[`Fn`][fn], [`FnMut`][fn_mut], and [`FnOnce`][fn_once]
+[`Fn`][fn], [`FnMut`][fn_mut], и [`FnOnce`][fn_once]
 
 [fn]: https://doc.rust-lang.org/std/ops/trait.Fn.html
 [fn_mut]: https://doc.rust-lang.org/std/ops/trait.FnMut.html

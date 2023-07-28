@@ -90,4 +90,4 @@ fn main() {
 
 [^borrow]: заемане, заемам, вземам на заем – borrowwing, borrow
 
-[^signature]: описание – signature
+[^signature]: описание, обявление – signature

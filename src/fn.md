@@ -1,48 +1,49 @@
 # Функции
 
-Functions are declared using the `fn` keyword. Its arguments are type
-annotated, just like variables, and, if the function returns a value, the
-return type must be specified after an arrow `->`.
+Функциите се обявяват с ключовата дума `fn`. Типовете на аргументите им се
+отбелязват като при променливите и, ако функцията връща стойност, типа на
+връщаната стойност се указва след стрелка `->`.
 
-The final expression in the function will be used as return value.
-Alternatively, the `return` изявлениe can be used to return a value earlier
-from within the function, even from inside loops or `if` изявления.
-
-Let's rewrite FizzBuzz using functions!
+Последният израз във функцията ще бъде използван като стойност за връщане. Той
+**не трябва** да завършва с `;`, за да бъде ползван като върната стойност (б.
+пр.). Но изявлението `return` може да се позлва по-рано в тялото на функцията,
+дори насред цикли или в изявлениe `if`. Да пренапишем FizzBuzz като използваме
+функции!
 
 ```rust,editable
-// Unlike C/C++, there's no restriction on the order of function definitions
+// За разлика от C/C++, тук няма ограничения в реда на обявяване на функциите
 fn main() {
-    // We can use this function here, and define it somewhere later
+    // Можем да използваме функцията тук, а да я опишем някъде по-късно
     fizzbuzz_to(100);
 }
 
-// Function that returns a boolean value
-fn is_divisible_by(lhs: u32, rhs: u32) -> bool {
-    // Corner case, early return
+// Функция, връщаща булева стойност
+// Както при променливите, можем да ползваме всяка азбука (б. пр.)
+fn е_делимо_на(lhs: u32, rhs: u32) -> bool {
+    // Ъглов случай, връщаме по-рано
     if rhs == 0 {
         return false;
     }
 
-    // This is an expression, the `return` keyword is not necessary here
+    // Това е израз, няма нужда от `return`
+    // И не трябва да завършва с `;`
     lhs % rhs == 0
 }
 
-// Functions that "don't" return a value, actually return the unit type `()`
+// Функции, които не връщат стойност, всъщност връщат типа unit `()`
 fn fizzbuzz(n: u32) -> () {
-    if is_divisible_by(n, 15) {
+    if е_делимо_на(n, 15) {
         println!("fizzbuzz");
-    } else if is_divisible_by(n, 3) {
+    } else if е_делимо_на(n, 3) {
         println!("fizz");
-    } else if is_divisible_by(n, 5) {
+    } else if е_делимо_на(n, 5) {
         println!("buzz");
     } else {
         println!("{}", n);
     }
 }
 
-// When a function returns `()`, the return type can be omitted from the
-// signature
+// Когато функция връща `()`, връщаният тип може да не се указва в обявлението
 fn fizzbuzz_to(n: u32) {
     for n in 1..=n {
         fizzbuzz(n);

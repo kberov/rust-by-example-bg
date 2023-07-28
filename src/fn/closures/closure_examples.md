@@ -1,3 +1,4 @@
-# Examples in `std`
+# Примери в `std`
 
-This section contains a few examples of using closures from the `std` library.
+Този раздел съдържа няколко примера с използване на затваряния в стандартната
+библиотека.

@@ -1,50 +1,48 @@
-# Higher Order Functions
+# Функции от по-висок порядък 
 
-Ръждьо provides Higher Order Functions (HOF). These are functions that
-take one or more functions and/or produce a more useful function. HOFs
-and lazy iterators give Ръждьо its functional flavor.
-
+Ръждьо предоставя Функции от по-Висок Порядък (ФВП). Това са функции, които
+приемат една или повече функции и произвеждат нова, по-полезна функция. ФВП и
+ленивите повторители придават на Ръждьо по-функционалния му оттенък.
 ```rust,editable
 fn is_odd(n: u32) -> bool {
     n % 2 == 1
 }
 
 fn main() {
-    println!("Find the sum of all the squared odd numbers under 1000");
+    println!("Намираме сбора от нечетните квадрати, по-малки от 1000, \
+      на всички числа"
+    );
     let upper = 1000;
 
-    // Imperative approach
-    // Declare accumulator variable
+    // Императивен (със заповеди) подход
+    // Обявяваме променлива за съхраняване на сбора
     let mut acc = 0;
-    // Iterate: 0, 1, 2, ... to infinity
+    // Изброяваме: 0, 1, 2, ... до безкрайност
     for n in 0.. {
-        // Square the number
+        // Степенуваме числото
         let n_squared = n * n;
 
         if n_squared >= upper {
-            // Break loop if exceeded the upper limit
+            // Прекъсваме изброяването, ако сме достигнали горната граница
             break;
         } else if is_odd(n_squared) {
-            // Accumulate value, if it's odd
+            // Добавяме стойност, ако числото е нечетно
             acc += n_squared;
         }
     }
-    println!("imperative style: {}", acc);
+    println!("Императивен подход: {}", acc);
 
-    // Functional approach
+    // Функционален подход
     let sum_of_squared_odd_numbers: u32 =
-        (0..).map(|n| n * n)                             // All natural numbers squared
-             .take_while(|&n_squared| n_squared < upper) // Below upper limit
-             .filter(|&n_squared| is_odd(n_squared))     // That are odd
-             .sum();                                     // Sum them
-    println!("functional style: {}", sum_of_squared_odd_numbers);
+        (0..).map(|n| n * n) // Всички естествени числа на квадрат
+             .take_while(|&n_squared| n_squared < upper) // Под горната граница
+             .filter(|&n_squared| is_odd(n_squared)) // Които са нечетни
+             .sum(); // Събираме ги
+    println!("Функционален подход: {}", sum_of_squared_odd_numbers);
 }
 ```
 
-[Option][option]
-and
-[Iterator][iter]
-implement their fair share of HOFs.
+[Option][option] и [Iterator][iter] осъществяват много ФВП.
 
 [option]: https://doc.rust-lang.org/core/option/enum.Option.html
 [iter]: https://doc.rust-lang.org/core/iter/trait.Iterator.html

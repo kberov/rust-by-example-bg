@@ -1,8 +1,8 @@
-# Creating a Library
+# Създаване на библиотека 
 
-Let's create a library, and then see how to link it to another crate.
+Да създадем библиотека и после да видим как да я свържем с друг кош.
 
-In `rary.rs`:
+В `rary.rs`:
 
 ```rust,ignore
 pub fn public_function() {
@@ -25,10 +25,9 @@ $ rustc --crate-type=lib rary.rs
 $ ls lib*
 library.rlib
 ```
-
-Libraries get prefixed with "lib", and by default they get named after their
-crate file, but this default name can be overridden by passing
-the `--crate-name` option to `rustc` or by using the [`crate_name`
-attribute][crate-name].
+Библиотеките получават представка "lib" пред името и по подразбиране се
+именуват на главния файл за коша. Това име може да бъде променено, като се
+подаде на `rustc` флага `--crate-name` или като се използва атрибута
+[`crate_name`][crate-name].
 
 [crate-name]: ../attribute/crate.md

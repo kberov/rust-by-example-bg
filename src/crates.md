@@ -1,12 +1,12 @@
-# Crates
+# Кокшове
 
-A crate is a compilation unit in Ръждьо. Whenever `rustc some_file.rs` is called,
-`some_file.rs` is treated as the *crate file*. If `some_file.rs` has `mod`
-declarations in it, then the contents of the module files would be inserted in
-places where `mod` declarations in the crate file are found, *before* running
-the compiler over it. In other words, modules do *not* get compiled
-individually, only crates get compiled.
+Кошът е компилационна единица в Ръждьо. Когато изпълните на командния ред
+`rustc some_file.rs`, `some_file.rs` се смята за *главния файл в коша*. Ако
+`some_file.rs` има в себе си обявление `mod`, съдържанието на файловете в модула
+ще бъдат вмъкнати на местата, където са обявленията `mod` *преди* компилаторът
+да започне работа. Иначе казано *модулите не се компилират поотделно*. Само
+кошове биват компилирани.
 
-A crate can be compiled into a binary or into a library. By default, `rustc`
-will produce a binary from a crate. This behavior can be overridden by passing
-the `--crate-type` flag to `lib`.
+Кошът може да бъде компилиран като изпълним файл или като библиотека. По
+подразбиране `rustc` ще произведе изпълним файл от коша. Това поведение може да
+бъде променено като се подаде флага `--crate-type` със стойност `lib`.

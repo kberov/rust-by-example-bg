@@ -17,7 +17,7 @@ fn main() {
 ```
 
 ```txt
-# Където library.rlib е пътят до компилираната библиотека. Тук предполагаме,
+# library.rlib е пътят до компилираната библиотека. Тук предполагаме,
 # че се намира в същата директория:
 $ rustc executable.rs --extern rary=library.rlib && ./executable 
 called rary's `public_function()`

@@ -89,9 +89,9 @@
 
 - [Cargo](cargo.md)
     - [Зависимости](cargo/deps.md)
-    - [Уговорки (конвенции)](cargo/conventions.md)
-    - [Проверки (Тестове)](cargo/test.md)
-    - [Скриптове за изграждане](cargo/build_scripts.md)
+    - [Уговорки](cargo/conventions.md)
+    - [Тестове](cargo/test.md)
+    - [Скриптове за построяване](cargo/build_scripts.md)
 
 - [Атрибути](attribute.md)
     - [`dead_code`](attribute/unused.md)
@@ -206,7 +206,7 @@
         - [Argument parsing](std_misc/arg/matching.md)
     - [Foreign Function Interface](std_misc/ffi.md)
 
-- [Проверки](testing.md)
+- [Тестване](testing.md)
     - [Unit testing](testing/unit_testing.md)
     - [Documentation testing](testing/doc_testing.md)
     - [Integration testing](testing/integration_testing.md)

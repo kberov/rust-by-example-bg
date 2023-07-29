@@ -1,24 +1,24 @@
-# Dependencies
+# Зависимости
 
-Most programs have dependencies on some libraries. If you have ever managed
-dependencies by hand, you know how much of a pain this can be. Luckily, the Ръждьо
-ecosystem comes standard with `cargo`! `cargo` can manage dependencies for a
-project.
+Много програми зависят от някакви библиотеки. Ако някога сте управлявали
+зависимости на ръка, знаете каква мъка е. За щастие Ръждьо идва стандартно с
+`cargo`! `cargo` може да управлява зависимостите в проекта.
 
-To create a new Ръждьо project,
+
+За да създадете нов проект на Ръждьо, изпълнете на командния ред.
 
 ```sh
-# A binary
+# Изпълним
 cargo new foo
 
-# A library
+# Библиотека
 cargo new --lib bar
 ```
 
-For the rest of this chapter, let's assume we are making a binary, rather than
-a library, but all of the concepts are the same.
+До края на главата ще приемем, че правим изпълним файл, но понятията са същите
+като за библиотека.
 
-After the above commands, you should see a file hierarchy like this:
+След изпълнението на горните команди файловото дърво на проекта изглежда така:
 
 ```txt
 .
@@ -32,9 +32,9 @@ After the above commands, you should see a file hierarchy like this:
         └── main.rs
 ```
 
-The `main.rs` is the root source file for your new `foo` project -- nothing new there.
-The `Cargo.toml` is the config file for `cargo` for this project. If you
-look inside it, you should see something like this:
+`main.rs` е главния файл с изходен код за новия ви проект `foo` – нищо особено.
+`Cargo.toml` е файлът с настройки за `cargo` за този проект. Ако погледнете в
+него, ще видите нещо такова:
 
 ```toml
 [package]
@@ -45,27 +45,19 @@ authors = ["mark"]
 [dependencies]
 ```
 
-The `name` field under `[package]` determines the name of the project. This is
-used by `crates.io` if you publish the crate (more later). It is also the name
-of the output binary when you compile.
+Полето `name` под `[package]` определя името на проекта. То се ползва от
+`crates.io`, ако обнародвате коша (повече по-късно). Това е и името на двоичния
+изпълним файл след компилация.
 
-The `version` field is a crate version number using [Semantic
-Versioning](http://semver.org/).
+Полето `version` е версията на коша. Използват се [Значещи версии](http://semver.org/).
 
-The `authors` field is a list of authors used when publishing the crate.
+Полето `authors`е списък с автори, който се ползва когато се обнародва коша.
 
-The `[dependencies]` section lets you add dependencies for your project.
+Разделът `[dependencies]` е за добавяне на зависимости към проекта.
 
-For example, suppose that we want our program to have a great CLI. You can find
-lots of great packages on [crates.io](https://crates.io) (the official Ръждьо
-package registry). One popular choice is [clap](https://crates.io/crates/clap).
-As of this writing, the most recent published version of `clap` is `2.27.1`. To
-add a dependency to our program, we can simply add the following to our
-`Cargo.toml` under `[dependencies]`: `clap = "2.27.1"`. And that's it! You can start using
-`clap` in your program.
+Нека предположим, че искаме програмта ни да има яко взаимодействиe с командния ред[^cli]. Можете да намерите много чудесни пакети на [crates.io](https://crates.io) (представителния[^official] регистър за пакети на Ръждьо). Чест избор е [clap](https://crates.io/crates/clap). По време на писането последната версия на `clap` е `2.27.1`. За да добавим зависимост към нашата програма, просто добавяме следното в `Cargo.toml` под `[dependencies]`: `clap = "2.27.1"`. И това е! Можете да използвате `clap`.
 
-`cargo` also supports [other types of dependencies][dependencies]. Here is just
-a small sampling:
+`cargo` поддържа и [други типове зависимости][dependencies]. Ето малък пример:
 
 ```toml
 [package]
@@ -74,23 +66,29 @@ version = "0.1.0"
 authors = ["mark"]
 
 [dependencies]
-clap = "2.27.1" # from crates.io
-rand = { git = "https://github.com/rust-lang-nursery/rand" } # from online repo
-bar = { path = "../bar" } # from a path in the local filesystem
+clap = "2.27.1" # от crates.io
+rand = { git = "https://github.com/rust-lang-nursery/rand" } # от хранилището
+bar = { path = "../bar" } # от файлов път на сметалото ви
 ```
 
-`cargo` is more than a dependency manager. All of the available
-configuration options are listed in the [format specification][manifest] of
+`cargo` е повече от управление на зависимости. Всички възможни настройки
+са изброени в [спецификациатя на формата][manifest] на
 `Cargo.toml`.
 
-To build our project we can execute `cargo build` anywhere in the project
-directory (including subdirectories!). We can also do `cargo run` to build and
-run. Notice that these commands will resolve all dependencies, download crates
-if needed, and build everything, including your crate. (Note that it only
-rebuilds what it has not already built, similar to `make`).
+За да построим нашия проект можем да изпълним `cargo build` където и да е в
+папката на проекта (включително и подпапките). Може също да изпълним `cargo
+run`, за да построим и изпълним произведения двоичен файл. Забележете, че тези
+команди ще разрешат зависимостите, ще изтеглят кошовете, ако е необходимо и ще
+построят всичко, включително и вашия кош. Ще се построи отново само каквото е
+нужно, подобно на `make`.
 
-Voila! That's all there is to it!
+Voila! Това е всичко!
 
+## Б. пр.
+
+[^cli]: взаимодействиe с командния ред – command line interface. взаимодействиe – interfac
+
+[^official] представителен (официален) – official
 
 [manifest]: https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html

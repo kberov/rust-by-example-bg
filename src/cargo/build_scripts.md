@@ -1,4 +1,4 @@
-# Build Scripts
+# Скриптове за построяване
 
 Sometimes a normal build from `cargo` is not enough. Perhaps your crate needs
 some pre-requisites before `cargo` will successfully compile, things like code

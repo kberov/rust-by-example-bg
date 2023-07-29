@@ -1,6 +1,6 @@
-# Conventions
+# Уговорки[^Conventions]
 
-In the previous chapter, we saw the following directory hierarchy:
+В предишният раздел видяхме следната иерархия от папки:
 
 ```txt
 foo
@@ -9,12 +9,11 @@ foo
     └── main.rs
 ```
 
-Suppose that we wanted to have two binaries in the same project, though. What
-then?
+Да предположим, че искаме да имаме два изпълними файла в проекта. Тогава какво?
 
-It turns out that `cargo` supports this. The default binary name is `main`, as
-we saw before, but you can add additional binaries by placing them in a `bin/`
-directory:
+Оказва се, че `cargo` поддържа това. Името по подразбиране за главния файл е
+`main.rs`, както видяхме по-рано, но можем да сложим допълнителни изпълними
+файлове в папка `bin/`
 
 ```txt
 foo
@@ -24,14 +23,17 @@ foo
     └── bin
         └── my_other_bin.rs
 ```
+За да кажем на `cargo` да компил;ира или изпълни само този двоичен файл, просто
+му подаваме флага `--bin my_other_bin`, където `my_other_bin` е името на файла,
+с който искаме да работим.
 
-To tell `cargo` to only compile or run this binary, we just pass `cargo` the
-`--bin my_other_bin` flag, where `my_other_bin` is the name of the binary we
-want to work with.
+Освен да изпълнява двоични файлове `cargo` [може да изпълнява] също примери,
+тестове и проверки за бързодействие.
 
-In addition to extra binaries, `cargo` supports [more features] such as
-benchmarks, tests, and examples.
+В следващия раздел ще разгледаме по-отблизо тестовете.
 
-In the next chapter, we will look more closely at tests.
+## Б.пр.
 
-[more features]: https://doc.rust-lang.org/cargo/guide/project-layout.html
+[^Conventions] уговорки – conventions
+
+[може да изпълнява]: https://doc.rust-lang.org/cargo/guide/project-layout.html

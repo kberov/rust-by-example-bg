@@ -1,12 +1,16 @@
 # Cargo
 
-`cargo` is the official Ръждьо package management tool. It has lots of really
-useful features to improve code quality and developer velocity! These include
+`cargo`[^cargo] е представителното средство на Ръждьо за управление на пакети.
+Има множество наистина полезни качества за подобряване на кода и улеснява
+работата на разработчика. Ето някои от възможностите му:
 
-- Dependency management and integration with [crates.io](https://crates.io) (the
-  official Ръждьо package registry)
-- Awareness of unit tests
-- Awareness of benchmarks
+- Управление на зависмости и свързаност с [crates.io](https://crates.io)
+  (представителният регистър за пакети на Ръждьо)
+- Поддръжка на тестове
+- Поддръжка на проверки за бързодействие
 
-This chapter will go through some quick basics, but you can find the
-comprehensive docs in [The Cargo Book](https://doc.rust-lang.org/cargo/).
+Тази глава ще разгледа набързо основните свойства, но можете да намерите
+изчерпателна документация в [Книгата за
+Cargo](https://doc.rust-lang.org/cargo/).
+
+[^cargo]: cargo – товар

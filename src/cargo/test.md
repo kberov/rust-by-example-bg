@@ -1,13 +1,12 @@
-# Testing
+# Тестове
 
-As we know testing is integral to any piece of software! Ръждьо has first-class
-support for unit and integration testing ([see this
-chapter](https://doc.rust-lang.org/book/ch11-00-testing.html) in
-TRPL).
+Както знаем, тестването е неразделна част от всеки софтуер. Ръждьо иа
+първокласна поддръжка за  единични(unit) и интеграционни тестове. Вижте глава
+11 от [„The Rust Programming
+Language”](https://doc.rust-lang.org/book/ch11-00-testing.html).
 
-From the testing chapters linked above, we see how to write unit tests and
-integration tests. Organizationally, we can place unit tests in the modules they
-test and integration tests in their own `tests/` directory:
+Там е описано как се пишат тестове. Можем да сложим единичните тестове в
+модулите, които тестват, а интеграционните в отделна директория `tests/`:
 
 ```txt
 foo
@@ -20,21 +19,21 @@ foo
     └── my_other_test.rs
 ```
 
-Each file in `tests` is a separate 
-[integration test](https://doc.rust-lang.org/book/ch11-03-test-organization.html#integration-tests),
-i.e. a test that is meant to test your library as if it were being called from a dependent
-crate.
+Всеки файл в `tests` е отделен [интеграционен
+тест](https://doc.rust-lang.org/book/ch11-03-test-organization.html#integration-tests),
+сиреч тест, който проверява библиотеката сякаш се ползва от зависещ от нея кош.
 
-The [Testing][testing] chapter elaborates on the three different testing styles: 
-[Unit][unit_testing], [Doc][doc_testing], and [Integration][integration_testing]. 
+Глава [Тестване][testing] разглежда  трите вида тестване: 
+[Единично][unit_testing], [Документално][doc_testing], и
+[Интеграционно][integration_testing]. 
 
-`cargo` naturally provides an easy way to run all of your tests!
+`cargo` предоставя лесен начин за изпълняване на всички тестове!
 
 ```shell
 $ cargo test
 ```
 
-You should see output like this:
+Ще видите да се извежда следното на екрана:
 
 ```shell
 $ cargo test
@@ -51,7 +50,8 @@ test test_foo ... ok
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-You can also run tests whose name matches a pattern:
+Също можете да изпълните само някои тестове, чиито имена частично съвпадат с
+написаното от вас:
 
 ```shell
 $ cargo test test_foo
@@ -70,23 +70,23 @@ test test_foo_bar ... ok
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out
 ```
 
-One word of caution: Cargo may run multiple tests concurrently, so make sure
-that they don't race with each other. 
+Имайте следното предвид: Cargo може да изпълнява няколко теста едновременно,
+така че уверете се, че те не си съперничат по някакъв начин.
 
-One example of this concurrency causing issues is if two tests output to a
-file, such as below:
+Един пример как едновремеността създава проблеми е когато два теста пишат в
+един и същи файл, както по-долу:
 
 ```rust
 #[cfg(test)]
 mod tests {
-    // Import the necessary modules
+    // Внасяме нужните модули
     use std::fs::OpenOptions;
     use std::io::Write;
 
-    // This test writes to a file
+    // Този тест пише във файл
     #[test]
     fn test_file() {
-        // Opens the file ferris.txt or creates one if it doesn't exist.
+        // Отваря файла ferris.txt или създава нов, ако не съществува.
         let mut file = OpenOptions::new()
             .append(true)
             .create(true)
@@ -100,10 +100,10 @@ mod tests {
         }
     }
 
-    // This test tries to write to the same file
+    // Този тест се опитва да пише в същия файл
     #[test]
     fn test_file_also() {
-        // Opens the file ferris.txt or creates one if it doesn't exist.
+        // Отваря файла ferris.txt или създава нов, ако не съществува.
         let mut file = OpenOptions::new()
             .append(true)
             .create(true)
@@ -119,7 +119,7 @@ mod tests {
 }
 ```
 
-Although the intent is to get the following:
+Макар намерението ни да е да получим следното:
 ```shell
 $ cat ferris.txt
 Ferris
@@ -133,7 +133,7 @@ Corro
 Corro
 Corro
 ```
-What actually gets put into `ferris.txt` is this:
+Съдържанието на `ferris.txt` е това:
 ```shell
 $ cargo test test_foo
 Corro

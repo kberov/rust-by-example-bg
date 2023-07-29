@@ -1,16 +1,15 @@
-# Using a Library
+# Използване на библиотека
 
-To link a crate to this new library you may use `rustc`'s `--extern` flag. All 
-of its items will then be imported under a module named the same as the library.
-This module generally behaves the same way as any other module.
+За да свържете кош с тази нова библиотека, може да ползвате флага за `rustc` `--extern`. Всичко от библиотеката ще бъде внесено с име на модул, съответстващо с името на библиотеката. Този модул се държи като всеки друг модул.
 
 ```rust,ignore
-// extern crate rary; // May be required for Ръждьо 2015 edition or earlier
+// extern crate rary; 
+// Може да се изисква за издания на Ръждьо 2015 или по-ранни
 
 fn main() {
     rary::public_function();
 
-    // Error! `private_function` is private
+    // Грешка! `private_function` е частна
     //rary::private_function();
 
     rary::indirect_access();
@@ -18,8 +17,8 @@ fn main() {
 ```
 
 ```txt
-# Where library.rlib is the path to the compiled library, assumed that it's
-# in the same directory here:
+# library.rlib е пътят до компилираната библиотека. Тук предполагаме,
+# че се намира в същата директория:
 $ rustc executable.rs --extern rary=library.rlib && ./executable 
 called rary's `public_function()`
 called rary's `indirect_access()`, that

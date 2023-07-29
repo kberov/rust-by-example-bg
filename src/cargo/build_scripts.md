@@ -1,12 +1,13 @@
 # Скриптове за построяване
 
-Sometimes a normal build from `cargo` is not enough. Perhaps your crate needs
-some pre-requisites before `cargo` will successfully compile, things like code
-generation, or some native code that needs to be compiled. To solve this problem
-we have build scripts that Cargo can run.
+Понякога обикновеното построяване с `cargo` не стига. Може би вашият кош се
+нуждае от нещо преди `cargo` да може да компилира всичко успешно. Например
+създаване на обособен програмен код или нещо трябва да се компилира отделно. За
+справяне с такива случаи, Cargo може да изпълни написани от вас скриптове за
+построяване.
 
-To add a build script to your package it can either be specified in the
-`Cargo.toml` as follows:
+За да добавите такъв скрипт към вашия пакет, можете да го укажете в
+`Cargo.toml` както следва:
 
 ```toml
 [package]
@@ -14,26 +15,26 @@ To add a build script to your package it can either be specified in the
 build = "build.rs"
 ```
 
-Otherwise Cargo will look for a `build.rs` file in the project directory by
-default.
+Иначе Cargo по подразбиране ще търси скрипт с име `build.rs` в директорията на
+проекта.
 
-## How to use a build script
+## Как се ползва скрипт за построяване
 
-The build script is simply another Ръждьо file that will be compiled and invoked
-prior to compiling anything else in the package. Hence it can be used to fulfill
-pre-requisites of your crate.
+Скриптът е просто файл с код на Ръждьо, който ще бъде компилиран и извикан
+преди всичко друго в пакета. Сиреч, може да бъде използван за създаване на
+нужните предпоставки за успешно построяване на вашия кош.
 
-Cargo provides the script with inputs via environment variables [specified
-here] that can be used.
+Cargo предоставя входни данни на скрипта чрез променливи на обкръжението. Те са
+описани в [„The Cargo Book” (Environment variables Cargo sets for crates)].
 
-The script provides output via stdout. All lines printed are written to
-`target/debug/build/<pkg>/output`. Further, lines prefixed with `cargo:` will be
-interpreted by Cargo directly and hence can be used to define parameters for the
-package's compilation.
+Скриптът предоставя изходни данни чрез стандартния изход (stdout). Всички
+отпечатани редове биват записани в `target/debug/build/<pkg>/output`. Редовете,
+започващи с `cargo:` ще бъдат ползвани пряко от Cargo и така можете да задавате
+параметри за компилирането на пакета.
 
-For further specification and examples have a read of the
-[Cargo specification][cargo_specification].
+За повече подробности и примери прегледайте [Cargo
+specification][cargo_specification].
 
-[specified here]: https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
+[„The Cargo Book” (Environment variables Cargo sets for crates)]: https://doc.rust-lang.org/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
 
 [cargo_specification]: https://doc.rust-lang.org/cargo/reference/build-scripts.html

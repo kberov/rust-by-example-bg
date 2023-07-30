@@ -1,24 +1,26 @@
 # `cfg`
 
-Configuration conditional checks are possible through two different operators:
+Условни проверки на настройките на компилиране са възможни чрез два оператора:
 
-* the `cfg` attribute: `#[cfg(...)]` in attribute position
-* the `cfg!` macro: `cfg!(...)` in boolean expressions
+* атрибутът `cfg`: `#[cfg(...)]`
+* Макрото `cfg!`: `cfg!(...)` при условни изрази
 
 While the former enables conditional compilation, the latter conditionally
 evaluates to `true` or `false` literals allowing for checks at run-time. Both
 utilize identical argument syntax.
 
-`cfg!`, unlike `#[cfg]`, does not remove any code and only evaluates to true or false. For example, all blocks in an if/else expression need to be valid when `cfg!` is used for the condition, regardless of what `cfg!` is evaluating.
+За разлика от `#[cfg]`, `cfg!` не премахва код, а само се оценява като „да” или
+„не”. Вички блокове в израз if/else трябва да работят, когато се ползва  `cfg!`,
+независимо как ще се оцени `cfg!`.
 
 ```rust,editable
-// This function only gets compiled if the target OS is linux
+// Тази функция се компилира само ако целевата ОУ е Линукс
 #[cfg(target_os = "linux")]
 fn are_you_on_linux() {
     println!("You are running linux!");
 }
 
-// And this function only gets compiled if the target OS is *not* linux
+// А тази функция се компилира само ако целевата ОУ *не е* Линукс
 #[cfg(not(target_os = "linux"))]
 fn are_you_on_linux() {
     println!("You are *not* running linux!");

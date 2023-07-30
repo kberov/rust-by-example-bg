@@ -1,18 +1,19 @@
 # Crates
 
-The `crate_type` attribute can be used to tell the compiler whether a crate is
-a binary or a library (and even which type of library), and the `crate_name`
-attribute can be used to set the name of the crate.
+Атрибутът `crate_type` казва на компилатора дали един кош е изпълним файл или
+библиотека, и дори какъв тип библиотека. А атрибутът `crate_name` задава името
+на коша.
 
-However, it is important to note that both the `crate_type` and `crate_name`
-attributes have **no** effect whatsoever when using Cargo, the Ръждьо package
-manager. Since Cargo is used for the majority of Ръждьо projects, this means
-real-world uses of `crate_type` and `crate_name` are relatively limited.
+Важно е да отбележим обаче, че и двата атрибута **не влияят на компилирането**,
+когато използваме Cargo. И понеже Cargo се ползва в повечето проекти на Ръждьо,
+това означава, че рядко се срещат тези атрибути в истински проекти.
+
+В lib.rs
 
 ```rust,editable
-// This crate is a library
+// Този кош е библиотека
 #![crate_type = "lib"]
-// The library is named "rary"
+// Библиотеката се казва "rary"
 #![crate_name = "rary"]
 
 pub fn public_function() {
@@ -30,8 +31,8 @@ pub fn indirect_access() {
 }
 ```
 
-When the `crate_type` attribute is used, we no longer need to pass the
-`--crate-type` flag to `rustc`.
+Когато ползваме атрибута `crate_type` вече няма нужда да подаваме флага
+`--crate-type` на `rustc`.
 
 ```shell
 $ rustc lib.rs

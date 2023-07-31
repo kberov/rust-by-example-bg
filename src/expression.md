@@ -63,4 +63,4 @@ fn main() {
   присвоима стойност). Да се разясни:
   https://en.wikipedia.org/wiki/Value_(computer_science)#lrvalue
 
-[^unit]: `()` – празна единична стойност - като `void` в другите езици
+[^unit]: `()` – празна единична стойност - като `void` в други езици

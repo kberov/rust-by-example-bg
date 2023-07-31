@@ -1,7 +1,7 @@
-# Multiple bounds
+# Множество предели
 
-Multiple bounds for a single type can be applied with a `+`. Like normal, different types are
-separated with `,`.
+Повече предели за отделен тип може да се приложат чрез знака `+`.
+Обикновено различните типове се отделят с `,`.
 
 ```rust,editable
 use std::fmt::{Debug, Display};
@@ -23,7 +23,7 @@ fn main() {
 
     compare_prints(&string);
     //compare_prints(&array);
-    // TODO ^ Try uncommenting this.
+    // ^ ЗАДАЧА: Разкоментирайте горния ред.
 
     compare_types(&array, &vec);
 }

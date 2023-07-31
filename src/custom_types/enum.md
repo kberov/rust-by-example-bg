@@ -18,7 +18,7 @@ enum WebEvent {
     // списъчна структура `tuple`;
     KeyPress(char),
     Paste(String),
-    // или стурктура като тези в езика C.
+    // или стурктура като тези, в езика C.
     Click { x: i64, y: i64 },
 }
 

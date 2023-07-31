@@ -1,10 +1,10 @@
-# New Type Idiom
+# Изразът за нов тип
 
-The `newtype` idiom gives compile time guarantees that the right type of value is supplied
-to a program.
+*Изразът за нов тип*[^newtype] дава гаранция по време на компилация, че на програмата е
+подаден правилния тип за стойност.
 
-For example, an age verification function that checks age in years, *must* be given
-a value of type `Years`.
+Да речем, че имаме функция за проверка на възраст, която проверява възрастта
+в години. На нея **трябва** да ѝ се подаде стойност от тип `Years`. 
 
 ```rust, editable
 struct Years(i64);
@@ -19,7 +19,7 @@ impl Years {
 
 
 impl Days {
-    /// truncates partial years
+    /// изрязва непълни години
     pub fn to_years(&self) -> Years {
         Years(self.0 / 365)
     }
@@ -38,21 +38,28 @@ fn main() {
 }
 ```
 
-Uncomment the last print изявлениe to observe that the type supplied must be `Years`.
+Разкоментирайте последното изявлениe `println!`, за да видите, че
+предоставения тип трябва да бъде `Years`.
 
-To obtain the `newtype`'s value as the base type, you may use the tuple or destructuring syntax like so:
+За да получите стойността на „новия тип” като основен тип, може да ползвате
+разнороден списък или разлагане по следния начин:
 ```rust, editable
 struct Years(i64);
 
 fn main() {
     let years = Years(42);
-    let years_as_primitive_1: i64 = years.0; // Tuple
-    let Years(years_as_primitive_2) = years; // Destructuring
+    let years_as_primitive_1: i64 = years.0; // Разнородно
+    let Years(years_as_primitive_2) = years; // Разлагане
 }
 ```
 
+## Б.пр.
+
+[^newtype]: Изразът за нов тип – New Type Idiom/Pattern
+
 ### See also:
 
-[`structs`][struct]
+[`structs`][struct],
+["…a Generic Array using Newtype Pattern"](https://rsdlt.github.io/posts/rust-use-newtype-pattern-display-trait-array-generics/)
 
 [struct]: ../custom_types/structs.md

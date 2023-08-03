@@ -1,61 +1,70 @@
 # Обобщения 
 
-*Generics* is the topic of generalizing types and functionalities to broader
-cases. This is extremely useful for reducing code duplication in many ways,
-but can call for rather involved syntax. Namely, being generic requires 
-taking great care to specify over which types a generic type 
-is actually considered valid. The simplest and most common use of generics 
-is for type parameters.
+*Обобщенията*[^generics] са начин за обобщаване на типове и функционалност за
+по-широк кръг от случаи. Това е особено полезно за намаляване на повторенията в
+програмния код, но може да доведе до много усложнен правопис. За да се направи
+част от кода обобщена е необходимо грижливо да се укаже за кои типове се отнася
+обобщения код. Най-простата и най-често срещана употреба е за обобщение на
+*параметри за типове*[^type_parameter].
 
-A type parameter is specified as generic by the use of angle brackets and upper
-[camel case][camelcase]: `<Aaa, Bbb, ...>`. "Generic type parameters" are
-typically represented as `<T>`. In Ръждьо, "generic" also describes anything that
-accepts one or more generic type parameters `<T>`. Any type specified as a 
-generic type parameter is generic, and everything else is concrete (non-generic).
+Описваме даден параметър за тип като обобщен като ограждаме с ъглови скоби
+типовете за които е в сила обобщения тип. Типовете обикновено започват с главна
+буква и ако се състоят от повече от една дума, думите са слети, а всяка
+следваща започва с главна буква. Такова именоване е познато като
+[КамилскиВид][camelcase]: `<Aaa, Bbb, ДругТип...>`. Обобщените типове за
+параметри обикновено се представят така: `<T>`. В Ръждьо, „обобщено” също
+означава всяко нещо, приемащо един или повече обобщени типа `<T>`. Всеки тип,
+указан като обобщен е *обобщен параметър за тип*, а всеки друг е
+*точен*[^concrete] (необобщен).
 
-For example, defining a *generic function* named `foo` that takes an argument
-`T` of any type:
+Например, описваме *обобщена функция* именувана `foo`, която приема аргумент
+`T` от всякакъв тип:
 
 ```rust,ignore
 fn foo<T>(arg: T) { ... }
 ```
 
-Because `T` has been specified as a generic type parameter using `<T>`, it 
-is considered generic when used here as `(arg: T)`. This is the case even if `T` 
-has previously been defined as a `struct`.
+Понеже `T` е указан като обобщен параметър за тип чрез  `<T>`, той се смята
+обобщен, когато се ползва така `(arg: T)`. Това важи дори `T` да е бил описан
+преди това като `struct`.
 
-This example shows some of the syntax in action:
+Този пример показва част от правописа в действие:
 
 ```rust,editable
-// A concrete type `A`.
+// Точен тип `A`.
 struct A;
 
-// In defining the type `Single`, the first use of `A` is not preceded by `<A>`.
-// Therefore, `Single` is a concrete type, and `A` is defined as above.
+// При описване на типа `Single` първото използване на `A` не се предхожда от `<A>`.
+// Това означава, че `Single` е точен тип, а `A` е описан по-горе.
 struct Single(A);
-//            ^ Here is `Single`s first use of the type `A`.
+//            ^ Тук е първото използване от `Single на типа `A`.
 
-// Here, `<T>` precedes the first use of `T`, so `SingleGen` is a generic type.
-// Because the type parameter `T` is generic, it could be anything, including
-// the concrete type `A` defined at the top.
+// Тук `<T>` предхожда първата употреба на `T`, значи `SingleGen` е обобщен тип.
+// Понеже типовият параметър `T` е обобщен, то би могъл да бъде всичко,
+// включително точния тип `A`, описан горе.
 struct SingleGen<T>(T);
 
 fn main() {
-    // `Single` is concrete and explicitly takes `A`.
+    // `Single` е точен и изрично приема `A`.
     let _s = Single(A);
     
-    // Create a variable `_char` of type `SingleGen<char>`
-    // and give it the value `SingleGen('a')`.
-    // Here, `SingleGen` has a type parameter explicitly specified.
+    // Създаваме променлива `_char` от тип `SingleGen<char>`
+    // и ѝ даваме стойност `SingleGen('a')`.
+    // Тук `SingleGen` има изрично указан типов параметър.
     let _char: SingleGen<char> = SingleGen('a');
 
-    // `SingleGen` can also have a type parameter implicitly specified:
+    // `SingleGen` може също да има неявно указан типов параметър:
     let _t    = SingleGen(A); // Uses `A` defined at the top.
     let _i32  = SingleGen(6); // Uses `i32`.
     let _char = SingleGen('a'); // Uses `char`.
 }
 ```
 
+[^generics]: обобщения – generics (б.пр.)
+
+[^type_parameter]: параметър за тип, типов параметър – <ИмеНаТип> – type parameter 
+
+[^concrete]: точен – concrete (б.пр.)
 ### See also:
 
 [`structs`][structs]

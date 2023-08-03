@@ -1,25 +1,23 @@
-# Where clauses
+# Условия „където” (`where`) 
 
-A bound can also be expressed using a `where` clause immediately
-before the opening `{`, rather than at the type's first mention. 
-Additionally, `where` clauses can apply bounds to arbitrary types, 
-rather than just to type parameters.
+Предел може да бъде описан също чрез условие `where`[^where_clause] преди отварящата фигурна скоба `{`, а не само при първото споменаване на тип. Освен това условията  `where` могат да налагат предели на всякакви типове, не само на параметри за типове.
 
-Some cases that a `where` clause is useful:
+Ето някои случаи, при които условието `where` е полезно:
 
-* When specifying generic types and bounds separately is clearer:
+* Когато се указват обобщени типове и предели поотделно, така е по-ясно:
 
 ```rust,ignore
 impl <A: TraitB + TraitC, D: TraitE + TraitF> MyTrait<A, D> for YourType {}
 
-// Expressing bounds with a `where` clause
+// Изразяване на предели чрез условие `where`
 impl <A, D> MyTrait<A, D> for YourType where
     A: TraitB + TraitC,
     D: TraitE + TraitF {}
 ```
 
-* When using a `where` clause is more expressive than using normal syntax. 
-The `impl` in this example cannot be directly expressed without a `where` clause:
+* Условието `where` е по-изразително, сравнено с обичайния правопис. В този
+  пример блокът за осъществяване (`impl`) не може да бъде изразен направо без
+  условие `where`:
 
 ```rust,editable
 use std::fmt::Debug;
@@ -28,12 +26,12 @@ trait PrintInOption {
     fn print_in_option(self);
 }
 
-// Because we would otherwise have to express this as `T: Debug` or 
-// use another method of indirect approach, this requires a `where` clause:
+// Понеже иначе трябва да изразим това като напишем `T: Debug` или да ползваме
+// някакъв друг заобиколен начин, се налага да ползваме условие `where`: 
 impl<T> PrintInOption for T where
     Option<T>: Debug {
-    // We want `Option<T>: Debug` as our bound because that is what's
-    // being printed. Doing otherwise would be using the wrong bound.
+    // Искаме `Option<T>: Debug` да бъде нашия предел, защото това отпечатваме
+    // Иначе ще се окаже, че ползваме грешен предел.
     fn print_in_option(self) {
         println!("{:?}", Some(self));
     }
@@ -45,6 +43,8 @@ fn main() {
     vec.print_in_option();
 }
 ```
+
+[^where_clause]  условие „където” – `where` clause (б.пр.)
 
 ### See also:
 

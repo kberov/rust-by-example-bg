@@ -1,25 +1,25 @@
-# Traits
+# Отличители
 
-Of course `trait`s can also be generic. Here we define one which reimplements
-the `Drop` `trait` as a generic method to `drop` itself and an input.
+Разбира се отличителите също могат да бъдат обобщени. Тук описваме един, който
+осъществява наново отличителя `Drop` като обобщен метод на метода `drop` и
+входен параметър.
 
 ```rust,editable
-// Non-copyable types.
+// Некопируеми типове.
 struct Empty;
 struct Null;
 
-// A trait generic over `T`.
+// Обобщен отличител за `T`.
 trait DoubleDrop<T> {
-    // Define a method on the caller type which takes an
-    // additional single parameter `T` and does nothing with it.
+    // Обявяваме метод за извикващия тип, който приема допълнителен единичен
+    // параметър `T` и не прави нищо с него.
     fn double_drop(self, _: T);
 }
 
-// Implement `DoubleDrop<T>` for any generic parameter `T` and
-// caller `U`.
+// Осъществяваме `DoubleDrop<T>` за всеки обобщен параметър `T` и извикващ `U`.
 impl<T, U> DoubleDrop<T> for U {
-    // This method takes ownership of both passed arguments,
-    // deallocating both.
+    // Този метод овладява и двата подадени аргумента като така освобождава
+    // паметта и за двата.
     fn double_drop(self, _: T) {}
 }
 
@@ -27,12 +27,12 @@ fn main() {
     let empty = Empty;
     let null  = Null;
 
-    // Deallocate `empty` and `null`.
+    // Освобождаваме `empty` и `null`.
     empty.double_drop(null);
 
     //empty;
     //null;
-    // ^ TODO: Try uncommenting these lines.
+    // ^ ЗАДАЧА: Разкоментирйте двата реда.
 }
 ```
 

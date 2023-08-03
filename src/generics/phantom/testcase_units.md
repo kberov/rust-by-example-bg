@@ -1,76 +1,81 @@
-# Testcase: unit clarification
+# Проверка: разясняване на единичния тип
 
-A useful method of unit conversions can be examined by implementing `Add`
-with a phantom type parameter. The `Add` `trait` is examined below:
+Можем да разгледаме един полезен начин за превръщане на мерни единици[^unit]
+като осъществим `Add` с помощта на параметър от призрачен тип. Отличителят
+`Add` е разгледан по-долу.
 
 ```rust,ignore
-// This construction would impose: `Self + RHS = Output`
-// where RHS defaults to Self if not specified in the implementation.
+// Този строеж предполага: `Self + RHS = Изход`, където RHS (ДС - Дясна
+// страна) е по подразбиране Self, ако не е уточнена в осъществяването.
 pub trait Add<RHS = Self> {
-    type Output;
+    type Изход;
 
-    fn add(self, rhs: RHS) -> Self::Output;
+    fn add(self, rhs: RHS) -> Self::Изход;
 }
 
-// `Output` must be `T<U>` so that `T<U> + T<U> = T<U>`.
+// `Изход` трябва да бъде `T<U>` така че `T<U> + T<U> = T<U>`.
 impl<U> Add for T<U> {
-    type Output = T<U>;
+    type Изход = T<U>;
     ...
 }
 ```
 
-The whole implementation:
+Цялото – осъществено:
 
 ```rust,editable
-use std::ops::Add;
 use std::marker::PhantomData;
+use std::ops::Add;
 
-/// Create void enumerations to define unit types.
+/// Създаваме празни броячи, като единични типове.
 #[derive(Debug, Clone, Copy)]
-enum Inch {}
+enum Инч {}
 #[derive(Debug, Clone, Copy)]
-enum Mm {}
+enum Мм {}
 
-/// `Length` is a type with phantom type parameter `Unit`,
-/// and is not generic over the length type (that is `f64`).
+/// `Дължина` е тип с параметър от призрачен тип `Единица`,
+/// и не е обобщен през типа `Дължина` (сиреч `f64`).
 ///
-/// `f64` already implements the `Clone` and `Copy` traits.
+/// `f64` вече осъществява отличителите `Clone` и `Copy`.
 #[derive(Debug, Clone, Copy)]
-struct Length<Unit>(f64, PhantomData<Unit>);
+struct Дължина<Единица>(f64, PhantomData<Единица>);
 
-/// The `Add` trait defines the behavior of the `+` operator.
-impl<Unit> Add for Length<Unit> {
-    type Output = Length<Unit>;
+/// Отличителят `Add` описва поведението на оператора `+`.
+impl<Единица> Add for Дължина<Единица> {
+    type Output = Дължина<Единица>;
 
-    // add() returns a new `Length` struct containing the sum.
-    fn add(self, rhs: Length<Unit>) -> Length<Unit> {
-        // `+` calls the `Add` implementation for `f64`.
-        Length(self.0 + rhs.0, PhantomData)
+    // add() връща нова структура `Дължина`, съдържаща сбора.
+    fn add(self, rhs: Дължина<Единица>) -> Дължина<Единица> {
+        // `+` извиква осъществения за `f64` `Add`.
+        Дължина(self.0 + rhs.0, PhantomData)
     }
 }
 
 fn main() {
-    // Specifies `one_foot` to have phantom type parameter `Inch`.
-    let one_foot:  Length<Inch> = Length(12.0, PhantomData);
-    // `one_meter` has phantom type parameter `Mm`.
-    let one_meter: Length<Mm>   = Length(1000.0, PhantomData);
+    // Описва `one_foot` с призрачен тип `Инч`.
+    let one_foot: Дължина<Инч> = Дължина(12.0, PhantomData);
+    // `one_meter` има параметър от призрачен тип `Мм`.
+    let one_meter: Дължина<Мм> = Дължина(1000.0, PhantomData);
 
-    // `+` calls the `add()` method we implemented for `Length<Unit>`.
+    // `+` извиква метода `add()`, който осъществихме за `Дължина<Единица>`.
     //
-    // Since `Length` implements `Copy`, `add()` does not consume
-    // `one_foot` and `one_meter` but copies them into `self` and `rhs`.
+    // Понеже `Дължина` осъществява `Copy`, `add()` не поглъща
+    // `one_foot` и `one_meter`, а ги копира в `self` и `rhs`.
     let two_feet = one_foot + one_foot;
     let two_meters = one_meter + one_meter;
 
-    // Addition works.
-    println!("one foot + one_foot = {:?} in", two_feet.0);
-    println!("one meter + one_meter = {:?} mm", two_meters.0);
+    // Събирането работи.
+    println!("една стъпка + one_foot = {:?} ин", two_feet.0);
+    println!("един метър + one_meter = {:?} мм", two_meters.0);
 
-    // Nonsensical operations fail as they should:
-    // Compile-time Error: type mismatch.
+    // Безсмислените действия не минават, както си трябва:
+    // Грешка по време на компилаиране: несъответствие в типовете.
+    // expected `Дължина<Инч>`, found `Дължина<Мм>`
     //let one_feter = one_foot + one_meter;
 }
 ```
+## Б.пр.
+
+[^unit] Игра на думи: мерна единица, единичен тип – unit.  Вижте също https://en.wikipedia.org/wiki/Unit_type
 
 ### See also:
 

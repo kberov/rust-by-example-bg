@@ -1,16 +1,16 @@
-# Implementation
+# Осъществяване
 
-Similar to functions, implementations require care to remain generic.
+Подобно на функциите осъществяванията изискват внимание, за да останат обобщени.
 
 ```rust
-struct S; // Concrete type `S`
-struct GenericVal<T>(T); // Generic type `GenericVal`
+struct S; // Точен тип`S`
+struct GenericVal<T>(T); // Обобщен тип `GenericVal`
 
-// impl of GenericVal where we explicitly specify type parameters:
-impl GenericVal<f32> {} // Specify `f32`
-impl GenericVal<S> {} // Specify `S` as defined above
+// Осъществяваме GenericVal, където изрично указваме типовите параметри:
+impl GenericVal<f32> {} // Указваме `f32`
+impl GenericVal<S> {} // Указваме `S`, описан по-горе
 
-// `<T>` Must precede the type to remain generic
+// `<T>` Трябва да предхожда типа, за да остане обобщен GenericVal
 impl<T> GenericVal<T> {}
 ```
 
@@ -23,14 +23,14 @@ struct GenVal<T> {
     gen_val: T,
 }
 
-// impl of Val
+// Осъществяваме Val
 impl Val {
     fn value(&self) -> &f64 {
         &self.val
     }
 }
 
-// impl of GenVal for a generic type `T`
+// Осъществяваме GenVal за обобщен тип `T`
 impl<T> GenVal<T> {
     fn value(&self) -> &T {
         &self.gen_val

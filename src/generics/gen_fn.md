@@ -1,55 +1,59 @@
-# Functions
+# Функции
 
-The same set of rules can be applied to functions: a type `T` becomes
-generic when preceded by `<T>`.
+Същият набор от правила може да бъде приложен за функции: типът `T` става
+обобщен, ако е предшестван от `<T>`.
 
-Using generic functions sometimes requires explicitly specifying type 
-parameters. This may be the case if the function is called where the return type 
-is generic, or if the compiler doesn't have enough information to infer 
-the necessary type parameters.
+Използването на обобщени функции понякога изисква да се указват типови
+параметри. Такъв може да е случаят, когато функцията е извикана, където
+връщаният тип е обобщен, или компилаторът няма достатъчно сведения, за да
+отгатне нужните типови параметри.
 
-A function call with explicitly specified type parameters looks like:
+Извикване на функция с изрично указани параметри за тип изглежда така:
 `fun::<A, B, ...>()`.
 
 ```rust,editable
-struct A;          // Concrete type `A`.
-struct S(A);       // Concrete type `S`.
-struct SGen<T>(T); // Generic type `SGen`.
+struct A;          // Точен тип `A`.
+struct S(A);       // Точен тип `S`.
+struct SGen<T>(T); // Обобщен тип `SGen`.
 
-// The following functions all take ownership of the variable passed into
-// them and immediately go out of scope, freeing the variable.
+// Всички следващи функции *овладяват* подадената им променлива. Променливата
+// излиза от областта на видимост и бива освободена.
 
-// Define a function `reg_fn` that takes an argument `_s` of type `S`.
-// This has no `<T>` so this is not a generic function.
+// Описваме функция `reg_fn`, приемаща аргумент `_s` от тип `S`.
+// Тук никъде няма `<T>`, значи това не е обобщена функция.
 fn reg_fn(_s: S) {}
 
-// Define a function `gen_spec_t` that takes an argument `_s` of type `SGen<T>`.
-// It has been explicitly given the type parameter `A`, but because `A` has not 
-// been specified as a generic type parameter for `gen_spec_t`, it is not generic.
+// Описваме функция `gen_spec_t`, приемаща аргумент `_s` от тип `SGen<T>`.
+// Тя има изрично даден праметър за тип `A`, но понеже `A` не е бил указан като
+// обобщен параметър за тип за `gen_spec_t`, тя не е обобщена.
 fn gen_spec_t(_s: SGen<A>) {}
 
-// Define a function `gen_spec_i32` that takes an argument `_s` of type `SGen<i32>`.
-// It has been explicitly given the type parameter `i32`, which is a specific type.
-// Because `i32` is not a generic type, this function is also not generic.
+// Описваме функция `gen_spec_i32`, приемаща аргумент `_s` от тип `SGen<i32>`.
+// Тя има изрично даден праметър за тип `i32`, който е точен тип.
+// Понеже `i32` не е обобщен тип, тази функция също не е обобщена.
 fn gen_spec_i32(_s: SGen<i32>) {}
 
-// Define a function `generic` that takes an argument `_s` of type `SGen<T>`.
-// Because `SGen<T>` is preceded by `<T>`, this function is generic over `T`.
+// Описваме функция `generic`, приемаща аргумент `_s` от тип `SGen<T>`.
+// Понеже `SGen<T>` се предхожда от `<T>`, тази функция е обобщена чрез `T`.
 fn generic<T>(_s: SGen<T>) {}
 
 fn main() {
-    // Using the non-generic functions
-    reg_fn(S(A));          // Concrete type.
-    gen_spec_t(SGen(A));   // Implicitly specified type parameter `A`.
-    gen_spec_i32(SGen(6)); // Implicitly specified type parameter `i32`.
+    // Използваме необобщените функции
+    reg_fn(S(A));          // Точно определен тип.
+    gen_spec_t(SGen(A));   // Неявно указан типов параметър `A`.
+    gen_spec_i32(SGen(6)); // Неявно указан типов параметър `i32`.
 
-    // Explicitly specified type parameter `char` to `generic()`.
+    // Изрично указан типов параметър `char` за `generic()`.
     generic::<char>(SGen('a'));
 
-    // Implicitly specified type parameter `char` to `generic()`.
+    // Неявно указан типов параметър `char` за `generic()`.
     generic(SGen('c'));
 }
 ```
+
+## Б.пр.
+
+овладявам – take ownership
 
 ### See also:
 

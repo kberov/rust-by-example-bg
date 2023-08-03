@@ -1,57 +1,72 @@
-# Phantom type parameters
+# Параметри от призрачен тип
 
-A phantom type parameter is one that doesn't show up at runtime,
-but is checked statically (and only) at compile time.
+*Параметър от призрачен тип*[^phantom_type] е такъв, който не се появява по
+време на изпълнение, а се проверява статично (и само) по време на компилиране.
 
-Data types can use extra generic type parameters to act as markers
-or to perform type checking at compile time. These extra parameters
-hold no storage values, and have no runtime behavior.
+Типовете данни могат да използват допълнителни обобщени типови параметри, които
+действат като означения или да извършват проверки на типове по време на
+компилиране. Тези допълнителни параметри не съдържат съхранени стойности и не
+правят нищо по време на изпълнение.
 
-In the following example, we combine [std::marker::PhantomData]
-with the phantom type parameter concept to create tuples containing
-different data types.
+В следващия пример използваме [std::marker::PhantomData] за осъществяване на
+представата за призрачен тип и, за да създадем разнородни списъци, съдържащи
+различни типове данни.
 
 ```rust,editable
 use std::marker::PhantomData;
 
-// A phantom tuple struct which is generic over `A` with hidden parameter `B`.
-#[derive(PartialEq)] // Allow equality test for this type.
-struct PhantomTuple<A, B>(A, PhantomData<B>);
+// Списъчна структура от призрачен тип, обобщена през `A` със скрит
+// параметър `B`.
+#[derive(PartialEq)] // Разрешаваме проверка за еднаквост за този тип.
+struct РазноПриз<A, B>(A, PhantomData<B>);
 
-// A phantom type struct which is generic over `A` with hidden parameter `B`.
-#[derive(PartialEq)] // Allow equality test for this type.
-struct PhantomStruct<A, B> { first: A, phantom: PhantomData<B> }
+// Структура от призрачен тип, обобщена през `A` със скрит параметър `B`.
+#[derive(PartialEq)] // Разрешаваме проверка за еднаквост за този тип.
+struct ПризроСтрой<A, B> {
+    first: A,
+    phantom: PhantomData<B>,
+}
 
-// Note: Storage is allocated for generic type `A`, but not for `B`.
-//       Therefore, `B` cannot be used in computations.
+// Важно: Заделено е място в паметта за обобщения тип `A`, но не и за `B`.
+//        Затова `B` не може да се използва в изчисления.
 
 fn main() {
-    // Here, `f32` and `f64` are the hidden parameters.
-    // PhantomTuple type specified as `<char, f32>`.
-    let _tuple1: PhantomTuple<char, f32> = PhantomTuple('Q', PhantomData);
-    // PhantomTuple type specified as `<char, f64>`.
-    let _tuple2: PhantomTuple<char, f64> = PhantomTuple('Q', PhantomData);
+    // Тук, `f32` и `f64` са скритите параметри.
+    // Типът за РазноПриз е уточнен като `<char, f32>`.
+    let _tuple1: РазноПриз<char, f32> = РазноПриз('Q', PhantomData);
+    // Типът за РазноПриз е уточнен като  `<char, f64>`.
+    let _tuple2: РазноПриз<char, f64> = РазноПриз('Q', PhantomData);
 
-    // Type specified as `<char, f32>`.
-    let _struct1: PhantomStruct<char, f32> = PhantomStruct {
+    // Типът е уточнен като `<char, f32>`.
+    let _struct1: ПризроСтрой<char, f32> = ПризроСтрой {
         first: 'Q',
         phantom: PhantomData,
     };
-    // Type specified as `<char, f64>`.
-    let _struct2: PhantomStruct<char, f64> = PhantomStruct {
+    // Типът е уточнен като `<char, f64>`.
+    let _struct2: ПризроСтрой<char, f64> = ПризроСтрой {
         first: 'Q',
         phantom: PhantomData,
     };
 
-    // Compile-time Error! Type mismatch so these cannot be compared:
-    // println!("_tuple1 == _tuple2 yields: {}",
-    //           _tuple1 == _tuple2);
+    // Грешка по време на компилация за _tuple2! Разминаване в типовете –
+    // променливите не могат да бъдат сравнени:
+    // expected `РазноПриз<char, f32>`, found `РазноПриз<char, f64>`
+    println!("_tuple1 == _tuple2 yields: {}", _tuple1 == _tuple2);
 
-    // Compile-time Error! Type mismatch so these cannot be compared:
-    // println!("_struct1 == _struct2 yields: {}",
-    //           _struct1 == _struct2);
+    // Грешка по време на компилация за _struct2! Разминаване в типовете –
+    // променливите не могат да бъдат сравнени:
+    // expected `ПризроСтрой<char, f32>`, found `ПризроСтрой<char, f64>`
+    println!("_struct1 == _struct2 yields: {}", _struct1 == _struct2);
 }
 ```
+
+# Б.пр.
+
+[^phantom_type]: параметър от призрачен тип – phantom type parameter
+
+> В примера отново използваме азбука, за да покажем поддръжката на Ръждьо за
+> уникод и по-ясно да различм внесения PhantomData от нашите потребителски
+> типове, които можем да наречем всякак.
 
 ### See also:
 

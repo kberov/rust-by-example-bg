@@ -1,33 +1,34 @@
-# Bounds
+# Предели
 
-When working with generics, the type parameters often must use traits as *bounds* to
-stipulate what functionality a type implements. For example, the following
-example uses the trait `Display` to print and so it requires `T` to be bound
-by `Display`; that is, `T` *must* implement `Display`.
+Когато работим с обобщения, често се налага параметрите за типове да ползват
+*предели*[^bounds], за да *о-пределят* каква функционалност осъществява дадения
+тип. Следващият пример използва отличителя `Display` за извеждане на стойност
+на екрана и е задължително `T` да бъде ограничен (о-пределен) от `Display`;
+сиреч, `T` *трябва* да осъществи `Display`.
 
 ```rust,ignore
-// Define a function `printer` that takes a generic type `T` which
-// must implement trait `Display`.
+// Обявяваме функция `printer`, която приема обобщен тип `T`, който трябва да е
+// осъществил отличителя `Display`.
 fn printer<T: Display>(t: T) {
     println!("{}", t);
 }
 ```
 
-Bounding restricts the generic to types that conform to the bounds. That is:
+Пределите ограничават обобщението до типове, които отговарят на ограниченията,
+иначе казано са в пределите на нужната функционалност. Ето:
 
 ```rust,ignore
 struct S<T: Display>(T);
 
-// Error! `Vec<T>` does not implement `Display`. This
-// specialization will fail.
+// Грешка! `Vec<T>` не осъществява `Display`. Това уточнение ще се провали.
 let s = S(vec![1]);
 ```
 
-Another effect of bounding is that generic instances are allowed to access the 
-[methods] of traits specified in the bounds. For example:
+Друго последствие от о-пределянето е, че обобщените обекти могат да извикват
+[методите][methods] на отличителите, упоменати в пределите. Например:
 
 ```rust,editable
-// A trait which implements the print marker: `{:?}`.
+// Отличител, който осъществява означението: `{:?}`.
 use std::fmt::Debug;
 
 trait HasArea {
@@ -43,14 +44,14 @@ struct Rectangle { length: f64, height: f64 }
 #[allow(dead_code)]
 struct Triangle  { length: f64, height: f64 }
 
-// The generic `T` must implement `Debug`. Regardless
-// of the type, this will work properly.
+// Обобщеният тип `T` трябва да осъществява `Debug`. Независимо какъв е типа
+// следният код ще работи.
 fn print_debug<T: Debug>(t: &T) {
     println!("{:?}", t);
 }
 
-// `T` must implement `HasArea`. Any type which meets
-// the bound can access `HasArea`'s function `area`.
+// `T` трябва да осъществява `HasArea`. Всеки тип, който е в пределите може да
+// извика функцията на `HasArea` `area`.
 fn area<T: HasArea>(t: &T) -> f64 { t.area() }
 
 fn main() {
@@ -62,13 +63,17 @@ fn main() {
 
     //print_debug(&_triangle);
     //println!("Area: {}", area(&_triangle));
-    // ^ TODO: Try uncommenting these.
-    // | Error: Does not implement either `Debug` or `HasArea`. 
+    // ^ ЗАДАЧА: Разкоментирайте горните редове.
+    // | Грешка: Не осъществява ни `Debug` ни `HasArea`. 
 }
 ```
 
-As an additional note, [`where`][where] clauses can also be used to apply bounds in
-some cases to be more expressive.
+Забележете, че в някои случаи за по-голяма изразителност или четимост могат да
+се изполват условия [`where`][where] за налагане на предели.
+
+## Б.пр.
+
+[^bounds]: предели, граници – bounds
 
 ### See also:
 

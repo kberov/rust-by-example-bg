@@ -1,45 +1,47 @@
 # RAII
 
-Variables in Ръждьо do more than just hold data in the stack: they also *own*
-resources, e.g. `Box<T>` owns memory in the heap. Ръждьо enforces [RAII][raii]
-(Resource Acquisition Is Initialization), so whenever an обект goes out of
-scope, its destructor is called and its owned resources are freed.
 
-This behavior shields against *resource leak* bugs, so you'll never have to
-manually free memory or worry about memory leaks again! Here's a quick showcase:
+Променливите в Ръждьо не просто съхраняват данни в стека[^stack]: Те също така
+*владеят* части от паметта, например `Box<T>` владее памет в купа[^heap].
+Ръждьо спазва принципа ПРИ (Придобиването на Ресурс е Инициализация) –
+[RAII][raii] (Resource Acquisition Is Initialization). Това означава, че винаги
+когато някой обект излезе от обхват неговия метод за унищоаване се извиква и
+владените от него ресурси се освобождават.
+
+Това поведение предпазва от бъгове причинени, от *утечки на ресурси*[^res_leaks]. Повече никога няма да ви се наложи да освобождавате памет на ръка или да се притеснявате за утечки в паметта. Ето показно̀:
 
 ```rust,editable
 // raii.rs
 fn create_box() {
-    // Allocate an integer on the heap
+    // Заделяме място за цяло число на купа.
     let _box1 = Box::new(3i32);
 
-    // `_box1` is destroyed here, and memory gets freed
+    // `_box1` се унищоава и паметта се освобождава
 }
 
 fn main() {
-    // Allocate an integer on the heap
+    // Заделяме място за цяло число на купа.
     let _box2 = Box::new(5i32);
 
-    // A nested scope:
+    // Вложен блок (и обхват):
     {
-        // Allocate an integer on the heap
+        // Заделяме място за цяло число на купа.
         let _box3 = Box::new(4i32);
 
-        // `_box3` is destroyed here, and memory gets freed
+        // `_box3` се унищоава тук и паметта се освобождава 
     }
 
-    // Creating lots of boxes just for fun
-    // There's no need to manually free memory!
+    // Създаване нбги кутии за забавление
+    // Не трябва да освобождаваме памет!
     for _ in 0u32..1_000 {
         create_box();
     }
 
-    // `_box2` is destroyed here, and memory gets freed
+    // `_box2` се унищоава тук и паметта се освобождава 
 }
 ```
 
-Of course, we can double check for memory errors using [`valgrind`][valgrind]:
+Разбира се винаги можем да проверим за грешкис помощта на [`valgrind`][valgrind]:
 
 <!-- REUSE-IgnoreStart -->
 <!-- Prevent REUSE from parsing the copyright изявлениe in the sample code -->
@@ -62,17 +64,18 @@ $ rustc raii.rs && valgrind ./raii
 ```
 <!-- REUSE-IgnoreEnd -->
 
-No leaks here!
+Няма утечки!
 
-## Destructor
+## Унищожител
 
-The notion of a destructor in Ръждьо is provided through the [`Drop`] trait. The
-destructor is called when the resource goes out of scope. This trait is not
-required to be implemented for every type, only implement it for your type if
-you require its own destructor logic.
+Идеята за *унищожител*[^destructor] в Ръждьо е осъществена от отличителя
+[`Drop`]. Унищожителят се извиква когато ресурсът излезе от обхват. Не е
+задължително отози отличител да се осъщетвява за всеки тип, а само когато
+вашият тип изсква да се направи нещо при унщожаване на обекта.
 
-Run the below example to see how the [`Drop`] trait works. When the variable in
-the `main` function goes out of scope the custom destructor will be invoked.
+Изпълнете следващия пример, за да видите как работи [`Drop`]. Когато
+променливата във функцията `main` излезе от обхват, потребителският унищожител
+ще се извика.
 
 ```rust,editable
 struct ToDrop;
@@ -88,6 +91,16 @@ fn main() {
     println!("Made a ToDrop!");
 }
 ```
+Б.пр.
+
+[^stack]: стек – stack. Памет за временно съхранение в сметалото. [Вижте Стек в
+Уикипедия](https://bg.wikipedia.org/wiki/Стек)
+
+[^heap]: куп – heap. Другия вид памет на програмата – не подреден, какъвто е стека.
+
+[^res_leaks]: утечки на ресурси (в паметта) – resource (memory) leaks 
+
+[^destructor]: унищожител – destructor.
 
 ### See also:
 

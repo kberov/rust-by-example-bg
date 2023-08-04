@@ -1,5 +1,15 @@
-# Правила за видимост 
+# Правила за обхват 
 
-Scopes play an important part in ownership, borrowing, and lifetimes.
-That is, they indicate to the compiler when borrows are valid, when 
-resources can be freed, and when variables are created or destroyed.
+*Обхватът* (на видимост) има голямо значение при *собствеността*[^ownership],
+*заемането*[^borrowing] и *живота*[^lifetime] на променливите. Той показва на
+компилатора докога са в сила заеманията, кога може да се освободи паметта и
+кога променливите биват създадени и унищожени.
+
+
+Б.пр.
+
+[^ownership]: собственост – ownership,  овладяване – to take ownership
+
+[^borrowing]: заемане (вземане на заем) – borrowing
+
+[^lifetime]: живот (трайност) – lifetime

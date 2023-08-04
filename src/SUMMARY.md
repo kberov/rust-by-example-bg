@@ -114,7 +114,7 @@
     - [Параметри от призрачен тип](generics/phantom.md)
         - [Проверка: разясняване на единичния тип](generics/phantom/testcase_units.md)
 
-- [Правила за видимост](scope.md)
+- [Правила за обхват](scope.md)
     - [RAII](scope/raii.md)
     - [Собственост и премествания](scope/move.md)
         - [Менѝмост](scope/move/mut.md)
@@ -123,7 +123,7 @@
         - [Mutability](scope/borrow/mut.md)
         - [Aliasing](scope/borrow/alias.md)
         - [The ref pattern](scope/borrow/ref.md)
-    - [Времетраения](scope/lifetime.md)
+    - [Живот](scope/lifetime.md)
         - [Изрично отбелязване](scope/lifetime/explicit.md)
         - [Функции](scope/lifetime/fn.md)
         - [Методи](scope/lifetime/methods.md)

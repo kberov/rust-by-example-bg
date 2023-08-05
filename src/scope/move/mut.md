@@ -1,24 +1,25 @@
-# Mutability
+# Менѝмост
 
-Mutability of data can be changed when ownership is transferred.
+Менѝмостта на данните може да бъде променена, когато собствеността бива
+прехвърлена на друга променлива.
 
 ```rust,editable
 fn main() {
-    let immutable_box = Box::new(5u32);
+    let менѝма_кутийка= Box::new(5u32);
 
-    println!("immutable_box contains {}", immutable_box);
+    println!("менѝма_кутийка съдържа {}", менѝма_кутийка);
 
-    // Mutability error
+    // Грешка, свързана с менимостта
     //*immutable_box = 4;
 
-    // *Move* the box, changing the ownership (and mutability)
-    let mut mutable_box = immutable_box;
+    // *Преместваме* кутийката, сменяйки владелеца (и менимостта)
+    let mut mutable_box = менѝма_кутийка;
 
     println!("mutable_box contains {}", mutable_box);
 
-    // Modify the contents of the box
+    // Променяме съдържанието на кутията.
     *mutable_box = 4;
 
-    println!("mutable_box now contains {}", mutable_box);
+    println!("mutable_box сега съдържа {}", mutable_box);
 }
 ```

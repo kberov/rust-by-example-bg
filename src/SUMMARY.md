@@ -115,8 +115,8 @@
         - [Проверка: разясняване на единичния тип](generics/phantom/testcase_units.md)
 
 - [Правила за обхват](scope.md)
-    - [RAII](scope/raii.md)
-    - [Собственост и премествания](scope/move.md)
+    - [ПРИ](scope/raii.md)
+    - [Владение и премествания](scope/move.md)
         - [Менѝмост](scope/move/mut.md)
         - [Частични премествания](scope/move/partial_move.md)
     - [Заемане](scope/borrow.md)
@@ -176,8 +176,8 @@
     - [Iterating over `Result`s](error/iter_result.md)
 
 - [Типове от стандартната библиотека](std.md)
-    - [Box, stack and heap](std/box.md)
-    - [Vectors](std/vec.md)
+    - [Box, кама̀ра и куп](std/box.md)
+    - [Вектори](std/vec.md)
     - [Низове](std/str.md)
     - [`Option`](std/option.md)
     - [`Result`](std/result.md)

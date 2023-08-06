@@ -1,57 +1,68 @@
-# Mutability
+# Менѝмост
 
-Mutable data can be mutably borrowed using `&mut T`. This is called 
-a *mutable reference* and gives read/write access to the borrower.
-In contrast, `&T` borrows the data via an immutable reference, and 
-the borrower can read the data but not modify it:
+Менѝмите данни могат да бъдат заемани менѝмо като напишем `&mut T`. Това се
+нарича _менѝма препратка_[^mut_ref] и дава на заемащата променлива достъп до
+стойността за пиасне и четене. Обратно на това, като напишем `&T`, заемаме
+данните като _неменѝма препратка_[^immut_ref]. Заемащата променлива може само
+да чете данните, но не и да ги променя.
 
 ```rust,editable,ignore,mdbook-runnable
 #[allow(dead_code)]
 #[derive(Clone, Copy)]
 struct Book {
-    // `&'static str` is a reference to a string allocated in read only memory
+    // `&'static str` е препратка към низ в паметта само за четене
     author: &'static str,
     title: &'static str,
     year: u32,
 }
 
-// This function takes a reference to a book
+// Тази функция взема препратка към променлива от тип Book
 fn borrow_book(book: &Book) {
-    println!("I immutably borrowed {} - {} edition", book.title, book.year);
+    println!(
+        "Аз взех на заем неменѝмо {} - {} edition",
+        book.title, book.year
+    );
 }
 
-// This function takes a reference to a mutable book and changes `year` to 2014
+// Тази функция взема менима препратка към менима `book` и променя полето
+// `year` на 2014
 fn new_edition(book: &mut Book) {
     book.year = 2014;
-    println!("I mutably borrowed {} - {} edition", book.title, book.year);
+    println!("Аз заех менѝмо {} - издание {}", book.title, book.year);
 }
 
 fn main() {
-    // Create an immutable Book named `immutabook`
+    // Създаваме неменѝма Book, наречена `immutabook`
     let immutabook = Book {
-        // string literals have type `&'static str`
+        // буквалните низове са от тип `&'static str`
         author: "Douglas Hofstadter",
         title: "Gödel, Escher, Bach",
         year: 1979,
     };
 
-    // Create a mutable copy of `immutabook` and call it `mutabook`
+    // Създаваме менѝмо копие на `immutabook` и го наричаме `mutabook`
     let mut mutabook = immutabook;
-    
-    // Immutably borrow an immutable object
+
+    // Заемаме неменимо неменим обект
     borrow_book(&immutabook);
 
-    // Immutably borrow a mutable object
+    // Заемаме неменимо меним обект
     borrow_book(&mutabook);
-    
-    // Borrow a mutable обект as mutable
+
+    // Заемаме менимо меним обект
     new_edition(&mut mutabook);
-    
-    // Error! Cannot borrow an immutable обект as mutable
+
+    // Error! Не може да се заеме неменим обект като менѝм
     new_edition(&mut immutabook);
-    // FIXME ^ Comment out this line
+    // ПОПРАВИ ^ Коментирайте този ред
 }
 ```
+
+## Б.пр.
+
+[^mut_ref]: менѝма препратка – mutable reference
+
+[^immut_ref]: неменѝма препратка – immutable reference
 
 ### See also:
 [`static`][static]

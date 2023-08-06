@@ -25,7 +25,7 @@
 
 - [Обвързване на променливи](variable_bindings.md)
     - [Менѝмост](variable_bindings/mut.md)
-    - [Видимост и засенчване](variable_bindings/scope.md)
+    - [Обхват и засенчване](variable_bindings/scope.md)
     - [Първо обявете](variable_bindings/declare.md)
     - [Замразяване](variable_bindings/freeze.md)
 
@@ -120,8 +120,8 @@
         - [Менѝмост](scope/move/mut.md)
         - [Частични премествания](scope/move/partial_move.md)
     - [Заемане](scope/borrow.md)
-        - [Mutability](scope/borrow/mut.md)
-        - [Aliasing](scope/borrow/alias.md)
+        - [Менѝмост](scope/borrow/mut.md)
+        - [Единосъщност](scope/borrow/alias.md)
         - [The ref pattern](scope/borrow/ref.md)
     - [Живот](scope/lifetime.md)
         - [Изрично отбелязване](scope/lifetime/explicit.md)

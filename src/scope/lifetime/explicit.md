@@ -1,69 +1,73 @@
-# Explicit annotation
+# Изрично отбелязване
 
-The borrow checker uses explicit lifetime annotations to determine
-how long references should be valid. In cases where lifetimes are not
-elided[^1], Ръждьо requires explicit annotations to determine what the 
-lifetime of a reference should be. The syntax for explicitly annotating 
-a lifetime uses an apostrophe character as follows: 
+Проверителят на заемания използва изричното отбелязване за живота на
+променливата, за да определи колко дълго са в сила препратките. В случаите,
+когато животите са изрично указани (не са пропуснати[^elided]|[^1]), Ръждьо изисква изрично
+отбелязване, за да определи какъв би трябвало да е животът на дадена препратка.
+Правописът за указване на живот е с апостроф. Ето така: 
 
 ```rust,ignore
 foo<'a>
-// `foo` has a lifetime parameter `'a`
+// `foo` има параметър за живот `'a`
 ```
 
-Similar to [closures][anonymity], using lifetimes requires generics. 
-Additionally, this lifetime syntax indicates that the lifetime of `foo` 
-may not exceed that of `'a`. Explicit annotation of a type has the form 
-`&'a T` where `'a` has already been introduced.
+Подобно на [затварянията][anonymity], използването на животи изисква обобщения.
+В допълнение този правопис за живот означава, че животът на `foo` не може да
+надвишава този на `'a`. Изричното обозначаване на тип има вида `&'a T`, като
+`'a` вече е било въведено в употреба.
 
-In cases with multiple lifetimes, the syntax is similar:
+Когато имаме множество животи, правописът е подобен:
 
 ```rust,ignore
 foo<'a, 'b>
-// `foo` has lifetime parameters `'a` and `'b`
+// `foo` има параметри за живот за `'a` и `'b`
 ```
 
-In this case, the lifetime of `foo` cannot exceed that of either `'a` *or* `'b`.
+В този случай животът на `foo` не може да надвишава този на `'a` *или* `'b`.
 
-See the following example for explicit lifetime annotation in use:
+Да разгледаме следния пример за изрично обозначаване на живот:
 
 ```rust,editable,ignore,mdbook-runnable
-// `print_refs` takes two references to `i32` which have different
-// lifetimes `'a` and `'b`. These two lifetimes must both be at
-// least as long as the function `print_refs`.
+// `print_refs` приема две препратки към данни от тип `i32`, които имат
+// различни животи `'a` и `'b`. Тези два живота трябва да са с продължителност
+// поне колкото на функцията `print_refs`.
 fn print_refs<'a, 'b>(x: &'a i32, y: &'b i32) {
     println!("x is {} and y is {}", x, y);
 }
 
-// A function which takes no arguments, but has a lifetime parameter `'a`.
+// Функция, която не приема аргументи но има праметър за живот `'a`.
 fn failed_borrow<'a>() {
     let _x = 12;
 
-    // ERROR: `_x` does not live long enough
+    // Грешка!: `_x` не живее достатъчно дълго
     let y: &'a i32 = &_x;
-    // Attempting to use the lifetime `'a` as an explicit type annotation 
-    // inside the function will fail because the lifetime of `&_x` is shorter
-    // than that of `y`. A short lifetime cannot be coerced into a longer one.
+    // Опитът да се ползва живот `'a` като изрично отбелязване за тип вътре във
+    // функцията дава грешка, защото живота на `&_x` е по-къс от този на `y`. Къс
+    // живот не може насила да бъде приведен³ към по-дълъг.
 }
 
 fn main() {
-    // Create variables to be borrowed below.
+    // Създаваме променливи, за да бъдат заети по-долу.
     let (four, nine) = (4, 9);
     
-    // Borrows (`&`) of both variables are passed into the function.
+    // Заети препратки (`&`) и на двете променливи са подадени във функцията.
     print_refs(&four, &nine);
-    // Any input which is borrowed must outlive the borrower. 
-    // In other words, the lifetime of `four` and `nine` must 
-    // be longer than that of `print_refs`.
+    // Всяка заета входна променлива трябва да надживее заемащия. Иначе
+    // казано, животът на `four` и `nine` трябва да е по-дълъг от този на
+    // `print_refs`.
     
     failed_borrow();
-    // `failed_borrow` contains no references to force `'a` to be 
-    // longer than the lifetime of the function, but `'a` is longer.
-    // Because the lifetime is never constrained, it defaults to `'static`.
+    // `failed_borrow` не съдържа препратка, за да насили `'a` да бъде по-дълъг
+    // от живота на функцията, но `'a` е по-дълъг. Понеже животът не е ограничаван
+    // никога, той по подразбиране е `'static`.
 }
 ```
 
+[^elided] неявно указан, пропуснат – elided (elision). Неявно указване, пропускане – elision.
+
 [^1]: [elision] implicitly annotates lifetimes and so is different.
+
+[^coercion]: мълчаливо привеждане насила (от един тип към друг) – coercion 
 
 ### See also:
 

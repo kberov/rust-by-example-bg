@@ -1,4 +1,4 @@
-# Functions
+# Функции
 
 Ignoring [elision], function signatures with lifetimes have a few constraints: 
 

@@ -88,6 +88,6 @@ fn main() {
 
 [^slices]: отрязъци, рѐзени – slices
 
-[^borrow]: заемане, заемам, вземам на заем – borrowwing, borrow
+[^borrow]: заемане, заемка заемам, вземам на заем – borrowwing, borrow
 
 [^signature]: описание, обявление – signature

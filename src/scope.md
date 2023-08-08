@@ -10,6 +10,6 @@
 
 [^ownership]: владение, собственост – ownership,  овладяване – to take ownership
 
-[^borrowing]: заемане (вземане на заем) – borrowing
+[^borrowing]: заемка, заемане (вземане на заем) – borrowing
 
 [^lifetime]: живот (трайност) – lifetime

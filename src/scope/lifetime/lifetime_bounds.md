@@ -1,4 +1,4 @@
-# Bounds
+# Предели
 
 Just like generic types can be bounded, lifetimes (themselves generic)
 use bounds as well. The `:` character has a slightly different meaning here, 

@@ -1,16 +1,16 @@
-# Traits
+# Отличители
 
-Annotation of lifetimes in trait methods basically are similar to functions.
-Note that `impl` may have annotation of lifetimes too.
+Отбелязването на живот в методи на отличители е като при функциите.
+Забележете, че за `impl` също може да се указва живот.
 
 ```rust,editable
-// A struct with annotation of lifetimes.
+// Структура с отбелязан живот за нея и неин член.
 #[derive(Debug)]
 struct Borrowed<'a> {
     x: &'a i32,
 }
 
-// Annotate lifetimes to impl.
+// Отбелязваме живот за `impl`.
 impl<'a> Default for Borrowed<'a> {
     fn default() -> Self {
         Self {

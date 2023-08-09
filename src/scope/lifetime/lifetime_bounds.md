@@ -1,34 +1,36 @@
 # Предели
 
-Just like generic types can be bounded, lifetimes (themselves generic)
-use bounds as well. The `:` character has a slightly different meaning here, 
-but `+` is the same. Note how the following read:
+Както обобщените типове могат да имат предели, животите (сами по себе си
+обобщения) също ползват предели. Знакът `:` тук има малко по различно значение,
+но пък знакът `+` е със същото значение като при обобщенията. Тук следното се
+чете така:
 
-1. `T: 'a`: *All* references in `T` must outlive lifetime `'a`.
-2. `T: Trait + 'a`: Type `T` must implement trait `Trait` and *all* references
-in `T` must outlive `'a`.
+1. `T: 'a`: *Всички* препратки в `T` трябва да имат продължителност на живота
+   по-голяма от `'a`.
+2. `T: Trait + 'a`: Типът `T` трябва да осъществява отличителя `Trait` и
+   *всички* препратки в `T` трябва да живеят по-дълго от `'a`.
 
-The example below shows the above syntax in action used after keyword `where`:
+Примерът показва използването на горния правопис след ключовата дума `where`:
 
 ```rust,editable
 use std::fmt::Debug; // Trait to bound with.
 
 #[derive(Debug)]
 struct Ref<'a, T: 'a>(&'a T);
-// `Ref` contains a reference to a generic type `T` that has
-// an unknown lifetime `'a`. `T` is bounded such that any
-// *references* in `T` must outlive `'a`. Additionally, the lifetime
-// of `Ref` may not exceed `'a`.
+// `Ref` съдържа препратка към обобщен тип `T`, който има незнаен живот `'a`.
+//`T` е о-пределен (ограничен) така, че всякакви *препратки* в `T` трябва да
+// живеят по-дълго от `'a`. Същевременно животът на `Ref` не може да е по-дълъг от
+// `'a`.
 
-// A generic function which prints using the `Debug` trait.
+// Обобщена функция, която печати с помощта на отличителя `Debug`.
 fn print<T>(t: T) where
     T: Debug {
     println!("`print`: t is {:?}", t);
 }
 
-// Here a reference to `T` is taken where `T` implements
-// `Debug` and all *references* in `T` outlive `'a`. In
-// addition, `'a` must outlive the function.
+// Тук функцията приема препратка към `T`, където `T` осъществява `Debug` и
+// всички препратки в `T` живеят повече от `'a`. Освен това `'a` трябва да
+// надживее функцията.
 fn print_ref<'a, T>(t: &'a T) where
     T: Debug + 'a {
     println!("`print_ref`: t is {:?}", t);
@@ -45,8 +47,8 @@ fn main() {
 
 ### See also:
 
-[generics][generics], [bounds in generics][bounds], and 
-[multiple bounds in generics][multibounds]
+[„Обобщения”][generics], [„Предели” в „Обобщения”][bounds] и
+[„Множество предели” в „Обобщения”][multibounds]
 
 [generics]: ../../generics.md
 [bounds]: ../../generics/bounds.md

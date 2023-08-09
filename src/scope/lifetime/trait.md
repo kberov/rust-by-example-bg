@@ -27,7 +27,7 @@ fn main() {
 
 ### See also:
 
-[`trait`s][trait]
+[Отличители][trait]
 
 
 [trait]: ../../trait.md

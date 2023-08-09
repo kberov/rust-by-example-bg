@@ -1,49 +1,52 @@
-# Borrowing
+# Заемане
 
-Most of the time, we'd like to access data without taking ownership over
-it. To accomplish this, Ръждьо uses a *borrowing* mechanism. Instead of
-passing обекти by value (`T`), обекти can be passed by reference (`&T`).
+През повечето време искаме достъп до данните без да ги овладяваме. За да
+постигне това Ръждьо ползва *заемане*. Вместо да подаваме обекти като стойности
+(`T`), можем да подаваме обекти като препратки (`&T`).
 
-The compiler statically guarantees (via its borrow checker) that references 
-*always* point to valid обекти. That is, while references to an object
-exist, the обект cannot be destroyed.
+Компилаторът прави статична проверка и гарантира (чрез своя проверител на заемките),
+че препратките *винаги* сочат към действителни обекти. Сиреч, ако към някой обект
+има препратки, обектът не може да бъде унищожен.
 
 ```rust,editable,ignore,mdbook-runnable
-// This function takes ownership of a box and destroys it
-fn eat_box_i32(boxed_i32: Box<i32>) {
-    println!("Destroying box that contains {}", boxed_i32);
+// Тази функция овладява една кутия и я унищожава
+fn ям_кутия_i32(boxed_i32: Box<i32>) {
+    println!("Унищожавам кутия, съдържаща {}", boxed_i32);
 }
 
-// This function borrows an i32
-fn borrow_i32(borrowed_i32: &i32) {
-    println!("This int is: {}", borrowed_i32);
+// Тази функция заема стойност от тип i32
+fn заемам_кутия_i32(borrowed_i32: &i32) {
+    println!("Това цяло число е: {}", borrowed_i32);
 }
 
 fn main() {
-    // Create a boxed i32, and a stacked i32
+    // Създаваме променливи – i32 в кутия, съхранвяано на купа̀, и i32 в стека
     let boxed_i32 = Box::new(5_i32);
     let stacked_i32 = 6_i32;
 
-    // Borrow the contents of the box. Ownership is not taken,
-    // so the contents can be borrowed again.
-    borrow_i32(&boxed_i32);
-    borrow_i32(&stacked_i32);
+    // Заемаме съдържанието на кутията. Владението не е прехвърлено, така че
+    // съдържанията могат да бъдат заети отново.
+    заемам_кутия_i32(&boxed_i32);
+    заемам_кутия_i32(&stacked_i32);
 
     {
-        // Take a reference to the data contained inside the box
+        // Вземаме препратка към данните, от кутията
         let _ref_to_i32: &i32 = &boxed_i32;
 
-        // Error!
-        // Can't destroy `boxed_i32` while the inner value is borrowed later in scope.
-        eat_box_i32(boxed_i32);
-        // FIXME ^ Comment out this line
+        // Грешка!
+        // Невъзможно е да бъде унищожена `boxed_i32`, докато вътрешната ѝ
+        // стойност е заета по-късно и е в обхват.
+        ям_кутия_i32(boxed_i32);
+        // ПОПРАВИ ^ Коментирайте този ред
 
-        // Attempt to borrow `_ref_to_i32` after inner value is destroyed
-        borrow_i32(_ref_to_i32);
-        // `_ref_to_i32` goes out of scope and is no longer borrowed.
+        // Опит за заемане на `_ref_to_i32` след като вътрешната стойност е
+        // унищожена
+        заемам_кутия_i32(_ref_to_i32);
+        // `_ref_to_i32` излиза от обхват и вече не е заета.
     }
 
-    // `boxed_i32` can now give up ownership to `eat_box` and be destroyed
-    eat_box_i32(boxed_i32);
+    // `boxed_i32` сега може да предаде владението на `ям_кутия_i32` и да бъде
+    // унищожена
+    ям_кутия_i32(boxed_i32);
 }
 ```

@@ -1,12 +1,12 @@
-# Methods
+# Методи
 
-Methods are annotated similarly to functions:
+Методите се обозначават подобно на функциите:
 
 ```rust,editable
 struct Owner(i32);
 
 impl Owner {
-    // Annotate lifetimes as in a standalone function.
+    // Отбелязваме живота на аргументите като при самостоятелна функция.
     fn add_one<'a>(&'a mut self) { self.0 += 1; }
     fn print<'a>(&'a self) {
         println!("`print`: {}", self.0);

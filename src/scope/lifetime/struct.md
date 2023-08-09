@@ -1,21 +1,21 @@
-# Structs
+# Структури
 
-Annotation of lifetimes in structures are also similar to functions:
+Отбелязването на живот в структури е също подобно на функциите:
 
 ```rust,editable
-// A type `Borrowed` which houses a reference to an
-// `i32`. The reference to `i32` must outlive `Borrowed`.
+// Тип `Borrowed`, който съдържа препратка към число от тип `i32`. Препратката
+// към `i32` трябва да надживее `Borrowed`.
 #[derive(Debug)]
 struct Borrowed<'a>(&'a i32);
 
-// Similarly, both references here must outlive this structure.
+// И тук двете препратки трябва да надживеят тази структура.
 #[derive(Debug)]
 struct NamedBorrowed<'a> {
     x: &'a i32,
     y: &'a i32,
 }
 
-// An enum which is either an `i32` or a reference to one.
+// Брояч, който е `i32` или препратка към такива данни.
 #[derive(Debug)]
 enum Either<'a> {
     Num(i32),
@@ -40,7 +40,7 @@ fn main() {
 
 ### See also:
 
-[`struct`s][structs]
+[Структури][structs]
 
 
 [structs]: ../../custom_types/structs.md

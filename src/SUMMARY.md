@@ -1,7 +1,5 @@
 # Summary
-
 [Въведение](index.md)
-
 - [Здравей, Свят](hello.md)
     - [Коментари](hello/comment.md)
     - [Форматиран изход](hello/print.md)
@@ -9,12 +7,10 @@
         - [Display](hello/print/print_display.md)
             - [Проверка: Списък](hello/print/print_display/testcase_list.md)
         - [Форматиране](hello/print/fmt.md)
-
 - [Първични типове](primitives.md)
     - [Буквални стойности и оператори](primitives/literals.md)
     - [Разнородни списъци](primitives/tuples.md)
     - [Поредици и отрязъци](primitives/array.md)
-
 - [Потребителски типове](custom_types.md)
     - [Структури](custom_types/structs.md)
     - [Броячи](custom_types/enum.md)
@@ -22,26 +18,21 @@
         - [Като в C](custom_types/enum/c_like.md)
         - [Проверка: свързан списък](custom_types/enum/testcase_linked_list.md)
     - [Константи](custom_types/constants.md)
-
 - [Обвързване на променливи](variable_bindings.md)
     - [Менѝмост](variable_bindings/mut.md)
-    - [Видимост и засенчване](variable_bindings/scope.md)
+    - [Обхват и засенчване](variable_bindings/scope.md)
     - [Първо обявете](variable_bindings/declare.md)
     - [Замразяване](variable_bindings/freeze.md)
-
 - [Типове](types.md)
     - [Привеждане към тип](types/cast.md)
     - [Буквални](types/literals.md)
     - [Отгатване](types/inference.md)
     - [Прякори](types/alias.md)
-
 - [Превръщане](conversion.md)
     - [`From` и `Into`](conversion/from_into.md)
     - [`TryFrom` и `TryInto`](conversion/try_from_try_into.md)
     - [Към и от низове](conversion/string.md)
-
 - [Изрази](expression.md)
-
 - [Програмен поток](flow_control.md)
     - [if/else](flow_control/if_else.md)
     - [loop](flow_control/loop.md)
@@ -61,7 +52,6 @@
     - [if let](flow_control/if_let.md)
     - [let-else](flow_control/let_else.md)
     - [while let](flow_control/while_let.md)
-
 - [Функции](fn.md)
     - [Методи](fn/methods.md)
     - [Затваряния](fn/closures.md)
@@ -75,30 +65,25 @@
             - [Търсене чрез повторители](fn/closures/closure_examples/iter_find.md)
     - [Функции от по-висок порядък](fn/hof.md)
     - [Разклоняващи функции](fn/diverging.md)
-
 - [Модули](mod.md)
     - [Видимост](mod/visibility.md)
     - [Видимост на структури](mod/struct_visibility.md)
     - [Обявлението `use`](mod/use.md)
     - [`super` и `self`](mod/super.md)
     - [Иерархия на файловете](mod/split.md)
-
 - [Кошове](crates.md)
     - [Създаване на библиотека](crates/lib.md)
     - [Използване на библиотека](crates/using_lib.md)
-
 - [Cargo](cargo.md)
     - [Зависимости](cargo/deps.md)
     - [Уговорки](cargo/conventions.md)
     - [Тестове](cargo/test.md)
     - [Скриптове за построяване](cargo/build_scripts.md)
-
 - [Атрибути](attribute.md)
     - [`dead_code`](attribute/unused.md)
     - [Кошове](attribute/crate.md)
     - [`cfg`](attribute/cfg.md)
         - [Custom](attribute/cfg/custom.md)
-
 - [Обобщения](generics.md)
     - [Обобщения](generics/gen_fn.md)
     - [Осъществяване](generics/impl.md)
@@ -113,17 +98,16 @@
         - [Свързани типове](generics/assoc_items/types.md)
     - [Параметри от призрачен тип](generics/phantom.md)
         - [Проверка: разясняване на единичния тип](generics/phantom/testcase_units.md)
-
-- [Правила за видимост](scope.md)
-    - [RAII](scope/raii.md)
-    - [Собственост и премествания](scope/move.md)
+- [Правила за обхват](scope.md)
+    - [ПРИ](scope/raii.md)
+    - [Владение и премествания](scope/move.md)
         - [Менѝмост](scope/move/mut.md)
         - [Частични премествания](scope/move/partial_move.md)
     - [Заемане](scope/borrow.md)
-        - [Mutability](scope/borrow/mut.md)
-        - [Aliasing](scope/borrow/alias.md)
-        - [The ref pattern](scope/borrow/ref.md)
-    - [Времетраения](scope/lifetime.md)
+        - [Менѝмост](scope/borrow/mut.md)
+        - [Единосъщност](scope/borrow/alias.md)
+        - [Образецът `ref`](scope/borrow/ref.md)
+    - [Живот](scope/lifetime.md)
         - [Изрично отбелязване](scope/lifetime/explicit.md)
         - [Функции](scope/lifetime/fn.md)
         - [Методи](scope/lifetime/methods.md)
@@ -131,9 +115,8 @@
         - [Отличители](scope/lifetime/trait.md)
         - [Предели](scope/lifetime/lifetime_bounds.md)
         - [Принуждение](scope/lifetime/lifetime_coercion.md)
-        - [Статично](scope/lifetime/static_lifetime.md)
+        - [Статичeн](scope/lifetime/static_lifetime.md)
         - [Пропускане](scope/lifetime/elision.md)
-
 - [Отличители](trait.md)
     - [Производство от… (`derive`)](trait/derive.md)
     - [Returning Traits with `dyn`](trait/dyn.md)
@@ -144,7 +127,6 @@
     - [Клониране](trait/clone.md)
     - [Основни отличители](trait/supertraits.md)
     - [Уточняване на застъпващи се отличители](trait/disambiguating.md)
-
 - [Правила за макроси!](macros.md)
     - [Правопис](macros/syntax.md)
         - [Украсители](macros/designators.md)
@@ -153,7 +135,6 @@
     - [DRY (Don't Repeat Yourself)](macros/dry.md)
     - [DSL (Domain Specific Languages)](macros/dsl.md)
     - [Variadics](macros/variadics.md)
-
 - [Обработка на грешки](error.md)
     - [`panic`](error/panic.md)
     - [`abort` & `unwind`](error/abort_unwind.md)
@@ -174,10 +155,9 @@
         - [Other uses of `?`](error/multiple_error_types/reenter_question_mark.md)
         - [Wrapping errors](error/multiple_error_types/wrap_error.md)
     - [Iterating over `Result`s](error/iter_result.md)
-
 - [Типове от стандартната библиотека](std.md)
-    - [Box, stack and heap](std/box.md)
-    - [Vectors](std/vec.md)
+    - [Box, кама̀ра и куп](std/box.md)
+    - [Вектори](std/vec.md)
     - [Низове](std/str.md)
     - [`Option`](std/option.md)
     - [`Result`](std/result.md)
@@ -188,7 +168,6 @@
         - [HashSet](std/hash/hashset.md)
     - [`Rc`](std/rc.md)
     - [`Arc`](std/arc.md)
-
 - [Разни в std](std_misc.md)
     - [Нишки](std_misc/threads.md)
         - [Testcase: map-reduce](std_misc/threads/testcase_mapreduce.md)
@@ -205,19 +184,15 @@
     - [Program arguments](std_misc/arg.md)
         - [Argument parsing](std_misc/arg/matching.md)
     - [Foreign Function Interface](std_misc/ffi.md)
-
 - [Тестване](testing.md)
     - [Unit testing](testing/unit_testing.md)
     - [Documentation testing](testing/doc_testing.md)
     - [Integration testing](testing/integration_testing.md)
     - [Dev-dependencies](testing/dev_dependencies.md)
-
 - [Опасни действия](unsafe.md)
     - [Inline assembly](unsafe/asm.md)
-
 - [Съвместимост](compatibility.md)
     - [Raw identifiers](compatibility/raw_identifiers.md)
-
 - [Отвъд](meta.md)
     - [Documentation](meta/doc.md)
     - [Playground](meta/playground.md)

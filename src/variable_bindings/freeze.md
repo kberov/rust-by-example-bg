@@ -14,7 +14,7 @@ fn main() {
 
         // Грешка! `_mutable_integer` is frozen in this scope
         _mutable_integer = 50;
-        // ПОПРАВИМЕ ^ Да се коментира този ред
+        // ПОПРАВИ ^ Да се коментира този ред
 
         // `_mutable_integer` излиза от обхват
     }

@@ -1,73 +1,77 @@
-# Static
+# Статичeн
 
-Ръждьо has a few reserved lifetime names. One of those is `'static`. You
-might encounter it in two situations:
+Ръждьо има няколко запазени имена за животи. Едно от тях е `'static`. Може да
+ги срещнете в два случая.
 
 ```rust, editable
-// A reference with 'static lifetime:
+// Препратка със 'static – статична продължителност на живота:
 let s: &'static str = "hello world";
 
-// 'static as part of a trait bound:
+// 'static като част от предел за отличител:
 fn generic<T>(x: T) where T: 'static {}
 ```
 
-Both are related but subtly different and this is a common source for
-confusion when learning Ръждьо. Here are some examples for each situation:
+Двата случая са свързани но има разлика и това често води до объркване при
+изучаването на Ръждьо. Ето някои примери за всеки от случаите.
 
-## Reference lifetime
+## Като живот на препратка
 
-As a reference lifetime `'static` indicates that the data pointed to by
-the reference lives for the entire lifetime of the running program.
-It can still be coerced to a shorter lifetime.
+Препратка със живот, обозначен като `'static`, указва, че данните, към които
+сочи препратката, живеят през цялото време, докато работи програмата. Тази
+трайност може принудително да бъде съкратена.
 
-There are two ways to make a variable with `'static` lifetime, and both
-are stored in the read-only memory of the binary:
+Има два начина за създаване на променлива със статичен (`'static`) живот. И в
+двата случая данните се съхраняват в статичната (само за четене) памет на
+изпълнимия файл.
 
-* Make a constant with the `static` declaration.
-* Make a `string` literal which has type: `&'static str`.
+* Създаване на константа с ключовата дума `static`.
+* Създаване на на низова буквална стойност от тип `&'static str`.
 
-See the following example for a display of each method:
+В следващия пример са онагледени и двата начина.
 
 ```rust,editable
-// Make a constant with `'static` lifetime.
+// Създаваме константа със `'static` продължителност на живота.
 static NUM: i32 = 18;
 
-// Returns a reference to `NUM` where its `'static`
-// lifetime is coerced to that of the input argument.
+// Връща препратка към  `NUM` като нейния `'static` живот е принудително сведен
+// до този на входния аргумент.
 fn coerce_static<'a>(_: &'a i32) -> &'a i32 {
     &NUM
 }
 
 fn main() {
     {
-        // Make a `string` literal and print it:
-        let static_string = "I'm in read-only memory";
+        // Създаваме низова буквална стойност и я отпечатваме:
+        let static_string = "Аз съм в паметта само за четене.";
         println!("static_string: {}", static_string);
 
-        // When `static_string` goes out of scope, the reference
-        // can no longer be used, but the data remains in the binary.
+        // Когато `static_string` излезе от обхват, препратката не може да бъде
+        // ползвана повече, но данните си остават в двоичния файл.
     }
 
     {
-        // Make an integer to use for `coerce_static`:
+        // Създаваме число, за да го подадем на `coerce_static`:
         let lifetime_num = 9;
 
-        // Coerce `NUM` to lifetime of `lifetime_num`:
+        // Съкращаваме живота на `NUM` до този на `lifetime_num`:
         let coerced_static = coerce_static(&lifetime_num);
 
         println!("coerced_static: {}", coerced_static);
     }
 
-    println!("NUM: {} stays accessible!", NUM);
+    println!("NUM: {} остава достъпно!", NUM);
 }
 ```
 
-## Trait bound
+## Като предел на отличител
 
-As a trait bound, it means the type does not contain any non-static
-references. Eg. the receiver can hold on to the type for as long as
-they want and it will never become invalid until they drop it.
+Като предел на отличител `'static` означава, че типът не съдържа никакви
+нестатични препратки. Сиреч получателят може да държи типа колкото му е
+необходимо и да знае, че данните в този тип винаги ще са дейстивителни, докато
+ги изхвърли.
 
+*Неясен смисъл на английски. Д го погледна пак§!*
+Важно е да се знае, че това означава, че всички притежавани данни винаги минават проверка за статична (`'static`) продължителност, но….
 It's important to understand this means that any owned data always passes
 a `'static` lifetime bound, but a reference to that owned data generally
 does not:
@@ -76,20 +80,22 @@ does not:
 use std::fmt::Debug;
 
 fn print_it( input: impl Debug + 'static ) {
-    println!( "'static value passed in is: {:?}", input );
+    println!( "подадената 'static стойност е: {:?}", input );
 }
 
 fn main() {
-    // i is owned and contains no references, thus it's 'static:
+    // i е собствена и не съдържа препратки, значи е 'static:
     let i = 5;
     print_it(i);
 
-    // oops, &i only has the lifetime defined by the scope of
-    // main(), so it's not 'static:
+    // Опааа, &i има живот само колкото е обхвата на main(),
+    // значи не е 'static:
     print_it(&i);
 }
 ```
-The compiler will tell you:
+
+Компилаторът ще ви каже:
+
 ```ignore
 error[E0597]: `i` does not live long enough
   --> src/lib.rs:15:15

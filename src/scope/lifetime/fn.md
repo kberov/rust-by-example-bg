@@ -1,43 +1,43 @@
-# Functions
+# Функции
 
-Ignoring [elision], function signatures with lifetimes have a few constraints: 
+Без оглед на [пропускането][elision], обявите на функциите с живот имат някои
+ограничения:
+* всяка препратка _задължително трябва_ да е с отбелязан живот.
+* всяка върната препратка _задължително трябва_ да има същия живот като на
+  входните данни (параметъра), или животът ѝ да бъде `static`.
 
-* any reference *must* have an annotated lifetime.
-* any reference being returned *must* have the same lifetime as an input or
-be `static`.
-
-Additionally, note that returning references without input is banned if it
-would result in returning references to invalid data. The following example shows
-off some valid forms of functions with lifetimes:
+В допълнние, обърнете внимание, че връщането на препратки е забранено, ако това
+ще доведе до връщане на недействителни данни. Следващият пример показва няколко
+работещи рановидности на функции с указана продължителност на живота.
 
 ```rust,editable
-// One input reference with lifetime `'a` which must live
-// at least as long as the function.
+// Една входна препратка с живот `'a`, която трябва да живее поне колкото
+// функцията.
 fn print_one<'a>(x: &'a i32) {
     println!("`print_one`: x is {}", x);
 }
 
-// Mutable references are possible with lifetimes as well.
+// Също може да се приемат меними препратки с указан живот.
 fn add_one<'a>(x: &'a mut i32) {
     *x += 1;
 }
 
-// Multiple elements with different lifetimes. In this case, it
-// would be fine for both to have the same lifetime `'a`, but
-// in more complex cases, different lifetimes may be required.
+// Повече аргументи с различен живот. В този случай и двата аргумента биха
+// могли да имат един и същи живот `'a`, но при по-сложни случаи може да се наложи
+// да са с различни животи.
 fn print_multi<'a, 'b>(x: &'a i32, y: &'b i32) {
     println!("`print_multi`: x is {}, y is {}", x, y);
 }
 
-// Returning references that have been passed in is acceptable.
-// However, the correct lifetime must be returned.
+// Да се връщат приети като аргументи препратки е приемливо.
+// Но трябва да се върне правилния живот.
 fn pass_x<'a, 'b>(x: &'a i32, _: &'b i32) -> &'a i32 { x }
 
 //fn invalid_output<'a>() -> &'a String { &String::from("foo") }
-// The above is invalid: `'a` must live longer than the function.
-// Here, `&String::from("foo")` would create a `String`, followed by a
-// reference. Then the data is dropped upon exiting the scope, leaving
-// a reference to invalid data to be returned.
+// Горното не работи: `'a` трябва да живее по-дълго от функцията.
+// Тук `&String::from("foo")` ще създаде обект `String`, следван от препратка.
+// След което данните се изхвърлят при излизане от обхват, като така остава за
+// връщане препратка към недействителни данни.
 
 fn main() {
     let x = 7;
@@ -54,10 +54,10 @@ fn main() {
     print_one(&t);
 }
 ```
-
 ### See also:
 
-[functions][fn]
+[Функции]
+
+[Функции]: ../../fn.md
 
 [elision]: elision.md
-[fn]: fn.md

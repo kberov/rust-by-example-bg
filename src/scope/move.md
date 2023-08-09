@@ -1,60 +1,67 @@
-# Ownership and moves Собственост и премествания
+# Владение и премествания
 
-Because variables are in charge of freeing their own resources, 
-**resources can only have one owner**. This also prevents resources 
-from being freed more than once. Note that not all variables own 
-resources (e.g. [references]).
+Понеже променливите сами се грижат за освобождаване на заетата от тях част от
+паметта, **ресурсите могат да имат само един владелец (собственик)**. Това също
+предотвратява възможността даден ресурс да бъде освободен повече от веднъж.
+Обърнете внимание, че не всички променливи владеят ресурси. Препратките са
+такива променливи.
 
-When doing assignments (`let x = y`) or passing function arguments by value
-(`foo(x)`), the *ownership* of the resources is transferred. In Ръждьо-speak, 
-this is known as a *move*.
+Когато присвояваме стойност на променлива (`let x = y`) или подаваме аргументи
+като стойност (не като препратка) (`foo(x)`), *владението* на ресурса бива
+предадено на функцията. Казано по ръждьовски, това е *преместване*[^move].
 
-After moving resources, the previous owner can no longer be used. This avoids
-creating dangling pointers.
+След преместването, предишния владелец (променлива) повече не може да бъде
+ползван. Това предотвратява създаването на *висящи указатели*[^dangling].
 
 ```rust,editable
-// This function takes ownership of the heap allocated memory
+// Тази функция овладява заделената памет от купа
 fn destroy_box(c: Box<i32>) {
-    println!("Destroying a box that contains {}", c);
+    println!("Унищожаваме кутия, която съдържа {}", c);
 
-    // `c` is destroyed and the memory freed
+    // `c` е унищожена и паметта е освободена
 }
 
 fn main() {
-    // _Stack_ allocated integer
+    // Паметта за това число е заделена в стека
     let x = 5u32;
 
-    // *Copy* `x` into `y` - no resources are moved
+    // *Копираме* `x` в `y` - няма преместване на ресурси
     let y = x;
 
-    // Both values can be independently used
-    println!("x is {}, and y is {}", x, y);
+    // И двете стойности могат да се ползват независимо една от друга
+    println!("x е {}, а y е {}", x, y);
 
-    // `a` is a pointer to a _heap_ allocated integer
+    // `a` е указаел към цяло число от _купа̀_
     let a = Box::new(5i32);
 
-    println!("a contains: {}", a);
+    println!("a съдържа: {}", a);
 
-    // *Move* `a` into `b`
+    // *Местим* `a` в `b`
     let b = a;
-    // The pointer address of `a` is copied (not the data) into `b`.
-    // Both are now pointers to the same heap allocated data, but
-    // `b` now owns it.
+    // Адресът на указателя на `a` е копиран (не самите данни) в `b`.
+    // И двете променливи сега са указатели към едни и същи данни, заделени в
+    // купа, но сега `b` притежава/владее данните.
     
-    // Error! `a` can no longer access the data, because it no longer owns the
-    // heap memory
-    //println!("a contains: {}", a);
-    // TODO ^ Try uncommenting this line
+    // Грешка! `a` повече няма достъп до данните, понеже вече не владее тези
+    // данни от купа.
+    //println!("a съдържа: {}", a);
+    // ЗАДАЧА ^ Разкоментирайте този ред
 
-    // This function takes ownership of the heap allocated memory from `b`
+    // Тази функция овладява (става собственик на) заделената памет от `b`
     destroy_box(b);
 
-    // Since the heap memory has been freed at this point, this action would
-    // result in dereferencing freed memory, but it's forbidden by the compiler
-    // Error! Same reason as the previous Error
+    // Понеже паметта от купа е освободена вече, следващото действие би
+    // осъществило пряк остъп до вече освободена памет. Това е забранено от
+    // компилатора.
+    // Грешка! Поради същата причина като предишната грешка.
     //println!("b contains: {}", b);
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА ^ Разкоментирайте този ред
 }
 ```
+## Б.пр.
+
+[^move]: местене, преместване, движение – move
+
+[^dangling] висящ указател – dangling pointer
 
 [references]: ../flow_control/match/destructuring/destructure_pointers.md

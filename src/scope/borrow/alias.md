@@ -1,58 +1,88 @@
-# Aliasing
+# Единосъщност
 
-Data can be immutably borrowed any number of times, but while immutably
-borrowed, the original data can't be mutably borrowed. On the other hand, only
-*one* mutable borrow is allowed at a time. The original data can be borrowed
-again only *after* the mutable reference has been used for the last time.
+Чрез обвързване с имена (каквото са променлвите), данните могат да бъдат
+заемани менимо многократно, но докато са заети неменимо не могат да бъдат
+заемани менимо. Освен това може да има само _една_ менима заемка едновременно.
+Първоначалните данни може да се заемат отново само _след като_ менимата
+препратка е използвана за последен път.
 
 ```rust,editable
-struct Point { x: i32, y: i32, z: i32 }
+struct Point {
+    x: i32,
+    y: i32,
+    z: i32,
+}
 
 fn main() {
     let mut point = Point { x: 0, y: 0, z: 0 };
 
     let borrowed_point = &point;
     let another_borrow = &point;
+    // Данните могат да бъдат достъпени чрез препратки и чрез първоначалния
+    // владелец
+    println!(
+        "Point has coordinates: ({}, {}, {})",
+        borrowed_point.x, another_borrow.y, point.z
+    );
 
-    // Data can be accessed via the references and the original owner
-    println!("Point has coordinates: ({}, {}, {})",
-                borrowed_point.x, another_borrow.y, point.z);
-
-    // Error! Can't borrow `point` as mutable because it's currently
-    // borrowed as immutable.
+    // Грешка! Не може да се заеме `point` като менима, защото сега е заета
+    // като неменѝма
     // let mutable_borrow = &mut point;
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА^ Разкоментирайте този ред
 
-    // The borrowed values are used again here
-    println!("Point has coordinates: ({}, {}, {})",
-                borrowed_point.x, another_borrow.y, point.z);
+    // Заетите данни биват ползвани отново тук
+    println!(
+        "Point has coordinates: ({}, {}, {})",
+        borrowed_point.x, another_borrow.y, point.z
+    );
 
-    // The immutable references are no longer used for the rest of the code so
-    // it is possible to reborrow with a mutable reference.
+    // Неменимите препратки не се ползват по-нататък в кода, следователно може
+    // да бъдат заети отново чрез менима препратка.
     let mutable_borrow = &mut point;
 
-    // Change data via mutable reference
+    // Променяме данните чрез менима препратка
     mutable_borrow.x = 5;
     mutable_borrow.y = 2;
     mutable_borrow.z = 1;
 
-    // Error! Can't borrow `point` as immutable because it's currently
-    // borrowed as mutable.
+    // Грешка! Не може да се заеме `point` като неменѝма, защото сега е заета
+    // като менѝма.
     // let y = &point.y;
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА^ Разкоментирайте този ред
 
-    // Error! Can't print because `println!` takes an immutable reference.
+    // Грешка! Не може да се печати, защото `println!` взема неменѝма препратка,
+    // а по-долу в кода се ползва `mutable_borrow` – менима препратка.
     // println!("Point Z coordinate is {}", point.z);
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА^ Разкоментирайте този ред
 
-    // Ok! Mutable references can be passed as immutable to `println!`
-    println!("Point has coordinates: ({}, {}, {})",
-                mutable_borrow.x, mutable_borrow.y, mutable_borrow.z);
+    // Може! Менѝми препратки може да се подават като неменѝми на `println!`
+    println!(
+        "Point has coordinates: ({}, {}, {})",
+        mutable_borrow.x, mutable_borrow.y, mutable_borrow.z
+    );
 
-    // The mutable reference is no longer used for the rest of the code so it
-    // is possible to reborrow
+    // Менимата препратка вече не се използва до края на кода, значи може
+    // данните да се заемат отново.
     let new_borrowed_point = &point;
-    println!("Point now has coordinates: ({}, {}, {})",
-             new_borrowed_point.x, new_borrowed_point.y, new_borrowed_point.z);
+    println!(
+        "Point now has coordinates: ({}, {}, {})",
+        new_borrowed_point.x, new_borrowed_point.y, new_borrowed_point.z
+    );
 }
+
 ```
+
+## Б.пр.
+
+В Ръждьо за _единосъщни_[^aliasing] се смятат две променливи, които сочат към
+едни и същи данни в паметта. В следването на собствените си правила за
+безопаснот, Ръждьо не позволява едновременно писане в две променливи, които
+сочат към едни и същи данни, макар да са с различни имена. Тогава едната
+променлия се счита за друго име (прякор, псевдоним) на другата.
+От [„The Rustonomicon”](https://doc.rust-lang.org/nomicon/aliasing.html):
+„…variables and pointers alias if they refer to overlapping regions of memory.”
+– Променливите и указателите с две различни имена имена са единосъщни,
+ако препращат към припокриващи се области от паметта.
+
+[^aliasing]: единосъщност,  разнооименност – aliasing
+

@@ -1,16 +1,17 @@
-# Elision
+# Пропускане
 
-Some lifetime patterns are overwhelmingly common and so the borrow checker
-will allow you to omit them to save typing and to improve readability.
-This is known as elision. Elision exists in Ръждьо solely because these patterns
-are common.
+Някои образци за прилагане на идеята за живот на препратките са толкова често
+срещани, че проверителят на заемките разрешава да бъдат *пропуснати*, за да се
+спести писане и да се подобри четимостта на кода. Това е известно като
+*пропускане*[^elision] (елизия). Пропускането е разрешено само за често срещани
+случаи.
 
-The following code shows a few examples of elision. For a more comprehensive
-description of elision, see [lifetime elision][elision] in the book.
+Следният код показва примери на пропускане. За по-изчерпателно описание на
+пропускането вижте [„Lifetime Elision”][elision] в книгата.
 
 ```rust,editable
-// `elided_input` and `annotated_input` essentially have identical signatures
-// because the lifetime of `elided_input` is inferred by the compiler:
+// `elided_input` and `annotated_input` всъщност имат едно и също обявление.
+// животът на `elided_input` е отгатнат от компилатора:
 fn elided_input(x: &i32) {
     println!("`elided_input`: {}", x);
 }
@@ -19,11 +20,11 @@ fn annotated_input<'a>(x: &'a i32) {
     println!("`annotated_input`: {}", x);
 }
 
-// Similarly, `elided_pass` and `annotated_pass` have identical signatures
-// because the lifetime is added implicitly to `elided_pass`:
+// Така  `elided_pass` и `annotated_pass` имат еднакви обяви.
+// Животът на `elided_pass` бива добавен неявно:
 fn elided_pass(x: &i32) -> &i32 { x }
 
-fn annotated_pass<'a>(x: &'a i32) -> &'a i32 { x }
+fn annotated_pass<'б>(x: &'б i32) -> &'б i32 { x }
 
 fn main() {
     let x = 3;
@@ -35,6 +36,10 @@ fn main() {
     println!("`annotated_pass`: {}", annotated_pass(&x));
 }
 ```
+
+Б.пр.
+
+[^elision] пропускане, изпускане, скриване (елизия) – elision
 
 ### See also:
 

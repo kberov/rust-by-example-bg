@@ -1,42 +1,56 @@
-# Lifetimes
+# Живот
 
-A *lifetime* is a construct of the compiler (or more specifically, its *borrow
-checker*) uses to ensure all borrows are valid. Specifically, a variable's
-lifetime begins when it is created and ends when it is destroyed. While
-lifetimes and scopes are often referred to together, they are not the same.
+Продължителността на *живота*[^lifetime] [на променливите] е
+конструкция[^construct] на компилаторa (или по-точно на неговия _проверител на
+заемките_[^borrow_checker]), който проверява дали всички заемания
+са действителни. В частност, животът на една променлива започва, когато бива
+създадена и приключва с нейното унищожаване.  Въпреки че обхватът и животът на
+променливите често се споменават заедно, те не са едно и също нещо.
 
-Take, for example, the case where we borrow a variable via `&`. The
-borrow has a lifetime that is determined by where it is declared. As a result,
-the borrow is valid as long as it ends before the lender is destroyed. However,
-the scope of the borrow is determined by where the reference is used.
+Да вземем например случая, където заемаме променлива чрез `&`. Заемката има
+живот, предопределен от това къде е обявена. Последствието е, че заемката е в
+сила до преди заемодателят да бъде унищожен. А обхватът се определя от това,
+къде се ползва препратката.
 
-In the following example and in the rest of this section, we will see how
-lifetimes relate to scopes, as well as how the two differ.
+В следващия пример и до края на този раздел ще видим как се отнася животът към
+обхвата и по какво се различават.
 
 ```rust,editable
-// Lifetimes are annotated below with lines denoting the creation
-// and destruction of each variable.
-// `i` has the longest lifetime because its scope entirely encloses 
-// both `borrow1` and `borrow2`. The duration of `borrow1` compared 
-// to `borrow2` is irrelevant since they are disjoint.
+// Животът на променливите е обозначен с линии, показващи създаването и
+// унищожаването на всяка променлива.
+// `i` е с най-дълъг живот, защото нейният обхват изцяло включва `borrow1` и
+// `borrow2`. Продължителността на `borrow1` няма значение за `borrow2`, тъй като
+// те са отделени.
 fn main() {
-    let i = 3; // Lifetime for `i` starts. ────────────────┐
+    let i = 3; // Животът на `i` започва.  ────────────────┐
     //                                                     │
     { //                                                   │
-        let borrow1 = &i; // `borrow1` lifetime starts. ──┐│
+        let borrow1 = &i; // Животът на `borrow1` начева. ┐│
         //                                                ││
         println!("borrow1: {}", borrow1); //              ││
-    } // `borrow1` ends. ─────────────────────────────────┘│
+    } // `borrow1` свършва. ──────────────────────────────┘│
     //                                                     │
     //                                                     │
     { //                                                   │
-        let borrow2 = &i; // `borrow2` lifetime starts. ──┐│
+        let borrow2 = &i; //Животът на `borrow2` начева. ─┐│
         //                                                ││
         println!("borrow2: {}", borrow2); //              ││
-    } // `borrow2` ends. ─────────────────────────────────┘│
+    } // `borrow2` свършва. ──────────────────────────────┘│
     //                                                     │
-}   // Lifetime ends. ─────────────────────────────────────┘
+}   // Животът на `i` свършва.  ───────────────────────────┘
 ```
 
-Note that no names or types are assigned to label lifetimes.
-This restricts how lifetimes will be able to be used as we will see.
+Забележете, че не се присвояват никакви имена или типове за обозначване на
+животите. Това създава ограничения при използването на животите, както ще
+видим.
+
+## Б.пр.
+
+> Когато говорим за _живот_, винаги става въпрос за заети данни и препратки.
+
+[^lifetime]: живот, продължителност, трайност (на променлива) – lifetime
+
+[^construct]: конструкция – construct
+
+[^borrow_checker]: проверител на заемките – borrow checker
+

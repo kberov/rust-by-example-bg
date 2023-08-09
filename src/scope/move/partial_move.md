@@ -1,12 +1,12 @@
-# Partial moves
+# Частични премествания
 
-Within the [destructuring] of a single variable, both `by-move` and 
-`by-reference` pattern bindings can be used at the same time. Doing 
-this will result in a _partial move_ of the variable, which means 
-that parts of the variable will be moved while other parts stay. In 
-such a case, the parent variable cannot be used afterwards as a 
-whole, however the parts that are only referenced (and not moved) 
-can still be used.
+При [разлагането][destructuring] на отделна променлива чрез преместване и като
+препратка може да се ползва _обвързване (на променливи) по
+образец_[^pattern_binding]. От това може да последва _частично преместване_ на
+променливата, което означава, че част от променливата е преместена, а друга не
+е. В този случай изходната променлива не може да бъде използвана като цяло.
+Само частите, които са присвоени на нови променливи като препратки, могат да
+бъдат използвани. 
 
 ```rust,editable
 fn main() {
@@ -21,28 +21,39 @@ fn main() {
         age: Box::new(20),
     };
 
-    // `name` is moved out of person, but `age` is referenced
+    // Стойността, присвоена на променливата `name` е преместена извън person,
+    // но `age` е само препратка.
     let Person { name, ref age } = person;
 
     println!("The person's age is {}", age);
 
     println!("The person's name is {}", name);
 
-    // Error! borrow of partially moved value: `person` partial move occurs
+    // Грешка! заемка на частично преместена стойност: `person`. Случва се
+    // частично преместване
     //println!("The person struct is {:?}", person);
 
-    // `person` cannot be used but `person.age` can be used as it is not moved
+    // `person` не може да се ползва, но `person.age`, понеже нейната стойност
+    // не е преместена
     println!("The person's age from person struct is {}", person.age);
 }
+
 ```
-(In this example, we store the `age` variable on the heap to 
-illustrate the partial move: deleting `ref` in the above code would 
-give an error as the ownership of `person.age` would be moved to the 
-variable `age`. If `Person.age` were stored on the stack, `ref` would 
-not be required as the definition of `age` would copy the data from 
-`person.age` without moving it.)
+(В този пример съхраняваме стойността на променливата `age` в купа̀ за да
+онагледим частичното преместване. Ако изтрием `ref` от кода по-горе,
+компилаторът ще върне грешка, тъй като владението на `person.age` ще бъде
+прехвърлено на променливата `age`. Ако `Person.age` беше записано в стека (т.е
+не беше в кутийка), нямаше да е нужно да пишем `ref`, понеже според описанието
+си `age` щеше да е копирало данните от `person.age` без да ги мести.)
+
+## Б.пр.
+
+[^pattern_binding] обвързване по образец (при разлагане на структура) – pattern binding.
+
+_ЗАДАЧА за прев.!: Да прегледам другите преводи на `pattern`,  за да видя дали „образец”
+е подходящ превод и за другите случаи. Да отбележа превода в Б.Пр._
 
 ### See also:
-[destructuring][destructuring]
+[Разлагане][destructuring]
 
 [destructuring]: ../../flow_control/match/destructuring.md

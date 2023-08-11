@@ -1,21 +1,21 @@
-# Traits
+# Отличители
 
-A `trait` is a collection of methods defined for an unknown type:
-`Self`. They can access other methods declared in the same trait.
+Отличителят (буквално отличителна черта – б. пр.) (`trait`) е набор от методи,
+описани за непознат тип: `Self`. Те могат да достъпват други методи в същия
+отличител.
 
-Traits can be implemented for any data type. In the example below,
-we define `Animal`, a group of methods. The `Animal` `trait` is 
-then implemented for the `Sheep` data type, allowing the use of 
-methods from `Animal` with a `Sheep`.
+Отличителите могат да бъдат осъществени за всеки тип данни. В този пример описваме
+`Animal` като множество от методи. След това отличителят `Animal` бива осъществен за
+типа `Sheep`. Така можем да ползваме методи от `Animal` с `Sheep`.
 
 ```rust,editable
 struct Sheep { naked: bool, name: &'static str }
 
 trait Animal {
-    // Associated function signature; `Self` refers to the implementor type.
+    // Обявяваме придадена функция; `Self` се отнася до осъществяващия тип
     fn new(name: &'static str) -> Self;
 
-    // Method signatures; these will return a string.
+    // Обяви на методи; ще върнат низ.
     fn name(&self) -> &'static str;
     fn noise(&self) -> &'static str;
 

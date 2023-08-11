@@ -1,7 +1,7 @@
 # Отличители
 
 Отличителят (буквално отличителна черта – б. пр.) (`trait`) е набор от методи,
-описани за непознат тип: `Self`. Те могат да достъпват други методи в същия
+описани за непознат тип: `Self`. Методите могат да достъпват други методи в същия
 отличител.
 
 Отличителите могат да бъдат осъществени за всеки тип данни. В този пример описваме
@@ -19,7 +19,7 @@ trait Animal {
     fn name(&self) -> &'static str;
     fn noise(&self) -> &'static str;
 
-    // Traits can provide default method definitions.
+    // Отличителите могат да предоставят осъществени методи по подразбиране.
     fn talk(&self) {
         println!("{} says {}", self.name(), self.noise());
     }
@@ -32,7 +32,8 @@ impl Sheep {
 
     fn shear(&mut self) {
         if self.is_naked() {
-            // Implementor methods can use the implementor's trait methods.
+            // Методите на осъществителя (структура, друг отличител) могат да
+            // извикват методите, осъществени в отличителя.
             println!("{} is already naked...", self.name());
         } else {
             println!("{} gets a haircut!", self.name);
@@ -42,9 +43,9 @@ impl Sheep {
     }
 }
 
-// Implement the `Animal` trait for `Sheep`.
+// Осъществяваме отличителя `Animal` за `Sheep`.
 impl Animal for Sheep {
-    // `Self` is the implementor type: `Sheep`.
+    // `Self` е типа на осъществителя: `Sheep`.
     fn new(name: &'static str) -> Sheep {
         Sheep { name: name, naked: false }
     }
@@ -55,23 +56,24 @@ impl Animal for Sheep {
 
     fn noise(&self) -> &'static str {
         if self.is_naked() {
-            "baaaaah?"
+            "беееее?"
         } else {
-            "baaaaah!"
+            "бееееее!"
         }
     }
     
-    // Default trait methods can be overridden.
+    // Методите по подразбиране, осъществени в отличителя могат да бъдат
+    // променени.
     fn talk(&self) {
-        // For example, we can add some quiet contemplation.
+        // Например можем да добавим малко тихо съзерцание.
         println!("{} pauses briefly... {}", self.name, self.noise());
     }
 }
 
 fn main() {
-    // Type annotation is necessary in this case.
+    // В този случай е нужно да се укаже типа.
     let mut dolly: Sheep = Animal::new("Dolly");
-    // TODO ^ Try removing the type annotations.
+    // ЗАДАЧА ^ Премахнете необходимостта от указване на типа на променливата.
 
     dolly.talk();
     dolly.shear();

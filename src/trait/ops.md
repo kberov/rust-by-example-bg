@@ -1,12 +1,14 @@
-# Operator Overloading
+# Промяна на оператори 
 
-In Ръждьо, many of the operators can be overloaded via traits. That is, some operators can
-be used to accomplish different tasks based on their input arguments. This is possible
-because operators are syntactic sugar for method calls. For example, the `+` operator in
-`a + b` calls the `add` method (as in `a.add(b)`). This `add` method is part of the `Add`
-trait. Hence, the `+` operator can be used by any implementor of the `Add` trait.
+В Ръждьо много от операторите могат да бъдат променени чрез отличители. Някои
+оператори може да се ползват за извършване на различни задачи, в зависимост от
+подадените им аргументи. Това е възможно, защото операторите са просто
+краснопис за извикване на методи. Например `+` в израза `a + b` извиква метода
+`add` (ей така `a.add(b)`). този метод `add` е част от толичителя `Add`. Така
+операторът `+` може да се ползва от всеки осъществител на отличтеля `Add`.
 
-A list of the traits, such as `Add`, that overload operators can be found in [`core::ops`][ops].
+Списък с отличители като `Add`, които променят оператори може да бъде намерен в
+[`core::ops`][ops].
 
 ```rust,editable
 use std::ops;

@@ -1,24 +1,24 @@
-# Derive
+# Производни
 
-The compiler is capable of providing basic implementations for some traits via
-the `#[derive]` [attribute][attribute]. These traits can still be
-manually implemented if a more complex behavior is required.
+Компилаторът може да предоставя просто осъществяване за някои отличители чрез
+[атрибута][attribute] `#[derive]`. Тези отличители пак могат да бъдат
+осъществени, ако е необходимо по-сложно поведение.
 
-The following is a list of derivable traits:
-* Comparison traits:
+Ето списък с отличители, от които можем да създаваме [производни][^derive]:
+* Отличители за сравнение:
   [`Eq`][eq], [`PartialEq`][partial-eq], [`Ord`][ord], [`PartialOrd`][partial-ord].
-* [`Clone`][clone], to create `T` from `&T` via a copy.
-* [`Copy`][copy], to give a type 'copy semantics' instead of 'move semantics'.
-* [`Hash`][hash], to compute a hash from `&T`.
-* [`Default`][default], to create an empty instance of a data type.
-* [`Debug`][debug], to format a value using the `{:?}` formatter.
+* [`Clone`][clone], за създаване на `T` от `&T` чрез копиране.
+* [`Copy`][copy], да се направи даден тип "копируем" вместо "преместваем".
+* [`Hash`][hash], за изчисляване на хеш-сума от `&T`.
+* [`Default`][default], за създаване на празен обект от даден тип данни.
+* [`Debug`][debug], за форматиране на стойност чрез обозначението `{:?}`.
  
 ```rust,editable
-// `Centimeters`, a tuple struct that can be compared
+// `Centimeters` – разнороден списък, който може да бъде сравняван с друг
 #[derive(PartialEq, PartialOrd)]
 struct Centimeters(f64);
 
-// `Inches`, a tuple struct that can be printed
+// `Inches` – разнороден списък, който може да бъде отпечатван
 #[derive(Debug)]
 struct Inches(i32);
 
@@ -30,19 +30,19 @@ impl Inches {
     }
 }
 
-// `Seconds`, a tuple struct with no additional attributes
+// `Seconds` – разнороден списък без допълнителни атрибути
 struct Seconds(i32);
 
 fn main() {
     let _one_second = Seconds(1);
 
-    // Error: `Seconds` can't be printed; it doesn't implement the `Debug` trait
+    // Грешка: `Seconds` не може да се печати; не осъществява отличителя `Debug`
     //println!("One second looks like: {:?}", _one_second);
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА ^ Разкоментирайте този ред
 
-    // Error: `Seconds` can't be compared; it doesn't implement the `PartialEq` trait
+    // Грешка: `Seconds` не може да бъде сравняван; Не съществява отличителя `PartialEq`
     //let _this_is_true = (_one_second == _one_second);
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА ^ Разкоментирайте този ред
 
     let foot = Inches(12);
 
@@ -59,7 +59,11 @@ fn main() {
 
     println!("One foot is {} than one meter.", cmp);
 }
+
 ```
+Б.пр.
+
+[^derive]: производни – типове, които наследяват способности от отличители използвайки атрибута `#[derive]`. 
 
 ### See also:
 [`derive`][derive]

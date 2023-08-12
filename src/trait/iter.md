@@ -1,7 +1,7 @@
 # Повторители
 
-The [`Iterator`][iter] trait is used to implement iterators over collections
-such as arrays.
+Отличителят [`Iterator`][iter] се ползва за осъществяване на повторители върху
+набори от данни, каквиото са списъците.
 
 The trait requires only a method to be defined for the `next` element,
 which may be manually defined in an `impl` block or automatically

@@ -39,9 +39,9 @@ fn main() {
     let array1 = [1, 2, 3];
     let array2 = [4, 5, 6];
 
-    // `iter()` за поредици дава `&&i32`
+    // `iter()` за списъци дава `&&i32`
     println!("Find 2 in array1: {:?}", array1.iter()     .find(|&&x| x == 2));
-    // `into_iter()` за поредици дава `&i32`
+    // `into_iter()` за списъци дава `&i32`
     println!("Find 2 in array2: {:?}", array2.into_iter().find(|&x| x == 2));
     // ПОПРАВИ: да се промени кода, така че да работи за издание 2021
 }

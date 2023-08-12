@@ -123,7 +123,7 @@
     - [Промяна на оператори](trait/ops.md)
     - [Drop](trait/drop.md)
     - [Повторители](trait/iter.md)
-    - [`impl Trait`](trait/impl_trait.md)
+    - [`impl Черта`](trait/impl_trait.md)
     - [Клониране](trait/clone.md)
     - [Основни отличители](trait/supertraits.md)
     - [Уточняване на застъпващи се отличители](trait/disambiguating.md)

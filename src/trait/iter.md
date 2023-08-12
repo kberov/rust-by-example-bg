@@ -1,14 +1,14 @@
 # Повторители
 
 Отличителят [`Iterator`][iter] се ползва за осъществяване на повторители върху
-набори от данни, каквиото са списъците.
+набори от данни, каквито са списъците.
 
-The trait requires only a method to be defined for the `next` element,
-which may be manually defined in an `impl` block or automatically
-defined (as in arrays and ranges).
+Отличителят изисква само един метод за следващия (`next`) член. Той може да се
+опише на ръка в блок за осъществяване (`impl`) или да се ползва автоматично
+(както е в списъците и редиците[^range]).
 
-As a point of convenience for common situations, the `for` construct
-turns some collections into iterators using the [`.into_iter()`][intoiter] method.
+За удобство, в общия случай конструкцията `for` превръща някои набори в
+повторители с помощта на метода [`.into_iter()`][intoiter].
 
 ```rust,editable
 struct Fibonacci {
@@ -16,59 +16,60 @@ struct Fibonacci {
     next: u32,
 }
 
-// Implement `Iterator` for `Fibonacci`.
-// The `Iterator` trait only requires a method to be defined for the `next` element.
+// Осъществяваме `Iterator` за `Fibonacci`.
+// Отличителят `Iterator` изисква осъществяване само на един метод за следващия
+// (`next`) член.
 impl Iterator for Fibonacci {
-    // We can refer to this type using Self::Item
+    // Можем да ползваме този тип чрез Self::Item
     type Item = u32;
 
-    // Here, we define the sequence using `.curr` and `.next`.
-    // The return type is `Option<T>`:
-    //     * When the `Iterator` is finished, `None` is returned.
-    //     * Otherwise, the next value is wrapped in `Some` and returned.
-    // We use Self::Item in the return type, so we can change
-    // the type without having to update the function signatures.
+    // Тук описваме последователнос с `.curr` и `.next`.
+    // Типът за връщане е `Option<T>`:
+    //     * Когато `Iterator` свърши, връщаме `None`.
+    //     * Иначе обгръщаме следващата стойност в `Some` и я връщаме.
+    // Ползваме Self::Item като тип за връщане, така че можем да сменим типа и
+    // да не променяме обявленията на функциите.
     fn next(&mut self) -> Option<Self::Item> {
         let current = self.curr;
 
         self.curr = self.next;
         self.next = current + self.next;
 
-        // Since there's no endpoint to a Fibonacci sequence, the `Iterator` 
-        // will never return `None`, and `Some` is always returned.
+        // Тъй като в редицата на Фибоначи, `Iterator` никога няма да въне
+        // `None`, винаги връщаме `Some`.
         Some(current)
     }
 }
 
-// Returns a Fibonacci sequence generator
+// Връща производител на последователност на Фибоначи.
 fn fibonacci() -> Fibonacci {
     Fibonacci { curr: 0, next: 1 }
 }
 
 fn main() {
-    // `0..3` is an `Iterator` that generates: 0, 1, and 2.
+    // `0..3` е `Iterator`, който създава 0, 1, and 2.
     let mut sequence = 0..3;
 
-    println!("Four consecutive `next` calls on 0..3");
+    println!("Четири последователни извиквания на `next` върху редицата 0..3");
     println!("> {:?}", sequence.next());
     println!("> {:?}", sequence.next());
     println!("> {:?}", sequence.next());
     println!("> {:?}", sequence.next());
 
-    // `for` works through an `Iterator` until it returns `None`.
-    // Each `Some` value is unwrapped and bound to a variable (here, `i`).
+    // `for` работи върху обект, създаден от `Iterator` докато той върне `None`.
+    // Всяка стойност `Some` е рагърната и обвързана с променлива (тук – `i`).
     println!("Iterate through 0..3 using `for`");
     for i in 0..3 {
         println!("> {}", i);
     }
 
-    // The `take(n)` method reduces an `Iterator` to its first `n` terms.
+    // Методът `take(n)` смалява обекта от тип `Iterator` до първите му  `n` члена.
     println!("The first four terms of the Fibonacci sequence are: ");
     for i in fibonacci().take(4) {
         println!("> {}", i);
     }
 
-    // The `skip(n)` method shortens an `Iterator` by dropping its first `n` terms.
+    // Методът `skip(n)` скъсява обекта от тип `Iterator` като освобождава първите му `n` члена.
     println!("The next four terms of the Fibonacci sequence are: ");
     for i in fibonacci().skip(4).take(4) {
         println!("> {}", i);
@@ -76,13 +77,17 @@ fn main() {
 
     let array = [1u32, 3, 3, 7];
 
-    // The `iter` method produces an `Iterator` over an array/slice.
+    // Методът `iter` произвежда обект от тип `Iterator` върху списък или отрязък.
     println!("Iterate the following array {:?}", &array);
     for i in array.iter() {
         println!("> {}", i);
     }
 }
 ```
+
+Б.пр.
+
+[^range]: редица – range. https://bg.wikipedia.org/wiki/Редица
 
 [intoiter]: https://doc.rust-lang.org/std/iter/trait.IntoIterator.html
 [iter]: https://doc.rust-lang.org/core/iter/trait.Iterator.html

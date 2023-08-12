@@ -1,7 +1,7 @@
 # Supertraits
 
-Ръждьо doesn't have "inheritance", but you can define a trait as being a superset
-of another trait. For example:
+Ръждьо няма "наследяване", но можете да опишете отличител, който да е
+надмножество на друг отличител. Например:
 
 ```rust,editable
 trait Person {

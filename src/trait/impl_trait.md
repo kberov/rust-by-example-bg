@@ -1,65 +1,81 @@
-# `impl ИмеНаОтличител`
+# `impl Черта`
 
-`impl Trait` can be used in two locations:
+`impl Черта` може да се ползва на две места:
 
-1. as an argument type
-2. as a return type
+1. като тип за аргумент
+2. като тип за връщане
 
-## As an argument type
+## Като тип за аргумент
 
-If your function is generic over a trait but you don't mind the specific type, you can simplify the function declaration using `impl Trait` as the type of the argument.
+Ако функцията ви е обобщена чрез някакакъв отличител, но нямате нищо против
+уточняването на типа, може да опростите обявлението на функцията, като
+използвате правописа `impl Черта` като тип на аргумента.
 
-For example, consider the following code:
+За пример да разгледаме следния код:
 
 ```rust,editable
-fn parse_csv_document<R: std::io::BufRead>(src: R) -> std::io::Result<Vec<Vec<String>>> {
+fn parse_csv_document<R: std::io::BufRead>(src: R)
+    -> std::io::Result<Vec<Vec<String>>> {
     src.lines()
         .map(|line| {
-            // For each line in the source
+            // За всеки ред в източника
             line.map(|line| {
-                // If the line was read successfully, process it, if not, return the error
-                line.split(',') // Split the line separated by commas
-                    .map(|entry| String::from(entry.trim())) // Remove leading and trailing whitespace
-                    .collect() // Collect all strings in a row into a Vec<String>
+                // Ако редът е прочетен успешно, го обработваме,
+                // ако ли не – връщаме грешка
+                line.split(',') // Цепим реда по запетайки
+                    // Махаме водещи и следваши празноти
+                    .map(|entry| String::from(entry.trim()))
+                    // Събираме всички низове в реда във Vec<String>
+                    .collect()
             })
         })
-        .collect() // Collect all lines into a Vec<Vec<String>>
+        .collect() // Събираме всички редове във Vec<Vec<String>>
 }
 ```
 
-`parse_csv_document` is generic, allowing it to take any type which implements BufRead, such as `BufReader<File>` or `[u8]`,
-but it's not important what type `R` is, and `R` is only used to declare the type of `src`, so the function can also be written as:
+`parse_csv_document` е обобщена и това ѝ позволява да приема всякакъв тип,
+осъществяващ BufRead. Такива са `BufReader<File>` и `[u8]`. Не е важно какво
+точно е типа `R`. `R` се ползва само, за да бъде обявен типа на `src`, така че
+функцията може да бъде написана и така:
 
 ```rust,editable
-fn parse_csv_document(src: impl std::io::BufRead) -> std::io::Result<Vec<Vec<String>>> {
+fn parse_csv_document(src: impl std::io::BufRead)
+    -> std::io::Result<Vec<Vec<String>>> {
     src.lines()
         .map(|line| {
-            // For each line in the source
+            // За всеки ред в източника
             line.map(|line| {
-                // If the line was read successfully, process it, if not, return the error
-                line.split(',') // Split the line separated by commas
-                    .map(|entry| String::from(entry.trim())) // Remove leading and trailing whitespace
-                    .collect() // Collect all strings in a row into a Vec<String>
+                // Ако редът е прочетен успешно, го обработваме,
+                // ако ли не – връщаме грешка
+                line.split(',') // Цепим реда по запетайки
+                    // Махаме водещи и следваши празноти
+                    .map(|entry| String::from(entry.trim()))
+                    // Събираме всички низове в реда във Vec<String>
+                    .collect()
             })
         })
-        .collect() // Collect all lines into a Vec<Vec<String>>
+        .collect() // Събираме всички редове във Vec<Vec<String>>
 }
 ```
 
-Note that using `impl Trait` as an argument type means that you cannot explicitly state what form of the function you use, i.e. `parse_csv_document::<std::io::Empty>(std::io::empty())` will not work with the second example.
+Забележете, че иползвайки `impl Черта` като тип за аргумент, не можете
+изрично да кажете каква форма на функцията използвате. По-точно
+`parse_csv_document::<std::io::Empty>(std::io::empty())` няма да работи с
+втория пример.
 
 
-## As a return type
+## Като тип за връщане
 
-If your function returns a type that implements `MyTrait`, you can write its
-return type as `-> impl MyTrait`. This can help simplify your type signatures quite a lot!
+Ако вашата функция връща тип, който осъществява `MyTrait`, можете да опишете
+типа за връщане така: `-> impl MyTrait`. Това може доста да опрости обявленията
+на функциите ви.
 
 ```rust,editable
 use std::iter;
 use std::vec::IntoIter;
 
-// This function combines two `Vec<i32>` and returns an iterator over it.
-// Look how complicated its return type is!
+// Тази функция съчетава два вектора `Vec<i32>` и връща повторител за
+// съчетанието. Вижте колко е сложен типът за връщане!
 fn combine_vecs_explicit_return_type(
     v: Vec<i32>,
     u: Vec<i32>,
@@ -67,8 +83,8 @@ fn combine_vecs_explicit_return_type(
     v.into_iter().chain(u.into_iter()).cycle()
 }
 
-// This is the exact same function, but its return type uses `impl Trait`.
-// Look how much simpler it is!
+// Това е същата функция, но типът ѝ за връщане ползва `impl Черта`.
+// Вижте колко по-проста е!
 fn combine_vecs(
     v: Vec<i32>,
     u: Vec<i32>,
@@ -89,13 +105,12 @@ fn main() {
 }
 ```
 
-More importantly, some Ръждьо types can't be written out. For example, every
-closure has its own unnamed concrete type. Before `impl Trait` syntax, you had
-to allocate on the heap in order to return a closure. But now you can do it all
-statically, like this:
-
+Още повече, че някои типове в Ръждьо не могат да бъдат написани изрично.
+Например всяко затваряне има свой собствен безименен тип. Преди появата на
+правописа `impl Черта` трябваше да се задели място на купа̀, за да се
+върне затваряне. Но сега е възможно да се направи статично, ето така:
 ```rust,editable
-// Returns a function that adds `y` to its input
+// Връща функция, която добавя `y` към входа си
 fn make_adder_function(y: i32) -> impl Fn(i32) -> i32 {
     let closure = move |x: i32| { x + y };
     closure
@@ -107,10 +122,11 @@ fn main() {
 }
 ```
 
-You can also use `impl Trait` to return an iterator that uses `map` or `filter`
-closures! This makes using `map` and `filter` easier. Because closure types don't
-have names, you can't write out an explicit return type if your function returns
-iterators with closures. But with `impl Trait` you can do this easily:
+Можете също да пишете `impl Черта`, за да върнете повторител, който
+ползва затварянията `map` или `filter`. Това прави употребата на `map` и
+`filter` по-лесна. Понеже типовете на затварянията нямат имена, не можете да
+напишете изрично името на типа за връщане, ако функцията ви връща повторител
+със затваряне. Но с помощта на `impl Черта` това е лесно:
 
 ```rust,editable
 fn double_positives<'a>(numbers: &'a Vec<i32>) -> impl Iterator<Item = i32> + 'a {

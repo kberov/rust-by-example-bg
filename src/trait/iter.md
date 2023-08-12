@@ -1,4 +1,4 @@
-# Iterators
+# Повторители
 
 The [`Iterator`][iter] trait is used to implement iterators over collections
 such as arrays.

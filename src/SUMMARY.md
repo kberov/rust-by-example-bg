@@ -122,7 +122,7 @@
     - [Връщане на отличители с `dyn`](trait/dyn.md)
     - [Промяна на оператори](trait/ops.md)
     - [Drop](trait/drop.md)
-    - [Iterators](trait/iter.md)
+    - [Повторители](trait/iter.md)
     - [`impl Trait`](trait/impl_trait.md)
     - [Клониране](trait/clone.md)
     - [Основни отличители](trait/supertraits.md)

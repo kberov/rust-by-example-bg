@@ -129,7 +129,8 @@ fn main() {
 
 [^borrows]: заема, взема на заем – borrows
 
-[^consumes]: употребява (параметри, поредица, набор и т.н.) – consumes (parameters, array, collection etc.)
+[^consumes]: употребява и поглъща, поглъща (параметри, поредица, набор и т.н.)
+  – consumes (parameters, array, collection etc.)
 
 [^moved]: преместен – moved. Виж [Собственост и премествания][move]
 

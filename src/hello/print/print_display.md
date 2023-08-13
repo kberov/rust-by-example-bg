@@ -83,7 +83,7 @@ fn main() {
     let big_range =   MinMax(-300, 300);
     let small_range = MinMax(-3, 3);
 
-    println!("Голямата поредица е {big}, а малката е {small}",
+    println!("Големият списък е {big}, а малкият е {small}",
              small = small_range,
              big = big_range);
 

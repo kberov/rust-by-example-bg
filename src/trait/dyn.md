@@ -1,35 +1,48 @@
-# Returning Traits with `dyn`
+# Връщане на отличители с `dyn` 
 
-The Ръждьо compiler needs to know how much space every function's return type requires. This means all your functions have to return a concrete type. Unlike other languages, if you have a trait like `Animal`, you can't write a function that returns `Animal`, because its different implementations will need different amounts of memory. 
+Компилаторът на Ръждьо трябва да знае колко място в паметта изисква всеки тип
+за връщане от функция. Това означава, че всичките ви функции трябва да връщат
+определен тип. За разлика от други езици, ако имате отличител `Animal`, тук не
+можете да напишете функция, която връща `Animal`, защото различните ѝ
+въплъщения ще изискват различно количество памет.
 
-However, there's an easy workaround. Instead of returning a trait обект directly, our functions return a `Box` which _contains_ some `Animal`. A `box` is just a reference to some memory in the heap. Because a reference has a statically-known size, and the compiler can guarantee it points to a heap-allocated `Animal`, we can return a trait from our function!
+Все пак това ограничение може лесно да се заобиколи. Вместо да връщат направо
+обект от отличител, функциите могат да връщат `Box` (кутия), която _съдържа_
+някакво въплъщение на `Animal`. Кутията е просто препратка към някакво място от
+паметта в купа[^heap]. Понеже размерът на препратката се знае, и компилаторът
+може да гарантира, че тя сочи към `Animal`, за което е заделено място в купа,
+нашата функция може да върне отличител.  
 
-Ръждьо tries to be as explicit as possible whenever it allocates memory on the heap. So if your function returns a pointer-to-trait-on-heap in this way, you need to write the return type with the `dyn` keyword, e.g. `Box<dyn Animal>`.
+
+Ръждьо гледа да бъде колкото се може по-изричен, когато заделя памет на купа.
+Така че, ако функцията ви връща препратка-към-отличител-на-купа, трябва да
+напишете пред типа си ключовата дума `dyn`.
 
 ```rust,editable
 struct Sheep {}
 struct Cow {}
 
 trait Animal {
-    // Instance method signature
+    // обявление на метод
     fn noise(&self) -> &'static str;
 }
 
-// Implement the `Animal` trait for `Sheep`.
+// Осъществяваме отличителя `Animal` за `Sheep`.
 impl Animal for Sheep {
     fn noise(&self) -> &'static str {
-        "baaaaah!"
+        "беееее!"
     }
 }
 
-// Implement the `Animal` trait for `Cow`.
+// Осъществяваме отличителя `Animal` за `Cow`.
 impl Animal for Cow {
     fn noise(&self) -> &'static str {
-        "moooooo!"
+        "мууууу!"
     }
 }
 
-// Returns some struct that implements Animal, but we don't know which one at compile time.
+// Връща някаква структура, която осъществява някакво животно (Animal), но не
+// знаем кое точно по време на компилация.
 fn random_animal(random_number: f64) -> Box<dyn Animal> {
     if random_number < 0.5 {
         Box::new(Sheep {})
@@ -41,7 +54,10 @@ fn random_animal(random_number: f64) -> Box<dyn Animal> {
 fn main() {
     let random_number = 0.234;
     let animal = random_animal(random_number);
-    println!("You've randomly chosen an animal, and it says {}", animal.noise());
+    println!("Избрахте случайно животно и то казва {}", animal.noise());
 }
 
 ```
+Б.пр.
+
+[^heap]: куп същ. м. р. ед, ч. – the heap memory

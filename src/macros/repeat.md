@@ -1,21 +1,21 @@
-# Repeat
+# Повторение
 
-Macros can use `+` in the argument list to indicate that an argument may
-repeat at least once, or `*`, to indicate that the argument may repeat zero or
-more times.
+В макросите може да се използва знакът `+` в списъка с аргументи, за да се
+обозначи, че даден аргумент може да се повтаря[^repeat] поне веднъж, или знакът `*`, за
+да се обозначи, че аргументът може да се повтаря нула или повече пъти.
 
-In the following example, surrounding the matcher with `$(...),+` will
-match one or more expression, separated by commas.
-Also note that the semicolon is optional on the last case.
+В следващия пример, ако оградим израза за съвпадението с `$(...),+`, това ще
+съвпадне с един или повече _израза_ (`expr`), разделени със запетая. Забележете също, че
+знакът `;` не е задължителен за последния _израз_.[^expr]
 
 ```rust,editable
-// `find_min!` will calculate the minimum of any number of arguments.
+// `find_min!` ще намери най-малкото число от незнаен брой аргументи.
 macro_rules! find_min {
-    // Base case:
+    // Основен случай:
     ($x:expr) => ($x);
-    // `$x` followed by at least one `$y,`
+    // `$x` последвано от поне едно `$y,`
     ($x:expr, $($y:expr),+) => (
-        // Call `find_min!` on the tail `$y`
+        // Извикваме `find_min!` върху последното `$y`
         std::cmp::min($x, find_min!($($y),+))
     )
 }
@@ -26,3 +26,8 @@ fn main() {
     println!("{}", find_min!(5, 2 * 3, 4));
 }
 ```
+
+## Б.пр.
+
+[^repeat]: Повторение – Repeat
+

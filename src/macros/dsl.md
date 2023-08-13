@@ -1,18 +1,19 @@
-# Domain Specific Languages (DSLs)
+# Езици с особено предназначение (ЕОП) 
 
-A DSL is a mini "language" embedded in a Ръждьо macro. It is completely valid
-Ръждьо because the macro system expands into normal Ръждьо constructs, but it looks
-like a small language. This allows you to define concise or intuitive syntax for
-some special functionality (within bounds).
+ЕОП е малък език, внедрен в макроси на Ръждьо. Това си е напълно действащ
+Ръждьо, защото уредбата за макроси го разгръща в обикновени изявления и изрази
+на Ръждьо, но изглежда като малък език. Това ви позволява да опишете сбит или
+интуитивен правопис за някакви особени (ограничени) дейности.
 
-Suppose that I want to define a little calculator API. I would like to supply
-an expression and have the output printed to console.
+Да предположим, че искам да опиша _ВП (Взаимодействие за Приложение)_[^API] за
+калкулатор. Бих искал да мога като напиша математически израз, изходът да се
+изведе на конзолата.
 
 ```rust,editable
 macro_rules! calculate {
     (eval $e:expr) => {
         {
-            let val: usize = $e; // Force types to be integers
+            let val: usize = $e; // Насилваме типовете да са цели числа
             println!("{} = {}", stringify!{$e}, val);
         }
     };
@@ -20,7 +21,7 @@ macro_rules! calculate {
 
 fn main() {
     calculate! {
-        eval 1 + 2 // hehehe `eval` is _not_ a Ръждьо keyword!
+        eval 1 + 2 // Хи-хи, `eval`  _не е_ ключова дума в Ръждьо!
     }
 
     calculate! {
@@ -29,16 +30,23 @@ fn main() {
 }
 ```
 
-Output:
+Изход:
 
 ```txt
 1 + 2 = 3
 (1 + 2) * (3 / 4) = 0
 ```
 
-This was a very simple example, but much more complex interfaces have been
-developed, such as [`lazy_static`](https://crates.io/crates/lazy_static) or
+Това беше простичък израз, но има разработени много по-сложни взаимодействия,
+като например [`lazy_static`](https://crates.io/crates/lazy_static) или
 [`clap`](https://crates.io/crates/clap).
 
-Also, note the two pairs of braces in the macro. The outer ones are
-part of the syntax of `macro_rules!`, in addition to `()` or `[]`.
+Обърнете внимание и на двете двойки фигурни скоби в макроса. Външните са част
+от правописа на `macro_rules!`, а има и  `()`, и `[]`.
+
+
+## Б.пр.
+
+[^API]: ВП (Взаимодействие за Приложение) – API (Application Programmming Interface)
+
+

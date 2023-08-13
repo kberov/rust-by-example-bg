@@ -1,27 +1,28 @@
-# Disambiguating overlapping traits
+# Уточняване на застъпващи се отличители 
 
-A type can implement many different traits. What if two traits both require
-the same name? For example, many traits might have a method named `get()`.
-They might even have different return types!
+Всеки тип може да осъществява много различни отличители. Но какво да правим,
+ако два отличителя изискват осъществяване на метод с едно и също име? Например
+много отличители може да имат метод с име `get()`. А тези методи може би връщат
+и различен тип данни!
 
-Good news: because each trait implementation gets its own `impl` block, it's
-clear which trait's `get` method you're implementing.
+Имаме добри новини. Понеже всяко осъществяване на отличител става в отделен
+блок `impl`, винаги е ясно чий метод `get` осъществяваме.
 
-What about when it comes time to _call_ those methods? To disambiguate between
-them, we have to use Fully Qualified Syntax.
+Но пък как ще извикаме тези методи? За да ги различим, се нуждаем от
+_Пълнокачествен Правопис_[^fully_qualified].
 
 ```rust,editable
 trait UsernameWidget {
-    // Get the selected username out of this widget
+    // Връща избраното с тази джаджа потребителско име
     fn get(&self) -> String;
 }
 
 trait AgeWidget {
-    // Get the selected age out of this widget
+    // Връща избраното с тази джаджа потребителско име
     fn get(&self) -> u8;
 }
 
-// A form with both a UsernameWidget and an AgeWidget
+// Форма за попълване с полета UsernameWidget и AgeWidget
 struct Form {
     username: String,
     age: u8,
@@ -45,9 +46,8 @@ fn main() {
         age: 28,
     };
 
-    // If you uncomment this line, you'll get an error saying
-    // "multiple `get` found". Because, after all, there are multiple methods
-    // named `get`.
+    // Ако разкоментирате този ред, ще получите грешка, която казва
+    // "Намерени са множество `get`", защото наистина е така.
     // println!("{}", form.get());
 
     let username = <Form as UsernameWidget>::get(&form);
@@ -56,6 +56,10 @@ fn main() {
     assert_eq!(28, age);
 }
 ```
+
+## Б.пр.
+
+[^fully_qualified]: пълнокачествен правопис – fully qualified syntax. Такова описание на нещатата, което не оставя неясноти.
 
 ### See also:
 

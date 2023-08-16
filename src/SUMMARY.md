@@ -137,7 +137,7 @@
     - [Променлив брой аргументи](macros/variadics.md)
 - [Обработка на грешки](error.md)
     - [`panic`](error/panic.md)
-    - [`abort` & `unwind`](error/abort_unwind.md)
+    - [`abort` и `unwind`](error/abort_unwind.md)
     - [`Option` & `unwrap`](error/option_unwrap.md)
         - [Unpacking options with `?`](error/option_unwrap/question_mark.md)
         - [Combinators: `map`](error/option_unwrap/map.md)

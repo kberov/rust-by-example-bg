@@ -1,9 +1,13 @@
-# `abort` and `unwind`
+# `abort` и `unwind`
 
-The previous section illustrates the error handling mechanism `panic`.  Different code paths can be conditionally compiled based on the panic setting. The current values available are `unwind` and `abort`. 
+Предният раздел показа `panic`. Различните пътища, по които поема кода, могат
+да бъдат компилирани условно в ависимост от настройката за `panic`. Сега
+възможните стойности са "разгъване" (`unwind`) и „преждевременно прекратяване”
+(`abort`). 
 
 
-Building on the prior lemonade example, we explicitly use the panic strategy to exercise different lines of code.  
+Ако разработим предния пример с лимонадата, можем изрично да ползваме
+стратегията на паникьосване, за да насочим програмата по различен път.  
 
 ```rust,editable,mdbook-runnable
 
@@ -22,7 +26,7 @@ fn main() {
 }
 ```
 
-Here is another example focusing on rewriting `drink()` and explicitly use the `unwind` keyword.
+Ето друг пример, който пренаписва `drink()` и използва изрично ключовата дума `unwind`.
 
 ```rust,editable
 
@@ -43,7 +47,7 @@ fn main() {
 }
 ```
 
-The panic strategy can be set from the command line by using `abort` or `unwind`.
+Стратегията за паникьосване може да бъде зададена на командния ред, като ползваме `abort` или `unwind`.
 
 ```console
 rustc  lemonade.rs -C panic=abort

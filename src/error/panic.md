@@ -1,15 +1,15 @@
 # `panic`
 
-The simplest error handling mechanism we will see is `panic`. It prints an
-error message, starts unwinding the stack, and usually exits the program.
-Here, we explicitly call `panic` on our error condition:
+Най-простата обработка на грешки  е `panic`. Този макрос отпечатва съобщение за
+грешка, започва да размотава стека и обикновено прекратява програмата. Тук
+изрично извикваме `panic` при нашето условие за грешка:
 
 ```rust,editable,ignore,mdbook-runnable
 fn drink(beverage: &str) {
-    // You shouldn't drink too much sugary beverages.
+    // Не е добре да се пият много сладки напитки.
     if beverage == "lemonade" { panic!("AAAaaaaa!!!!"); }
 
-    println!("Some refreshing {} is all I need.", beverage);
+    println!("Просто ми трябва нещо освежаващо като {}.", beverage);
 }
 
 fn main() {
@@ -19,4 +19,5 @@ fn main() {
 }
 ```
 
-The first call to `drink` works. The second panics and thus the third is never called.
+Първото извикване  на `drink` работи. Второто се паникьосва, а до третото не
+достигаме никога.

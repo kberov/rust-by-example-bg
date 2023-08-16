@@ -47,13 +47,16 @@ fn main() {
 
 [^system]: уредба (система) – system
 
-[^metaprogramming]: метапрограмиране – metaprogramming. Програмиране на програмирането – създаване на изходен програмен код, чрез програмиране.
+[^metaprogramming]: метапрограмиране – metaprogramming. Програмиране на
+  програмирането – създаване на изходен програмен код, чрез програмиране.
 
 [^expanded]: разгърнат (програмен код) – expanded
 
 [^abstract]: отвлечен (за понятие), абстрактен – abstract
 
-[^DSL]: Езици с особено предназначение – Domain-specific languages
+[^DSL]: Езици с особено предназначение – Domain-specific languages. Обратното
+  на Езици с общо предназначение – General purpose programming languages,
+  какъвто е Ръждьо.
 
 [^VI]: Взаимодействия с променлив брой аргументи – Variadic interfaces
 

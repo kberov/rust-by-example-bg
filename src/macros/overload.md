@@ -1,23 +1,24 @@
-# Overload
+# Презареждане
 
-Macros can be overloaded to accept different combinations of arguments. 
-In that regard, `macro_rules!` can work similarly to a match block:
+Макросите могат да бъдат презареждани[^Overload] да приемат различни съчетания от
+аргументи. В този смисъл `macro_rules!` може да работи подобно на блок за
+сравнение на стойности (`match`).
 
 ```rust,editable
-// `test!` will compare `$left` and `$right`
-// in different ways depending on how you invoke it:
+// `test!` ще сравни `$left` и `$right`
+// по различни начини в зависимост от това как го извикате:
 macro_rules! test {
-    // Arguments don't need to be separated by a comma.
-    // Any template can be used!
-    ($left:expr; and $right:expr) => {
-        println!("{:?} and {:?} is {:?}",
+    // Не е нужно аргументите да бъдат разделени със запетаи.
+    // Може да се използва всякакъв образец!
+    ($left:expr; и $right:expr) => {
+        println!("{:?} и {:?} е {:?}",
                  stringify!($left),
                  stringify!($right),
                  $left && $right)
     };
-    // ^ each arm must end with a semicolon.
-    ($left:expr; or $right:expr) => {
-        println!("{:?} or {:?} is {:?}",
+    // ^ всяко разклонение трябва да завършва с точка и запетая.
+    ($left:expr; или $right:expr) => {
+        println!("{:?} или {:?} е {:?}",
                  stringify!($left),
                  stringify!($right),
                  $left || $right)
@@ -25,7 +26,11 @@ macro_rules! test {
 }
 
 fn main() {
-    test!(1i32 + 1 == 2i32; and 2i32 * 2 == 4i32);
-    test!(true; or false);
+    test!(1i32 + 1 == 2i32; и 2i32 * 2 == 4i32);
+    test!(true; или false);
 }
 ```
+
+## Б. пр.
+
+[^Overload]: Презареждане (Презаписване) – Overloading

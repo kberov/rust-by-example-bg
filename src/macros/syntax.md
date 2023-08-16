@@ -1,12 +1,20 @@
-# Syntax
+# Правопис
 
-In following subsections, we will show how to define macros in Ръждьо.
-There are three basic ideas:
+В следващите подраздели ще покажем как се описват макроси в Ръждьо.
+Има три основни понятия:
 
-- [Patterns and Designators][designators]
-- [Overloading][overloading]
-- [Repetition][repetition]
+- [Образци и обозначители][designators][^PD]
+- [Презаписване][overloading][^overloading]
+- [Повторение][repetition]
 
 [designators]: designators.md
 [overloading]: overload.md
 [repetition]: repeat.md
+
+## Б.пр.
+
+[^PD]: Образци и обозначители – Patterns and Designators
+
+[^overloading]: Презаписване – Overloading
+
+

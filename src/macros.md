@@ -1,40 +1,60 @@
 # macro_rules!
 
-Ръждьо provides a powerful macro system that allows metaprogramming. As you've
-seen in previous chapters, macros look like functions, except that their name
-ends with a bang `!`, but instead of generating a function call, macros are
-expanded into source code that gets compiled with the rest of the program.
-However, unlike macros in C and other languages, Ръждьо macros are expanded into
-abstract syntax trees, rather than string preprocessing, so you don't get
-unexpected precedence bugs.
+Ръждьо предоставя мощна уредба[^system] за макроси, която позволява
+метапрограмиране[^metaprogramming]. Както видяхме в предишните глави, макросите
+изглеждат като функции, само че завършват накрая с удивителен знак `!`. Но
+вместо да създават извикване на функция, макросите биват разгърнати[^expanded]
+в изходен код, който се компилира с другия код в програмата. За разлика, обаче,
+от макросите в C и други езици, ръждьовите макроси биват разгърнати в
+абстрактни[^abstract] правописни дървета, а не просто като предварително
+обработени низове (състоящи се от програмен код). Така не ви се случват
+неочаквани бъгове, например заради предимството на операторите при извикване.
 
-Macros are created using the `macro_rules!` macro.
+Макроси се създават с помощтта на макроса `macro_rules!`
 
 ```rust,editable
-// This is a simple macro named `say_hello`.
+// Това е простичък макрос, наречен `say_hello`.
 macro_rules! say_hello {
-    // `()` indicates that the macro takes no argument.
+    // `()` означава, че макросът не приема аргументи.
     () => {
-        // The macro will expand into the contents of this block.
+        // Макросът ще се разгърне както е съдържанието на този блок.
         println!("Hello!")
     };
 }
 
 fn main() {
-    // This call will expand into `println!("Hello")`
+    // Това извикване се рагръща като `println!("Hello")`
     say_hello!()
 }
 ```
 
-So why are macros useful?
+И така. Защо са полезни макросите?
 
-1. Don't repeat yourself. There are many cases where you may need similar
-   functionality in multiple places but with different types. Often, writing a
-   macro is a useful way to avoid repeating code. (More on this later)
+1. Избягване на повторения (не се повтаряй). Има много случаи, където може да
+   ви трябва подобна функционалност на различни места, но с различни типове.
+   Често написването на макрос е полезен начин за избягване на повторения в
+   кода. (Повече по-късно)
 
-2. Domain-specific languages. Macros allow you to define special syntax for a
-   specific purpose. (More on this later)
+2. Езици с особено предназначение.[^DSL] Макросите позволяват да се
+   описва определен правопис за точно определена цел. (Повече по-късно)
 
-3. Variadic interfaces. Sometimes you want to define an interface that takes a
-   variable number of arguments. An example is `println!` which could take any
-   number of arguments, depending on the format string. (More on this later)
+3. Взаимодействия с променлив брой аргументи.[^VI] Понякога искате да опишете
+   взаимодействие[^interface], което приема различен брой аргументи. Един пример е
+   `println!`, който приема различен брой аргументи в зависимост от означенията
+   в низа за форматиране. (Повече по-късно)
+
+## Б. пр.
+
+[^system]: уредба (система) – system
+
+[^metaprogramming]: метапрограмиране – metaprogramming. Програмиране на програмирането – създаване на изходен програмен код, чрез програмиране.
+
+[^expanded]: разгърнат (програмен код) – expanded
+
+[^abstract]: отвлечен (за понятие), абстрактен – abstract
+
+[^DSL]: Езици с особено предназначение – Domain-specific languages
+
+[^VI]: Взаимодействия с променлив брой аргументи – Variadic interfaces
+
+[^interface]: взаимодействие (интерфейс) – interface

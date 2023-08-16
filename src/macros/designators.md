@@ -1,32 +1,32 @@
-# Designators
+# Обозначители
 
-The arguments of a macro are prefixed by a dollar sign `$` and type annotated
-with a *designator*:
+Пред аргументите на макроса се поставя знакът за долар `$` и се отбелязват като
+тип чрез *обозначител*[^designator]:
 
 ```rust,editable
 macro_rules! create_function {
-    // This macro takes an argument of designator `ident` and
-    // creates a function named `$func_name`.
-    // The `ident` designator is used for variable/function names.
+    // Този макрос приема един аргумент с обозначител `ident` и създава функция,
+    // наречена `$func_name`. Обозначителят `ident` се използва за имена на
+    // променливи и функции.
     ($func_name:ident) => {
         fn $func_name() {
-            // The `stringify!` macro converts an `ident` into a string.
-            println!("You called {:?}()",
+            // Макросът `stringify!` превръща `ident` в низ.
+            println!("Вие извикахте {:?}()",
                      stringify!($func_name));
         }
     };
 }
 
-// Create functions named `foo` and `bar` with the above macro.
+// Създаваме функции, именувани `foo` и `bar` с горния макрос.
 create_function!(foo);
 create_function!(bar);
 
 macro_rules! print_result {
-    // This macro takes an expression of type `expr` and prints
-    // it as a string along with its result.
-    // The `expr` designator is used for expressions.
+    // Този макрос приема израз от тип `expr` и го отпечатва
+    // като низ заедно с изхода от него.
+    // Обозначителят `expr` се използва за изрази.
     ($expression:expr) => {
-        // `stringify!` will convert the expression *as it is* into a string.
+        // `stringify!` ще превърне израза *както си е* в низ.
         println!("{:?} = {:?}",
                  stringify!($expression),
                  $expression);
@@ -39,7 +39,7 @@ fn main() {
 
     print_result!(1u32 + 1);
 
-    // Recall that blocks are expressions too!
+    // Да не забравяме, че блоковете също са изрази!
     print_result!({
         let x = 1u32;
 
@@ -48,20 +48,26 @@ fn main() {
 }
 ```
 
-These are some of the available designators:
+Ето някои от наличните [типове] обозначители:
 
 * `block`
-* `expr` is used for expressions
-* `ident` is used for variable/function names
+* `expr` се използва за указване на изрази
+* `ident` се използва за задаване имена на променливи и функции
 * `item`
-* `literal` is used for literal constants
-* `pat` (*pattern*)
+* `literal`се използва за обозначаване на буквални константи
+* `pat` (*образец*)
 * `path`
 * `stmt` (*изявлениe*)
-* `tt` (*token tree*)
-* `ty` (*type*)
-* `vis` (*visibility qualifier*)
+* `tt` (*дърво от признаци*[^token])
+* `ty` (*тип*)
+* `vis` (*окачествител на видимостта*)
 
-For a complete list, see the [Ръждьо Reference].
+За да видите пълния списък, погледнете в [Справочника на Ръждьо][Reference].
 
-[Ръждьо Reference]: https://doc.rust-lang.org/reference/macros-by-example.html
+[Reference]: https://doc.rust-lang.org/reference/macros-by-example.html
+
+## Б.пр.
+
+[^designator]: обозначител – designator
+
+[^token]  знак, признак, белег; опознавателен знак; – token

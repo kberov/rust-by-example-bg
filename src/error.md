@@ -1,9 +1,10 @@
-# Error handling
+# Обработка на грешки 
 
-Error handling is the process of handling the possibility of failure. For
-example, failing to read a file and then continuing to use that *bad* input
-would clearly be problematic. Noticing and explicitly managing those errors
-saves the rest of the program from various pitfalls.
+Обработката на грешки е действието, което се предприема в случай на провал.
+Например, ако продължим изпълнението на програмата въпреки неуспешно прочитане
+на файл, определено ще имаме затруднения с използването на входните данни.
+Отчитането и изричното управление на тези грешки спасява програмата от
+по-натататъшни провали.
 
 There are various ways to deal with errors in Ръждьо, which are described in the
 following subchapters. They all have more or less subtle differences and different

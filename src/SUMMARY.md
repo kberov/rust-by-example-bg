@@ -134,7 +134,7 @@
         - [Повторение](macros/repeat.md)
     - [НСП (Не Се Повтаряй!)](macros/dry.md)
     - [ЕОП (Езици с особено предназначение)](macros/dsl.md)
-    - [Variadics](macros/variadics.md)
+    - [Променлив брой аргументи](macros/variadics.md)
 - [Обработка на грешки](error.md)
     - [`panic`](error/panic.md)
     - [`abort` & `unwind`](error/abort_unwind.md)

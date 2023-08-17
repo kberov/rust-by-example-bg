@@ -1,36 +1,38 @@
-# Defining an error type
+# Описване на тип за грешка 
 
-Sometimes it simplifies the code to mask all of the different errors with a
-single type of error.  We'll show this with a custom error.
+Понякога кодът може да бъде опростен, като се маскират всички различни грешки
+с единен тип. Щем показа това с потребителска грешка.
 
-Ръждьо allows us to define our own error types. In general, a "good" error type:
+Ръждьо ни позволява да описваме собствени типове за грешки. Ето общите
+изисквания за „добър” тип грешка:
 
-* Represents different errors with the same type
-* Presents nice error messages to the user
-* Is easy to compare with other types
-    - Good: `Err(EmptyVec)`
-    - Bad: `Err("Please use a vector with at least one element".to_owned())`
-* Can hold information about the error
-    - Good: `Err(BadChar(c, position))`
-    - Bad: `Err("+ cannot be used here".to_owned())`
-* Composes well with other errors
+* Представя различни грешки чрез еднакъв тип;
+* Показва приятни на вид съобщения за грешка;
+* Лесен е за сравняване с други типове:
+    - Добре: `Err(EmptyVec)`;
+    - Зле: `Err("Please use a vector with at least one element".to_owned())`.
+* Може да съдържа сведения за грешката:
+    - Добре: `Err(BadChar(c, position))`;
+    - Зле: `Err("+ cannot be used here".to_owned())`.
+* Подхожда си с другите грешки.
 
 ```rust,editable
 use std::fmt;
 
 type Result<T> = std::result::Result<T, DoubleError>;
 
-// Define our error types. These may be customized for our error handling cases.
-// Now we will be able to write our own errors, defer to an underlying error
-// implementation, or do something in between.
+// Описваме наши типове за грешки. Можем да ги нагодим за начина, по който
+// обработваме грешките. Сега ще можем да си пишем наши грешки, да отпращаме към
+// някакво вътрешно осъществление за грешка, или нещо между двете.
 #[derive(Debug, Clone)]
 struct DoubleError;
 
-// Generation of an error is completely separate from how it is displayed.
-// There's no need to be concerned about cluttering complex logic with the display style.
+// Хвърлянето на грешка е напълно отделно от това как се показва.
+// Не се притеснявайте, ако имате сложна логика в начина на показване.
 //
-// Note that we don't store any extra info about the errors. This means we can't state
-// which string failed to parse without modifying our types to carry that information.
+// Забележете, че не съхраняваме никакви допълнителни сведения за грешките.
+// Това означава, че не можем да потвърдим точно кой низ не може да бъде разбран,
+// без да променим нашите типове, така че да носят тези данни със себе си.
 impl fmt::Display for DoubleError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "invalid first item to double")
@@ -39,11 +41,11 @@ impl fmt::Display for DoubleError {
 
 fn double_first(vec: Vec<&str>) -> Result<i32> {
     vec.first()
-        // Change the error to our new type.
+        // Променяме грешката да бъде от нашия нов тип.
         .ok_or(DoubleError)
         .and_then(|s| {
             s.parse::<i32>()
-                // Update to the new error type here also.
+                // Тук също ползваме новия тип.
                 .map_err(|_| DoubleError)
                 .map(|i| 2 * i)
         })

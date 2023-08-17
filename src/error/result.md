@@ -1,31 +1,32 @@
 # `Result`
 
-[`Result`][result] is a richer version of the [`Option`][option] type that
-describes possible *error* instead of possible *absence*.
+[`Result`][result] е по-богата разновидност на типа [`Option`][option], която
+описва възможна *грешка* вместо възможна *липса* на стойност.
 
-That is, `Result<T, E>` could have one of two outcomes:
+Сиреч, `Result<T, E>` може да има една от следните стойности:
 
-* `Ok(T)`: An element `T` was found
-* `Err(E)`: An error was found with element `E`
+* `Ok(T)`: Намерен е член от тип `T`
+* `Err(E)`: Открита е грешка, чиято стойност е от тип `E`
 
-By convention, the expected outcome is `Ok` while the unexpected outcome is `Err`.
+По уговорка, очакваният изход е `Ok`, докато неочакваният изход е `Err`.
 
-Like `Option`, `Result` has many methods associated with it. `unwrap()`, for
-example, either yields the element `T` or `panic`s. For case handling,
-there are many combinators between `Result` and `Option` that overlap.
+Както `Option`, `Result` има много придадени методи. `unwrap()` например, или
+произвежда член от тип `T`, или завършва програмата с `panic`. За обработка на
+различни случаи `Result` има много припокриващи се с `Option` съчетатели.
 
-In working with Ръждьо, you will likely encounter methods that return the
-`Result` type, such as the [`parse()`][parse] method. It might not always
-be possible to parse a string into the other type, so `parse()` returns a
-`Result` indicating possible failure.
+Докато работите с Ръждьо, вероятно ще се натъквате на методи, които връщат типа
+`Result`. Такъв е методът [`parse()`][parse]. Не винаги е възможно да се
+разбере целевия тип при разбора на низ. Затова `parse()` връща `Result` и така
+показва, че е възможен неуспех.
 
-Let's see what happens when we successfully and unsuccessfully `parse()` a string:
+Нека видим какво се случва, когато успешно и неуспешно `parse()` (разбираме –
+правим разбор на, б. пр.) низ:
 
 ```rust,editable,ignore,mdbook-runnable
 fn multiply(first_number_str: &str, second_number_str: &str) -> i32 {
-    // Let's try using `unwrap()` to get the number out. Will it bite us?
+    // Нека пробваме да извлечем числото с `unwrap()`. Дали ще ни ухапе?
     let first_number = first_number_str.parse::<i32>().unwrap();
-    let second_number = second_number_str.parse::<i32>().unwrap();
+    let second_number: i32 = second_number_str.parse().unwrap();
     first_number * second_number
 }
 
@@ -38,17 +39,17 @@ fn main() {
 }
 ```
 
-In the unsuccessful case, `parse()` leaves us with an error for `unwrap()`
-to `panic` on. Additionally, the `panic` exits our program and provides an
-unpleasant error message.
+При неуспешния случай `parse()` ни оставя грешка tа `unwrap()` да се паникьоса.
+Допълнително `panic` прекратява програмата ни и показва неприятно съобщение за
+грешка.
 
-To improve the quality of our error message, we should be more specific
-about the return type and consider explicitly handling the error.
+За да подобрим качеството на нашето съобщение за грешка, трябва да уточним
+какъв тип ще връщаме и да помислим как ще обработваме грешката. 
 
-## Using `Result` in `main`
+## Използване на `Result` в `main`
 
-The `Result` type can also be the return type of the `main` function if
-specified explicitly. Typically the `main` function will be of the form:
+Типа `Result` може да се връща също и от функцията `main`, ако укажем това
+изрично. Обичайно `main` има следния вид:
 
 ```rust
 fn main() {
@@ -56,10 +57,10 @@ fn main() {
 }
 ```
 
-However `main` is also able to have a return type of `Result`. If an error
-occurs within the `main` function it will return an error code and print a debug
-representation of the error (using the [`Debug`] trait). The following example
-shows such a scenario and touches on aspects covered in [the following section].
+Обаче `main` може да връща и `Result`. Ако се случи грешка във функцията
+`main`, тя ще върне код за грешка и ще отпечати подсказващо представяне на
+грешката ( с помощта на отличителя [`Debug`]). Следния пример ни показва такъв
+развой и загатва за неща, които разглеждаме в следващия раздел.
 
 ```rust,editable
 use std::num::ParseIntError;

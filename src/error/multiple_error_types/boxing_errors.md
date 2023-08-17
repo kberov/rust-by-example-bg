@@ -1,18 +1,19 @@
-# `Box`ing errors
+# Грешки в Кутии
 
-A way to write simple code while preserving the original errors is to [`Box`][box]
-them.  The drawback is that the underlying error type is only known at runtime and not
-[statically determined][dynamic_dispatch].
+Един начин за писане на прост код, запазвайки първоначалните грешки, е да
+ползваме [`Кутии`][box]. За съжаление в този случай истинската грешка става
+известна едва по време на изпълнение и не е [определена
+статично][dynamic_dispatch].
 
-The stdlib helps in boxing our errors by having `Box` implement conversion from
-any type that implements the `Error` trait into the trait обект `Box<Error>`,
-via [`From`][from].
+С помощта на стандартната библиотека можем да слагаме нашите грешки в кутии.
+`Box` може да превръща от всеки тип, осъществяващ отличителя `Error` в обект от
+тип `Box<Error>` чрез [`From`][from].
 
 ```rust,editable
 use std::error;
 use std::fmt;
 
-// Change the alias to `Box<error::Error>`.
+// Променяме прякора на `Box<error::Error>`.
 type Result<T> = std::result::Result<T, Box<dyn error::Error>>;
 
 #[derive(Debug, Clone)]
@@ -28,10 +29,10 @@ impl error::Error for EmptyVec {}
 
 fn double_first(vec: Vec<&str>) -> Result<i32> {
     vec.first()
-        .ok_or_else(|| EmptyVec.into()) // Converts to Box
+        .ok_or_else(|| EmptyVec.into()) // Превръща в Box
         .and_then(|s| {
             s.parse::<i32>()
-                .map_err(|e| e.into()) // Converts to Box
+                .map_err(|e| e.into()) // Превръща в Box
                 .map(|i| 2 * i)
         })
 }

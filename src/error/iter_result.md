@@ -1,6 +1,6 @@
-# Iterating over `Result`s
+# Обхождане на `Result`ати
 
-An `Iter::map` operation might fail, for example:
+Действието `Iter::map` може да не успее. Например:
 
 ```rust,editable
 fn main() {
@@ -13,11 +13,11 @@ fn main() {
 }
 ```
 
-Let's step through strategies for handling this.
+Да видим как може да се подходи.
 
-## Ignore the failed items with `filter_map()`
+## Да пропускаме провалените опити с помощта на `filter_map()`
 
-`filter_map` calls a function and filters out the results that are `None`.
+`filter_map` извиква функция и филтрира резултатите, които са `None`.
 
 ```rust,editable
 fn main() {
@@ -30,10 +30,10 @@ fn main() {
 }
 ```
 
-## Collect the failed items with `map_err()` and `filter_map()`
+## Да съберем провалите с помощта на `map_err()` и `filter_map()`
 
-`map_err` calls a function with the error, so by adding that to the previous
-`filter_map` solution we can save them off to the side while iterating.
+`map_err` извиква функция , като ѝ подава грешката. Ако добавим това към
+предното решение с `filter_map`, можем да съберем грешките, докато обхождаме.
 
 ```rust,editable
 fn main() {
@@ -49,11 +49,12 @@ fn main() {
 }
 ```
 
-## Fail the entire operation with `collect()`
+## Да предизвикаме неуспех на цялото действие чрез  `collect()`
 
-`Result` implements `FromIterator` so that a vector of results (`Vec<Result<T, E>>`)
-can be turned into a result with a vector (`Result<Vec<T>, E>`). Once an
-`Result::Err` is found, the iteration will terminate.
+`Result` въплъщава `FromIterator`, така че един вектор, съдържащ резултати
+(`Vec<Result<T, E>>`) може да бъде превърнат в резултат, съдържащ вектор
+(`Result<Vec<T>, E>`). Щом се натъкнем на `Result::Err`, обхождането се
+прекратява.
 
 ```rust,editable
 fn main() {
@@ -66,9 +67,9 @@ fn main() {
 }
 ```
 
-This same technique can be used with `Option`.
+Същата техника може да бъде приложена с `Option`.
 
-## Collect all valid values and failures with `partition()`
+## Събираме всички действителни стойности и грешки с помощта на `partition()`
 
 ```rust,editable
 fn main() {
@@ -82,8 +83,8 @@ fn main() {
 }
 ```
 
-When you look at the results, you'll note that everything is still wrapped in
-`Result`.  A little more boilerplate is needed for this.
+Ако погледнем резултатите, ще забележим, че всичко е все още обгърнато с
+`Result`. За да разгърнем стойностите, трябва да напишем още малко код.
 
 ```rust,editable
 fn main() {

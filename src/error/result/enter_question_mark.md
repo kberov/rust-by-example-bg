@@ -1,22 +1,23 @@
-# Introducing `?`
+# Запознаване с `?`
 
-Sometimes we just want the simplicity of `unwrap` without the possibility of
-a `panic`. Until now, `unwrap` has forced us to nest deeper and deeper when
-what we really wanted was to get the variable *out*. This is exactly the purpose of `?`.
+Понякога ни се иска да имаме простотата на `unwrap` без вероятна `panic`-а.
+Досега `unwrap` ни принуждаваше да влизаме все по-надълбоко, докато ние
+всъщност просто искахме стойността. Точно това е предназначението на `?`.
 
-Upon finding an `Err`, there are two valid actions to take:
+При откриването на `Err` има две възможни действия:
 
-1. `panic!` which we already decided to try to avoid if possible
-2. `return` because an `Err` means it cannot be handled
+1. `panic!`, което вече решихме, че е добре да се избягва по възможност;
+2. `return`, защото `Err` означава, че не можем да обработим това състояние.
 
-`?` is *almost*[^†] exactly equivalent to an `unwrap` which `return`s
-instead of `panic`king on `Err`s. Let's see how we can simplify the earlier
-example that used combinators:
+`?` е *почти*[^†] точно съответствия на `unwrap`, което връща `Err` вместо да
+завършва с `panic`. Да видим как можем да опростим предния случай, където
+ползвахме съчетатели:
 
 ```rust,editable
 use std::num::ParseIntError;
 
-fn multiply(first_number_str: &str, second_number_str: &str) -> Result<i32, ParseIntError> {
+fn multiply(first_number_str: &str, second_number_str: &str)
+   -> Result<i32, ParseIntError> {
     let first_number = first_number_str.parse::<i32>()?;
     let second_number = second_number_str.parse::<i32>()?;
 
@@ -36,20 +37,28 @@ fn main() {
 }
 ```
 
-## The `try!` macro
+## Макросът `try!`
 
-Before there was `?`, the same functionality was achieved with the `try!` macro.
-The `?` operator is now recommended, but you may still find `try!` when looking
-at older code. The same `multiply` function from the previous example
-would look like this using `try!`:
+Преди да имаше `?`, същото постигахме с макроса `try!`.
+Сега се препоръчва оператора `?`, но все още може да се натъкнете на `try!`,
+ако гледате по-стар код. Същата функция за умножение, `multiply` от предния
+пример, ще изглежда така с `try!`:
 
 ```rust,editable,edition2015
-// To compile and run this example without errors, while using Cargo, change the value 
-// of the `edition` field, in the `[package]` section of the `Cargo.toml` file, to "2015".
+// За да компилирате и пуснете примера без грешки с Cargo, променете стойността
+// на изданието (`edition`) в раздела `[package]` на файла `Cargo.toml` да бъде
+// "2015".
+// За да компилиратe направо с rustc:
+// rustc ./src/bin/error_result_try.rs  --edition 2015\
+//  -o target/debug/error_result_try
+// За да изпълните:
+// target/debug/error_result_try
+
 
 use std::num::ParseIntError;
 
-fn multiply(first_number_str: &str, second_number_str: &str) -> Result<i32, ParseIntError> {
+fn multiply(first_number_str: &str, second_number_str: &str)
+   -> Result<i32, ParseIntError> {
     let first_number = try!(first_number_str.parse::<i32>());
     let second_number = try!(second_number_str.parse::<i32>());
 
@@ -70,6 +79,6 @@ fn main() {
 ```
 
 
-[^†]: See [re-enter ?][re_enter_?] for more details.
+[^†]: Вижте [re-enter ?][re_enter_?] за още подробности.
 
 [re_enter_?]: ../multiple_error_types/reenter_question_mark.md

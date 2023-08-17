@@ -1,60 +1,62 @@
-# `Option` & `unwrap`
+# `Option` и `unwrap`
 
-In the last example, we showed that we can induce program failure at will.
-We told our program to `panic` if we drink a sugary lemonade.
-But what if we expect _some_ drink but don't receive one?
-That case would be just as bad, so it needs to be handled!
+В последния пример показахме, че можем да предизвикаме срив по желание. Казахме
+на програмата да се паникьоса (`panic`), ако пием лимонада с много захар. Но
+какво да правим ако очакваме _някакво (some)_, а не получим никакво питие?
+Такава развръзка също е лоша и трябва да се справим, и с нея.
 
-We *could* test this against the null string (`""`) as we do with a lemonade.
-Since we're using Ръждьо, let's instead have the compiler point out cases
-where there's no drink.
+Бихме могли да пробваме какво ще стане ако ни се подаде празен низ (`""`) –
+никакво питие. Понеже пишем на Ръждьо, нека накараме компилатора да ни покаже
+случаите, в които няма питие.
 
-An `enum` called `Option<T>` in the `std` library is used when absence is a
-possibility. It manifests itself as one of two "options":
+В стандартната библиотека има един брояч (`enum`), наречен `Option<T>` –
+`Избор<Т>`. Той се ползва, когато има вероятност да липсва някаква стойност,
+която очакваме. Проявява се в две възможности за избор:
 
-* `Some(T)`: An element of type `T` was found
-* `None`: No element was found
+* `Some(T)` – `Някакво(T)`: Намерена е _някаква_ стойност от тип`T`;
+* `None` – `Нищо`: Няма _никаква_ стойност.
 
-These cases can either be explicitly handled via `match` or implicitly with
-`unwrap`. Implicit handling will either return the inner element or `panic`.
+Тези две възможности могат да бъдат обработени изрично с помощта на `match` или
+мълчаливо чрез `unwrap`. Мълчаливата обработка ще върне вътрешната стойност (ще
+я _разгърне_) или ще паникьоса (`panic`) програмата ни.
 
-Note that it's possible to manually customize `panic` with [expect][expect],
-but `unwrap` otherwise leaves us with a less meaningful output than explicit
-handling. In the following example, explicit handling yields a more
-controlled result while retaining the option to `panic` if desired.
+Забележете, че е възможно да управляваме _паниката_ с помощта на
+[expect][expect], а `unwrap` ни дава по-несмислен изход от изричната обработка.
+В следния пример изричната обработка на грешката произвежда по-управляем изход,
+като оставя възможността за паникьосване, ако желаем.
 
 ```rust,editable,ignore,mdbook-runnable
-// The adult has seen it all, and can handle any drink well.
-// All drinks are handled explicitly using `match`.
+// Възрастният е видял всичко и може да обработи всяко питие добре.
+// Всички питиета се обработват с `match`.
 fn give_adult(drink: Option<&str>) {
-    // Specify a course of action for each case.
+    // Указваме поведение за всеки от случаите.
     match drink {
-        Some("lemonade") => println!("Yuck! Too sugary."),
-        Some(inner)   => println!("{}? How nice.", inner),
-        None          => println!("No drink? Oh well."),
+        Some("лимонада") => println!("Ъъъ! Много сладко."),
+        Some(inner)   => println!("{}? Колко любезно.", inner),
+        None          => println!("Няма питие? Е… добре."),
     }
 }
 
-// Others will `panic` before drinking sugary drinks.
-// All drinks are handled implicitly using `unwrap`.
+// Други ще се `panic`ьосат при вида на сладки питиета.
+// Всички питиета са обработени чрез рагъване – `unwrap`.
 fn drink(drink: Option<&str>) {
-    // `unwrap` returns a `panic` when it receives a `None`.
-    let inside = drink.unwrap();
-    if inside == "lemonade" { panic!("AAAaaaaa!!!!"); }
+    // `unwrap` връща `panic`а, когато получи `None`.
+    let вътре = drink.unwrap();
+    if вътре == "лимонада" { panic!("AAAaaaaa!!!!"); }
 
-    println!("I love {}s!!!!!", inside);
+    println!("Обичам {}!!!!", вътре);
 }
 
 fn main() {
-    let water  = Some("water");
-    let lemonade = Some("lemonade");
+    let water  = Some("вода");
+    let lemonade = Some("лимонада");
     let void  = None;
 
     give_adult(water);
     give_adult(lemonade);
     give_adult(void);
 
-    let coffee = Some("coffee");
+    let coffee = Some("кафе");
     let nothing = None;
 
     drink(coffee);

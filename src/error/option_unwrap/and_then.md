@@ -1,16 +1,18 @@
-# Combinators: `and_then`
+# Съчетатели: `and_then`
 
-`map()` was described as a chainable way to simplify `match` изявления. 
-However, using `map()` on a function that returns an `Option<T>` results 
-in the nested `Option<Option<T>>`. Chaining multiple calls together can 
-then become confusing. That's where another combinator called `and_then()`, 
-known in some languages as flatmap, comes in.
+Описахме `map()` като начин за верижно изпълнение и опростяване  на изявления
+`match`. Но ако използваме `map()` с функция, която връща `Option<T>`,
+получаваме вгнезден избор `Option<Option<T>>`. В такива случаи, ако имаме
+верижно изпълнение, може да стане объркващо. Тук идва редът на друг съчетател,
+познат в някои езици като _плоскосъпоставяне_ (flatmap). Този съчетател се
+нарича `and_then()` – `и_после()`. 
 
-`and_then()` calls its function input with the wrapped value and returns the result. If the `Option` is `None`, then it returns `None` instead.
+`and_then()` извиква подадената ѝ функция с обгърната стойност и връща
+резултата. Ако изборът (`Option`) е `None`, тогава връща `None`.
 
-In the following example, `cookable_v3()` results in an `Option<Food>`. 
-Using `map()` instead of `and_then()` would have given an 
-`Option<Option<Food>>`, which is an invalid type for `eat()`.
+В следващия пример `cookable_v3()` връща `Option<Food>`. 
+Ако ползваме `map()` вместо `and_then()` щяхме да получим 
+`Option<Option<Food>>`, което е неподходящ тип за `eat()`.
 
 ```rust,editable
 #![allow(dead_code)]
@@ -18,7 +20,7 @@ Using `map()` instead of `and_then()` would have given an
 #[derive(Debug)] enum Food { CordonBleu, Steak, Sushi }
 #[derive(Debug)] enum Day { Monday, Tuesday, Wednesday }
 
-// We don't have the ingredients to make Sushi.
+// Нямаме съставки, за да направим Суши.
 fn have_ingredients(food: Food) -> Option<Food> {
     match food {
         Food::Sushi => None,
@@ -26,7 +28,7 @@ fn have_ingredients(food: Food) -> Option<Food> {
     }
 }
 
-// We have the recipe for everything except Cordon Bleu.
+// Имаме рецепти за всичко освен Кордон Блю.
 fn have_recipe(food: Food) -> Option<Food> {
     match food {
         Food::CordonBleu => None,
@@ -34,8 +36,8 @@ fn have_recipe(food: Food) -> Option<Food> {
     }
 }
 
-// To make a dish, we need both the recipe and the ingredients.
-// We can represent the logic with a chain of `match`es:
+// За да направим ястие, ни трябват състваки и рецепта.
+// Можем да представим логиката като верига от съвпадения `match`:
 fn cookable_v1(food: Food) -> Option<Food> {
     match have_recipe(food) {
         None       => None,
@@ -43,13 +45,13 @@ fn cookable_v1(food: Food) -> Option<Food> {
     }
 }
 
-// This can conveniently be rewritten more compactly with `and_then()`:
+// Това може да се пренапише много по-сбито с `and_then()`:
 fn cookable_v3(food: Food) -> Option<Food> {
     have_recipe(food).and_then(have_ingredients)
 }
 
-// Otherwise we'd need to `flatten()` an `Option<Option<Food>>`
-// to get an `Option<Food>`:
+// Иначе ще трябва да сплескаме (`flatten()`) една `Option<Option<Food>>`,
+// за да получим `Option<Food>`:
 fn cookable_v2(food: Food) -> Option<Food> {
     have_recipe(food).map(have_ingredients).flatten()
 }

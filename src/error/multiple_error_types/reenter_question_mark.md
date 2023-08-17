@@ -1,32 +1,31 @@
-# Other uses of `?`
+# Други ползвания на `?`
 
-Notice in the previous example that our immediate reaction to calling
-`parse` is to `map` the error from a library error into a boxed
-error:
+Забележете, че в предния пример след разбора гледаме незабавно да сложим
+грешката в кутия:
 
 ```rust,ignore
 .and_then(|s| s.parse::<i32>())
     .map_err(|e| e.into())
 ```
 
-Since this is a simple and common operation, it would be convenient if it
-could be elided. Alas, because `and_then` is not sufficiently flexible, it
-cannot. However, we can instead use `?`.
+Тъй като това е просто действие, може да се окаже удобно да можем да го
+пропускаме. За съжаление, понеже `and_then` не е достатъчно гъвкава, това е
+невъзможно. Вместо това можем да ползваме `?`.
 
-`?` was previously explained as either `unwrap` or `return Err(err)`.
-This is only mostly true. It actually means `unwrap` or
-`return Err(From::from(err))`. Since `From::from` is a conversion utility
-between different types, this means that if you `?` where the error is
-convertible to the return type, it will convert automatically.
+Оперторът `?` вече бе описан като „`unwrap` или `return Err(err)`”.
+Това не е съвсем вярно. `?` всъщност означава „`unwrap` или `return
+Err(From::from(err))`”. Понеже `From::from` е средство за превръщане между
+различни типове, това означава, че ако извикаме оператора `?`, където грешката
+може да бъде превърната в типа за връщане, той ще я превърне автоматично.
 
-Here, we rewrite the previous example using `?`. As a result, the
-`map_err` will go away when `From::from` is implemented for our error type:
+Тук пренаписваме предния пример да ползва `?`. От това следва, че `map_err` вече
+не ни е нужна, щом `From::from` е осъществена за нашия тип за грешка:
 
 ```rust,editable
 use std::error;
 use std::fmt;
 
-// Change the alias to `Box<dyn error::Error>`.
+// Променяме прякора за типа грешка на `Box<dyn error::Error>`.
 type Result<T> = std::result::Result<T, Box<dyn error::Error>>;
 
 #[derive(Debug)]
@@ -40,8 +39,9 @@ impl fmt::Display for EmptyVec {
 
 impl error::Error for EmptyVec {}
 
-// The same structure as before but rather than chain all `Results`
-// and `Options` along, we `?` to get the inner value out immediately.
+// Същото построение като преди, но вместо да направим всички `Result` и
+// `Option` верижни, ползваме оператора `?`, за да вземем и върнем вътрешната
+// стойност незабавано.
 fn double_first(vec: Vec<&str>) -> Result<i32> {
     let first = vec.first().ok_or(EmptyVec)?;
     let parsed = first.parse::<i32>()?;
@@ -66,10 +66,9 @@ fn main() {
 }
 ```
 
-This is actually fairly clean now. Compared with the original `panic`, it
-is very similar to replacing the `unwrap` calls with `?` except that the
-return types are `Result`. As a result, they must be destructured at the
-top level.
+Сега е доста по-чистичко. В сравнение с първоначалната `panic`-а, много
+наподобява на заместване на извикванията на `unwrap` с `?`, само дето типът за
+връщане е `Result`. И само трябва да бъдат разложени при получване от извикващия.
 
 ### See also:
 

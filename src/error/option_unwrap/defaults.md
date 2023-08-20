@@ -1,12 +1,16 @@
-# Unpacking options and defaults
+# Разопаковане на избори и стойности по подразбиране
 
-There is more than one way to unpack an `Option` and fall back on a default if it is `None`. To choose the one that meets our needs, we need to consider the following:
-* do we need eager or lazy evaluation?
-* do we need to keep the original empty value intact, or modify it in place?
+Има няколко начина за разгъване на `Option` и връщане на стойност по
+подразбиране, ако проверяваната стойност е `None`. За да изберем най-подходящия
+начин, трябва да преценим следното:
+* дали искаме алчно или лениво изчисление?
+* дали трябва да запазим първоначалната празна стойност или да я променим на място?
 
-##  `or()` is chainable, evaluates eagerly, keeps empty value intact
+##  `or()` може да се използва верижно, изчислява алчно, не пипа празната стойност
 
-`or()`is chainable and eagerly evaluates its argument, as is shown in the following example. Note that because `or`'s arguments are evaluated eagerly, the variable passed to `or` is moved.
+`or()` може да се изпълнява верижно и изчислява аргументите си алчно, както се
+вижда от следващия пример. Забележете, че понеже аргументите се оценяват алчно,
+стойностите на подадените на `or` аругменти биват преместени.
 
 ```rust,editable
 #[derive(Debug)] 
@@ -21,17 +25,19 @@ fn main() {
     println!("first_available_fruit: {:?}", first_available_fruit);
     // first_available_fruit: Some(Orange)
 
-    // `or` moves its argument.
-    // In the example above, `or(orange)` returned a `Some`, so `or(apple)` was not invoked.
-    // But the variable named `apple` has been moved regardless, and cannot be used anymore.
+    // `or` премества аргумента си.
+    // В горния пример `or(orange)` връща `Some`, така че `or(apple)` не се
+    // извиква. Но въпреки това стойностт на променливата `apple` бива
+    // преместена и не може да се ползва повече.
     // println!("Variable apple was moved, so this line won't compile: {:?}", apple);
-    // TODO: uncomment the line above to see the compiler error
+    // ЗАДАЧА: Разкоментирайте горния ред, за да видите грешката при компилиране.
  }
 ```
 
-##  `or_else()` is chainable, evaluates lazily, keeps empty value intact
+##  `or_else()` може да се извиква верижно, изчислява лениво, не пипа празната стойност
 
-Another alternative is to use `or_else`, which is also chainable, and evaluates lazily, as is shown in the following example:
+Друга възможност е да ползвате `or_else`. Тя също се извиква верижно и оценява
+аргументите си лениво. Вижте следния пример.
 
 ```rust,editable
 #[derive(Debug)] 
@@ -53,35 +59,41 @@ fn main() {
         .or_else(get_kiwi_as_fallback)
         .or_else(get_lemon_as_fallback);
     println!("first_available_fruit: {:?}", first_available_fruit);
-    // Providing kiwi as fallback
+    // Предоставяме киви като последна възможност
     // first_available_fruit: Some(Kiwi)
 }
 ```
 
-##  `get_or_insert()` evaluates eagerly, modifies empty value in place
+##  `get_or_insert()` Изчислява аргументите си алчно, променя празната стойност на място
 
-To make sure that an `Option` contains a value, we can use `get_or_insert` to modify it in place with a fallback value, as is shown in the following example. Note that `get_or_insert` eagerly evaluates its parameter, so variable `apple` is moved:
+За да се подсигурим, че даден `Избор` съдържа стойност, можем да ползваме
+`get_or_insert`, за да го променим на място, като му дадем стойност по
+подразбиране. Забележете, че `get_or_insert` изчислява параметъра си алчно,
+така че стойността на променливата `apple` е преместена:
 
 ```rust,editable
 #[derive(Debug)]
 enum Fruit { Apple, Orange, Banana, Kiwi, Lemon }
 
 fn main() {
-    let mut my_fruit: Option<Fruit> = None;
+    let mut моят_плод: Option<Fruit> = None;
     let apple = Fruit::Apple;
-    let first_available_fruit = my_fruit.get_or_insert(apple);
-    println!("first_available_fruit is: {:?}", first_available_fruit);
-    println!("my_fruit is: {:?}", my_fruit);
-    // first_available_fruit is: Apple
-    // my_fruit is: Some(Apple)
-    //println!("Variable named `apple` is moved: {:?}", apple);
-    // TODO: uncomment the line above to see the compiler error
+    let първият_наличен_плод = моят_плод.get_or_insert(apple);
+    println!("първият_наличен_плод е: {:?}", първият_наличен_плод);
+    println!("моят_плод е: {:?}", моят_плод);
+    // първият_наличен_плод е: Apple
+    // my_fruit е: Some(Apple)
+    //println!("Стойността на `apple` е преместена: {:?}", apple);
+    // ЗАДАЧА: разкоментирайте горния ред, за да видите грешката при
+    // компилиране
 }
 ```
 
-##  `get_or_insert_with()` evaluates lazily, modifies empty value in place
+##  `get_or_insert_with()` изчислява аргументите си лениво, променя празната стойност на място
 
-Instead of explicitly providing a value to fall back on, we can pass a closure to `get_or_insert_with`, as follows:
+Вместо изрично да подаваме стойност за връщане, можем да подадем затваряне на
+`get_or_insert_with`, както следва:
+
 ```rust,editable
 #[derive(Debug)] 
 enum Fruit { Apple, Orange, Banana, Kiwi, Lemon }
@@ -89,23 +101,24 @@ enum Fruit { Apple, Orange, Banana, Kiwi, Lemon }
 fn main() {
     let mut my_fruit: Option<Fruit> = None;
     let get_lemon_as_fallback = || {
-        println!("Providing lemon as fallback");
+        println!("Предоставям лимон за всеки случай");
         Fruit::Lemon
     };
     let first_available_fruit = my_fruit
         .get_or_insert_with(get_lemon_as_fallback);
     println!("first_available_fruit is: {:?}", first_available_fruit);
-    println!("my_fruit is: {:?}", my_fruit);
-    // Providing lemon as fallback
+    println!("my_fruit е: {:?}", my_fruit);
+    // Предоставяме лимон в запас
     // first_available_fruit is: Lemon
     // my_fruit is: Some(Lemon)
 
-    // If the Option has a value, it is left unchanged, and the closure is not invoked
+    // Ако Option има стойност, тя не се променя и зтварянето не се извиква
     let mut my_apple = Some(Fruit::Apple);
     let should_be_apple = my_apple.get_or_insert_with(get_lemon_as_fallback);
     println!("should_be_apple is: {:?}", should_be_apple);
     println!("my_apple is unchanged: {:?}", my_apple);
-    // The output is a follows. Note that the closure `get_lemon_as_fallback` is not invoked
+    // Изходът е както следва. Забележете, че зтварянето
+    // `get_lemon_as_fallback` не е извикано.
     // should_be_apple is: Apple
     // my_apple is unchanged: Some(Apple)
 }

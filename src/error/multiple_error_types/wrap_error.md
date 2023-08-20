@@ -1,6 +1,6 @@
-# Wrapping errors
+# Обгръщане на грешки
 
-An alternative to boxing errors is to wrap them in your own error type.
+Вместо да слагаме грешките в кутии, можем да ги обгръщаме в наш тип за грешка.
 
 ```rust,editable
 use std::error;
@@ -13,8 +13,9 @@ type Result<T> = std::result::Result<T, DoubleError>;
 #[derive(Debug)]
 enum DoubleError {
     EmptyVec,
-    // We will defer to the parse error implementation for their error.
-    // Supplying extra info requires adding more data to the type.
+    // Ще оставим грешката за извличане на цяло число да си се обработва от
+    // първоначалния отличител. Допълнителните сведения за грешката изискват да
+    // добавим повече данни към типа.
     Parse(ParseIntError),
 }
 
@@ -23,8 +24,8 @@ impl fmt::Display for DoubleError {
         match *self {
             DoubleError::EmptyVec =>
                 write!(f, "please use a vector with at least one element"),
-            // The wrapped error contains additional information and is available
-            // via the source() method.
+            // Обгърнатата грешка съдържа допълнителни сведения, а те са
+            // достъпни чрез метода source().
             DoubleError::Parse(..) =>
                 write!(f, "the provided string could not be parsed as int"),
         }
@@ -54,8 +55,8 @@ impl From<ParseIntError> for DoubleError {
 
 fn double_first(vec: Vec<&str>) -> Result<i32> {
     let first = vec.first().ok_or(DoubleError::EmptyVec)?;
-    // Here we implicitly use the `ParseIntError` implementation of `From` (which
-    // we defined above) in order to create a `DoubleError`.
+    // Тук ползваме въплъщението на `ParseIntError` от `From` (което описахме
+    // горе), за да създадем `DoubleError`.
     let parsed = first.parse::<i32>()?;
 
     Ok(2 * parsed)
@@ -84,10 +85,8 @@ fn main() {
 }
 ```
 
-This adds a bit more boilerplate for handling errors and might not be needed in
-all applications. There are some libraries that can take care of the boilerplate
-for you.
-
+Този подход изисква повечко писане за обработак на грешките и не винаги е
+нужен. Има библиотеки, които могат да спестят осъществяването на обгръщането.
 ### See also:
 
 [`From::from`][from] and [`Enums`][enums]

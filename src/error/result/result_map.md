@@ -1,22 +1,24 @@
-# `map` for `Result`
+# `map` за `Result`
 
-Panicking in the previous example's `multiply` does not make for robust code.
-Generally, we want to return the error to the caller so it can decide what is
-the right way to respond to errors.
+Ако просто се паникьосваме в предния пример с `multiply`, кодът ни е немощен.
+Обикновено връщаме грешката към извикващия блок, за да може той да реши как
+правилно да я обработи.
 
-We first need to know what kind of error type we are dealing with. To determine
-the `Err` type, we look to [`parse()`][parse], which is implemented with the
-[`FromStr`][from_str] trait for [`i32`][i32]. As a result, the `Err` type is
-specified as [`ParseIntError`][parse_int_error].
+Първо трябва да знаем с какъв вид грешка си имаме работа. За да определим типа
+вътре в `Err`, гледаме [`parse()`][parse], който е осъществен с отличителя
+[`FromStr`][from_str] за типа [`i32`][i32]. Виждаме, че типа `Err` е указан
+като [`ParseIntError`][parse_int_error].
 
-In the example below, the straightforward `match` изявлениe leads to code
-that is overall more cumbersome.
+В примера долу, иначе ясното изявление `match` води като цяло до по-труден за
+четене код.
 
 ```rust,editable
 use std::num::ParseIntError;
 
-// With the return type rewritten, we use pattern matching without `unwrap()`.
-fn multiply(first_number_str: &str, second_number_str: &str) -> Result<i32, ParseIntError> {
+// Сега сме променили типа за връщане. Получаваме го чрез съпоставяне по
+// образец, без да ползваме `unwrap()`.
+fn multiply(first_number_str: &str, second_number_str: &str)
+   -> Result<i32, ParseIntError> {
     match first_number_str.parse::<i32>() {
         Ok(first_number)  => {
             match second_number_str.parse::<i32>() {
@@ -32,50 +34,54 @@ fn multiply(first_number_str: &str, second_number_str: &str) -> Result<i32, Pars
 
 fn print(result: Result<i32, ParseIntError>) {
     match result {
-        Ok(n)  => println!("n is {}", n),
-        Err(e) => println!("Error: {}", e),
+        Ok(n)  => println!("n е {}", n),
+        Err(e) => println!("Грешка: {}", e),
     }
 }
 
 fn main() {
-    // This still presents a reasonable answer.
+    // Това е по-смислен отговор.
     let twenty = multiply("10", "2");
     print(twenty);
 
-    // The following now provides a much more helpful error message.
+    // Следното съобщение за грешка помага много повече.
     let tt = multiply("t", "2");
     print(tt);
 }
 ```
 
-Luckily, `Option`'s `map`, `and_then`, and many other combinators are also
-implemented for `Result`. [`Result`][result] contains a complete listing.
+За щастие, `map`, `and_then` и много други съчетатели от `Option` са
+осъществени също и за `Result`. Страницата с документацията на
+[`Result`][result] съдържа пълния списък.
 
 ```rust,editable
 use std::num::ParseIntError;
 
-// As with `Option`, we can use combinators such as `map()`.
-// This function is otherwise identical to the one above and reads:
-// Multiply if both values can be parsed from str, otherwise pass on the error.
-fn multiply(first_number_str: &str, second_number_str: &str) -> Result<i32, ParseIntError> {
+// Както с `Option`, и тук можем да ползваме съчетатели като `map()`.
+// Тази функция, иначе същата като горе, се чете така:
+// Умножаваме, ако и двете стойности могат да се извлекат от низа, иначе
+// предаваме грешката нагоре.
+fn multiply(first_number_str: &str, second_number_str: &str)
+   -> Result<i32, ParseIntError> {
     first_number_str.parse::<i32>().and_then(|first_number| {
-        second_number_str.parse::<i32>().map(|second_number| first_number * second_number)
+        second_number_str.parse::<i32>().map(|second_number|
+            first_number * second_number)
     })
 }
 
 fn print(result: Result<i32, ParseIntError>) {
     match result {
-        Ok(n)  => println!("n is {}", n),
-        Err(e) => println!("Error: {}", e),
+        Ok(число)  => println!("числото е {}", число),
+        Err(e) => println!("Грешка: {}", e),
     }
 }
 
 fn main() {
-    // This still presents a reasonable answer.
+    // Това е по-смислен отговор.
     let twenty = multiply("10", "2");
     print(twenty);
 
-    // The following now provides a much more helpful error message.
+    // Следното съобщение за грешка помага много повече.
     let tt = multiply("t", "2");
     print(tt);
 }

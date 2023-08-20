@@ -1,15 +1,15 @@
-# Multiple error types
+# Множество типове грешки 
 
-The previous examples have always been very convenient; `Result`s interact
-with other `Result`s and `Option`s interact with other `Option`s.
+Предишните примери бяха все много удобни.
+Типовете `Result` си взаимодействаха с други `Result`, а типовете `Option` – с
+други `Option`.
 
-Sometimes an `Option` needs to interact with a `Result`, or a
-`Result<T, Error1>` needs to interact with a `Result<T, Error2>`. In those
-cases, we want to manage our different error types in a way that makes them
-composable and easy to interact with.
+Понякога се налага `Option` да взаимодейства с `Result` или `Result<T, Error1>`
+да взаимодейства с `Result<T, Error2>`. В тези случаи искаме да управляваме
+различните типове грешки така, че да са съставими и лесни  за взаимодействие.
 
-In the following code, two instances of `unwrap` generate different error
-types. `Vec::first` returns an `Option`, while `parse::<i32>` returns a
+В следващия код две инстанции на `unwrap` създават различни типове грешки.
+`Vec::first` връща `Option`, докато `parse::<i32>` връща стойост от тип
 `Result<i32, ParseIntError>`:
 
 ```rust,editable,ignore,mdbook-runnable
@@ -26,11 +26,11 @@ fn main() {
     println!("The first doubled is {}", double_first(numbers));
 
     println!("The first doubled is {}", double_first(empty));
-    // Error 1: the input vector is empty
+    // Грешка 1: входният вектор е празен
 
     println!("The first doubled is {}", double_first(strings));
-    // Error 2: the element doesn't parse to a number
+    // Грешка 2: от първата стойност не може да се извлече число
 }
 ```
 
-Over the next sections, we'll see several strategies for handling these kind of problems.
+В следващите раздели ще видим  няколко стратегии за справяне с тези проблеми.

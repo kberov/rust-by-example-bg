@@ -1,31 +1,39 @@
-# Error handling
+# Обработка на грешки 
 
-Error handling is the process of handling the possibility of failure. For
-example, failing to read a file and then continuing to use that *bad* input
-would clearly be problematic. Noticing and explicitly managing those errors
-saves the rest of the program from various pitfalls.
+_Обработка на грешки_[^EH] е действието, което се предприема в случай на провал.
+Например, ако продължим изпълнението на програмата въпреки неуспешно прочитане
+на файл, определено ще имаме затруднения с използването на входните данни.
+Отчитането и изричното управление на тези грешки спасява програмата от
+по-нататъшни провали.
 
-There are various ways to deal with errors in Ръждьо, which are described in the
-following subchapters. They all have more or less subtle differences and different
-use cases. As a rule of thumb:
+Има различни начини за справяне с грешки в Ръждьо. Те са описани в следвашите
+раздели на тази глава. Всички те имат тънки разлики помежду си и се ползват в
+различни случаи. Ето някои общи правила: 
 
-An explicit `panic` is mainly useful for tests and dealing with unrecoverable errors.
-For prototyping it can be useful, for example when dealing with functions that
-haven't been implemented yet, but in those cases the more descriptive `unimplemented`
-is better. In tests `panic` is a reasonable way to explicitly fail.
+Изрична паника, `panic`, върши работа за писане на тестове и справяне с
+непоправими грешки. Когато нахвърляте вашата програма като идеи, например,
+можете да ползвате `panic` в недописани функции, където описателната грешка
+"недоправена!.." е по-добре от нищо. При тестовете `panic` е разумен начин за
+изрично излизане от строя.
 
-The `Option` type is for when a value is optional or when the lack of a value is
-not an error condition. For example the parent of a directory - `/` and `C:` don't
-have one. When dealing with `Option`s, `unwrap` is fine for prototyping and cases
-where it's absolutely certain that there is guaranteed to be a value. However `expect`
-is more useful since it lets you specify an error message in case something goes
-wrong anyway.
+Типът `Option` се ползва, когато дадена стойност е незадължителна или, когато
+липсата на стойност не е недопустимо състояние. Например липсата на
+наддиректория – `/` и `C:` си нямат такава. Няма страшно да ползваме метода
+`unwrap` от брояча `Option` докато скицираме програмата си или, когато сме
+напълно сигурни, че ще върне стойност. Иначе  `expect` върши по-добра работа,
+защото ни дава възможност да зададем съобщение в случай на грешка.
 
-When there is a chance that things do go wrong and the caller has to deal with the
-problem, use `Result`. You can `unwrap` and `expect` them as well (please don't
-do that unless it's a test or quick prototype).
+Когато има вероятност нещо да се обърка и извикващият блок трябва да се оправя
+с грешката, ползвайте `Result`. Може да разгънете (`unwrap`) и да очаквате
+(`expect`) грешките. Но по-добре е да ползвате тези методи само при бъзи
+тестове и докато скицирате програмата си. 
 
-For a more rigorous discussion of error handling, refer to the error
-handling section in the [official book][book].
+По-обстойно раглеждане на обработката на грешки ще намерите в Книгата[^book].
 
-[book]: https://doc.rust-lang.org/book/ch09-00-error-handling.html
+[^book]: https://doc.rust-lang.org/book/ch09-00-error-handling.html
+
+## Б.пр.
+
+[^EH]: Обработка на грешки –  Error handling
+
+

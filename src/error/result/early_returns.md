@@ -1,12 +1,13 @@
-# Early returns
+# Ранни връщания
 
-In the previous example, we explicitly handled the errors using combinators.
-Another way to deal with this case analysis is to use a combination of
-`match` изявления and *early returns*.
+В предишния пример обработвахме грешките изрично с помощта на съчетатели. Друг
+начин да се справяме с подобни случаи е да ползваме съчетание от изявления
+`match` и *ранни връщания*.
 
-That is, we can simply stop executing the function and return the error if
-one occurs. For some, this form of code can be easier to both read and
-write. Consider this version of the previous example, rewritten using early returns:
+Сиреч, можем просто да спрем изпълнението на функцията и да върнем грешката,
+ако има такава. За някои този начин на писане може да се окаже по-лесен както
+за писане, така и за четене. Да разгледаме тази разновидност на предния пример,
+пренаписан с ранни връщания.
 
 ```rust,editable
 use std::num::ParseIntError;
@@ -38,9 +39,9 @@ fn main() {
 }
 ```
 
-At this point, we've learned to explicitly handle errors using combinators
-and early returns. While we generally want to avoid panicking, explicitly
-handling all of our errors is cumbersome.
+Дотук се научихме да обработваме грешките изрично с помощта на съчетатели и
+ранни връщания. Въпреки че обикновено искаме да избегнем паникьосване,
+изричната обработка на грешки си е трудоемка.
 
-In the next section, we'll introduce `?` for the cases where we simply
-need to `unwrap` without possibly inducing `panic`.
+В следващия раздел ще се запознаем с `?` за случаите, в които просто искаме да
+разгърнем стойността (`unwrap`), но без да прикючваме с `panic`.

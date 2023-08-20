@@ -1,30 +1,34 @@
-# aliases for `Result`
+# Прякори за `Result`
 
-How about when we want to reuse a specific `Result` type many times?
-Recall that Ръждьо allows us to create [aliases][typealias]. Conveniently,
-we can define one for the specific `Result` in question.
+Какво да правим, когато искаме да преизползваме определен тип `Result`
+многократно? Да си припомним, че Ръждьо ни позволява да създаваме
+[прякори][typealias]. За наше удобство можем да опишем прякор за тоно определен
+`Result`.
 
-At a module level, creating aliases can be particularly helpful. Errors
-found in a specific module often have the same `Err` type, so a single alias
-can succinctly define *all* associated `Results`. This is so useful that the
-`std` library even supplies one: [`io::Result`][io_result]!
+Може да се окаже особено полезно да си създадем прякори за грешки само за един
+модул. Грешките в даден модул често имат един и същи тип `Err`. Така, че с един
+прякор можем сбито да опишем _всички_ подобни `Results`. Това е толкова
+полезно, че стандартнат библиотека `std` дори предоставя такъв тип:
+[`io::Result`][io_result]!
 
-Here's a quick example to show off the syntax:
+Ето бърз пример, за да покажем как се пише:
 
 ```rust,editable
 use std::num::ParseIntError;
 
-// Define a generic alias for a `Result` with the error type `ParseIntError`.
+// Описваме обобщен прякор за `Result` с тип за грешка `ParseIntError`.
 type AliasedResult<T> = Result<T, ParseIntError>;
 
-// Use the above alias to refer to our specific `Result` type.
-fn multiply(first_number_str: &str, second_number_str: &str) -> AliasedResult<i32> {
+// Използваме горния прякор, за обръщение към нашия особен тип `Result`.
+fn multiply(first_number_str: &str, second_number_str: &str)
+   -> AliasedResult<i32> {
     first_number_str.parse::<i32>().and_then(|first_number| {
-        second_number_str.parse::<i32>().map(|second_number| first_number * second_number)
+        second_number_str.parse::<i32>().map(|second_number|
+            first_number * second_number)
     })
 }
 
-// Here, the alias again allows us to save some space.
+// Тук прякорът отново ни позволява да спестим малко място.
 fn print(result: AliasedResult<i32>) {
     match result {
         Ok(n)  => println!("n is {}", n),

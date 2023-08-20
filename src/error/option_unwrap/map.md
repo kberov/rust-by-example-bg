@@ -1,17 +1,19 @@
-# Combinators: `map`
+# Съчетатели: `map`
 
-`match` is a valid method for handling `Option`s. However, you may 
-eventually find heavy usage tedious, especially with operations only valid 
-with an input. In these cases, [combinators][combinators] can be used to 
-manage control flow in a modular fashion.
+`match` върши работа за обработка на избори (`Option`). Ако го ползвате много,
+обаче, може да ви се види досадно, особено за действия, които работят само
+с определени входни данни. В тези случаи можем да ползваме
+[_съчетатели_][combinators][^combinators], за управление на програмния поток
+като отделни части.
 
-`Option` has a built in method called `map()`, a combinator for the simple 
-mapping of `Some -> Some` and `None -> None`. Multiple `map()` calls can be 
-chained together for even more flexibility.
+`Option` има вграден метод, наречен `map()` (съпоставяне, сравнение), който е
+съчетател за простите сравнения `Some -> Some` и `None -> None`. Повече
+извиквания на `map()` може да се наредят последователно за постигане на повече
+гъвкавост.
 
-In the following example, `process()` replaces all functions previous
-to it while staying compact.
-
+В следния пример функцията `process()` в много сбит вид замества всички функции
+използвани преди това.
+ 
 ```rust,editable
 #![allow(dead_code)]
 
@@ -21,8 +23,8 @@ to it while staying compact.
 #[derive(Debug)] struct Chopped(Food);
 #[derive(Debug)] struct Cooked(Food);
 
-// Peeling food. If there isn't any, then return `None`.
-// Otherwise, return the peeled food.
+// Белим нещо за ядене. Ако няма нищо за белене, връщаме `None`.
+// Иначе връщаме обеленото.
 fn peel(food: Option<Food>) -> Option<Peeled> {
     match food {
         Some(food) => Some(Peeled(food)),
@@ -30,8 +32,8 @@ fn peel(food: Option<Food>) -> Option<Peeled> {
     }
 }
 
-// Chopping food. If there isn't any, then return `None`.
-// Otherwise, return the chopped food.
+// Нарязваме. Ако няма какво, връщаме `None`.
+// Иначе връщаме нарязаното.
 fn chop(peeled: Option<Peeled>) -> Option<Chopped> {
     match peeled {
         Some(Peeled(food)) => Some(Chopped(food)),
@@ -39,24 +41,25 @@ fn chop(peeled: Option<Peeled>) -> Option<Chopped> {
     }
 }
 
-// Cooking food. Here, we showcase `map()` instead of `match` for case handling.
+// Готвим. Тук показваме ка се ползва `map()` вместо `match` за обрабитка на
+// различните случаи.
 fn cook(chopped: Option<Chopped>) -> Option<Cooked> {
     chopped.map(|Chopped(food)| Cooked(food))
 }
 
-// A function to peel, chop, and cook food all in sequence.
-// We chain multiple uses of `map()` to simplify the code.
+// Една функция за белене, рязане и готвене – всичко това последователно.
+// Навръзваме няколко извиквания на `map()` за да опростим кода.
 fn process(food: Option<Food>) -> Option<Cooked> {
     food.map(|f| Peeled(f))
         .map(|Peeled(f)| Chopped(f))
         .map(|Chopped(f)| Cooked(f))
 }
 
-// Check whether there's food or not before trying to eat it!
+// Проверяваме има ли храна преди да се опиттаме да ядем!
 fn eat(food: Option<Cooked>) {
     match food {
-        Some(food) => println!("Mmm. I love {:?}", food),
-        None       => println!("Oh no! It wasn't edible."),
+        Some(food) => println!("Мммм… Обичам {:?}!", food),
+        None       => println!("О, не! не става за ядене."),
     }
 }
 
@@ -67,7 +70,7 @@ fn main() {
 
     let cooked_apple = cook(chop(peel(apple)));
     let cooked_carrot = cook(chop(peel(carrot)));
-    // Let's try the simpler looking `process()` now.
+    // Да опитаме по простичката `process()` сега.
     let cooked_potato = process(potato);
 
     eat(cooked_apple);
@@ -75,6 +78,12 @@ fn main() {
     eat(cooked_potato);
 }
 ```
+## Б.пр.
+
+[^combinators]: съчетатели, съединители – combinators. Съчетателите са функции
+  от по-високо ниво, които прилагат функции и по-рано описани съчетатели, за да
+  произведат някакъв изход от подадените им данни. Те може да се ползват за
+  управление на програмния поток като отделни части.
 
 ### See also:
 

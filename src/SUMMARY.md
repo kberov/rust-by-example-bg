@@ -155,7 +155,7 @@
         - [Други ползвания на `?`](error/multiple_error_types/reenter_question_mark.md)
         - [Обгръщане на грешки](error/multiple_error_types/wrap_error.md)
     - [Обхождане на `Result`ати](error/iter_result.md)
-- [Типове от стандартната библиотека](std.md)
+- [Стандартни типове](std.md)
     - [Box, кама̀ра и куп](std/box.md)
     - [Вектори](std/vec.md)
     - [Низове](std/str.md)

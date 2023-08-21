@@ -1,70 +1,86 @@
-# Vectors
+# Вектори
 
-Vectors are re-sizable arrays. Like slices, their size is not known at compile
-time, but they can grow or shrink at any time. A vector is represented using
-3 parameters: 
-- pointer to the data
-- length
-- capacity 
+Векторите са поредици с променлива дължина. Както при отрязъците, техният
+размер е неизвестен по време на компилиране, но могат да се уголемяват и
+смаляват по всяко време. Векторът се представя чрез три параметъра:
 
-The capacity indicates how much memory is reserved for the vector. The vector 
-can grow as long as the length is smaller than the capacity. When this threshold 
-needs to be surpassed, the vector is reallocated with a larger capacity.
+- _указател към данните_[^pointer_to_data];
+- _дължина_[^length];
+- _вместимост_[^capacity].
+
+
+Вместимостта показва, колко памет (в брой членове) е запазена за вектора.
+Векторът може да расте доколкото дължината е по-малка от вместимостта. Когато
+този праг трябва да се премине, за вектора се заделя ново място в паметта с
+по-голяма вместимост (и данните биват преместени там).
 
 ```rust,editable,ignore,mdbook-runnable
 fn main() {
-    // Iterators can be collected into vectors
+    // От повторителите данните могат да бъдат събрани във вектори
     let collected_iterator: Vec<i32> = (0..10).collect();
-    println!("Collected (0..10) into: {:?}", collected_iterator);
+    println!("събрани (от 0 до 10) – (0..10) into: {:?}", collected_iterator);
 
-    // The `vec!` macro can be used to initialize a vector
+    // Макросът `vec!` може да се ползва за създаване на вектор
     let mut xs = vec![1i32, 2, 3];
-    println!("Initial vector: {:?}", xs);
+    println!("Първоначален вектор: {:?}", xs);
 
-    // Insert new element at the end of the vector
-    println!("Push 4 into the vector");
+    // Добавяме нови членове към вектора
+    println!("Бутаме 4 във вектора");
     xs.push(4);
-    println!("Vector: {:?}", xs);
+    println!("Вектор: {:?}", xs);
 
-    // Error! Immutable vectors can't grow
+    // Грешка! Неменим вектор не може да расте
     collected_iterator.push(0);
-    // FIXME ^ Comment out this line
+    // ПОПРАВКА ^ Коментирайте този ред
 
-    // The `len` method yields the number of elements currently stored in a vector
+    // Методът `len` дава броя на членовете, съхранение във вектора
     println!("Vector length: {}", xs.len());
 
-    // Indexing is done using the square brackets (indexing starts at 0)
-    println!("Second element: {}", xs[1]);
+    // Посочването се прави с помощта на квадратни скоби
+    // (посочването започва от 0)
+    println!("Втори член: {}", xs[1]);
 
-    // `pop` removes the last element from the vector and returns it
-    println!("Pop last element: {:?}", xs.pop());
+    // `pop` премахва последния член от вектора и го връща
+    println!("Премахваме (pop) последния член: {:?}", xs.pop());
 
-    // Out of bounds indexing yields a panic
-    println!("Fourth element: {}", xs[3]);
-    // FIXME ^ Comment out this line
+    // Посочване на член извън пределите на вектора предизвиква паника
+    println!("Четвърти член: {}", xs[3]);
+    // ПОПРАВКА ^ Коментирайте този ред
 
-    // `Vector`s can be easily iterated over
-    println!("Contents of xs:");
+    // Векторите могат лесно да бъдат обхождани
+    println!("Съдържание на:");
     for x in xs.iter() {
         println!("> {}", x);
     }
 
-    // A `Vector` can also be iterated over while the iteration
+    // Векторите могат да бъдат обхождани и като поредния номер на стъпката се
+    // слага в отделна променлива.
     // count is enumerated in a separate variable (`i`)
     for (i, x) in xs.iter().enumerate() {
-        println!("In position {} we have value {}", i, x);
+        println!("На място {} имаме стойност {}", i, x);
     }
 
-    // Thanks to `iter_mut`, mutable `Vector`s can also be iterated
-    // over in a way that allows modifying each value
+    // Благодарение на `iter_mut`, менимите `Vector`и могат също да бъдат
+    // обхождани така, че да може да се променя всяка стойност.
     for x in xs.iter_mut() {
         *x *= 3;
     }
-    println!("Updated vector: {:?}", xs);
+    println!("Обновен вектор: {:?}", xs);
 }
 ```
+ 
 
-More `Vec` methods can be found under the
-[std::vec][vec] module
+Още методи на `Vec` може да видите  в модула [std::vec][vec].
+
+
+## Б. пр.
+
+[^pointer_to_data]: указател към данни – pointer to data
+
+[^length]: дължина – length
+
+[^capacity]: вместимост – capacity
+
+
 
 [vec]: https://doc.rust-lang.org/std/vec/

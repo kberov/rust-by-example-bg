@@ -1,83 +1,85 @@
-# Strings
+#  Низове
 
-There are two types of strings in Ръждьо: `String` and `&str`.
+В Ръждьо има два типа низове: `String` и `&str`.
 
-A `String` is stored as a vector of bytes (`Vec<u8>`), but guaranteed to
-always be a valid UTF-8 sequence. `String` is heap allocated, growable and not
-null terminated.
+Типът (`String`) се съхранява като вектор от байтове (`Vec<u8>`), но е
+гарантирано, че винаги ще бъде действителна UTF-8 последователност. Низовете се
+съхраняват в купа, могат да растат и не завършват с празен байт (\0).
 
-`&str` is a slice (`&[u8]`) that always points to a valid UTF-8 sequence, and
-can be used to view into a `String`, just like `&[T]` is a view into `Vec<T>`.
+Типът `&str` е отрязък (`&[u8]`), който винаги сочи към действителна UTF-8
+последователност, и може да се ползва за „поглеждане (четене)” в стойност от тип
+`String`, точно както `&[T]` е изглед[^view] във `Vec<T>`.
 
 ```rust,editable
 fn main() {
-    // (all the type annotations are superfluous)
-    // A reference to a string allocated in read only memory
-    let pangram: &'static str = "the quick brown fox jumps over the lazy dog";
-    println!("Pangram: {}", pangram);
+    // ( всички отбелязвания на типове са излишни)
+    // Препратка към низ, поместен в статичната памет (само за четене)
+    let pangram: &'static str = "Хм, чужд щит, бърз гьон плюс яйце в шкаф.";
+    println!("Панграм: {}", pangram);
 
-    // Iterate over words in reverse, no new string is allocated
-    println!("Words in reverse");
+    // Обхождаме думите наобратно, не се създава нов низ в паметта
+    println!("Думите наобратно");
     for word in pangram.split_whitespace().rev() {
         println!("> {}", word);
     }
 
-    // Copy chars into a vector, sort and remove duplicates
+    // Копираме знаци във вектор, подреждаме по азбучен ред и премахваме
+    // повтарящите се
     let mut chars: Vec<char> = pangram.chars().collect();
     chars.sort();
     chars.dedup();
 
-    // Create an empty and growable `String`
+    // Създаваме празен низ с променлива дължина
     let mut string = String::new();
     for c in chars {
-        // Insert a char at the end of string
+        // Добавяме знак в края на низа
         string.push(c);
-        // Insert a string at the end of string
+        // Добавяме низ в края на низа
         string.push_str(", ");
     }
 
-    // The trimmed string is a slice to the original string, hence no new
-    // allocation is performed
+    // Окастрения низ е отрязък от първоначалния низ, сиреч няма ново
+    // поместване в паметта.
     let chars_to_trim: &[char] = &[' ', ','];
     let trimmed_str: &str = string.trim_matches(chars_to_trim);
-    println!("Used characters: {}", trimmed_str);
+    println!("Използвани знаци: {}", trimmed_str);
 
-    // Heap allocate a string
-    let alice = String::from("I like dogs");
-    // Allocate new memory and store the modified string there
-    let bob: String = alice.replace("dog", "cat");
+    // Поместване на низ в купа
+    let alice = String::from("Харесвам кучета");
+    // Заделяме нова памет и съхраняваме променения низ там
+    let bob: String = alice.replace("кучета", "котки");
 
-    println!("Alice says: {}", alice);
-    println!("Bob says: {}", bob);
+    println!("Алис казва: {}", alice);
+    println!("Боб казва: {}", bob);
 }
 ```
 
-More `str`/`String` methods can be found under the
-[std::str][str] and
-[std::string][string]
-modules
+Още методи на `str`/`String` могат да се водят в модулите [std::str][str] и
+[std::string][string].
 
-## Literals and escapes
+## Буквални стойности и избягване
 
-There are multiple ways to write string literals with special characters in them.
-All result in a similar `&str` so it's best to use the form that is the most
-convenient to write. Similarly there are multiple ways to write byte string literals,
-which all result in `&[u8; N]`.
+Има няколко начина да се пишат низови буквални стойности с особени
+знаци[^spec_chars] в тях. Всички биват създадени като `&str`, така че може да
+се въвеждат както ви е най-удобно. Също така има няколко начина да се пишат
+байтови низови буквални стойности, който се създават като `&[u8; N]`.
 
-Generally special characters are escaped with a backslash character: `\`.
-This way you can add any character to your string, even unprintable ones
-and ones that you don't know how to type. If you want a literal backslash,
-escape it with another one: `\\`
+Обичайно особените знаци се избягват с обратно наклонена черта: `\`. Така можем
+да добавим всякакъв знак към низ, дори непечатаеми и такива, които не знаем как
+да въведем. Ако искаме да въведем обратно наклонена черта, я избягваме с още
+една пред нея: `\\`.
 
-String or character literal delimiters occurring within a literal must be escaped: `"\""`, `'\''`.
+Низовите или знакови разделители в буквална стойност трябва да се избягват с
+обратно наклонена черта: `"\""`, `'\''`.
 
 ```rust,editable
 fn main() {
-    // You can use escapes to write bytes by their hexadecimal values...
+    // Можем да ползваме избягване, за да пишем байтове като ползваме
+    // шестнадесетичните им стойности…
     let byte_escape = "I'm writing \x52\x75\x73\x74!";
     println!("What are you doing\x3F (\\x3F means ?) {}", byte_escape);
 
-    // ...or Unicode code points.
+    // …или кодови точки от Уникод.
     let unicode_codepoint = "\u{211D}";
     let character_name = "\"DOUBLE-STRUCK CAPITAL R\"";
 
@@ -93,8 +95,9 @@ fn main() {
 }
 ```
 
-Sometimes there are just too many characters that need to be escaped or it's just
-much more convenient to write a string out as-is. This is where raw string literals come into play.
+Понякога има много знаци за избягване или е много по-удобно да напишем низа
+така както е. Тук е мястото да се ползват сурови низови буkвални
+стойности[^raw_str].
 
 ```rust, editable
 fn main() {
@@ -159,6 +162,22 @@ For conversions between character encodings check out the [encoding][encoding-cr
 
 A more detailed listing of the ways to write string literals and escape characters
 is given in the ['Tokens' chapter][tokens] of the Ръждьо Reference.
+
+
+## Б.пр.
+
+[^view]: изглед – view
+
+[^spec_chars]: особени знаци – special characters
+
+[^raw_str]: сурови низови буkвални стойности – raw string literals
+
+поместване в паметта, заделяне на памет – allocation
+
+панграм – Панграмата ((ж. грамат. р.), наричана още панграм (pangram) (м. грамат. р.), от
+гръцки: παν γράμμα, pan gramma, „всяка буква“) е изречение, включващо всички
+букви (глифи/глифове) от дадена азбука (например българската, английската
+латиница или гръцката азбука).
 
 [str]: https://doc.rust-lang.org/std/str/
 [string]: https://doc.rust-lang.org/std/string/

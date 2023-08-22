@@ -8,11 +8,11 @@
 
 Типът `&str` е отрязък (`&[u8]`), който винаги сочи към действителна UTF-8
 последователност, и може да се ползва за „поглеждане (четене)” в стойност от тип
-`String`, точно както `&[T]` е изглед[^view] във `Vec<T>`.
+`String`, точно както `&[T]` е _изглед_[^view] във `Vec<T>`.
 
 ```rust,editable
 fn main() {
-    // ( всички отбелязвания на типове са излишни)
+    // (всички отбелязвания на типове са излишни)
     // Препратка към низ, поместен в статичната памет (само за четене)
     let pangram: &'static str = "Хм, чужд щит, бърз гьон плюс яйце в шкаф.";
     println!("Панграм: {}", pangram);
@@ -38,7 +38,7 @@ fn main() {
         string.push_str(", ");
     }
 
-    // Окастрения низ е отрязък от първоначалния низ, сиреч няма ново
+    // Окастреният низ е отрязък от първоначалния низ, сиреч няма ново
     // поместване в паметта.
     let chars_to_trim: &[char] = &[' ', ','];
     let trimmed_str: &str = string.trim_matches(chars_to_trim);
@@ -54,10 +54,10 @@ fn main() {
 }
 ```
 
-Още методи на `str`/`String` могат да се водят в модулите [std::str][str] и
+Още методи на `str`/`String` могат да се видят в модулите [std::str][str] и
 [std::string][string].
 
-## Буквални стойности и избягване
+## Буквални стойности и избягване[^escape]
 
 Има няколко начина да се пишат низови буквални стойности с особени
 знаци[^spec_chars] в тях. Всички биват създадени като `&str`, така че може да
@@ -83,14 +83,14 @@ fn main() {
     let unicode_codepoint = "\u{211D}";
     let character_name = "\"DOUBLE-STRUCK CAPITAL R\"";
 
-    println!("Unicode character {} (U+211D) is called {}",
+    println!("Знакът от Уникод таблицата {} (U+211D) се нарича {}",
                 unicode_codepoint, character_name );
 
 
-    let long_string = "String literals
-                        can span multiple lines.
-                        The linebreak and indentation here ->\
-                        <- can be escaped too!";
+    let long_string = "Низовите буквали
+                        могат да се пишат на повече редове.
+                        Краят на реда и отстъпа тук ->\
+                        <- могат също да се избегнат!";
     println!("{}", long_string);
 }
 ```
@@ -101,67 +101,73 @@ fn main() {
 
 ```rust, editable
 fn main() {
-    let raw_str = r"Escapes don't work here: \x3F \u{211D}";
+    let raw_str = r"Тук избягванията не работят: \x3F \u{211D}";
     println!("{}", raw_str);
 
-    // If you need quotes in a raw string, add a pair of #s
-    let quotes = r#"And then I said: "There is no escape!""#;
+    // Ако искаме кавички в суров низ, трябва да го оградим с # около
+    // ограждащите кавички.
+    let quotes = r#"И тогава си казах: "Няма спасение!""#;
     println!("{}", quotes);
 
-    // If you need "# in your string, just use more #s in the delimiter.
-    // You can use up to 65535 #s.
-    let longer_delimiter = r###"A string with "# in it. And even "##!"###;
+    // Ако ни трябва "#, просто ползваме повече диези (#) за ограждане.
+    // Диезите могат да бъдат до 65535.
+    let longer_delimiter = r###"Низ с "# в него. И после даже "##!"###;
     println!("{}", longer_delimiter);
 }
 ```
 
-Want a string that's not UTF-8? (Remember, `str` and `String` must be valid UTF-8).
-Or maybe you want an array of bytes that's mostly text? Byte strings to the rescue!
+Искаме низ, който не е кодиран като UTF-8? (Да не забравяме, `str` и `String`
+трябва да са действителни UTF-8). Или може би искаме поредица от байтове, която
+е почти само текст? Байтовите низове са нашето спасение!
 
 ```rust, editable
 use std::str;
 
 fn main() {
-    // Note that this is not actually a `&str`
+    // Забележете, че това всъщност не е `&str`
     let bytestring: &[u8; 21] = b"this is a byte string";
 
-    // Byte arrays don't have the `Display` trait, so printing them is a bit limited
-    println!("A byte string: {:?}", bytestring);
+    // Байтовите поредици не не осъщетвяват отличителя `Display`, затова
+    // печатането им е малко ограничено
+    println!("Низ от байтове: {:?}", bytestring);
 
-    // Byte strings can have byte escapes...
+    // В байтовите низове може да има избягвания…
     let escaped = b"\x52\x75\x73\x74 as bytes";
-    // ...but no unicode escapes
+    // …но не и знаци от уникод
     // let escaped = b"\u{211D} is not allowed";
-    println!("Some escaped bytes: {:?}", escaped);
+    println!("Някои избегнати байтове: {:?}", escaped);
 
 
-    // Raw byte strings work just like raw strings
+    // Суровите байтови низове работят точно като суровите низове
     let raw_bytestring = br"\u{211D} is not escaped here";
     println!("{:?}", raw_bytestring);
 
-    // Converting a byte array to `str` can fail
+    // Превръщането на байтова поредица в `str` може да се провали
     if let Ok(my_str) = str::from_utf8(raw_bytestring) {
-        println!("And the same as text: '{}'", my_str);
+        println!("И същото като текст: '{}'", my_str);
     }
 
     let _quotes = br#"You can also use "fancier" formatting, \
                     like with normal raw strings"#;
 
-    // Byte strings don't have to be UTF-8
-    let shift_jis = b"\x82\xe6\x82\xa8\x82\xb1\x82\xbb"; // "ようこそ" in SHIFT-JIS
+    // Суровите низове не трябва задължително да са UTF-8
+    // "ようこそ" в кодова таблица SHIFT-JIS
+    let shift_jis = b"\x82\xe6\x82\xa8\x82\xb1\x82\xbb";
 
-    // But then they can't always be converted to `str`
+    // Но не винаги могат да бъдат превърнати в `str`
     match str::from_utf8(shift_jis) {
-        Ok(my_str) => println!("Conversion successful: '{}'", my_str),
-        Err(e) => println!("Conversion failed: {:?}", e),
+        Ok(my_str) => println!("Превръщането е успешно: '{}'", my_str),
+        Err(e) => println!("Превръщането не успя: {:?}", e),
     };
 }
 ```
 
-For conversions between character encodings check out the [encoding][encoding-crate] crate.
+За превръщане между знакови кодирания, прегледайте коша
+[encoding][encoding-crate].
 
-A more detailed listing of the ways to write string literals and escape characters
-is given in the ['Tokens' chapter][tokens] of the Ръждьо Reference.
+По-подробен списък с описания на начините  да се пишат буквални низови
+стойности и знаци за избягване е даден в главата [„Признаци”][tokens]  на
+„Справочника на Ръждьо”.
 
 
 ## Б.пр.
@@ -170,6 +176,10 @@ is given in the ['Tokens' chapter][tokens] of the Ръждьо Reference.
 
 [^spec_chars]: особени знаци – special characters
 
+[^escape]: избягване – escape. Избягва се знак, който искаме да се покаже по
+  различен начин от начина, по който иначе би бил показан без да се постави `\`
+  пред него.
+
 [^raw_str]: сурови низови буkвални стойности – raw string literals
 
 поместване в паметта, заделяне на памет – allocation
@@ -177,7 +187,7 @@ is given in the ['Tokens' chapter][tokens] of the Ръждьо Reference.
 панграм – Панграмата ((ж. грамат. р.), наричана още панграм (pangram) (м. грамат. р.), от
 гръцки: παν γράμμα, pan gramma, „всяка буква“) е изречение, включващо всички
 букви (глифи/глифове) от дадена азбука (например българската, английската
-латиница или гръцката азбука).
+латиница или гръцката).
 
 [str]: https://doc.rust-lang.org/std/str/
 [string]: https://doc.rust-lang.org/std/string/

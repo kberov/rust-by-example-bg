@@ -1,15 +1,15 @@
 # HashMap
 
-Where vectors store values by an integer index, `HashMap`s store values by key. 
-`HashMap` keys can be booleans, integers, strings, 
-or any other type that implements the `Eq` and `Hash` traits. 
-More on this in the next section.
+Докато векторите съхраняват стойностите си в поредица, в която всяка стойност
+се достъпва чрез показалец – поредното ѝ число, _безредиците_[^hash] (`HashMap`)
+съхраняват стойностите си с показалци-ключове. Безредните ключове могат да
+бъдат булеви стойности, цели числа, низове или всеки друг тип, осъществяващ
+отличителите `Eq` и `Hash`. Повече за това ще научим в следващия радел. 
 
-Like vectors, `HashMap`s are growable, but HashMaps can also shrink themselves 
-when they have excess space. 
-You can create a HashMap with a certain starting capacity using 
-`HashMap::with_capacity(uint)`, or use `HashMap::new()` to get a HashMap 
-with a default initial capacity (recommended).
+Както и векторите, безредиците могат да растат, но могат и сами да се свиват,
+когато заемат излишно пространство. Можем да създадем безредица
+с някаква начална вместимост с помощта на `HashMap::with_capacity(uint)` или
+`HashMap::new()` с някаква вместимост по подразбиране (препоръчва се).
 
 ```rust,editable
 use std::collections::HashMap;
@@ -57,8 +57,11 @@ fn main() {
 }
 ```
 
-For more information on how hashing and hash maps 
-(sometimes called hash tables) work, have a look at 
-[Hash Table Wikipedia][wiki-hash]
+За повече сведения, свързани с хеширането и хеш-съответствията (понякога
+наричани хеш-таблици) погледнете [Хеш таблица в Уикипедия][wiki-hash]
 
-[wiki-hash]: https://en.wikipedia.org/wiki/Hash_table
+## Б.пр.
+
+[^hash]: безрѐдица, каша, безредни съответствия, таблицa със съответствия ключ-тойност – hash-map, hash-table 
+
+[wiki-hash]:https://bg.wikipedia.org/wiki/Хеш_таблица 

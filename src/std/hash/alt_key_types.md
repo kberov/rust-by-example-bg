@@ -1,35 +1,35 @@
-# Alternate/custom key types
+# Други и потребителски типове за ключ
 
-Any type that implements the `Eq` and `Hash` traits can be a key in `HashMap`. 
-This includes:
+Всеки тип, въплъщаващ отличителите `Eq` и `Hash` може да бъде ключ в `HashMap`. 
+Такива са:
 
-* `bool` (though not very useful since there is only two possible keys)
-* `int`, `uint`, and all variations thereof
-* `String` and `&str` (protip: you can have a `HashMap` keyed by `String`
-and call `.get()` with an `&str`)
+* `bool` (макар и не много полезен, защото има само два възможни ключа);
+* `int`, `uint`, всички разновидности;
+* `String` и `&str` (за напреднали: можете да имате `HashMap` с ключове от тип
+  `String` и да извиквате `.get()` като му подавате `&str`)
 
-Note that `f32` and `f64` do *not* implement `Hash`,
-likely because [floating-point precision errors][floating]
-would make using them as hashmap keys horribly error-prone.
+Забележете, че `f32` и `f64` *не* осъществяват `Hash`, най вероятно защото
+[грешките][floating], свързани с определяне на точнотта след десетичната
+запетая, биха направили използването им като ключове доста ненадеждно.
 
-All collection classes implement `Eq` and `Hash` 
-if their contained type also respectively implements `Eq` and `Hash`. 
-For example, `Vec<T>` will implement `Hash` if `T` implements `Hash`.
+Всички типове сбирки[^collection] осъществяват `Eq` и `Hash`, ако съдържаните
+от тях типове въплъщават `Eq` и `Hash`. Например `Vec<T>` ще въплъщава `Hash`
+ако `T` въплъщава `Hash`.
 
-You can easily implement `Eq` and `Hash` for a custom type with just one line: 
+Можем лесно да въплътим `Eq` и `Hash` за потрбителски тип с един ред само: 
 `#[derive(PartialEq, Eq, Hash)]`
 
-The compiler will do the rest. If you want more control over the details, 
-you can implement `Eq` and/or `Hash` yourself. 
-This guide will not cover the specifics of implementing `Hash`. 
+Компилаторът ще свърши останалото. Ако искате да управлявате подробностите,
+можете да осъществите `Eq` и/или `Hash` сами. В това ръководство не
+покриваме особеностите по осъществяване на `Hash`. 
 
-To play around with using a `struct` in `HashMap`, 
-let's try making a very simple user logon system:
+За да си поиграем с използване на структура като ключ в `HashMap`, нека
+направим простичка уредба за удостоверяване:
 
 ```rust,editable
 use std::collections::HashMap;
 
-// Eq requires that you derive PartialEq on the type.
+// Eq изисква вашият тип да е производен на PartialEq.
 #[derive(PartialEq, Eq, Hash)]
 struct Account<'a>{
     username: &'a str,
@@ -56,11 +56,11 @@ fn try_logon<'a>(accounts: &Accounts<'a>,
 
     match accounts.get(&logon) {
         Some(account_info) => {
-            println!("Successful logon!");
-            println!("Name: {}", account_info.name);
-            println!("Email: {}", account_info.email);
+            println!("Успешно влизане!");
+            println!("Име: {}", account_info.name);
+            println!("Е-поща: {}", account_info.email);
         },
-        _ => println!("Login failed!"),
+        _ => println!("Не успяхте да влезете!"),
     }
 }
 
@@ -84,6 +84,10 @@ fn main(){
     try_logon(&accounts, "j.everyman", "password123");
 }
 ```
+## Б.пр.
+
+
+[^collection]: набор, сбирка, колекция – collection
 
 [hash]: https://en.wikipedia.org/wiki/Hash_function
 [floating]: https://en.wikipedia.org/wiki/Floating_point#Accuracy_problems

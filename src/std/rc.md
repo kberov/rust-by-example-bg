@@ -1,10 +1,19 @@
 # `Rc`
 
-When multiple ownership is needed, `Rc`(Reference Counting) can be used. `Rc` keeps track of the number of the references which means the number of owners of the value wrapped inside an `Rc`. 
+Когато ни е нужно повече променливи да владеят едни и същи данни, можем да
+ползваме `Rc`(Reference Counting – Броене на Препратки – б. пр.). `Rc` следи
+броя на препратките, което е броят на владелците на данните обгърнати в
+стойност от тип `Rc`. 
 
-Reference count of an `Rc` increases by 1 whenever an `Rc` is cloned, and decreases by 1 whenever one cloned `Rc` is dropped out of the scope. When an `Rc`'s reference count becomes zero (which means there are no remaining owners), both the `Rc` and the value are all dropped. 
+Броят на препратките се увеличава с единица (1) всеки път, когато една стойност
+от тип `Rc` бива клонирана и намалява с единица, когато клонирана стойност от
+тип `Rc` излезе от обхват. Когато борят на `Rc` препратките стане нула (което
+означава, че не са останали владелци), `Rc` стойността и стойността, която тя
+обгръща, биват освободени.
 
-Cloning an `Rc` never performs a deep copy. Cloning creates just another pointer to the wrapped value, and increments the count.
+Клонирането на `Rc` стойност никога не прави дълбоко копиране. То просто
+създава още един указател към обгърнатата стойност и увеличава бройката на
+указателите към стойността.
 
 ```rust,editable
 use std::rc::Rc;
@@ -12,37 +21,38 @@ use std::rc::Rc;
 fn main() {
     let rc_examples = "Rc examples".to_string();
     {
-        println!("--- rc_a is created ---");
+        println!("--- създаде се rc_a ---");
         
         let rc_a: Rc<String> = Rc::new(rc_examples);
-        println!("Reference Count of rc_a: {}", Rc::strong_count(&rc_a));
+        println!("Брой Препратки към rc_a: {}", Rc::strong_count(&rc_a));
         
         {
-            println!("--- rc_a is cloned to rc_b ---");
+            println!("--- rc_a се клонира в rc_b ---");
             
             let rc_b: Rc<String> = Rc::clone(&rc_a);
-            println!("Reference Count of rc_b: {}", Rc::strong_count(&rc_b));
-            println!("Reference Count of rc_a: {}", Rc::strong_count(&rc_a));
+            println!("Брой Препратки към rc_b: {}", Rc::strong_count(&rc_b));
+            println!("Брой Препратки към rc_a: {}", Rc::strong_count(&rc_a));
             
-            // Two `Rc`s are equal if their inner values are equal
-            println!("rc_a and rc_b are equal: {}", rc_a.eq(&rc_b));
+            // Две `Rc` стойности са еднакви, ако техните вътрешни стойности са
+            // еднакви
+            println!("rc_a и rc_b са еднакви: {}", rc_a.eq(&rc_b));
             
-            // We can use methods of a value directly
-            println!("Length of the value inside rc_a: {}", rc_a.len());
-            println!("Value of rc_b: {}", rc_b);
+            // Можем да ползваме методите на стойността непосредствено
+            println!("Дължината на стойността в rc_a: {}", rc_a.len());
+            println!("Стойността на rc_b: {}", rc_b);
             
-            println!("--- rc_b is dropped out of scope ---");
+            println!("--- rc_b е извън обхват (освободена е) ---");
         }
         
-        println!("Reference Count of rc_a: {}", Rc::strong_count(&rc_a));
+        println!("Брой Препратки към rc_a: {}", Rc::strong_count(&rc_a));
         
-        println!("--- rc_a is dropped out of scope ---");
+        println!("--- rc_a е извън обхват (освободена е) ---");
     }
     
-    // Error! `rc_examples` already moved into `rc_a`
-    // And when `rc_a` is dropped, `rc_examples` is dropped together
+    // Грешка! `rc_examples`  вече е преместена в `rc_a`
+    // А когато `rc_a` бива освободена, `rc_examples` бива освободена с нея
     // println!("rc_examples: {}", rc_examples);
-    // TODO ^ Try uncommenting this line
+    // ЗАДАЧА^ Разкоментирайте този ред
 }
 ```
 

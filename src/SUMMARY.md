@@ -170,7 +170,7 @@
     - [`Arc`](std/arc.md)
 - [Разни в std](std_misc.md)
     - [Нишки](std_misc/threads.md)
-        - [Testcase: map-reduce](std_misc/threads/testcase_mapreduce.md)
+        - [Проверка: map-reduce](std_misc/threads/testcase_mapreduce.md)
     - [Канали](std_misc/channels.md)
     - [Path](std_misc/path.md)
     - [File I/O](std_misc/file.md)

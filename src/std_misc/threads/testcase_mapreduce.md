@@ -1,39 +1,46 @@
-# Testcase: map-reduce
+# Проверка: map-reduce[^map_reduce]
 
-Ръждьо makes it very easy to parallelise data processing, without many of the headaches traditionally associated with such an attempt.
+С Ръждьо много лесно се прави успоредна обработка на данни без обичайните
+затруднения, с които сме свикнали при такива начинания.
 
-The standard library provides great threading primitives out of the box.
-These, combined with Ръждьо's concept of Ownership and aliasing rules, automatically prevent
-data races.
+Стандартната библиотека предоставя чудеснни първични типове за
+многонишковост[^threading] наготово. Тези типове, съчетани с правилата за
+[единосъщност] и владеене на променливите, автоматично предотвратяват _гонките
+за данни_[^data_races].
 
-The aliasing rules (one writable reference XOR many readable references) automatically prevent
-you from manipulating state that is visible to other threads. (Where synchronisation is needed,
-there are synchronisation
-primitives like `Mutex`es or `Channel`s.)
+Правилата за _единосъщност на данните_[^aliasing] (само една менима препратка
+или (XOR (изключващо или)) много неменими препратки) автоматично предотвратяват
+вероятността да се промени състояние на данните, което е видимо и за други
+нишки. Когато е нужна синхронизация при промяна на данните, стандартната
+библиотека предоставя първични типове за синхронизация като `Mutex` и
+`Channel`.
 
-In this example, we will calculate the sum of all digits in a block of numbers.
-We will do this by parcelling out chunks of the block into different threads. Each thread will sum
-its tiny block of digits, and subsequently we will sum the intermediate sums produced by each
-thread.
+В този пример ще изчислим сумата на всички цели числа в един блок. Ще направим
+това като разделим на парчета блока в различни нишки. Всяка нишка ще изчисли
+сумата на нейния си подблок от числа. После ще съберем получените междинни
+суми, изчислени от всяка ниша.
 
-Note that, although we're passing references across thread boundaries, Ръждьо understands that we're
-only passing read-only references, and that thus no unsafety or data races can occur. Also because
-the references we're passing have `'static` lifetimes, Ръждьо understands that our data won't be
-destroyed while these threads are still running. (When you need to share non-`static` data between
-threads, you can use a smart pointer like `Arc` to keep the data alive and avoid non-`static`
-lifetimes.)
+Забележете, че макар да подаваме препратки отвъд границите на нишките, Ръждьо
+разбира, че подаваме препратки само за четене и така няма опасност от гонки за
+данните. Освен това, тъй като подаваните препратки имат `'static` живот, Ръждьо
+разбира, че данните няма да бъдат унищожени, докато работят тези нишки. (Когато
+искаме да споделяме данни с не-`'static` живот между нишките, можем да ползваме
+умен указател като `Arc`, за да държим данните живи и така да избегнем
+употребата на не-`static` животи.)
 
 ```rust,editable
 use std::thread;
 
-// This is the `main` thread
+// Това е главната нишка.
 fn main() {
 
-    // This is our data to process.
-    // We will calculate the sum of all digits via a threaded  map-reduce algorithm.
-    // Each whitespace separated chunk will be handled in a different thread.
+    // Това са нашите данни за обработка.
+    // Ще изчислим сбора на всички числа чрез многонишков алгоритъм, наречен
+    // "map-reduce". Всяко парче, отделено от другите с празнота ще бъде
+    // обработено в отделна нишка.
     //
-    // TODO: see what happens to the output if you insert spaces!
+    // ЗАДАЧА: Вижте какво се случва с изхода, ако въведете празноти между
+    // някои числа!
     let data = "86967897737416471853297327050364959
 11861322575564723963297542624962850
 70856234701860851907960690014725639
@@ -43,56 +50,58 @@ fn main() {
 69920216438980873548808413720956532
 16278424637452589860345374828574668";
 
-    // Make a vector to hold the child-threads which we will spawn.
+    // Създаваме вектор да държи новосъздадените дъщерни нишки.
     let mut children = vec![];
 
     /*************************************************************************
-     * "Map" phase
+     * Стъпка "Map"
      *
-     * Divide our data into segments, and apply initial processing
+     * Разделяме данните на парчета и прилагаме предварителна обработка
      ************************************************************************/
 
-    // split our data into segments for individual calculation
-    // each chunk will be a reference (&str) into the actual data
+    // Разделяме данните на дялове за самостоятелно изчисляване. Всяко парче ще
+    // бъде препратка (&str) към истинските данни.
     let chunked_data = data.split_whitespace();
 
-    // Iterate over the data segments.
-    // .enumerate() adds the current loop index to whatever is iterated
-    // the resulting tuple "(index, element)" is then immediately
-    // "destructured" into two variables, "i" and "data_segment" with a
-    // "destructuring assignment"
+    // Обхождаме парче по парче данните.
+    // .enumerate() добавя текущия показалец от повторението към каквото се
+    // обхожда. Произведената разнородна поредица "(index, element)" бива
+    // незабавно разложена в две променливи – "i" и "data_segment" чрез
+    // присвояване.
     for (i, data_segment) in chunked_data.enumerate() {
-        println!("data segment {} is \"{}\"", i, data_segment);
+        println!("Парчето данни  {} е \"{}\"", i, data_segment);
 
-        // Process each data segment in a separate thread
+        // Обработваме всяко парче в отделна нишка.
         //
-        // spawn() returns a handle to the new thread,
-        // which we MUST keep to access the returned value
+        // spawn() връща ръкохватка за новата нишка, която ТРЯБВА да запазим,
+        // за да достъпим върнатата стойност.
         //
-        // 'move || -> u32' is syntax for a closure that:
-        // * takes no arguments ('||')
-        // * takes ownership of its captured variables ('move') and
-        // * returns an unsigned 32-bit integer ('-> u32')
+        // 'move || -> u32' е правопис за затваряне, който:
+        // * не приема аргументи ('||'),
+        // * овладява прихванатите стойности ('move') и
+        // * връща 32-битово цяло число без знак ('-> u32')
         //
-        // Ръждьо is smart enough to infer the '-> u32' from
-        // the closure itself so we could have left that out.
+        // Ръждьо е достатъчно умен да отгатне '-> u32' от затварянето, така,
+        // че можеше даже да не го указваме изрично.
         //
-        // TODO: try removing the 'move' and see what happens
+        // ЗАДАЧА: Махнете 'move' и вижте какво се случва.
         children.push(thread::spawn(move || -> u32 {
-            // Calculate the intermediate sum of this segment:
+            // Изчисляваме междинната сума от този участък:
             let result = data_segment
-                        // iterate over the characters of our segment..
+                        // Обхождаме знаците от текущия участък…
                         .chars()
-                        // .. convert text-characters to their number value..
-                        .map(|c| c.to_digit(10).expect("should be a digit"))
-                        // .. and sum the resulting iterator of numbers
+                        // …превръщаме знаците в цели десетични числа…
+                        .map(|c| c.to_digit(10).expect("трябва да е число"))
+                        // …и сумираме произведения повторител на числа
                         .sum();
 
-            // println! locks stdout, so no text-interleaving occurs
-            println!("processed segment {}, result={}", i, result);
+            // println! заключва стандартния изход и така няма смесен изход от
+            // различни нишки.
+            println!("обработиме участък {}, сума={}", i, result);
 
-            // "return" not needed, because Ръждьо is an "expression language", the
-            // last evaluated expression in each block is automatically its value.
+            // Не ни е нужен израз "return", защото Ръждьо е "ѝзразен език",
+            // последно изчисления израз във всеки блок става автоматично стойност
+            // за връщане.
             result
 
         }));
@@ -100,40 +109,56 @@ fn main() {
 
 
     /*************************************************************************
-     * "Reduce" phase
+     * Стъпка "Reduce"
      *
-     * Collect our intermediate results, and combine them into a final result
+     * Събираме междинните суми и ги сумираме като краен резултат.
      ************************************************************************/
 
-    // combine each thread's intermediate results into a single final sum.
+    // Използваме „турбофиш” (::<>), за да подскажем типа за окончателната сума.
     //
-    // we use the "turbofish" ::<> to provide sum() with a type hint.
-    //
-    // TODO: try without the turbofish, by instead explicitly
-    // specifying the type of final_result
-    let final_result = children.into_iter().map(|c| c.join().unwrap()).sum::<u32>();
+    // ЗАДАЧА: Опитайте без „турбофиш”, като вместо това укажете типа за
+    // final_result изрично.
+    let final_result = children.into_iter().map(|c| c.join().unwrap())
+        .sum::<u32>();
 
-    println!("Final sum result: {}", final_result);
+    println!("Окончателна сума: {}", final_result);
 }
-
-
 ```
 
-### Assignments
-It is not wise to let our number of threads depend on user inputted data.
-What if the user decides to insert a lot of spaces? Do we _really_ want to spawn 2,000 threads?
-Modify the program so that the data is always chunked into a limited number of chunks,
-defined by a static constant at the beginning of the program.
+### Упражнения
+Не е мъдро броят на нишките да зависи от входните данни. Какво ако потребителят
+реши да въведе празноти[^spaces] между много числа? Наистина ли искаме да
+създадем 2000 нишки? Променете програмата, така че данните да се разделят в
+ограничен брой парчета, определящи се от статична константа в началото на
+програмата.
+
+## Б.пр.
+
+[^map_reduce]: съответствие-намаляване map-reduce? ЗАДАЧА: да се преведе и
+  обясни на български: https://en.wikipedia.org/wiki/MapReduce
+  https://ru.wikipedia.org/wiki/MapReduce
+
+[^threading]: нишковост – threading; многонишковост – multi-threading
+
+[^data_races]: гонки за данни – data races
+
+[^aliasing]: единосъщност, разноименост – aliasing. Когато различни променливи
+  сочат към едни и същи данни. Ръждьо автоматично (по подразбиране) не
+  позволява това да се случи.
+
+[^spaces] празнота, празно пространство – space, white-space
 
 ### See also:
-* [Threads][thread]
-* [vectors][vectors] and [iterators][iterators]
-* [closures][closures], [move][move] semantics and [`move` closures][move_closure]
-* [destructuring][destructuring] assignments
-* [turbofish notation][turbofish] to help type inference
-* [unwrap vs. expect][unwrap]
+* [Нишки][thread]
+* [Вектори][vectors] и [Повторители][iterators]
+* [Затваряния][closures], [move][move] semantics и [`move` closures][move_closure]
+* Присвояване чрез [разлагане][destructuring]
+* [означение турбофиш][turbofish] за помощ при отгатване на типове
+* [unwrap с/у expect][unwrap]
 * [enumerate][enumerate]
 
+
+[единосъщност]: ../../scope/borrow/alias.md
 [thread]: ../threads.md
 [vectors]: ../../std/vec.md
 [iterators]: ../../trait/iter.md

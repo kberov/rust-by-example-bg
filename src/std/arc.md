@@ -1,10 +1,12 @@
 # Arc
 
-When shared ownership between threads is needed, `Arc`(Atomically Reference
-Counted) can be used. This struct, via the `Clone` implementation can create
-a reference pointer for the location of a value in the memory heap while
-increasing the reference counter. As it shares ownership between threads, when
-the last reference pointer to a value is out of scope, the variable is dropped.
+Когато се нуждаем от споделено владение на данните между нишките на нашата
+програма, можем да ползваме `Arc`(Atomically Reference Counted – Неделимо
+Броене на Препратките, б.пр.). Чрез своето въплъщение на `Clone` тази структура
+може да създава указател към данните от купа̀, като увеличава броя на
+препратките към данните, към които сочи указателя. Тъй като `Arc` поддържа
+споделено между нишките владение, когато последната препратка към дадено парче
+данни излезе от обхват, променливата (и съотведната стойност) се освобождават.
 
 ```rust,editable
 use std::time::Duration;
@@ -12,22 +14,22 @@ use std::sync::Arc;
 use std::thread;
 
 fn main() {
-    // This variable declaration is where its value is specified.
+    // Чрез тази обява на променлива указваме и стойността.
     let apple = Arc::new("the same apple");
 
-    for _ in 0..10 {
-        // Here there is no value specification as it is a pointer to a
-        // reference in the memory heap.
+    for нишка in 0..10 {
+        // Тук не указваме нова стойност. Новата променлива е указател към
+        // препратка от купа̀ памет.
         let apple = Arc::clone(&apple);
 
         thread::spawn(move || {
-            // As Arc was used, threads can be spawned using the value allocated
-            // in the Arc variable pointer's location.
-            println!("{:?}", apple);
+            // Понеже ползваме Arc, можем да създаваме нови нишки със заделено
+            // място за новия указател.
+            println!("{:?} от нишка {нишка}", apple);
         });
     }
 
-    // Make sure all Arc instances are printed from spawned threads.
+    // Изчакваме, за да се отпечатат всички инстанции от умножените нишки.
     thread::sleep(Duration::from_secs(1));
 }
 ```

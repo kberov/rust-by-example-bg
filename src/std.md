@@ -1,17 +1,17 @@
-# Std library types
+# Стандартни типове
 
-The `std` library provides many custom types which expands drastically on
-the `primitives`. Some of these include:
+Библиотеката `std` предоставя много потребителски типове, изградени на основата
+на [първичните типове][primitives]. Ето някои от тях:
 
-* growable `String`s like: `"hello world"`
-* growable vectors: `[1, 2, 3]`
-* optional types: `Option<i32>`
-* error handling types: `Result<i32, i32>`
-* heap allocated pointers: `Box<i32>`
+* низове с променлива дължина –`String`: `"здравей, свят"`
+* вектори с променлива дължина: `[1, 2, 3]`
+* типове за избор: `Option<i32>`
+* типове за обработка на грешки: `Result<i32, i32>`
+* Указатели със заделено място в динамичната памет – купа̀ (heap): `Box<i32>`
 
 ### See also:
 
-[primitives] and [the std library][std]
+[първични типове][primitives] и [стандартна библиотека][std]
 
 [primitives]: primitives.md
 [std]: https://doc.rust-lang.org/std/

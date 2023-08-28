@@ -1,20 +1,20 @@
 # `Result`
 
-We've seen that the `Option` enum can be used as a return value from functions
-that may fail, where `None` can be returned to indicate failure. However,
-sometimes it is important to express *why* an operation failed. To do this we 
-have the `Result` enum.
+Видяхме, че броячът `Option` може да се ползва като стойност за връщане от
+функции, който може да не успеят, като можем да върнем `None` при неуспех.
+Понякога, обаче, е важно да кажем  _защо_ действието не е успяло. За тази цел
+разполагаме с брояча `Result` – `Изход|Резултат`.
 
-The `Result<T, E>` enum has two variants:
+`Result<T, E>` има две разновидности:
 
-* `Ok(value)` which indicates that the operation succeeded, and wraps the
-  `value` returned by the operation. (`value` has type `T`)
-* `Err(why)`, which indicates that the operation failed, and wraps `why`,
-  which (hopefully) explains the cause of the failure. (`why` has type `E`)
+* `Ok(стойност)`, което означава, че действието е успяло и обгръща
+  `стойност`та, върната от действието. (`стойност` е от тип `T`);
+* `Err(защо)`, което означава, че действието е неуспешно и обгръща `защо`, и
+  което (надяваме се) обяснява причината за неуспеха. (`защо` е от тип `E`).
 
 ```rust,editable,ignore,mdbook-runnable
 mod checked {
-    // Mathematical "errors" we want to catch
+    // Математически „грешки”, който искаме да прихванем
     #[derive(Debug)]
     pub enum MathError {
         DivisionByZero,
@@ -26,11 +26,12 @@ mod checked {
 
     pub fn div(x: f64, y: f64) -> MathResult {
         if y == 0.0 {
-            // This operation would `fail`, instead let's return the reason of
-            // the failure wrapped in `Err`
+            // Това действие може да не успее. Нека върнем причината обгърната
+            // в `Err`
             Err(MathError::DivisionByZero)
         } else {
-            // This operation is valid, return the result wrapped in `Ok`
+            // Това действие е правилно – връщаме изхода от него загърнат в
+            // `Ok`.
             Ok(x / y)
         }
     }
@@ -54,7 +55,7 @@ mod checked {
 
 // `op(x, y)` === `sqrt(ln(x / y))`
 fn op(x: f64, y: f64) -> f64 {
-    // This is a three level match pyramid!
+    // Това е пирмида за намиране на съвпадения на три нива!
     match checked::div(x, y) {
         Err(why) => panic!("{:?}", why),
         Ok(ratio) => match checked::ln(ratio) {

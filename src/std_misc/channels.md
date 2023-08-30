@@ -1,7 +1,7 @@
 # Канали
 
 Ръждьо предоставя _неедновременни[^asynchronous] канали (`channels`)_ за
-_общение_[^communication] между нишките. Каналите предоставят еднопосочен
+_общуване_[^communication] между нишките. Каналите предоставят еднопосочен
 поток данни между две крайни точки: Подател (`Sender`) и Получател
 (`Receiver`).
 
@@ -59,4 +59,4 @@ fn main() {
 
 [^asynchronous]: неедновременни – asynchronous; https://www.etymonline.com/word/synchronous https://www.etymonline.com/word/asynchronous
 
-[^communication]: общение – communication
+[^communication]: общуване – communication

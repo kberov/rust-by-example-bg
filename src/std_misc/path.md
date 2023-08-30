@@ -1,59 +1,76 @@
 # Path
 
-The `Path` struct represents file paths in the underlying filesystem. There are
-two flavors of `Path`: `posix::Path`, for UNIX-like systems, and
-`windows::Path`, for Windows. The prelude exports the appropriate
-platform-specific `Path` variant.
+Структурата `Path` (пѫть)[^path] представлява осъществление на работа с файлови пътища
+за съответната _файлова уредба_[^filesystem]. Има две разновидности на `Path`:
+`posix::Path`, за UNIX-подобни _уредби_[^systems] и `windows::Path`, за
+Windows.  _Предисловието_[^prelude] изнася (внася в обхвата на програмата,
+б.пр.) подходящата за текущата уредба разновидност на `Path`. 
 
-A `Path` can be created from an `OsStr`, and provides several methods to get
-information from the file/directory the path points to.
+`Path` може да бъде създаден от `OsStr` и предоставя няколко метода за
+извличане на данни от файла/директорията, към които сочи пътя.
 
-A `Path` is immutable. The owned version of `Path` is `PathBuf`. The relation 
-between `Path` and `PathBuf` is similar to that of `str` and `String`: 
-a `PathBuf` can be mutated in-place, and can be dereferenced to a `Path`.
+Променливите от тип `Path` са неменими. Овладимата разновидност на `Path` е
+`PathBuf`. Отношението между `Path` и `PathBuf` е подобно на това между `str` и
+`String`.  Променливите от тип `PathBuf` могат да бъдат променяни на място и
+могат да бъдат достъпвани пряко сякаш са от тип `Path`.
 
-Note that a `Path` is *not* internally represented as an UTF-8 string, but
-instead is stored as an `OsString`. Therefore, converting a `Path` to a `&str`
-is *not* free and may fail (an `Option` is returned). However, a `Path` can be 
-freely converted to an `OsString` or `&OsStr` using `into_os_string` and
-`as_os_str`, respectively.
+Обърнете внимание, че `Path` вътрешно _не е_ представена като UTF-8 низ, а се
+съхранява като `OsString`. Затова превръщането на `Path` в `&str` _не е_
+безплатно и може да не успее (връща се `Option`). Все пак `Path` може свободно
+да се превърне в `OsString` или `&OsStr` с помощта на `into_os_string` и
+`as_os_str`, съответно.
 
 ```rust,editable
 use std::path::Path;
 
 fn main() {
-    // Create a `Path` from an `&'static str`
+    // Създаваме `Path` от `&'static str`
     let path = Path::new(".");
 
-    // The `display` method returns a `Display`able structure
+    // Методът `display` връща показваема структура (виж `Display`).
     let _display = path.display();
 
-    // `join` merges a path with a byte container using the OS specific
-    // separator, and returns a `PathBuf`
+    // `join` слива път като ползва съответния разделител за текущата РУ и
+    // връща променлива от тип `PathBuf`.
     let mut new_path = path.join("a").join("b");
 
-    // `push` extends the `PathBuf` with a `&Path`
+    // `push` удължава `PathBuf` с един `&Path`
     new_path.push("c");
     new_path.push("myfile.tar.gz");
 
-    // `set_file_name` updates the file name of the `PathBuf`
+    // `set_file_name` променя името на файла в `PathBuf` променливата
     new_path.set_file_name("package.tgz");
 
-    // Convert the `PathBuf` into a string slice
+    // Превръща `PathBuf` в отрязък от низ.
     match new_path.to_str() {
-        None => panic!("new path is not a valid UTF-8 sequence"),
-        Some(s) => println!("new path is {}", s),
+        None => panic!("Новият пѫть е недействителна UTF-8 последователност"),
+        Some(s) => println!("Новият пѫть е {}", s),
     }
 }
 
 ```
 
-Be sure to check at other `Path` methods (`posix::Path` or `windows::Path`) and
-the `Metadata` struct.
+Не пропускайте да разгледате другите методи на `Path` (`posix::Path` или
+`windows::Path`) структурата `Metadata`.
+
+## Б.пр.
+
+[^path]: пѫть – път – path. „пѫть” е старият (до 1945 г.) правопис на думата
+  път. Буквата Ѫ (голям юс – Онсъ, носово О) отразява различните произношения в
+  различните говори на българския език. С голяма вероятност на езика на Светите Братя
+  е звучала като „Он” (Н се поизнася носово като във френски). В съвременните
+  български говори все още можете да чуете разлики в произношението на думи
+  като път, зъб, мъж. Ѫ =~ /(ОА|А|Ъ|О|У)(М|Н)?/
+
+[^filesystem]: файлова уредба – filesystem
+
+[^systems]: уредба – system
+
+[^prelude]: предисловие – prelude
 
 ### See also:
 
-[OsStr][1] and [Metadata][2].
+[OsStr][1] и [Metadata][2].
 
 [1]: https://doc.rust-lang.org/std/ffi/struct.OsStr.html
 [2]: https://doc.rust-lang.org/std/fs/struct.Metadata.html

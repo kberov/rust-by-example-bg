@@ -5,9 +5,10 @@
 * атрибутът `cfg`: `#[cfg(...)]`
 * Макрото `cfg!`: `cfg!(...)` при условни изрази
 
-While the former enables conditional compilation, the latter conditionally
-evaluates to `true` or `false` literals allowing for checks at run-time. Both
-utilize identical argument syntax.
+Докато първото включва условна компилация, второто оценява условието като
+буквали[^literals] „да” (`true`) или „не” (`false`), които позволяват да се
+правят проверки по време на изпълнение. И двете единици код ползват един и същ
+правопис за приемане на аргументи.
 
 За разлика от `#[cfg]`, `cfg!` не премахва код, а само се оценява като „да” или
 „не”. Вички блокове в израз if/else трябва да работят, когато се ползва  `cfg!`,
@@ -17,30 +18,34 @@ utilize identical argument syntax.
 // Тази функция се компилира само ако целевата ОУ е Линукс
 #[cfg(target_os = "linux")]
 fn are_you_on_linux() {
-    println!("You are running linux!");
+    println!("Работите в Линукс!");
 }
 
 // А тази функция се компилира само ако целевата ОУ *не е* Линукс
 #[cfg(not(target_os = "linux"))]
 fn are_you_on_linux() {
-    println!("You are *not* running linux!");
+    println!("*Не* работите в Линукс!");
 }
 
 fn main() {
     are_you_on_linux();
 
-    println!("Are you sure?");
+    println!("Сигурни ли сте?");
     if cfg!(target_os = "linux") {
-        println!("Yes. It's definitely linux!");
+        println!("Да. Определено е Линукс!");
     } else {
-        println!("Yes. It's definitely *not* linux!");
+        println!("Да. Определено *не е* Линукс!");
     }
 }
 ```
 
+## Б.пр.
+
+[^literals]: буквал (буквална стойност) – literal (literal value)
+
 ### See also:
 
-[the reference][ref], [`cfg!`][cfg], and [macros][macros].
+[Справочника][ref], [документацията за `cfg!`][cfg] и [macro_rules!][macros].
 
 [cfg]: https://doc.rust-lang.org/std/macro.cfg!.html
 [macros]: ../macros.md

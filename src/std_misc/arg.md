@@ -1,9 +1,9 @@
-# Program arguments
+# Аргументи на програмата 
 
-## Standard Library
+## Стандартната библиотека
 
-The command line arguments can be accessed using `std::env::args`, which
-returns an iterator that yields a `String` for each argument:
+Аргументите на командния ред са достъпни чрез функцията `std::env::args`, която
+връща повторител, даващ ни стойност от тип `String` за всеки аргумент:
 
 ```rust,editable
 use std::env;
@@ -11,13 +11,13 @@ use std::env;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    // The first argument is the path that was used to call the program.
-    println!("My path is {}.", args[0]);
+    // Първият аргумент е пътят, използван за извикване на програмата.
+    println!("Моят пѫть е {}.", args[0]);
 
-    // The rest of the arguments are the passed command line parameters.
-    // Call the program like this:
+    // Останалите аргументи са подадените параметри на командния ред.
+    // Извикайте програмата така:
     //   $ ./args arg1 arg2
-    println!("I got {:?} arguments: {:?}.", args.len() - 1, &args[1..]);
+    println!("Получих {:?} аргумента: {:?}.", args.len() - 1, &args[1..]);
 }
 ```
 
@@ -27,11 +27,11 @@ My path is ./args.
 I got 3 arguments: ["1", "2", "3"].
 ```
 
-## Crates
+## Кошове
 
-Alternatively, there are numerous crates that can provide extra functionality
-when creating command-line applications. The [Ръждьо Cookbook] exhibits best
-practices on how to use one of the more popular command line argument crates,
-`clap`.
+Има много кошове, предоставящи допълнителни възможности, когато създавате
+програми за командния ред. [„Готварската книга за Ръждьо”] излага редица добри
+примери за това как да се ползва един от най-известните кошове за употреба на
+аргументи – `clap`.
 
-[Ръждьо Cookbook]: https://rust-lang-nursery.github.io/rust-cookbook/cli/arguments.html
+[„Готварската книга за Ръждьо”]: https://rust-lang-nursery.github.io/rust-cookbook/cli/arguments.html

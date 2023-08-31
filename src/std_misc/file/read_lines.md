@@ -41,7 +41,7 @@ fn read_lines(filename: &str) -> Vec<String> {
 ## По-ефикасен подход
 
 Тук предаваме владението на отворения `File` на структура от тип `BufReader`.
-`BufReader` използва вътрешен _склад_[^buffer], за да намалим
+`BufReader` използва вътрешен _склад_[^buffer]. Така се намалява
 междинното[^intermediate] заделяне на памет[^allocations].
 
 Също така обновяваме[^update] `read_lines` да връща повторител вместо да заделя
@@ -73,7 +73,7 @@ where P: AsRef<Path>, {
 }
 ```
 
-Running this program simply prints the lines individually.
+Тази програма просто отпечатва редовете един по един.
 ```shell
 $ echo -e "127.0.0.1\n192.168.0.1\n" > hosts.txt
 $ rustc read_lines.rs && ./read_lines
@@ -81,11 +81,13 @@ $ rustc read_lines.rs && ./read_lines
 192.168.0.1
 ```
 
-(Note that since `File::open` expects a generic `AsRef<Path>` as argument, we define our
-generic `read_lines()` method with the same generic constraint, using the `where` keyword.)
+(Забележете, че понеже `File::open` очаква обобщен `AsRef<Path>` като аргумент,
+описваме `read_lines()` като обобщена функция със същото ограничение, като
+използваме ключовата дума `where`.)
 
-This process is more efficient than creating a `String` in memory with all of the file's
-contents. This can especially cause performance issues when working with larger files.
+Този подход е по-ефикасен от създаване на обект от тип `String` в паметта с
+цялото съдържание на файла. При големи файлове четенето им наведнъж в паметта
+може да създаде особено големи затруднения с производителността.
 
 ## Б.пр.
 
@@ -93,6 +95,6 @@ contents. This can especially cause performance issues when working with larger 
 
 [^intermediate]: междинно – intermediate
 
-[^allocations]: заделяне на памет – allocation
+[^allocations]: заделяне на памет – memory allocation
 
 [^update]: обновявам – update

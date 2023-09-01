@@ -1,9 +1,9 @@
 # `open`
 
-The `open` function can be used to open a file in read-only mode.
+Функцията `open` може да се ползва за отваряне на файл само за четене.
 
-A `File` owns a resource, the file descriptor and takes care of closing the
-file when it is `drop`ed.
+Един `File` владее източник – файловото описание, и се грижи да
+затвори файла, когато той бъде освободен (`drop`).
 
 ```rust,editable,ignore
 use std::fs::File;
@@ -11,28 +11,28 @@ use std::io::prelude::*;
 use std::path::Path;
 
 fn main() {
-    // Create a path to the desired file
+    // Създаваме път към желания файл.
     let path = Path::new("hello.txt");
     let display = path.display();
 
-    // Open the path in read-only mode, returns `io::Result<File>`
+    // Отваряме пътя само за четене. Това връща `io::Result<File>`.
     let mut file = match File::open(&path) {
-        Err(why) => panic!("couldn't open {}: {}", display, why),
+        Err(why) => panic!("Неуспех при отваряне на {}: {}", display, why),
         Ok(file) => file,
     };
 
-    // Read the file contents into a string, returns `io::Result<usize>`
+    // Прочитаме съдържанието на файла в низ, връща `io::Result<usize>`.
     let mut s = String::new();
     match file.read_to_string(&mut s) {
-        Err(why) => panic!("couldn't read {}: {}", display, why),
-        Ok(_) => print!("{} contains:\n{}", display, s),
+        Err(why) => panic!("Неуспех при четене на {}: {}", display, why),
+        Ok(_) => print!("{} съдържа:\n{}", display, s),
     }
 
-    // `file` goes out of scope, and the "hello.txt" file gets closed
+    // `file` излиза от обхват и "hello.txt" бива затворен
 }
 ```
 
-Here's the expected successful output:
+Ето очаквания успешен изход:
 
 ```shell
 $ echo "Hello World!" > hello.txt
@@ -41,6 +41,5 @@ hello.txt contains:
 Hello World!
 ```
 
-(You are encouraged to test the previous example under different failure
-conditions: `hello.txt` doesn't exist, or `hello.txt` is not readable,
-etc.)
+(Пробвайте горния пример при различни условия за неуспех: `hello.txt` не
+съществува или `hello.txt` е нечетим, и т.н.)

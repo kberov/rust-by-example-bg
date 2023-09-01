@@ -1,9 +1,8 @@
 # `read_lines`
 
-## A naive approach
+## Наивен подход
 
-This might be a reasonable first attempt for a beginner's first
-implementation for reading lines from a file.
+Това може да бъде приличен първи опит за четене на редове от файл.
 
 ```rust,norun
 use std::fs::read_to_string;
@@ -19,33 +18,34 @@ fn read_lines(filename: &str) -> Vec<String> {
 }
 ```
 
-Since the method `lines()` returns an iterator over the lines in the file,
-we can also perform a map inline and collect the results, yielding a more
-concise and fluent expression.
+Тъй като методът `lines()` връща повторител върху редовете във файла, можем
+също да направим съответствия и да съберем резултатите, като така представим
+нещата като по-сбит и ясен израз.
 
 ```rust,norun
 use std::fs::read_to_string;
 
 fn read_lines(filename: &str) -> Vec<String> {
     read_to_string(filename) 
-        .unwrap()  // panic on possible file-reading errors
-        .lines()  // split the string into an iterator of string slices
-        .map(String::from)  // make each slice into a string
-        .collect()  // gather them together into a vector
+        .unwrap() // Паника в случай на грешки при четене от файл.
+        .lines() // Разделяме низа в повторител върху низови отрязъци.
+        .map(String::from) // Правим всеки отрязък на низ.
+        .collect() // Събираме ги заедно във вектор.
 }
 ```
 
-Note that in both examples above, we must convert the `&str` reference
-returned from `lines()` to the owned type `String`, using `.to_string()`
-and `String::from` respectively.
+Забележете, че и в двата примера се налага да превърнем препратката `&str`,
+върната от `lines()` във владимия тип `String` с помощтта на `.to_string()` и
+съответно `String::from`.
 
-## A more efficient approach
+## По-ефикасен подход
 
-Here we pass ownership of the open `File` to a `BufReader` struct. `BufReader` uses an internal
-buffer to reduce intermediate allocations.
+Тук предаваме владението на отворения `File` на структура от тип `BufReader`.
+`BufReader` използва вътрешен _склад_[^buffer]. Така се намалява
+междинното[^intermediate] заделяне на памет[^allocations].
 
-We also update `read_lines` to return an iterator instead of allocating new
-`String` обекти in memory for each line.
+Също така обновяваме[^update] `read_lines` да връща повторител вместо да заделя
+памет за нови обекти от тип `String` за всеки ред.
 
 ```rust,no_run
 use std::fs::File;
@@ -53,9 +53,9 @@ use std::io::{self, BufRead};
 use std::path::Path;
 
 fn main() {
-    // File hosts.txt must exist in the current path
+    // Файлът hosts.txt трябва да съществува в текущия път.
     if let Ok(lines) = read_lines("./hosts.txt") {
-        // Consumes the iterator, returns an (Optional) String
+        // Поглъща повторителя. Връща Option<String>.
         for line in lines {
             if let Ok(ip) = line {
                 println!("{}", ip);
@@ -64,8 +64,8 @@ fn main() {
     }
 }
 
-// The output is wrapped in a Result to allow matching on errors
-// Returns an Iterator to the Reader of the lines of the file.
+// Изходът е обгърнат в `Result`, за да разреши намиране на съвпадения при
+// грешки. Връща повторител(`Iterator`) от `BufReader` на редовете във файла.
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
 where P: AsRef<Path>, {
     let file = File::open(filename)?;
@@ -73,7 +73,7 @@ where P: AsRef<Path>, {
 }
 ```
 
-Running this program simply prints the lines individually.
+Тази програма просто отпечатва редовете един по един.
 ```shell
 $ echo -e "127.0.0.1\n192.168.0.1\n" > hosts.txt
 $ rustc read_lines.rs && ./read_lines
@@ -81,8 +81,20 @@ $ rustc read_lines.rs && ./read_lines
 192.168.0.1
 ```
 
-(Note that since `File::open` expects a generic `AsRef<Path>` as argument, we define our
-generic `read_lines()` method with the same generic constraint, using the `where` keyword.)
+(Забележете, че понеже `File::open` очаква обобщен `AsRef<Path>` като аргумент,
+описваме `read_lines()` като обобщена функция със същото ограничение, като
+използваме ключовата дума `where`.)
 
-This process is more efficient than creating a `String` in memory with all of the file's
-contents. This can especially cause performance issues when working with larger files.
+Този подход е по-ефикасен от създаване на обект от тип `String` в паметта с
+цялото съдържание на файла. При големи файлове четенето им наведнъж в паметта
+може да създаде особено големи затруднения с производителността.
+
+## Б.пр.
+
+[^buffer]: склад – buffer
+
+[^intermediate]: междинно – intermediate
+
+[^allocations]: заделяне на памет – memory allocation
+
+[^update]: обновявам – update

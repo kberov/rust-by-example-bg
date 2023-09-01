@@ -1,11 +1,18 @@
 # File I/O
 
-The `File` struct represents a file that has been opened (it wraps a file
-descriptor), and gives read and/or write access to the underlying file.
+Структурата `File` представлява отворен файл (обгръща _файлово
+описание_[^f_descr]) и дава достъп за четене и/или писане към самия файл.
 
-Since many things can go wrong when doing file I/O, all the `File` methods
-return the `io::Result<T>` type, which is an alias for `Result<T, io::Error>`.
+Тъй като много неща могат да се объркат докато работим с вход и изход от
+файлове, методите от `File` връщат стойности от тип `io::Result<T>`, който е
+прякор за `Result<T, io::Error>`.
 
-This makes the failure of all I/O operations *explicit*. Thanks to this, the
-programmer can see all the failure paths, and is encouraged to handle them in
-a proactive manner.
+Това прави вероятния неуспех при всички входноизходни действия
+_изричен_[^explicit].  Благодарение на това програмистът може да види всички
+неуспешни опити, и бива насърчен да ги обработва чрез разни действия.
+
+## Б.пр.
+
+[^f_descr]: файлово описание – file descriptor
+
+[^explicit]: изричен – explicit

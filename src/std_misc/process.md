@@ -1,7 +1,7 @@
-# Child processes
+# Дъщерни процеси 
 
-The `process::Output` struct represents the output of a finished child process,
-and the `process::Command` struct is a process builder.
+Структурата `process::Output` представлява изходът от завършил дъщерен процес,
+а структурата `process::Command` е създател на процеси.
 
 ```rust,editable,ignore
 use std::process::Command;
@@ -10,20 +10,19 @@ fn main() {
     let output = Command::new("rustc")
         .arg("--version")
         .output().unwrap_or_else(|e| {
-            panic!("failed to execute process: {}", e)
+            panic!("Неуспех при изпълнение на процес: {}", e)
     });
 
     if output.status.success() {
         let s = String::from_utf8_lossy(&output.stdout);
 
-        print!("rustc succeeded and stdout was:\n{}", s);
+        print!("rustc успя, а стандартният изход беше:\n{}", s);
     } else {
         let s = String::from_utf8_lossy(&output.stderr);
 
-        print!("rustc failed and stderr was:\n{}", s);
+        print!("rustc не успя а стандартната грешка беше:\n{}", s);
     }
 }
 ```
 
-(You are encouraged to try the previous example with an incorrect flag passed
-to `rustc`)
+(Пробвайте горния пример, като подадете неправилен флаг на `rustc`)

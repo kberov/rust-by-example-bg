@@ -1,8 +1,7 @@
 # `create`
 
-The `create` function opens a file in write-only mode. If the file
-already existed, the old content is destroyed. Otherwise, a new file is
-created.
+Функцията `create` отваря файл само за писане. Ако файлът вече съществува,
+старото му съдържание бива унищожено. Иначе се създава нов файл.
 
 ```rust,ignore
 static LOREM_IPSUM: &str =
@@ -22,21 +21,21 @@ fn main() {
     let path = Path::new("lorem_ipsum.txt");
     let display = path.display();
 
-    // Open a file in write-only mode, returns `io::Result<File>`
+    // Отваряме файл само за четене. Връща `io::Result<File>`.
     let mut file = match File::create(&path) {
-        Err(why) => panic!("couldn't create {}: {}", display, why),
+        Err(why) => panic!("Неуспех при създаване на {}: {}", display, why),
         Ok(file) => file,
     };
 
-    // Write the `LOREM_IPSUM` string to `file`, returns `io::Result<()>`
+    // Пишем низа от `LOREM_IPSUM` във `file`. Връща `io::Result<()>`.
     match file.write_all(LOREM_IPSUM.as_bytes()) {
-        Err(why) => panic!("couldn't write to {}: {}", display, why),
-        Ok(_) => println!("successfully wrote to {}", display),
+        Err(why) => panic!("Неуспех при писане във {}: {}", display, why),
+        Ok(_) => println!("Успешно записахме в {}", display),
     }
 }
 ```
 
-Here's the expected successful output:
+Ето очаквания успешен изход:
 
 ```shell
 $ rustc create.rs && ./create
@@ -50,9 +49,8 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 ```
 
-(As in the previous example, you are encouraged to test this example under
-failure conditions.)
+(Както в предния пример, пробвайте различни условия за неуспех.)
 
-The [`OpenOptions`] struct can be used to configure how a file is opened.
+Може да ползваме структурата [`OpenOptions`], за да настроим как да се отваря файл.
 
 [`OpenOptions`]: https://doc.rust-lang.org/std/fs/struct.OpenOptions.html

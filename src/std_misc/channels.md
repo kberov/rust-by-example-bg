@@ -1,8 +1,9 @@
-# Channels
+# Канали
 
-Ръждьо provides asynchronous `channels` for communication between threads. Channels
-allow a unidirectional flow of information between two end-points: the
-`Sender` and the `Receiver`.
+Ръждьо предоставя _неедновременни[^asynchronous] канали (`channels`)_ за
+_общуване_[^communication] между нишките. Каналите предоставят еднопосочен
+поток данни между две крайни точки: Подател (`Sender`) и Получател
+(`Receiver`).
 
 ```rust,editable
 use std::sync::mpsc::{Sender, Receiver};
@@ -12,44 +13,50 @@ use std::thread;
 static NTHREADS: i32 = 3;
 
 fn main() {
-    // Channels have two endpoints: the `Sender<T>` and the `Receiver<T>`,
-    // where `T` is the type of the message to be transferred
-    // (type annotation is superfluous)
+    // Каналите имат две крайни точки: `Sender<T>` и `Receiver<T>`,
+    // където `T` е типа съобщение, което се пренася
+    // (означаването на типа е излишно).
     let (tx, rx): (Sender<i32>, Receiver<i32>) = mpsc::channel();
     let mut children = Vec::new();
 
     for id in 0..NTHREADS {
-        // The sender endpoint can be copied
+        // Точката подател може да се копира.
         let thread_tx = tx.clone();
 
-        // Each thread will send its id via the channel
+        // Всяка нишка ще подаде своето 'id' през канала.
         let child = thread::spawn(move || {
-            // The thread takes ownership over `thread_tx`
-            // Each thread queues a message in the channel
+            // Нишката овладява `thread_tx`
+            // Всяка нишка слага на опашка съобщение в канала.
             thread_tx.send(id).unwrap();
 
-            // Sending is a non-blocking operation, the thread will continue
-            // immediately after sending its message
-            println!("thread {} finished", id);
+            // Подаването е неблокиращо действие. Нишката ще продължи незабавно
+            // след подаването на своето съобщение.
+            println!("Нишка {} приключи.", id);
         });
 
         children.push(child);
     }
 
-    // Here, all the messages are collected
+    // Тук се събират всички съобщения.
     let mut ids = Vec::with_capacity(NTHREADS as usize);
     for _ in 0..NTHREADS {
-        // The `recv` method picks a message from the channel
-        // `recv` will block the current thread if there are no messages available
+        // Методът `recv` взима съобщение от канала.
+        // `recv` блокира текущата нишка, ако няма пристигнали съобщения.
         ids.push(rx.recv());
     }
     
-    // Wait for the threads to complete any remaining work
+    // Чакаме нишките да довършат каквото има.
     for child in children {
-        child.join().expect("oops! the child thread panicked");
+        child.join().expect("Опаа! Дъщерната нишка се паникьоса.");
     }
 
-    // Show the order in which the messages were sent
+    // Показваме съобщенията в реда на изпращане.
     println!("{:?}", ids);
 }
 ```
+
+## Б.пр.
+
+[^asynchronous]: неедновременни – asynchronous; https://www.etymonline.com/word/synchronous https://www.etymonline.com/word/asynchronous
+
+[^communication]: общуване – communication

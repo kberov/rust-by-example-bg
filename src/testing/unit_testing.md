@@ -1,27 +1,28 @@
-# Unit testing
+# Поединично тестване
 
-Tests are Ръждьо functions that verify that the non-test code is functioning in
-the expected manner. The bodies of test functions typically perform some setup,
-run the code we want to test, then assert whether the results are what we
-expect.
+Тестовете в Ръждьо са функции, които проверяват дали друг – нетестов код
+действа по очаквания начин. Телата на тестовите функции обикновено извършват
+някакви първоначални настройки, изпълняват кода, който искаме да тестваме и
+след това проверяват дали изхода от изпълнението на кода е каквото очакваме.
 
-Most unit tests go into a `tests` [mod][mod] with the `#[cfg(test)]` [attribute][attribute].
-Test functions are marked with the `#[test]` attribute.
+Повечето единични тестове се пишат в отделен [модул][mod] с име `tests` и
+[атрибут][attribute] `#[cfg(test)]`. Тестовите функции се обозначават с атрибута
+`#[test]`.
 
-Tests fail when something in the test function [panics][panic]. There are some
-helper [macros][macros]:
+Тестовете се провалят, когато нещо в тестова функция се [паникьоса][panic]. Има
+някои помощни [макроси][macros]:
 
-* `assert!(expression)` - panics if expression evaluates to `false`.
-* `assert_eq!(left, right)` and `assert_ne!(left, right)` - testing left and
-  right expressions for equality and inequality respectively.
+* `assert!(израз)`[^assert] – паникьосва се, ако изразът се оцени като `false`.
+* `assert_eq!(ляво, дясно)` и `assert_ne!(ляво, дясно)` – проверяват се левият
+  и десният израз за еднаквост и нееднаквост съответно.
 
 ```rust,ignore
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 
-// This is a really bad adding function, its purpose is to fail in this
-// example.
+// Това е наистина калпава функция за събиране. Нейното предназначение в този
+// пример е да се провали.
 #[allow(dead_code)]
 fn bad_add(a: i32, b: i32) -> i32 {
     a - b
@@ -29,7 +30,8 @@ fn bad_add(a: i32, b: i32) -> i32 {
 
 #[cfg(test)]
 mod tests {
-    // Note this useful idiom: importing names from outer (for mod tests) scope.
+    // Забележете този полезен устойчив израз. Така внасяме имена отвън в обхвата на
+    // `mod tests`.
     use super::*;
 
     #[test]
@@ -39,14 +41,14 @@ mod tests {
 
     #[test]
     fn test_bad_add() {
-        // This assert would fire and test will fail.
-        // Please note, that private functions can be tested too!
+        // Когато това потвърждение се изпълни, тестът ще се провали.
+        // Забележете, че частните функции също могат да бъдат тествани!
         assert_eq!(bad_add(1, 2), 3);
     }
 }
 ```
 
-Tests can be run with `cargo test`.
+Тестовете могат да се изпълняват с `cargo test`.
 
 ```shell
 $ cargo test
@@ -70,10 +72,10 @@ failures:
 test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-## Tests and `?`
-None of the previous unit test examples had a return type. But in Ръждьо 2018,
-your unit tests can return `Result<()>`, which lets you use `?` in them! This
-can make them much more concise.
+## Тестове и `?`
+Нито един от предишните единични тестове нямаше тип за връщане. Но в Ръждьо
+2018, тестовете могат да връщат `Result<()>`, което ви позволява да ползвате
+`?` в тях! Това може да ги направи много по-кратки.
 
 ```rust,editable
 fn sqrt(number: f64) -> Result<f64, String> {
@@ -97,15 +99,15 @@ mod tests {
 }
 ```
 
-See ["The Edition Guide"][editionguide] for more details.
+Вижте [„Ръководството за изданията”][editionguide] за повече подробности.
 
-## Testing panics
+## Тестване на паника
 
-To check functions that should panic under certain circumstances, use attribute
-`#[should_panic]`. This attribute accepts optional parameter `expected = ` with
-the text of the panic message. If your function can panic in multiple ways, it helps
-make sure your test is testing the correct panic.
-
+За да тествате функции, които може да се паникьосат, използвайте
+атрибута`#[should_panic]`. Този атрибут приема изборен параметър `expected =`
+с текста на съобщението при паника. Ако вашата функция се паникьосва по
+различни начини, трябва да се уверите, че тествате правилната паника.
+    
 ```rust,ignore
 pub fn divide_non_zero_result(a: u32, b: u32) -> u32 {
     if b == 0 {
@@ -139,7 +141,7 @@ mod tests {
 }
 ```
 
-Running these tests gives us:
+Изпълнението на тези тестове ни дава:
 
 ```shell
 $ cargo test
@@ -158,9 +160,10 @@ running 0 tests
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-## Running specific tests
+## Изпълняване на отделни тестове
 
-To run specific tests one may specify the test name to `cargo test` command.
+За да изпълните точно определени тестове, можете да укажете името на теста при
+изпълнение на командата `cargo test`.
 
 ```shell
 $ cargo test test_any_panic
@@ -176,8 +179,8 @@ running 0 tests
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-To run multiple tests one may specify part of a test name that matches all the
-tests that should be run.
+За да изпълните множество тестове, можете да укажете част от име на тест,
+което съответства на всички тестове, които искате да изпълните.
 
 ```shell
 $ cargo test panic
@@ -194,10 +197,10 @@ running 0 tests
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-## Ignoring tests
+## Пропускане[^ignore] на тестове
 
-Tests can be marked with the `#[ignore]` attribute to exclude some tests. Or to run
-them with command `cargo test -- --ignored`
+Тестовете могат да бъдат отбелязани с атрибута `#[ignore]`, за да ги изключите.
+Или пък да ги изпълните с командата `cargo test -- --ignored`.
 
 ```rust
 pub fn add(a: i32, b: i32) -> i32 {
@@ -254,6 +257,14 @@ running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
+## Б.пр.
+
+[^assert]: потвърждавам – assert
+
+[^ignore]: пренебрегвам – ignore. В случая – „пропускам”
+
+[^idiom]: устойчив израз, идиом – idiom
+
 
 [attribute]: ../attribute.md
 [panic]: ../std/panic.md

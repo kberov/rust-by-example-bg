@@ -1,8 +1,8 @@
-# Pipes
+# Тръби
 
-The `std::Child` struct represents a running child process, and exposes the
-`stdin`, `stdout` and `stderr` handles for interaction with the underlying
-process via pipes.
+Структурата `std::Child` представлява работещ дъщерен процес и предлага
+ръкохватките[^handle] `stdin`, `stdout` и `stderr` за взаимодействие със самия процес
+през тръби[^pipes].
 
 ```rust,ignore
 use std::io::prelude::*;
@@ -12,35 +12,43 @@ static PANGRAM: &'static str =
 "the quick brown fox jumped over the lazy dog\n";
 
 fn main() {
-    // Spawn the `wc` command
+    // Изпълняваме командата `wc`
     let process = match Command::new("wc")
                                 .stdin(Stdio::piped())
                                 .stdout(Stdio::piped())
                                 .spawn() {
-        Err(why) => panic!("couldn't spawn wc: {}", why),
+        Err(why) => panic!("Неуспех при изпълнение на `wc`: {}", why),
         Ok(process) => process,
     };
 
-    // Write a string to the `stdin` of `wc`.
+    // Пишем низ в стандартния входен поток (`stdin`) на `wc`.
     //
-    // `stdin` has type `Option<ChildStdin>`, but since we know this instance
-    // must have one, we can directly `unwrap` it.
+    // `stdin` е от тип `Option<ChildStdin>`, но понеже знаем, че това пускане
+    // има такъв, можем направо да го разгърнем (`unwrap`).
     match process.stdin.unwrap().write_all(PANGRAM.as_bytes()) {
-        Err(why) => panic!("couldn't write to wc stdin: {}", why),
-        Ok(_) => println!("sent pangram to wc"),
+        Err(why) => panic!("Неуспех при писане в \
+            стандартния входен поток на `wc`: {}", why),
+        Ok(_) => println!("Изпратихме всички-букви на `wc`"),
     }
 
-    // Because `stdin` does not live after the above calls, it is `drop`ed,
-    // and the pipe is closed.
+    // `stdin` не живее след горните извиквания и затова бива освободен, а
+    // тръбата е затворена.
     //
-    // This is very important, otherwise `wc` wouldn't start processing the
-    // input we just sent.
+    // Това е много важно. Иначе `wc` няма да започне да обработва входа, който
+    // току-що ѝ изпратихме.
 
-    // The `stdout` field also has type `Option<ChildStdout>` so must be unwrapped.
+    // Полето `stdout` също е от тип `Option<ChildStdout>` и трябва да бъде разгърнато.
     let mut s = String::new();
     match process.stdout.unwrap().read_to_string(&mut s) {
-        Err(why) => panic!("couldn't read wc stdout: {}", why),
-        Ok(_) => print!("wc responded with:\n{}", s),
+        Err(why) => panic!("Неуспех при четенето \
+            на стандартния изход от `wc`: {}", why),
+        Ok(_) => print!("`wc` отговори с:\n{}", s),
     }
 }
 ```
+
+## Б.пр.
+
+[^handle]: ръкохватка – handle
+
+[^pipes] тръба – pipe; тръбопровод – pipeline (Виж https://en.wikipedia.org/wiki/Pipeline_(Unix))

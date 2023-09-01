@@ -1,4 +1,4 @@
-# Unsafe Operations
+# Опасни действия 
 
 As an introduction to this section, to borrow from [the official docs][unsafe],
 "one should try to minimize the amount of unsafe code in a code base." With that

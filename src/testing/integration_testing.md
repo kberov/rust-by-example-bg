@@ -1,4 +1,4 @@
-# Integration testing
+# Тестове при внедряване
 
 [Unit tests][unit] are testing one module in isolation at a time: they're small
 and can test private code. Integration tests are external to your crate and use

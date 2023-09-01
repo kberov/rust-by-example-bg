@@ -1,22 +1,32 @@
-# Testing
+# Тестване
 
-Ръждьо is a programming language that cares a lot about correctness and it
-includes support for writing software tests within the language itself.
+Ръждьо е език за програмиране, който много държи на точността, а това включва
+поддръжка за писане на софтуерни тестове в самия език.
 
-Testing comes in three styles:
+Тестването се проявява в три разновидности:
 
-* [Unit][unit] testing.
-* [Doc][doc] testing.
-* [Integration][integration] testing.
+* [Поединично][unit][^unit] тестване (тестване на единици програмен код).
+* [Документално][doc] тестване (тестове в документацията).
+* Тестване при [внедряване][integration][^integration].
 
-Also Ръждьо has support for specifying additional dependencies for tests:
+Освен това Ръждьо поддържа указване на зависимости по време на
+разработка[^dev-dependencies] – за
+тестване:
 
-* [Dev-dependencies][dev-dependencies]
+* [Зависимости по време на разработка][dev-dependencies]
+
+## Б.пр.
+
+[^unit]: поединично тестване – unit testing
+
+[^integration]: внедряване – integration
+
+[^dev-dependencies]: зависимости по време на разработка – dev-dependencies
 
 ## See Also
 
-* [The Book][doc-testing] chapter on testing
-* [API Guidelines][doc-nursery] on doc-testing
+* [„Книгата”][doc-testing] главата за тестване
+* [Съвети за добро ППВ][doc-nursery] за тестването на документация
 
 [unit]: testing/unit_testing.md
 [doc]: testing/doc_testing.md

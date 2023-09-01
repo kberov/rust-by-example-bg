@@ -1,6 +1,6 @@
 # Разбор на аргументи 
 
-Matching can be used to parse simple arguments:
+Може да се ползва намиране на съвпадения за разбор на прости аргументи:
 
 ```rust,editable
 use std::env;
@@ -14,81 +14,85 @@ fn decrease(number: i32) {
 }
 
 fn help() {
-    println!("usage:
+    println!("Използване:
 match_args <string>
-    Check whether given string is the answer.
-match_args {{increase|decrease}} <integer>
-    Increase or decrease given integer by one.");
+    Проверка дали подаденият низ е отговорът.
+match_args {{увеличи|намали}} <цяло число>
+    Увеличаване или намаляване на подаденото цяло число с единица.");
 }
 
 fn main() {
     let args: Vec<String> = env::args().collect();
 
     match args.len() {
-        // no arguments passed
+        // Няма подадени аргуенти.
         1 => {
-            println!("My name is 'match_args'. Try passing some arguments!");
+            println!("Името ми е 'match_args'. Подайте някакви аргументи!");
         },
-        // one argument passed
+        // Подаден е един аргумент.
         2 => {
             match args[1].parse() {
-                Ok(42) => println!("This is the answer!"),
-                _ => println!("This is not the answer."),
+                Ok(42) => println!("Това е отговорът!"),
+                _ => println!("Това не е отговорът."),
             }
         },
-        // one command and one argument passed
+        // Подадени са една команда и един аргумент.
         3 => {
             let cmd = &args[1];
             let num = &args[2];
-            // parse the number
+            // Разбираме числото.
             let number: i32 = match num.parse() {
                 Ok(n) => {
                     n
                 },
                 Err(_) => {
-                    eprintln!("error: second argument not an integer");
+                    eprintln!("Грешка: Вторият аргумент не е цяло число.");
                     help();
                     return;
                 },
             };
-            // parse the command
+            // Разбираме командата.
             match &cmd[..] {
-                "increase" => increase(number),
-                "decrease" => decrease(number),
+                "увеличи" => increase(number),
+                "намали" => decrease(number),
                 _ => {
-                    eprintln!("error: invalid command");
+                    eprintln!("Грешка: Грешна команда!");
                     help();
                 },
             }
         },
-        // all the other cases
+        // Всички останали случаи.
         _ => {
-            // show a help message
+            // Показваме помощно съобщение.
             help();
         }
     }
 }
 ```
 
+Ако сте нарекли програмата си `match_args.rs`  и я компилирате с командата
+`rustc ./match_args.rs`, можете да я изпълните както следва:
+
 ```shell
 $ ./match_args Ръждьо
-This is not the answer.
+Това не е отговорът.
 $ ./match_args 42
-This is the answer!
+Това е отговорът!
 $ ./match_args do something
-error: second argument not an integer
-usage:
+Грешка: Вторият аргумент не е цяло число.
+Използване:
 match_args <string>
-    Check whether given string is the answer.
-match_args {increase|decrease} <integer>
-    Increase or decrease given integer by one.
+    Проверка дали подаденият низ е отговорът.
+match_args {увеличи|намали} <цяло число>
+    Увеличаване или намаляване на подаденото цяло число с единица.
 $ ./match_args do 42
-error: invalid command
-usage:
+Грешка: Грешна команда!
+Използване:
 match_args <string>
-    Check whether given string is the answer.
-match_args {increase|decrease} <integer>
-    Increase or decrease given integer by one.
-$ ./match_args increase 42
+    Проверка дали подаденият низ е отговорът.
+match_args {увеличи|намали} <цяло число>
+    Увеличаване или намаляване на подаденото цяло число с единица.
+$ ./match_args увеличи 42
 43
 ```
+

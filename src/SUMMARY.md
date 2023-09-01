@@ -188,7 +188,7 @@
     - [Поединично тестване](testing/unit_testing.md)
     - [Тестове в документацията](testing/doc_testing.md)
     - [Тестове при внедряване](testing/integration_testing.md)
-    - [Dev-dependencies](testing/dev_dependencies.md)
+    - [Зависимости при разработка](testing/dev_dependencies.md)
 - [Опасни действия](unsafe.md)
     - [Inline assembly](unsafe/asm.md)
 - [Съвместимост](compatibility.md)

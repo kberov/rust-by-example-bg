@@ -1,12 +1,21 @@
-# Meta
+# Между другото[^meta]
 
-Some topics aren't exactly relevant to how you program but provide you
-tooling or infrastructure support which just makes things better for
-everyone. These topics include:
+Някои теми нямат пряко отношение към това как програмираме, но предоставят
+средства или инфраструктура, които просто помагат на всички. Такива теми са:
 
-- [Documentation][doc]: Generate library documentation for users via the included
-  `rustdoc`.
-- [Playground][playground]: Integrate the Ръждьо Playground in your documentation.
+- [Документация][doc]: Създаване на документация за потребителите чрез включената програма `rustdoc`.
+- [Игрална площадка][playground][^playground]: Внедрява „Площадката за игра на Ръждьо” в нашата документация.
 
 [doc]: meta/doc.md
 [playground]: meta/playground.md
+
+## Б.пр.
+
+[^meta]: Заглавието на английски е „Meta”. Ако се опитаме да разтълкуваме
+  значението на тази дума като потърсим назад в миналото, ще открием, че тази
+  дума може да означава много неща. Най-подходящият превод в случая е като
+  опишем за какво става въпрос. Значенията могат да бъдат: след, зад, между,
+  сред, над, отвъд. Вижте [meta](https://www.etymonline.com/search?q=meta).
+
+[^playground]: игрална площадка, пясъчник – playground, sandbox
+

@@ -1,7 +1,5 @@
-# Compatibility
+# Съвместимост
 
-The Ръждьо language is fastly evolving, and because of this certain compatibility
-issues can arise, despite efforts to ensure forwards-compatibility wherever
-possible.
-
-* [Raw identifiers](compatibility/raw_identifiers.md)
+Езикът Ръждьо се развива бързо и заради това могат да се появят някои
+затруднения със съвместимостта въпреки полаганите усилия за осигуряване на
+колкото се може повече бъдеща съвместитмост.

@@ -1,10 +1,12 @@
-# Playground
+# Игрална площадка 
 
-The [Ръждьо Playground](https://play.rust-lang.org/) is a way to experiment with Ръждьо code through a web interface.
+[Игралната площадка на Ръждьо][rust-playground] е място за опити с код на
+Ръждьо през уеб четец.
 
-## Using it with `mdbook`
+## Ползване с `mdbook`
 
-In [`mdbook`][mdbook], you can make code examples playable and editable.
+В [`mdbook`][mdbook] можем да направим примерите да могат да се изпълняват и
+редактират.
 
 ```rust,editable
 fn main() {
@@ -12,7 +14,9 @@ fn main() {
 }
 ```
 
-This allows the reader to both run your code sample, but also modify and tweak it. The key here is the adding the word `editable` to your codefence block separated by a comma.
+Това позволява читателят не само да чете примерите с код , но и да ги променя.
+Същественото тук е да добавим думата `editable` към оградения ни блок код,
+разделен от предната дума със запетая.
 
 ````markdown
 ```rust,editable
@@ -20,7 +24,8 @@ This allows the reader to both run your code sample, but also modify and tweak i
 ```
 ````
 
-Additionally, you can add `ignore` if you want `mdbook` to skip your code when it builds and tests.
+В допълнение можем да добавим `ignore`, ако искаме `mdbook` да пропусне този
+код, докато изгражда и тества документацията като книга.
 
 ````markdown
 ```rust,editable,ignore
@@ -28,15 +33,18 @@ Additionally, you can add `ignore` if you want `mdbook` to skip your code when i
 ```
 ````
 
-## Using it with docs
+## Ползване с документация
 
-You may have noticed in some of the [official Ръждьо docs][official-rust-docs] a button that says "Run", which opens the code sample up in a new tab in Ръждьо Playground. This feature is enabled if you use the #[doc] attribute called [`html_playground_url`][html-playground-url].
+Може би сте забелязали някъде в [представителната документация на
+Ръждьо][official-rust-docs] бутона „Run”, който отваря примера с код в нов
+раздел в Игралната площадка на Ръждьо. Тази способност се включва, ако ползваме
+атрибута `#[doc]`, наречен [`html_playground_url`][html-playground-url].
 
 ### See also:
 
-- [The Ръждьо Playground][rust-playground]
+- [Игралната площадка на Ръждьо][rust-playground]
 - [rust-playground][rust-playground]
-- [The rustdoc Book][rustdoc-book]
+- [Книгата за rustdoc][rustdoc-book]
 
 [rust-playground]: https://play.rust-lang.org/
 [rust-playground]: https://github.com/integer32llc/rust-playground/

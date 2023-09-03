@@ -1,22 +1,22 @@
 # Опасни действия 
 
-As an introduction to this section, to borrow from [the official docs][unsafe],
-"one should try to minimize the amount of unsafe code in a code base." With that
-in mind, let's get started! Unsafe annotations in Ръждьо are used to bypass
-protections put in place by the compiler; specifically, there are four primary
-things that unsafe is used for:
+Да започнем този раздел със заемка от [представителната документация][unsafe],
+„…добре е да избягваме _опасен код_[^unsafe_code].”. Като имаме това предвид,
+можем да започнем. Отбелязването на опасност в Ръждьо се ползва за заобикаляне
+на мерките за безопасност, наложени  от компилатора. Има четири основни неща, за
+които се ползват „опасни блокове”:
 
-* dereferencing raw pointers
-* calling functions or methods which are `unsafe` (including calling a function
-  over FFI, see [a previous chapter](std_misc/ffi.md) of the book) 
-* accessing or modifying static mutable variables
-* implementing unsafe traits
+* Пряк достъп до сурови указатели;
+* извикване на функции, които са опасни (`unsafe`) (включително извикване на
+  функция чрез ВЧФ, вижте [съответната глава](std_misc/ffi.md) от книгата); 
+* достъп до или промяна на статични меними променливи;
+* осъществяване на опасни отличители.
 
-### Raw Pointers
-Raw pointers `*` and references `&T` function similarly, but references are
-always safe because they are guaranteed to point to valid data due to the
-borrow checker. Dereferencing a raw pointer can only be done through an unsafe
-block.
+### Сурови указатели
+Суровите указатели `*` и препратките `&T` работят по подобен начин, но
+препратките са винаги безопасни, понеже винаги сочат към действителни данни,
+благодарение на проверителя за заемки. Прекият достъп до суров указател може да
+се направи само чрез _опасен_ блок.
 
 ```rust,editable
 fn main() {
@@ -28,11 +28,12 @@ fn main() {
 }
 ```
 
-### Calling Unsafe Functions
-Some functions can be declared as `unsafe`, meaning it is the programmer's
-responsibility to ensure correctness instead of the compiler's. One example
-of this is [`std::slice::from_raw_parts`] which will create a slice given a
-pointer to the first element and a length.
+### Извикване на опасни функции
+
+Някои функции може да бъдат декларирани като `unsafe`. Това означава, че
+програмистът поема отговорност за безопасността вместо компилатора. Един
+пример за такъв код е [`std::slice::from_raw_parts`], който ще създаде отрязък
+от подаден първи член и дължина.
 
 ```rust,editable
 use std::slice;
@@ -51,11 +52,17 @@ fn main() {
 }
 ```
 
-For `slice::from_raw_parts`, one of the assumptions which *must* be upheld is 
-that the pointer passed in points to valid memory and that the memory pointed to
-is of the correct type. If these invariants aren't upheld then the program's 
-behaviour is undefined and there is no knowing what will happen.
+При използване на `slice::from_raw_parts`, едно от предположенията, които
+*трябва* да са потвърдени е, че подаденият улазател сочи към действително място
+от паметта и второто, че това място съдържа правилния тип данни. Ако тези
+задължителни условия не са спазени, поведението на програмата е
+неопределено[^undefined] и не се знае какво ще се случи.
 
+## Б.пр.
+
+[^unsafe_code]: опасен код – unsafe code
+
+[^undefined]: неопределено (поведение) – undefined behaviour
 
 [unsafe]: https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html
 [`std::slice::from_raw_parts`]: https://doc.rust-lang.org/std/slice/fn.from_raw_parts.html

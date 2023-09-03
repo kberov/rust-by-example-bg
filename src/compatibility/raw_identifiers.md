@@ -1,17 +1,16 @@
-# Raw identifiers
+# Сурови наименования 
 
-Ръждьо, like many programming languages, has the concept of "keywords".
-These identifiers mean something to the language, and so you cannot use them in
-places like variable names, function names, and other places.
-Raw identifiers let you use keywords where they would not normally be allowed.
-This is particularly useful when Ръждьо introduces new keywords, and a library
-using an older edition of Ръждьо has a variable or function with the same name
-as a keyword introduced in a newer edition.
+Както много други езици Ръждьо има понятието „ключови думи”. Тези думи
+означават нещо за езика и затова не можем да ги ползваме за имена на
+променливи, функции и на други места. Суровите наименования[^identifier]
+позволяват да се ползват ключови думи на места, където не биха били разрешени.
+Това е особено полезно, когато в Ръждьо биват въведени нови ключови думи, а
+някоя библиотека, използваща по-старо издание на Ръждьо, има променлива или
+функция със същото име като въведената в някое по-ново издание.
 
-For example, consider a crate `foo` compiled with the 2015 edition of Ръждьо that
-exports a function named `try`. This keyword is reserved for a new feature in
-the 2018 edition, so without raw identifiers, we would have no way to name the
-function.
+Например кошът `foo`, компилиран с изданието от 2015 г. изнася функция с име
+`try`. Тази дума е запазена за нова способност в изданието от 2018та. Без
+да ползваме сурови наименования няма начин да извикаме функцията.
 
 ```rust,ignore
 extern crate foo;
@@ -21,7 +20,7 @@ fn main() {
 }
 ```
 
-You'll get this error:
+Ще видим тази грешка:
 
 ```text
 error: expected identifier, found keyword `try`
@@ -31,7 +30,7 @@ error: expected identifier, found keyword `try`
   |      ^^^ expected identifier, found keyword
 ```
 
-You can write this with a raw identifier:
+Можем да я извикаме с помощта на сурово наименование:
 
 ```rust,ignore
 extern crate foo;
@@ -40,3 +39,8 @@ fn main() {
     foo::r#try();
 }
 ```
+
+## Б.пр.
+
+[^identifier]: наименование – identifier
+

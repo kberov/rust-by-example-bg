@@ -1,38 +1,39 @@
-# Documentation
+# Документация
 
-Use `cargo doc` to build documentation in `target/doc`.
+Ползвайте `cargo doc`, за да изградите документация в `target/doc`.
 
-Use `cargo test` to run all tests (including documentation tests), and `cargo test --doc` to only run documentation tests.
+Ползвайте `cargo test`, за да изпълните всички тестове (включително тези от
+документацията), а `cargo test --doc` само за документалните тестове.
 
-These commands will appropriately invoke `rustdoc` (and `rustc`) as required.
+Тези команди ще извикат съответно `rustdoc` (и `rustc`) според необходимостта.
 
-## Doc comments
+## Документални коментари
 
-Doc comments are very useful for big projects that require documentation. When
-running `rustdoc`, these are the comments that get compiled into
-documentation. They are denoted by a `///`, and support [Markdown].
+Документалните коментари са много полезни за големи проекти. Когато изпълним
+`rustdoc`, тези коментари се компилират като документация. Те се означават с
+`///`, и биват разбрани като [Markdown].
 
 ````rust,editable,ignore
 #![crate_name = "doc"]
 
-/// A human being is represented here
+/// Тук се представя човешко същество.
 pub struct Person {
-    /// A person must have a name, no matter how much Juliet may hate it
+    /// Личността трябва да има име, колкото и да го мрази Жулиета.
     name: String,
 }
 
 impl Person {
-    /// Returns a person with the name given them
+    /// Връша личност с даденото ѝ име.
     ///
-    /// # Arguments
+    /// # Аргументи
     ///
-    /// * `name` - A string slice that holds the name of the person
+    /// * `name` – Отрязък от низ, съдържащ името на лицето.
     ///
-    /// # Examples
+    /// # Примери
     ///
     /// ```
-    /// // You can have rust code between fences inside the comments
-    /// // If you pass --test to `rustdoc`, it will even test it for you!
+    /// // Може да имаме ограден код на Ръждьо вътре в коментарите
+    /// // Ако подадем  --test на `rustdoc`, тя ще изпълни и тестовете!
     /// use doc::Person;
     /// let person = Person::new("name");
     /// ```
@@ -42,9 +43,9 @@ impl Person {
         }
     }
 
-    /// Gives a friendly hello!
+    /// Дава приятелски поздрав!
     ///
-    /// Says "Hello, [name](Person::name)" to the `Person` it is called on.
+    /// Казва "Hello, [name](Person::name)" на лицето, с което е извикана.
     pub fn hello(& self) {
         println!("Hello, {}!", self.name);
     }
@@ -57,36 +58,38 @@ fn main() {
 }
 ````
 
-To run the tests, first build the code as a library, then tell `rustdoc` where
-to find the library so it can link it into each doctest program:
+За да изпълните тестовете, първо изградете кода като библиотека, после кажете
+на `rustdoc` къде да намери библиотеката, така че да може да я свърже с всеки
+документален тест:
 
 ```shell
 $ rustc doc.rs --crate-type lib
 $ rustdoc --test --extern doc="libdoc.rlib" doc.rs
 ```
 
-## Doc attributes
+## Документални атрибути
 
-Below are a few examples of the most common `#[doc]` attributes used with `rustdoc`.
+Следват няколко примера с най-използваните аргументи за атрибута `#[doc]`.
 
 ### `inline`
 
-Used to inline docs, instead of linking out to separate page.
+Използва се за вместване на документацията вместо да се прави връзка към
+отделна страница.
 
 ```rust,ignore
 #[doc(inline)]
 pub use bar::Bar;
 
-/// bar docs
+/// документация за bar
 mod bar {
-    /// the docs for Bar
+    /// Документацияе за  Bar
     pub struct Bar;
 }
 ```
 
 ### `no_inline`
 
-Used to prevent linking out to separate page or anywhere.
+Използва се за да предотврати свързване към отделна страница или където и да е.
 
 ```rust,ignore
 // Example from libcore/prelude
@@ -96,7 +99,7 @@ pub use crate::mem::drop;
 
 ### `hidden`
 
-Using this tells `rustdoc` not to include this in documentation:
+С това казваме на `rustdoc` да не включва това в документацията:
 
 ```rust,editable,ignore
 // Example from the futures-rs library
@@ -104,16 +107,17 @@ Using this tells `rustdoc` not to include this in documentation:
 pub use self::async_await::*;
 ```
 
-For documentation, `rustdoc` is widely used by the community. It's what is used to generate the [std library docs](https://doc.rust-lang.org/std/).
+`rustdoc` се използва широко от обшността. С тази програма е създадена
+[документацията за стандартната библиотека](https://doc.rust-lang.org/std/).
 
 ### See also:
 
-- [The Ръждьо Book: Making Useful Documentation Comments][book]
-- [The rustdoc Book][rustdoc-book]
-- [The Reference: Doc comments][ref-comments]
+- [Книгата за Ръждьо: Как да правим полезни документални коментари][book]
+- [Книгата за rustdoc][rustdoc-book]
+- [Справочникът: Документални коментари][ref-comments]
 - [RFC 1574: API Documentation Conventions][api-conv]
 - [RFC 1946: Relative links to other items from doc comments (intra-rustdoc links)][intra-links]
-- [Is there any documentation style guide for comments? (reddit)][reddit]
+- [Има ли някакво ръководство за коментари? (reddit)][reddit]
 
 [markdown]: https://en.wikipedia.org/wiki/Markdown
 [book]: https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments

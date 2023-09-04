@@ -1,28 +1,30 @@
 # `Option`
 
-Sometimes it's desirable to catch the failure of some parts of a program
-instead of calling `panic!`; this can be accomplished using the `Option` enum.
+Понякога е желателно да прихванем срива на някои части от програмата, вместо да
+предизвикваме `panic!`; това може да се постигне с помощта на брояча
+`Option`[^Option].
 
-The `Option<T>` enum has two variants:
+Броячът `Option<T>` има две разновидности:
 
-* `None`, to indicate failure or lack of value, and
-* `Some(value)`, a tuple struct that wraps a `value` with type `T`.
+* `None` – означава неуспех или липса на стойност, и
+* `Some(стойност)`, Разнородна структура, която обгръща дадената `стойност` от тип `T`.
 
 ```rust,editable,ignore,mdbook-runnable
-// An integer division that doesn't `panic!`
+// Делене на цяло число, което не предизвиква `panic!`
 fn checked_division(dividend: i32, divisor: i32) -> Option<i32> {
     if divisor == 0 {
-        // Failure is represented as the `None` variant
+        // Неуспехът се представя като разновидност `None`
         None
     } else {
-        // Result is wrapped in a `Some` variant
+        // Резултатът е обгърнат в разновидността `Some`
         Some(dividend / divisor)
     }
 }
 
-// This function handles a division that may not succeed
+// Тази функция обработва деление, което може да не успее
 fn try_division(dividend: i32, divisor: i32) {
-    // `Option` values can be pattern matched, just like other enums
+    //Стойностите в `Option` може да се проверят чрез израз за намиране на
+    // съответствия, като за всеки друг брояч
     match checked_division(dividend, divisor) {
         None => println!("{} / {} failed!", dividend, divisor),
         Some(quotient) => {
@@ -35,16 +37,20 @@ fn main() {
     try_division(4, 2);
     try_division(1, 0);
 
-    // Binding `None` to a variable needs to be type annotated
+    // Когато обвързваме `None` с променлива, трябва да отбележим типа
     let none: Option<i32> = None;
     let _equivalent_none = None::<i32>;
 
     let optional_float = Some(0f32);
 
-    // Unwrapping a `Some` variant will extract the value wrapped.
-    println!("{:?} unwraps to {:?}", optional_float, optional_float.unwrap());
+    // Трябва да извадим стойността от `Some` чрез разгръщане – `unwrap()`.
+    println!("{:?} се разгъва до {:?}", optional_float, optional_float.unwrap());
 
-    // Unwrapping a `None` variant will `panic!`
+    // Ако се опитаме да разгърнем разновидност `None`, ще предизвикаме `panic!`.
     println!("{:?} unwraps to {:?}", none, none.unwrap());
 }
 ```
+
+## Б.пр.
+
+[^Option]: `Избор` – `Option`

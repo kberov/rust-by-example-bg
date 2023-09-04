@@ -1,22 +1,23 @@
-# Integration testing
+# Тестове при внедряване
 
-[Unit tests][unit] are testing one module in isolation at a time: they're small
-and can test private code. Integration tests are external to your crate and use
-only its public interface in the same way any other code would. Their purpose is
-to test that many parts of your library work correctly together.
+[Поединичните тестове][unit] тестват всеки модул поотделно. Те са малки и могат
+да тестват частен код. Тестовете при внедряване са външни за коша ви и ползват
+само общодостъпното му взаимодействие, както всеки друг код би го ползвал.
+Тяхното предназначение е да проверят дали различните части на библиотеката ви
+работят правилно заедно.
 
-Cargo looks for integration tests in `tests` directory next to `src`.
+Cargo гледа за тестове при внедряване в директорията `tests` до `src`.
 
-File `src/lib.rs`:
+Файл `src/lib.rs`:
 
 ```rust,ignore
-// Define this in a crate called `adder`.
+// Опишете това в кош с име `adder`.
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 ```
 
-File with test: `tests/integration_test.rs`:
+Файл с тест: `tests/integration_test.rs`:
 
 ```rust,ignore
 #[test]
@@ -25,7 +26,7 @@ fn test_add() {
 }
 ```
 
-Running tests with `cargo test` command:
+Пускаме тестовете с командата `cargo test`:
 
 ```shell
 $ cargo test
@@ -47,36 +48,36 @@ running 0 tests
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-Each Ръждьо source file in the `tests` directory is compiled as a separate crate. In
-order to share some code between integration tests we can make a module with public
-functions, importing and using it within tests.
+Всеки файл с изходен код на Ръждьо в директорията `tests` бива компилиран като
+отделен кош. За да ползваме общ код в различните тестове, можем да направим
+модул с общодостъпни функции, да внесем и ползваме в тестовете.
 
-File `tests/common/mod.rs`:
+Файл `tests/common/mod.rs`:
 
 ```rust,ignore
 pub fn setup() {
-    // some setup code, like creating required files/directories, starting
-    // servers, etc.
+    // Някакъв подготвителен код за създаване на файлове, директории, пускане на
+    // сървъри и т.н.
 }
 ```
 
-File with test: `tests/integration_test.rs`
+Файл с тест: `tests/integration_test.rs`
 
 ```rust,ignore
-// importing common module.
+// Внасяме общия модул.
 mod common;
 
 #[test]
 fn test_add() {
-    // using common code.
+    // Ползваме общия код.
     common::setup();
     assert_eq!(adder::add(3, 2), 5);
 }
 ```
 
-Creating the module as `tests/common.rs` also works, but is not recommended
-because the test runner will treat the file as a test crate and try to run tests
-inside it.
+Ако създадем модула като `tests/common.rs` също ще работи, но не се препоръчва,
+защото изпълнителят на тестове смята файла за тестов кош и ще се опита да
+изпълни тестове в него.
 
 [unit]: unit_testing.md
 [mod]: ../mod.md

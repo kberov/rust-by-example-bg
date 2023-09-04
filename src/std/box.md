@@ -1,12 +1,13 @@
-# Box, stack and heap
+# Box, кама̀ра и куп
 
-All values in Ръждьо are stack allocated by default. Values can be *boxed*
-(allocated on the heap) by creating a `Box<T>`. A box is a smart pointer to a
-heap allocated value of type `T`. When a box goes out of scope, its destructor
-is called, the inner обект is destroyed, and the memory on the heap is freed.
+По подразбиране Ръждьо слага всички стойности на кама̀ра в паметта. Стойностите може да
+се сложат в _кутии (`Box<T>`)_ и така да се сложат в купа̀. Кутията (`Box<T>`) е
+умен указател към стойност от тип `T`, за която е заделено място в купа̀. Когато
+кутия излезе от обхват, се извиква нейния унищожител, вътрешният обект се
+унищожава, а паметта в купа се освобождава.
 
-Boxed values can be dereferenced using the `*` operator; this removes one layer
-of indirection. 
+Стойностите в кутии може да се достъпят пряко с помощта на оператора звезда –
+`*`. Така прескачаме един слой *опосредстване*[^indirection].
 
 ```rust,editable
 use std::mem;
@@ -18,8 +19,8 @@ struct Point {
     y: f64,
 }
 
-// A Rectangle can be specified by where its top left and bottom right 
-// corners are in space
+// Може да определим един четирикълник по това къде в пространството се намират
+// горният му ляв и долен десен ъгъл.
 #[allow(dead_code)]
 struct Rectangle {
     top_left: Point,
@@ -31,47 +32,58 @@ fn origin() -> Point {
 }
 
 fn boxed_origin() -> Box<Point> {
-    // Allocate this point on the heap, and return a pointer to it
+    // Заделяме място за точката на купа и връщаме указател към нея.
     Box::new(Point { x: 0.0, y: 0.0 })
 }
 
 fn main() {
-    // (all the type annotations are superfluous)
-    // Stack allocated variables
+    // (всички отбелязвания за тип са излишни)
+    // Променлива сложена на кама̀рата
     let point: Point = origin();
     let rectangle: Rectangle = Rectangle {
         top_left: origin(),
         bottom_right: Point { x: 3.0, y: -4.0 }
     };
 
-    // Heap allocated rectangle
+    // Променлива сложена в купа̀
     let boxed_rectangle: Box<Rectangle> = Box::new(Rectangle {
         top_left: origin(),
         bottom_right: Point { x: 3.0, y: -4.0 },
     });
 
-    // The output of functions can be boxed
+    // Изходът от функции може да се сложи в кутии
     let boxed_point: Box<Point> = Box::new(origin());
 
-    // Double indirection
+    // Двойно опосредстване
     let box_in_a_box: Box<Box<Point>> = Box::new(boxed_origin());
 
-    println!("Point occupies {} bytes on the stack",
+    println!("Точката заема {} байта на кама̀рата",
              mem::size_of_val(&point));
-    println!("Rectangle occupies {} bytes on the stack",
+    println!("Четиръгълникът заема {} байта на кама̀рата",
              mem::size_of_val(&rectangle));
 
     // box size == pointer size
-    println!("Boxed point occupies {} bytes on the stack",
+    println!("Точката в кутия заема {} байта на кама̀рата",
              mem::size_of_val(&boxed_point));
-    println!("Boxed rectangle occupies {} bytes on the stack",
+    println!("Четиръгълникът в кутия заема {} байта на кама̀рата",
              mem::size_of_val(&boxed_rectangle));
-    println!("Boxed box occupies {} bytes on the stack",
+    println!("Кутията в кутия заема {} байта на кама̀рата",
              mem::size_of_val(&box_in_a_box));
 
-    // Copy the data contained in `boxed_point` into `unboxed_point`
+    // Копираме данните, съдържащи се в `boxed_point` в `unboxed_point`
     let unboxed_point: Point = *boxed_point;
-    println!("Unboxed point occupies {} bytes on the stack",
+    println!("Точката без кутия заема {} байта на кама̀рата",
              mem::size_of_val(&unboxed_point));
 }
 ```
+
+## Б. пр.
+
+[^indirection]: опосредстване – indirection
+
+### Вижте също
+
+[ПРИ][raii]
+
+[raii]: ../scope/raii.md
+

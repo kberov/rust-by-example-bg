@@ -1,36 +1,35 @@
 # HashSet
 
-Consider a `HashSet` as a `HashMap` where we just care about the keys (
-`HashSet<T>` is, in actuality, just a wrapper around `HashMap<T, ()>`).
+Можем да гледаме на `HashSet` (_безредно множество_[^set]) като на безредица (`HashMap`), в
+която ни занимават само ключовете (`HashSet<T>` е всъщност просто обвивка около
+`HashMap<T, ()>`).
 
-"What's the point of that?" you ask. "I could just store the keys in a `Vec`."
+"Какъв е смисълът?" ще попитате. "Мога да запиша ключовете във `Vec`."
 
-A `HashSet`'s unique feature is that 
-it is guaranteed to not have duplicate elements. 
-That's the contract that any set collection fulfills. 
-`HashSet` is just one implementation. (see also: [`BTreeSet`][treeset])
+Неповторима способност на `HashSet` е, че гарантира _неповторимост_[^unique] на членовете
+си. Това е договорът, който всяко неподредено множество спазва. `HashSet` е просто
+едно въплъщение. (Вижте също: [`BTreeSet`][treeset])
 
-If you insert a value that is already present in the `HashSet`, 
-(i.e. the new value is equal to the existing and they both have the same hash), 
-then the new value will replace the old.
+Ако въведем вече същесвуваща в множеството стойност (нововъведената стойност е равна
+на някоя съществуваща вече в множеството и хешовете им са еднакви), то новата
+стойност ще замести старата.
 
-This is great for when you never want more than one of something, 
-or when you want to know if you've already got something.
+Това е велико, ако не искате повтарящи се стойности или ако искате да знаете
+дали дадена стойност вече я има.
 
-But sets can do more than that. 
+Но множествата могат и повече.
 
-Sets have 4 primary operations (all of the following calls return an iterator):
+Те имат четири главни действия (всяко от тях връща повторител):
 
-* `union`: get all the unique elements in both sets.
+* `union`: (обединение) взема всички неповторими членове _от двете_ множества;
 
-* `difference`: get all the elements that are in the first set but not the second.
+* `difference`: (разлика) взема всички членове от първото множество, които _не са във второто_;
 
-* `intersection`: get all the elements that are only in *both* sets.
+* `intersection`: (сечение) взема всички членове, които са _и в двете_ множества;
 
-* `symmetric_difference`: 
-get all the elements that are in one set or the other, but *not* both.
+* `symmetric_difference`: (съразмерна разлика) взема всички членове, които са _в едното или в другото множество, но не и в двете_.
 
-Try all of these in the following example:
+Да пробваме всичките действия в следващия пример:
 
 ```rust,editable,ignore,mdbook-runnable
 use std::collections::HashSet;
@@ -42,35 +41,40 @@ fn main() {
     assert!(a.insert(4));
     assert!(a.contains(&4));
 
-    // `HashSet::insert()` returns false if
-    // there was a value already present.
-    assert!(b.insert(4), "Value 4 is already in set B!");
-    // FIXME ^ Comment out this line
+    // `HashSet::insert()` връща false ако въвежданата стойност вече присъства.
+    assert!(b.insert(4), "Стойността 4 вече присъства в множество B!");
+    // ПОПРАВКА ^ Коментирайте този ред.
 
     b.insert(5);
 
-    // If a collection's element type implements `Debug`,
-    // then the collection implements `Debug`.
-    // It usually prints its elements in the format `[elem1, elem2, ...]`
+    // Ako типът на членовете на дадена сбирка осъществява `Debug`, то и самата
+    // сбирка осъществява `Debug`.
+    // Обикновено отпечатва членовете си във вида `[elem1, elem2, ...]`
     println!("A: {:?}", a);
     println!("B: {:?}", b);
 
-    // Print [1, 2, 3, 4, 5] in arbitrary order
-    println!("Union: {:?}", a.union(&b).collect::<Vec<&i32>>());
+    // Отпечатваме [1, 2, 3, 4, 5] в произволен ред.
+    println!("Обединение: {:?}", a.union(&b).collect::<Vec<&i32>>());
 
-    // This should print [1]
-    println!("Difference: {:?}", a.difference(&b).collect::<Vec<&i32>>());
+    // Това би трябвало да отпечати [1]
+    println!("Разлика: {:?}", a.difference(&b).collect::<Vec<&i32>>());
 
-    // Print [2, 3, 4] in arbitrary order.
+    // Отпечатва [2, 3, 4] в произволен ред.
     println!("Intersection: {:?}", a.intersection(&b).collect::<Vec<&i32>>());
 
-    // Print [1, 5]
-    println!("Symmetric Difference: {:?}",
+    // Опечатва [1, 5]
+    println!("Съразмерна разлика: {:?}",
              a.symmetric_difference(&b).collect::<Vec<&i32>>());
 }
 ```
 
-(Examples are adapted from the [documentation.][hash-set])
+(Примерите са приспособени от [документацията][hash-set].)
+
+## Б.пр.
+
+[^set]: безредно множество (мат.) – set 
+
+[^unique]: неповторимост – uniqueness; неповторим – unique
 
 [treeset]: https://doc.rust-lang.org/std/collections/struct.BTreeSet.html
 [hash-set]: https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.difference

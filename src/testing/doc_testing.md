@@ -1,17 +1,17 @@
-# Documentation testing
+# Тестове в документацията
 
-The primary way of documenting a Ръждьо project is through annotating the source
-code. Documentation comments are written in 
-[CommonMark Markdown specification][commonmark] and support code blocks in them.
-Ръждьо takes care about correctness, so these code blocks are compiled and used 
-as documentation tests.
+Главният начин да се документира проект в Ръждьо е чрез добавяне на бележки в
+изходния код. Документалните коментари се пишат според [Спецификацията на
+CommonMark Markdown][commonmark] и поддържат блокове от код в тях. Ръждьо се
+грижи за правилността, така че тези блокове от код се компилират и ползват като
+тестове от документацията.
 
 ```rust,ignore
-/// First line is a short summary describing function.
+/// Първият ред е кратко общо описание на функцията.
 ///
-/// The next lines present detailed documentation. Code blocks start with
-/// triple backquotes and have implicit `fn main()` inside
-/// and `extern crate <cratename>`. Assume we're testing `doccomments` crate:
+/// Следващите редове представляват подробна документация. Блоковете код
+/// започват с тройни обратни кавички и имат в себе си `fn main()` и `extern crate
+/// <cratename>`. Да си представим, че тестваме коша `doccomments`:
 ///
 /// ```
 /// let result = doccomments::add(2, 3);
@@ -21,9 +21,10 @@ pub fn add(a: i32, b: i32) -> i32 {
     a + b
 }
 
-/// Usually doc comments may include sections "Examples", "Panics" and "Failures".
+/// Обикновено документалните коментари може да включват раздели „Examples”,
+/// „Panics” и „Failures”.
 ///
-/// The next function divides two numbers.
+/// Следващата функция дели едно число на друго.
 ///
 /// # Examples
 ///
@@ -34,10 +35,10 @@ pub fn add(a: i32, b: i32) -> i32 {
 ///
 /// # Panics
 ///
-/// The function panics if the second argument is zero.
+/// Функцията се паникьосва, ако вторият аргумент е нула.
 ///
 /// ```rust,should_panic
-/// // panics on division by zero
+/// // паникьосва се при делене на нула.
 /// doccomments::div(10, 0);
 /// ```
 pub fn div(a: i32, b: i32) -> i32 {
@@ -49,8 +50,8 @@ pub fn div(a: i32, b: i32) -> i32 {
 }
 ```
 
-Code blocks in documentation are automatically tested
-when running the regular `cargo test` command:
+Блоковете код в документацията биват тествани автоматично, щом изпълните
+командата `cargo test`:
 
 ```shell
 $ cargo test
@@ -68,28 +69,31 @@ test src/lib.rs - div (line 31) ... ok
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-## Motivation behind documentation tests
+## Основания за тестове в документацията
 
-The main purpose of documentation tests is to serve as examples that exercise
-the functionality, which is one of the most important
-[guidelines][question-instead-of-unwrap]. It allows using examples from docs as
-complete code snippets. But using `?` makes compilation fail since `main`
-returns `unit`. The ability to hide some source lines from documentation comes
-to the rescue: one may write `fn try_main() -> Result<(), ErrorType>`, hide it
-and `unwrap` it in hidden `main`. Sounds complicated? Here's an example:
+Главната цел на документалните тестове е да служат като примери, които ползват
+предоставяната функционалност, а това е най-важното
+[ръководство][question-instead-of-unwrap]. То ни позволява да ползваме примерите
+от документацията като пълноценни парчета код. Но ползването на `?` прави така,
+че компилацията се проваля, понеже `main` връща `unit`. В този случай можем да
+скрием няколко реда код от документацията: Можем да напишем `fn try_main() ->
+Result<(), ErrorType>`, да я скрием и разгърнем (`unwrap`) в скритата `main`.
+Сложно ли звучи? Ето пример:
 
 ```rust,ignore
-/// Using hidden `try_main` in doc tests.
+/// Използване на скрита `try_main` в документални тестове.
 ///
 /// ```
-/// # // hidden lines start with `#` symbol, but they're still compilable!
-/// # fn try_main() -> Result<(), String> { // line that wraps the body shown in doc
+/// # // Скритите редове започват със знака `#` но са също компилируеми!
+/// # // Ред, който обгръща тялото, показано в документацията.
+/// # fn try_main() -> Result<(), String> {
 /// let res = doccomments::try_div(10, 2)?;
-/// # Ok(()) // returning from try_main
+/// # Ok(()) // Връщаме от try_main.
 /// # }
-/// # fn main() { // starting main that'll unwrap()
-/// #    try_main().unwrap(); // calling try_main and unwrapping
-/// #                         // so that test will panic in case of error
+/// # fn main() { // Започва `main`, която извиква `unwrap()`.
+/// #    try_main().unwrap(); // Извикваме try_main и разгръщаме,
+/// #                         // така че тестът ще се паникьоса в случай на
+/// #                         // грешка.
 /// # }
 /// ```
 pub fn try_div(a: i32, b: i32) -> Result<i32, String> {
@@ -103,8 +107,8 @@ pub fn try_div(a: i32, b: i32) -> Result<i32, String> {
 
 ## See Also
 
-* [RFC505][RFC505] on documentation style
-* [API Guidelines][doc-nursery] on documentation guidelines
+* [RFC505][RFC505] за стила на документацията;
+* [API Guidelines][doc-nursery] За насоки при документиране.
 
 [doc-nursery]: https://rust-lang-nursery.github.io/api-guidelines/documentation.html
 [commonmark]: https://commonmark.org/

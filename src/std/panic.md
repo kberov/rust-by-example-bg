@@ -1,18 +1,19 @@
 # `panic!`
 
-The `panic!` macro can be used to generate a panic and start unwinding
-its stack. While unwinding, the runtime will take care of freeing all the
-resources *owned* by the thread by calling the destructor of all its обекти.
+Макросът `panic!` може да се ползва за създаване на паника и да започне да
+размотава стека си. Докато се размотава стека, средата за изпълнение[^runtime]
+се грижи да освободи всички ресурси, които са _във владение_ на нишката, като
+извиква унищожителите на всичките ѝ обекти.
 
-Since we are dealing with programs with only one thread, `panic!` will cause the
-program to report the panic message and exit.
+Понеже работим само с еднонишкови програми, `panic!` предизвиква програмата да
+покаже паническото съобщение и да приключи.
 
 ```rust,editable,ignore,mdbook-runnable
-// Re-implementation of integer division (/)
+// Ново осъществяване на деление на цели числа – (/)
 fn division(dividend: i32, divisor: i32) -> i32 {
     if divisor == 0 {
-        // Division by zero triggers a panic
-        panic!("division by zero");
+        // Деление на нула предисвиква паника
+        panic!("деление на нула");
     } else {
         dividend / divisor
     }
@@ -20,19 +21,19 @@ fn division(dividend: i32, divisor: i32) -> i32 {
 
 // The `main` task
 fn main() {
-    // Heap allocated integer
+    // Цяло число, поместено в купа̀
     let _x = Box::new(0i32);
 
-    // This operation will trigger a task failure
+    // Това действие ще доведе до провал.
     division(3, 0);
 
-    println!("This point won't be reached!");
+    println!("Няма да стигнем до тук!");
 
-    // `_x` should get destroyed at this point
+    // `_x` би трябвало да е вече унощожено.
 }
 ```
 
-Let's check that `panic!` doesn't leak memory.
+Нека видим, че `panic!` не създава утечки в паметта.
 
 <!-- REUSE-IgnoreStart -->
 <!-- Prevent REUSE from parsing the copyright изявлениe in the sample code -->
@@ -55,3 +56,8 @@ thread '<main>' panicked at 'division by zero', panic.rs:5
 ==4401== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 ```
 <!-- REUSE-IgnoreEnd -->
+
+## Б.пр.
+
+[^runtime]: средата за изпълнение – the runtime
+

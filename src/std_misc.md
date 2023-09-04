@@ -1,17 +1,23 @@
-# Std misc
+# Разни в std 
 
-Many other types are provided by the std library to support
-things such as:
+Стандартната библиотека предоставя много други типове за поддръжка на неща като:
 
-* Threads
-* Channels
-* File I/O
+* Нишки
+* Канали[^channels]
+* Вход и изход от файлове[^file_io]
 
-These expand beyond what the [primitives] provide.
+Те дават много повече възможности от [първичните типове][primitives].
+
+## Б.пр.
+
+[^channels]: канали – channels
+
+[^file_io]: В/И (вход и и изход) – (input and output) I/O  
+
 
 ### See also:
 
-[primitives] and [the std library][std]
+[първични типове][primitives] и [стандартната библиотека][std]
 
 [primitives]: primitives.md
 [std]: https://doc.rust-lang.org/std/

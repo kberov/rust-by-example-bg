@@ -1,20 +1,24 @@
-# Development dependencies
+# Зависимости при разработка 
 
-Sometimes there is a need to have dependencies for tests (or examples,
-or benchmarks) only. Such dependencies are added to `Cargo.toml` in the
-`[dev-dependencies]` section. These dependencies are not propagated to other
-packages which depend on this package.
+Понякога ни трябват зависимости само за тестове или примери, или проверка на
+бързодействието. Такива зависимости се добавят в `Cargo.toml` в раздел
+[dev-dependencies]. Тези зависимости не биват предадени на други пакети, които
+зависят от този пакет.
 
-One such example is [`pretty_assertions`](https://docs.rs/pretty_assertions/1.0.0/pretty_assertions/index.html), which extends standard `assert_eq!` and `assert_ne!` macros, to provide colorful diff.  
-File `Cargo.toml`:
+Един такъв пример е
+[`pretty_assertions`](https://docs.rs/pretty_assertions/1.0.0/pretty_assertions/index.html),
+който разширява стандартния `assert_eq!` и `assert_ne!` macros, да предоставя
+разноцветни разлики.  
+
+Файл `Cargo.toml`:
 
 ```toml
-# standard crate data is left out
+# Стандартните данни за коша не са показани.
 [dev-dependencies]
 pretty_assertions = "1"
 ```
 
-File `src/lib.rs`:
+Файл `src/lib.rs`:
 
 ```rust,ignore
 pub fn add(a: i32, b: i32) -> i32 {
@@ -24,7 +28,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use pretty_assertions::assert_eq; // crate for test-only use. Cannot be used in non-test code.
+    use pretty_assertions::assert_eq; // Кош за ползване само в тестове. Не
+    // може да се ползва в нетестов код.
 
     #[test]
     fn test_add() {
@@ -34,6 +39,6 @@ mod tests {
 ```
 
 ## See Also
-[Cargo][cargo] docs on specifying dependencies.
+Документацията на [Карго][cargo] за указване на зависимости.
 
 [cargo]: http://doc.crates.io/specifying-dependencies.html

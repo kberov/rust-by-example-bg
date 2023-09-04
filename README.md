@@ -46,7 +46,7 @@ mdbook serve
 
 ## Лиценз
 
-Преводът на „Ръст в примери” е лицензиран по ваш избор:
+„Ръст в примери” е лицензиран по ваш избор:
 
 * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) или
   <http://www.apache.org/licenses/LICENSE-2.0>)

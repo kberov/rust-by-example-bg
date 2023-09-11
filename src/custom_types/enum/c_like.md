@@ -32,6 +32,6 @@ fn main() {
 
 ### Вижте също:
 
-[casting][cast]
+[Привеждане към тип (casting)][cast]
 
 [cast]: ../../types/cast.md

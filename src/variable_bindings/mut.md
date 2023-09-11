@@ -1,6 +1,6 @@
 # Менѝмост
 
-Обвързването на променлива е непроменяемо[^immutable] по подразбирне. Но с
+Обвързването на променлива е неменѝмо[^immutable] по подразбиране. Но с
 помощта на променителя[^modifier] `mut`, промяната на стойността може да бъде
 разрешена.
 
@@ -9,19 +9,19 @@ fn main() {
     let _immutable_binding = 1;
     let mut mutable_binding = 1;
 
-    println!("Before mutation: {}", mutable_binding);
+    println!("Преди промяната: {}", mutable_binding);
 
     // Ok
     mutable_binding += 1;
 
-    println!("After mutation: {}", mutable_binding);
+    println!("След промяната: {}", mutable_binding);
 
-    // Error! Cannot assign a new value to an immutable variable
+    // Грешка! Не може да се присвои нова стойност на неменѝма променлива
     _immutable_binding += 1;
 }
 ```
-Компилаторът ще изведе подробни описания на грешките, причинени от менимостта на променливите.
+Компилаторът ще изведе подробни описания на грешките, свързани с менимостта на променливите.
 
-[^immutable]: (не)променяемо, (не)менѝмо – (im)mutable. (Не)менѝмост, (не)променяемост – (im)mutability
+[^immutable]: (не)менѝмо, (не)променимо – (im)mutable. (Не)менѝмост, (не)променяемост – (im)mutability
 
-[^modifier]: променител, ~модификатор~ - modifier
+[^modifier]: изменител, ~модификатор~ - modifier

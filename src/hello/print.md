@@ -111,7 +111,7 @@ fn main() {
 
 ### Вижте също:
 
-[`std::fmt`][fmt], [`macros`][macros], [`struct`][structs], [`traits`][traits], and [`dead_code`][dead_code]
+[`std::fmt`][fmt], [`macros`][macros], [`struct`][structs], [`traits`][traits] и [`dead_code`][dead_code]
 
 [fmt]: https://doc.rust-lang.org/std/fmt/
 [macros]: ../macros.md

@@ -60,7 +60,7 @@ fn main() {
 ### Вижте също:
 
 [`for`][for], [`ref`][ref], [`Result`][result], [`struct`][struct],
-[`?`][q_mark], and [`vec!`][vec]
+[`?`][q_mark] и [`vec!`][vec]
 
 [^препратка]: препратка – reference
 

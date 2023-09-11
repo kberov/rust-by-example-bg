@@ -36,7 +36,7 @@ fn main() {
 
 ### Вижте също:
 
-[The `const`/`static` RFC](
+[RFC за `const`/`static`](
 https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md),
 [`'static` lifetime][static]
 

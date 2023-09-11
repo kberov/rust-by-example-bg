@@ -32,9 +32,10 @@ impl List {
         // Трябва да проверим за съответствие със `self`, защото
         // поведението на този метод зависи от варианта на `self`
         // Типът на`self` е `&List`, а типът на `*self` е `List`.
-        // За предпочитане е да се търси съответствие с `T` вместо с `&T`.
-        // След Ръждьо 2018 тук можем да ползваме `self` както и tail
-        // по-долу (без препратка). `&s` и `ref tail` ще бъдат отгатнати. 
+        // За предпочитане е да се търси съответствие с дадения тип `T`,
+        // вместо с препратката `&T`.
+        // След Ръждьо 2018 можем да ползваме `self` тук, както и tail
+        // (без препратка) по-долу. `&s` и `ref tail` ще бъдат отгатнати. 
         // Вижте https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/default-match-bindings.html
         match *self {
             // Не можем да овладеем (take ownership of) `tail`, защото `self`
@@ -50,7 +51,7 @@ impl List {
         match *self {
             Cons(head, ref tail) => {
                 // `format!` е подобен на `print!`, но връща низ
-                // от динамичната памет вместо да печати вконзолата.
+                // от динамичната памет, вместо да печати в конзолата.
                 format!("{}, {}", head, tail.stringify())
             },
             Nil => {
@@ -64,7 +65,7 @@ fn main() {
     // Създаваме празен свързан списък 
     let mut list = List::new();
 
-    // добавяме няколко члена в началото на списъка
+    // Добавяме няколко члена в началото на списъка
     list = list.prepend(1);
     list = list.prepend(2);
     list = list.prepend(3);
@@ -77,7 +78,7 @@ fn main() {
 
 ### Вижте също:
 
-[`Box`][box] and [methods][methods]
+[`Box`][box] и [methods][methods]
 
 [box]: ../../std/box.md
 [methods]: ../../fn/methods.md

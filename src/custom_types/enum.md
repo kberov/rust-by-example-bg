@@ -7,18 +7,18 @@
 
 ```rust,editable
 // Създаваме `enum`, за да определим някакво събитие в уеб.
-// Забележете как името и типа на данните заедно определят варианта:
+// Забележете как името и типът на данните заедно определят варианта:
 // `PageLoad != PageUnload` и `KeyPress(char) != Paste(String)`.
 // Всеки вариант е различен и независим.
 enum WebEvent {
-    // Всеки `enum` вариант може да бъде:
+    // Всеки вариант на `enum` може да бъде:
     // празна единица `unit`;
     PageLoad,
     PageUnload,
     // списъчна структура `tuple`;
     KeyPress(char),
     Paste(String),
-    // или стурктура като тези, в езика C.
+    // или C-образна стурктура (като тези в езика C).
     Click { x: i64, y: i64 },
 }
 
@@ -27,13 +27,13 @@ enum WebEvent {
 fn inspect(event: WebEvent) {
     match event {
         WebEvent::PageLoad => println!("заредихте страницата"),
-        WebEvent::PageUnload => println!("Напуснахте страницата"),
-        // Разлагаме (изваждаме) `c` от `enum` варианта.
+        WebEvent::PageUnload => println!("напуснахте страницата"),
+        // Разлагаме (изваждаме) `c` от варианта на `enum`.
         WebEvent::KeyPress(c) => println!("натиснахте '{}'.", c),
         WebEvent::Paste(s) => println!("поставихте \"{}\".", s),
         // Разлагаме `Click` на `x` и `y`.
         WebEvent::Click { x, y } => {
-            println!("Натиснахте място с координати x={}, y={}.", x, y);
+            println!("натиснахте място с координати x={}, y={}.", x, y);
         },
     }
 }
@@ -57,7 +57,7 @@ fn main() {
 
 ## Прякори на типове
 
-Ако ползвате прякор[^alias] на тип, можете да се обръщате към всеки вариант от
+Ако ползвате прякор[^alias] на тип, можете да се обръщате към всеки вариант на
 брояча чрез неговия прякор. Това може да се окаже полезно, ако името на брояча
 е твърде дълго или твърде общо и искате да го промените.
 
@@ -71,14 +71,14 @@ enum VeryVerboseEnumOfThingsToDoWithNumbers {
 type Operations = VeryVerboseEnumOfThingsToDoWithNumbers;
 
 fn main() {
-    // Можем да достъпваме всеки вариант чрез прякора на брояча.
+    // Можем да достъпваме всеки вариант на брояча чрез прякора му.
     // По-кратко и удобно е.
     let x = Operations::Add;
 }
 ```
 
 Най-често ще виждате използването на прякори в блоковете за осъществяване
-`impl`, където се ползва прякора `Self`.
+`impl`, където се ползва прякорът `Self`.
 
 ```rust,editable
 enum VeryVerboseEnumOfThingsToDoWithNumbers {
@@ -96,12 +96,12 @@ impl VeryVerboseEnumOfThingsToDoWithNumbers {
 }
 ```
 
-За да научите повече за брояите и типовите прякори, може да прочетете [отчета
+За да научите повече за броячите и типовите прякори, може да прочетете [отчета
 за стабилизация][aliasreport]. Оттогава е стабилна тази способност[^feature] на Ръждьо.
 
 ### Вижте също:
 
-[`match`][match], [`fn`][fn], and [`String`][str], ["Type alias enum variants" RFC][type_alias_rfc]
+[`match`][match], [`fn`][fn] и [`String`][str], ["Type alias enum variants" RFC][type_alias_rfc]
 
 [^enum]: брояч – enum. От enumerator – буквално „изброител” (бел. прев.)  
 

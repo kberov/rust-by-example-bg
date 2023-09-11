@@ -21,7 +21,7 @@ enum Color {
 }
 
 fn main() {
-    // `enums` могат да бъдат ползвани (cast) като цели числа.
+    // `enums` могат да бъдат представени (cast) като цели числа.
     println!("zero is {}", Number::Zero as i32);
     println!("one is {}", Number::One as i32);
 
@@ -32,6 +32,6 @@ fn main() {
 
 ### Вижте също:
 
-[casting][cast]
+[Привеждане към тип (casting)][cast]
 
 [cast]: ../../types/cast.md

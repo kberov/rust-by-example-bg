@@ -14,7 +14,7 @@ fn main() {
     // Ok
     mutable_binding += 1;
 
-    println!("След изменението: {}", mutable_binding);
+    println!("След промяната: {}", mutable_binding);
 
     // Грешка! Не може да се присвои нова стойност на неизменяема променлива
     _immutable_binding += 1;

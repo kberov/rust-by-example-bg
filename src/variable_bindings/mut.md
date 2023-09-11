@@ -9,7 +9,7 @@ fn main() {
     let _immutable_binding = 1;
     let mut mutable_binding = 1;
 
-    println!("Преди изменението: {}", mutable_binding);
+    println!("Преди промяната: {}", mutable_binding);
 
     // Ok
     mutable_binding += 1;

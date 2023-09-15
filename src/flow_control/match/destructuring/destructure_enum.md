@@ -22,7 +22,7 @@ enum Color {
 
 fn main() {
     let color = Color::RGB(122, 17, 40);
-    // TODO ^ Пробвайте различни значения за `color`
+    // ЗАДАЧА ^ Пробвайте различни значения за `color`
 
     println!("Какъв е този цвят?");
     // `enum` може да бъде разложен с помощта на `match`.
@@ -31,7 +31,7 @@ fn main() {
         Color::Blue  => println!("Цветът е син!"),
         Color::Green => println!("Цветът е зелен!"),
         Color::RGB(r, g, b) =>
-            println!("Red: {}, green: {} и blue: {}!", r, g, b),
+            println!("Червен: {}, зелен: {} и син: {}!", r, g, b),
         Color::HSV(h, s, v) =>
             println!("Hue: {}, saturation: {}, value: {}!", h, s, v),
         Color::HSL(h, s, l) =>

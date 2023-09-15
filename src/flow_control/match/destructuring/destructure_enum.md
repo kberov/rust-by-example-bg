@@ -3,8 +3,8 @@
 `enum` се разлага по подобен начин:
 
 ```rust,editable
-// `allow` required to silence warnings because only
-// one variant is used.
+// `allow` се изисква за заглушаване на предупрежденията,
+//тъй като е използван само един вариант.
 #[allow(dead_code)]
 enum Color {
     // Тези три са определени само по име.
@@ -22,16 +22,16 @@ enum Color {
 
 fn main() {
     let color = Color::RGB(122, 17, 40);
-    // TODO ^ Try different variants for `color`
+    // TODO ^ Пробвайте различни значения за `color`
 
-    println!("What color is it?");
-    // An `enum` can be destructured using a `match`.
+    println!("Какъв е този цвят?");
+    // `enum` може да бъде разложен с помощта на `match`.
     match color {
-        Color::Red   => println!("The color is Red!"),
-        Color::Blue  => println!("The color is Blue!"),
-        Color::Green => println!("The color is Green!"),
+        Color::Red   => println!("Цветът е червен!"),
+        Color::Blue  => println!("Цветът е син!"),
+        Color::Green => println!("Цветът е зелен!"),
         Color::RGB(r, g, b) =>
-            println!("Red: {}, green: {}, and blue: {}!", r, g, b),
+            println!("Red: {}, green: {} и blue: {}!", r, g, b),
         Color::HSV(h, s, v) =>
             println!("Hue: {}, saturation: {}, value: {}!", h, s, v),
         Color::HSL(h, s, l) =>

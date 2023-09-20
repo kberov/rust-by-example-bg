@@ -12,17 +12,17 @@ fn age() -> u32 {
 }
 
 fn main() {
-    println!("Tell me what type of person you are");
+    println!("Кажете на каква възраст сте");
 
     match age() {
-        0             => println!("I haven't celebrated my first birthday yet"),
+        0             => println!("Все още не съм отпразнувал първия си рожден ден"),
         // можехме направо да сравним 1 ..= 12, но тогава на каква възраст би
-        // било едно новородонео? Затова, обвързваме `n` с последователността
+        // било едно новородено? Затова обвързваме `n` с последователността
         // 1 ..= 12. Сега можем да кажем каква е възрастта.
-        n @ 1  ..= 12 => println!("I'm a child of age {:?}", n),
-        n @ 13 ..= 19 => println!("I'm a teen of age {:?}", n),
+        n @ 1  ..= 12 => println!("Аз съм дете на {:?} години", n),
+        n @ 13 ..= 19 => println!("Аз съм младеж на {:?} години", n),
         // Няма обвързване. Връщаме стойността.
-        n             => println!("I'm an old person of age {:?}", n),
+        n             => println!("Аз съм възрастен на {:?} години", n),
     }
 }
 ```
@@ -36,12 +36,12 @@ fn some_number() -> Option<u32> {
 
 fn main() {
     match some_number() {
-        // Got `Some` variant, match if its value, bound to `n`,
-        // is equal to 42.
-        Some(n @ 42) => println!("The Answer: {}!", n),
-        // Match any other number.
-        Some(n)      => println!("Not interesting... {}", n),
-        // Match anything else (`None` variant).
+        // Даденият вариант `Some` съвпада, ако стойността му, обвързана с `n`,
+        // е равна на 42.
+        Some(n @ 42) => println!("Отговор: {}!", n),
+        // Съвпадение с някое друго число.
+        Some(n)      => println!("Безинтересно... {}", n),
+        // Съвпадение с нещо друго (`Няма` вариант).
         _            => (),
     }
 }

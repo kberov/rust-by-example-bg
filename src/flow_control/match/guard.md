@@ -15,7 +15,7 @@ fn main() {
 
     match temperature {
         Temperature::Celsius(t) if t > 30 => println!("{}°C е над 30 по Целзий", t),
-        // Чатта с условието `if` ^ е страж
+        // Частта с условието `if` ^ е страж
         Temperature::Celsius(t) => println!("{}°C е под 30 по Целзий", t),
 
         Temperature::Fahrenheit(t) if t > 86 => println!("{}°F е над 86 по Фаренхайт", t),
@@ -31,10 +31,10 @@ fn main() {
     let number: u8 = 4;
 
     match number {
-        i if i == 0 => println!("Zero"),
-        i if i > 0 => println!("Greater than zero"),
-        // _ => unreachable!("Should never happen."),
-        // TODO ^ uncomment to fix compilation
+        i if i == 0 => println!("Нула"),
+        i if i > 0 => println!("По-голямо от нула"),
+        // _ => unreachable!("Никога не трябва да се случва."),
+        // ЗАДАЧА ^ разкоментирайте, за да изправите работата на компилатора
     }
 }
 ```

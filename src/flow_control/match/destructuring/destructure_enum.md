@@ -41,7 +41,8 @@ fn main() {
         Color::CMYK(c, m, y, k) =>
             println!("Cyan: {}, magenta: {}, yellow: {}, key (black): {}!",
                 c, m, y, k),
-        // Don't need another arm because all variants have been examined
+        // Няма нужда от други разклонения,
+        // защото всички случаи вече са разгледани.
     }
 }
 ```

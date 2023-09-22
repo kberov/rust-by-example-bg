@@ -59,7 +59,8 @@ fn main() {
 
 ## Б.пр.
 
-[^fully_qualified]: пълнокачествен правопис – fully qualified syntax. Такова описание на нещатата, което не оставя неясноти.
+[^fully_qualified]: пълнокачествен правопис – fully qualified syntax. Такова
+  описание на нещатата, което не оставя неясноти.
 
 ### See also:
 

@@ -71,7 +71,7 @@ enum VeryVerboseEnumOfThingsToDoWithNumbers {
 type Operations = VeryVerboseEnumOfThingsToDoWithNumbers;
 
 fn main() {
-    // Можем да достъпваме всеки вариант на брояча чрез прякора му.
+    // Можем да достигаме до всеки вариант на брояча чрез прякора му.
     // По-кратко и удобно е.
     let x = Operations::Add;
 }

@@ -12,7 +12,7 @@
 #[derive(Debug, Clone, Copy)]
 struct Unit;
 
-// Разнородна списъчна структура с данни, осъществяваща отличителя `Clone`
+// Разнородна поредна структура с данни, осъществяваща отличителя `Clone`
 #[derive(Clone, Debug)]
 struct Pair(Box<i32>, Box<i32>);
 

@@ -7,7 +7,7 @@
 use std::fmt;
 
 // Описваме структура, за която ще осъществим `fmt::Display`
-// Това е разнороден списък², именуван `Structure`,
+// Това е разнородна поредица², именувана `Structure`,
 // който съдържа един член³ от тип `i32`.
 struct Structure(i32);
 
@@ -117,7 +117,7 @@ Debug: Complex { real: 3.3, imag: 7.2 }
 
 [^containers]: обобщени съдържащи типове – generic containers
 
-[^tuples]: разнороден списък – tuple, вижте [разнородни списъци][tuples]
+[^tuples]: разнородна поредица – tuple, вижте [разнородни списъци][tuples]
 
 [^elements]: член – element
 
@@ -137,4 +137,3 @@ Debug: Complex { real: 3.3, imag: 7.2 }
 [traits]: https://doc.rust-lang.org/std/fmt/#formatting-traits
 [use]: ../../mod/use.md
 [tuples]: ../../primitives/tuples.md
-

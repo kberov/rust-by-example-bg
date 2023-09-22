@@ -17,37 +17,37 @@ struct Unit;
 struct Pair(Box<i32>, Box<i32>);
 
 fn main() {
-    // Инстанциираме `Unit`
+    // Създаваме обект от тип `Unit`
     let unit = Unit;
-    // Копираме `Unit`, няма данни за местене
+    // Копираме `unit`, няма данни за местене.
     let copied_unit = unit;
 
     // И двата обекта `Unit` могат да се ползват независимо един от друг
     println!("original: {:?}", unit);
     println!("copy: {:?}", copied_unit);
 
-    // Инстанциираме `Pair`
+    // Създаваме данни от тип `Pair`
     let pair = Pair(Box::new(1), Box::new(2));
     println!("original: {:?}", pair);
 
-    // Местим `pair` в `moved_pair`, има преместване на данни
+    // Местим `pair` в `moved_pair`, има преместване на данни.
     let moved_pair = pair;
     println!("moved: {:?}", moved_pair);
 
-    // Грешка! `pair` е загубил данните си
+    // Грешка! `pair` е загубил данните си.
     //println!("original: {:?}", pair);
-    // ЗАДАЧА ^ Разкоментирайте този ред
+    // ЗАДАЧА ^ Разкоментирайте този ред.
 
-    // Клонираме `moved_pair` в `cloned_pair` (включително с данните)
+    // Клонираме `moved_pair` в `cloned_pair` (включително с данните).
     let cloned_pair = moved_pair.clone();
-    // Изхвърляме първоначалния чифт с помощта на std::mem::drop
+    // Освобождаваме първоначалния чифт с помощта на `std::mem::drop`.
     drop(moved_pair);
 
-    // Грешка! `moved_pair` вече е изхвърлен
+    // Грешка! `moved_pair` вече е освободен.
     //println!("copy: {:?}", moved_pair);
-    // ЗАДАЧА ^ Разкоментирайте този ред
+    // ЗАДАЧА ^ Разкоментирайте този ред.
 
-    // Произведеното от .clone() все още може да се ползва!
+    // Резултатът от .clone() все още може да се ползва!
     println!("clone: {:?}", cloned_pair);
 }
 ```

@@ -36,8 +36,8 @@ fn main() {
     // Правим променлива `optional` от тип `Option<i32>`
     let mut optional = Some(0);
 
-    // Това се чете: "докато (while) `let` разлага `optional` в
-    // `Some(i)`, изпълняваме блока (`{}`). Иначе (else) `break` (прекъсване).
+    // Това се чете: "докато `let` разлага `optional` в
+    // `Some(i)`, изпълняваме блока (`loop {…}`). Иначе прекъсваме (`{ break; }`).
     while let Some(i) = optional {
         if i > 9 {
             println!("По-голямо от 9, напускаме!");

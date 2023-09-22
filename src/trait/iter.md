@@ -77,7 +77,7 @@ fn main() {
 
     let array = [1u32, 3, 3, 7];
 
-    // Методът `iter` произвежда обект от тип `Iterator` върху списък или отрязък.
+    // Методът `iter` произвежда обект от тип `Iterator` от поредица или отрязък.
     println!("Iterate the following array {:?}", &array);
     for i in array.iter() {
         println!("> {}", i);
@@ -85,7 +85,7 @@ fn main() {
 }
 ```
 
-Б.пр.
+## Б.пр.
 
 [^range]: редица – range. https://bg.wikipedia.org/wiki/Редица
 

@@ -83,7 +83,7 @@ fn main() {
     let big_range =   MinMax(-300, 300);
     let small_range = MinMax(-3, 3);
 
-    println!("Големият списък е {big}, а малкият е {small}",
+    println!("Голямата поредица е {big}, а малката е {small}",
              small = small_range,
              big = big_range);
 
@@ -117,7 +117,7 @@ Debug: Complex { real: 3.3, imag: 7.2 }
 
 [^containers]: обобщени съдържащи типове – generic containers
 
-[^tuples]: разнородна поредица – tuple, вижте [разнородни списъци][tuples]
+[^tuples]: разнородна поредица – tuple, вижте [разнородни поредици][tuples]
 
 [^elements]: член – element
 

@@ -14,17 +14,17 @@ loop {
         // Ако `optional` е разложимо, влизаме в блока.
         Some(i) => {
             if i > 9 {
-                println!("Greater than 9, quit!");
+                println!("По-голямо от 9, напускаме!");
                 optional = None;
             } else {
-                println!("`i` is `{:?}`. Try again.", i);
+                println!("`i` е `{:?}`. Опитай отново.", i);
                 optional = Some(i + 1);
             }
             // ^ Изисква 3 отстъпа!
         },
-        // Напускаме повторенията ако разлагането не успее:
+        // Напускаме повторенията, ако разлагането не успее:
         _ => { break; }
-        // ^ Защо това е задължително? Трябва д аима по-добър начин!
+        // ^ Защо това да е задължително? Трябва да има по-добър начин!
     }
 }
 ```
@@ -36,27 +36,27 @@ fn main() {
     // Правим променлива `optional` от тип `Option<i32>`
     let mut optional = Some(0);
 
-    // This reads: "while `let` destructures `optional` into
-    // `Some(i)`, evaluate the block (`{}`). Else `break`.
+    // Това се чете: "докато `let` разлага `optional` в
+    // `Some(i)`, изпълняваме блока (`loop {…}`). Иначе прекъсваме (`{ break; }`).
     while let Some(i) = optional {
         if i > 9 {
-            println!("Greater than 9, quit!");
+            println!("По-голямо от 9, напускаме!");
             optional = None;
         } else {
-            println!("`i` is `{:?}`. Try again.", i);
+            println!("`i` е `{:?}`. Опитай отново.", i);
             optional = Some(i + 1);
         }
-        // ^ Less rightward drift and doesn't require
-        // explicitly handling the failing case.
+        // ^ По-малко отместване вдясно и няма изрично изискване
+        // за обработка на неуспешен случай.
     }
-    // ^ `if let` имаше допълнителни условия `else`/`else if`
-    // `while let` няма такива.
+    // ^ `if let` – имаше допълнителни условия `else`/`else if`
+    // `while let` – няма такива.
 }
 ```
 
 ### See also:
 
-[`enum`][enum], [`Option`][option], and the [RFC][while_let_rfc]
+[`enum`][enum], [`Option`][option] и [RFC][while_let_rfc]
 
 [enum]: ../custom_types/enum.md
 [option]: ../std/option.md

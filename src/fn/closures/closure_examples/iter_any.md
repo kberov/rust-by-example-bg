@@ -42,9 +42,9 @@ fn main() {
     let array1 = [1, 2, 3];
     let array2 = [4, 5, 6];
 
-    // `iter()` за списъци дава `&i32`.
+    // `iter()` за поредици дава `&i32`.
     println!("2 in array1: {}", array1.iter()     .any(|&x| x == 2));
-    // `into_iter()` за списъци дава `i32`.
+    // `into_iter()` за поредици дава `i32`.
     println!("2 in array2: {}", array2.into_iter().any(|x| x == 2));
     // ^ ПОПРАВИ: да се промени кода, така че да работи за издание 2021
 }

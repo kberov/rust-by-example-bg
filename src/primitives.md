@@ -55,9 +55,9 @@ fn main() {
 ```
 
 ## Б.пр.
-[^primitives]: първични типове – основни типове – primitives
+[^primitives]: първични типове, основни типове – primitives
 
-[^scalar_types]: прости (единични, скаларни) типове - scalar types
+[^scalar_types]: прости (единични, скаларни) типове – scalar types
 
 [^unit]: Единичен тип – unit type
 

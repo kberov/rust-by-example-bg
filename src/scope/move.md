@@ -62,6 +62,6 @@ fn main() {
 
 [^move]: местене, преместване, движение – move
 
-[^dangling] висящ указател – dangling pointer
+[^dangling]: висящ указател – dangling pointer
 
 [references]: ../flow_control/match/destructuring/destructure_pointers.md

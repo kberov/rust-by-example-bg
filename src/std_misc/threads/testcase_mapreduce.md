@@ -134,7 +134,7 @@ fn main() {
 
 ## Б.пр.
 
-[^map_reduce]: съответствие-намаляване map-reduce? ЗАДАЧА: да се преведе и
+[^map_reduce]: съответствие-намаляване – map-reduce? ЗАДАЧА: да се преведе и
   обясни на български: https://en.wikipedia.org/wiki/MapReduce
   https://ru.wikipedia.org/wiki/MapReduce
 
@@ -146,7 +146,7 @@ fn main() {
   сочат към едни и същи данни. Ръждьо автоматично (по подразбиране) не
   позволява това да се случи.
 
-[^spaces] празнота, празно пространство – space, white-space
+[^spaces]: празнота, празно пространство – space, white-space
 
 ### See also:
 * [Нишки][thread]

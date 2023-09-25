@@ -59,10 +59,11 @@ fn main() {
 
 [^statements]: изявления – statements
 
-[^rvalue]: Не е обяснено какво всъщност е израз (изявление, което връща
-  присвоима стойност). Да се разясни:
-  https://en.wikipedia.org/wiki/Value_(computer_science)#lrvalue
+[^rvalue]: стойност за присвояване, дясна стойност – rvalue. Не е обяснено
+  какво всъщност е израз (изявление, което връща присвоима стойност). Да се
+  разясни: https://en.wikipedia.org/wiki/Value_(computer_science)#lrvalue
 
-[^unit]: `()` – празна единична стойност - като `void` в едни , а null,Null,nil
+[^unit]: празна единична стойност – `()`, като `void` в едни , а null,Null,nil
   в други езици. Вижте [Unit_type в
-  Wikipedia](https://en.wikipedia.org/wiki/Unit_type) 
+  Wikipedia](https://en.wikipedia.org/wiki/Unit_type)
+

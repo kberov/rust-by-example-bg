@@ -34,6 +34,6 @@ foo
 
 ## Б.пр.
 
-[^Conventions] уговорки – conventions
+[^Conventions]: уговорки, конвенции – conventions
 
 [може да изпълнява]: https://doc.rust-lang.org/cargo/guide/project-layout.html

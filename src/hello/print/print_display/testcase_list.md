@@ -62,7 +62,7 @@ fn main() {
 [`for`][for], [`ref`][ref], [`Result`][result], [`struct`][struct],
 [`?`][q_mark] и [`vec!`][vec]
 
-[^препратка]: препратка – reference
+[^reference]: препратка – reference
 
 [for]: ../../../flow_control/for.md
 [result]: ../../../std/result.md

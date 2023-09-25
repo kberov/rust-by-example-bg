@@ -102,7 +102,7 @@ Voila! Това е всичко!
   производни на отличителите и така могат просто да „облекат” някои готови
   „дрешки” (`Debug`), а други (`Display`) да си „ушият” като ги осъществят.
 
-[^official] представителен (официален) – official
+[^official]: представителен (официален) – official
 
 [manifest]: https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]: https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html

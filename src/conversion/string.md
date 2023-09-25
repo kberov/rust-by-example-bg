@@ -58,7 +58,7 @@ fn main() {
 
 [^syntax]: правопис, синтаксис – syntax
 
-[^turbofish]: метод::<Тип>(); **::<Тип>** (напомня на риба)
+[^turbofish]: турбофиш – метод::<Тип>(); **::<Тип>** (напомня на риба)
 
 [`ToString`]: https://doc.rust-lang.org/std/string/trait.ToString.html
 [Display]: https://doc.rust-lang.org/std/fmt/trait.Display.html

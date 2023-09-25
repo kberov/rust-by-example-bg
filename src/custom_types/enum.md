@@ -105,7 +105,7 @@ impl VeryVerboseEnumOfThingsToDoWithNumbers {
 
 [^enum]: брояч – enum. От enumerator – буквално „изброител” (бел. прев.)  
 
-[^valid]: действителен - valid (бел. прев.)
+[^valid]: действителен – valid (бел. прев.)
 
 [^feature]: способност, възможност – feature (бел. прев.)
 

@@ -125,7 +125,7 @@ fn main() {
 
 ## Б.пр.
 
-[^derive] про-извежда, съм прозводен на – [derive][derive]
+[^derive]: про-извежда, съм прозводен на – [derive][derive]
 
 
 ### See also:

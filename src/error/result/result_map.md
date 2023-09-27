@@ -9,14 +9,14 @@
 [`FromStr`][from_str] за типа [`i32`][i32]. Виждаме, че типа `Err` е указан
 като [`ParseIntError`][parse_int_error].
 
-В примера долу, иначе ясното изявление `match` води като цяло до по-труден за
+В примера долу, иначе ясното изявление `match`, води като цяло до по-труден за
 четене код.
 
 ```rust,editable
 use std::num::ParseIntError;
 
 // Сега сме променили типа за връщане. Получаваме го чрез съпоставяне по
-// образец, без да ползваме `unwrap()`.
+// образец (`match`), без да ползваме `unwrap()`.
 fn multiply(first_number_str: &str, second_number_str: &str)
    -> Result<i32, ParseIntError> {
     match first_number_str.parse::<i32>() {

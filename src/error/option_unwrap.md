@@ -38,7 +38,7 @@ fn give_adult(drink: Option<&str>) {
 }
 
 // Други ще се `panic`ьосат при вида на сладки питиета.
-// Всички питиета са обработени чрез рагъване – `unwrap`.
+// Всички питиета са обработени чрез разгъване – `unwrap`.
 fn drink(drink: Option<&str>) {
     // `unwrap` връща `panic`а, когато получи `None`.
     let вътре = drink.unwrap();

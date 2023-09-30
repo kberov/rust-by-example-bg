@@ -9,9 +9,7 @@ fn is_odd(n: u32) -> bool {
 }
 
 fn main() {
-    println!("Намираме сбора от нечетните квадрати, по-малки от 1000, \
-      на всички числа"
-    );
+    println!("Намираме сбора от квадратите на нечетните числа, по-малки от 1000");
     let upper = 1000;
 
     // Императивен (със заповеди) подход
@@ -19,7 +17,7 @@ fn main() {
     let mut acc = 0;
     // Изброяваме: 0, 1, 2, ... до безкрайност
     for n in 0.. {
-        // Степенуваме числото
+        // Повдигаме числото на квадрат
         let n_squared = n * n;
 
         if n_squared >= upper {
@@ -34,15 +32,15 @@ fn main() {
 
     // Функционален подход
     let sum_of_squared_odd_numbers: u32 =
-        (0..).map(|n| n * n) // Всички естествени числа на квадрат
+        (0..).map(|n| n * n)              // Всички естествени числа на квадрат
              .take_while(|&n_squared| n_squared < upper) // Под горната граница
-             .filter(|&n_squared| is_odd(n_squared)) // Които са нечетни
-             .sum(); // Събираме ги
+             .filter(|&n_squared| is_odd(n_squared))     // Които са нечетни
+             .sum();                                     // Събираме ги
     println!("Функционален подход: {}", sum_of_squared_odd_numbers);
 }
 ```
 
-[Option][option] и [Iterator][iter] осъществяват много ФВП.
+[Option][option] и [Iterator][iter] осъществяват немалка част от ФВП.
 
 [option]: https://doc.rust-lang.org/core/option/enum.Option.html
 [iter]: https://doc.rust-lang.org/core/iter/trait.Iterator.html

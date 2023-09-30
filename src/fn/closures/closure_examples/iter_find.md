@@ -12,8 +12,8 @@ pub trait Iterator {
     // `find` приема `&mut self`, значи извикващият може да бъде
     // заеман и променян, но не и поглъщан
     fn find<P>(&mut self, predicate: P) -> Option<Self::Item> where
-        // `FnMut` означава, че всяка прихваната променлива може да бъде
-        // най-много променяна, но не и поглъщана. `&Self::Item` покзва, че
+        // `FnMut` означава, че всяка прихваната променлива може най-много
+        // да бъде променяна, но не и поглъщана. `&Self::Item` покзва, че
         // аргументите към затварянето се приемат като препратки.
         P: FnMut(&Self::Item) -> bool;
 }
@@ -54,13 +54,13 @@ _мястото му_, използвайте `Iterator::position`.
 fn main() {
     let vec = vec![1, 9, 3, 3, 13, 2];
 
-    // `iter()` за вектори дава `&i32` и `position()` не приема препратка.
+    // `iter()` за вектори дава `&i32`, а `position()` не приема препратка.
     // Значи трябва да разложим `&i32` до `i32``
     let index_of_first_even_number = vec.iter().position(|&x| x % 2 == 0);
     assert_eq!(index_of_first_even_number, Some(5));
     
-    // `into_iter()` за вектори дава `i32` и `position()`не приема препратка. 
-    // Не трбва да разлагаме
+    // `into_iter()` за вектори дава `i32`, а `position()`не приема препратка. 
+    // Така че не трябва да разлагаме
     let index_of_first_negative_number = vec.into_iter().position(|x| x < 0);
     assert_eq!(index_of_first_negative_number, None);
 }

@@ -49,7 +49,7 @@ fn main() {
 
 ### See also:
 
-[`Fn`][fn], [`FnMut`][fnmut], [Generics][generics] и [impl ИмеНаОтличител][impltrait].
+[`Fn`][fn], [`FnMut`][fnmut], [Обобщения][generics] и [impl ИмеНаОтличител][impltrait].
 
 [fn]: https://doc.rust-lang.org/std/ops/trait.Fn.html
 [fnmut]: https://doc.rust-lang.org/std/ops/trait.FnMut.html

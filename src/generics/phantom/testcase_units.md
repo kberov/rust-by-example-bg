@@ -76,7 +76,7 @@ fn main() {
 ## Б.пр.
 
 [^unit] Игра на думи: мерна единица, единичен тип – unit. Вижте [Unit_type в
-Wikipedia](https://en.wikipedia.org/wiki/Unit_type) 
+ Wikipedia](https://en.wikipedia.org/wiki/Unit_type) 
 
 ### See also:
 

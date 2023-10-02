@@ -121,15 +121,15 @@ fn main() {
 
 ## Бел. прев.
 
-[^iterator]: повторител – итератор – iterator
+[^iterator]: повторител, итератор – iterator
 
 [^range]: редица (от .. до) – range; означението за редица – range notation
 
-[^collection]: сбирка, колекция; набор – collection
+[^collection]: сбирка – collection. Колекция, набор.
 
 [^borrows]: заема, взема на заем – borrows
 
-[^consumes]: употребява и поглъща, поглъща (параметри, поредица, сбирка и т.н.)
+[^consumes]: поглъща – consumes. Употребява и поглъща (параметри, поредица, сбирка и т.н.)
   – consumes (parameters, array, collection etc.)
 
 [^moved]: преместен – moved. Виж [Собственост и премествания][move]

@@ -29,5 +29,5 @@ fn main() {
 
 ## Б.пр.
 
-[^repeat]: Повторение – Repeat
+[^repeat]: повторение – repeat
 

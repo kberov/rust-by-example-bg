@@ -13,8 +13,8 @@
 
 ## Б.пр.
 
-[^PD]: Образци и обозначители – Patterns and Designators
+[^PD]: образци и обозначители – patterns and designators
 
-[^overloading]: Презаписване – Overloading
+[^overloading]: презаписване – overloading
 
 

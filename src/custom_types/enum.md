@@ -103,11 +103,13 @@ impl VeryVerboseEnumOfThingsToDoWithNumbers {
 
 [`match`][match], [`fn`][fn] и [`String`][str], ["Type alias enum variants" RFC][type_alias_rfc]
 
-[^enum]: брояч – enum. От enumerator – буквално „изброител” (бел. прев.)  
+## Б. пр.
 
-[^valid]: действителен – valid (бел. прев.)
+[^enum]: брояч – enum. От enumerator – буквално „изброител”
 
-[^feature]: способност, възможност – feature (бел. прев.)
+[^valid]: действителен – valid
+
+[^feature]: способност, възможност – feature
 
 
 [c_struct]: https://en.wikipedia.org/wiki/Struct_(C_programming_language)

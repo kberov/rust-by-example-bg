@@ -99,9 +99,9 @@ fn main() {
    ```
 
 ## Б.пр.
-[^transpose]: transpose – размествам, премествам от другата страна,
- сменям местата на две неща
+[^transpose]: размествам, премествам от другата страна, сменям местата на две
+  неща – transpose 
 
-[^template]: образец (шаблон) – template
+[^template]: образец, шаблон – template
 
 [print_display]: ../hello/print/print_display.md

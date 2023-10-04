@@ -1,34 +1,34 @@
 # `super` и `self`
 
-Ключовите думи `super` и `self` мод да се ползват в пътя, за да избегнете
-неясноти при достъпа до единици от даден модул и, за да избегнете ненужни
-буквални изписвания на пътища.
+Ключовите думи `super` и `self` могат да се ползват в пътя, за да се премахнат
+неясноти при достъпа до единици от даден модул и да се предотврати ненужно
+точно изписване на пътища.
 
 ```rust,editable
 fn function() {
-    println!("called `function()`");
+    println!("извикахме `function()`");
 }
 
 mod cool {
     pub fn function() {
-        println!("called `cool::function()`");
+        println!("извикахме `cool::function()`");
     }
 }
 
 mod my {
     fn function() {
-        println!("called `my::function()`");
+        println!("извикахме `my::function()`");
     }
     
     mod cool {
         pub fn function() {
-            println!("called `my::cool::function()`");
+            println!("извикахме `my::cool::function()`");
         }
     }
     
     pub fn indirect_call() {
         // Да достъпим всички функции от този обхват с име `function`!
-        print!("called `my::indirect_call()`, that\n> ");
+        print!("извикахме `my::indirect_call()`, that\n> ");
         
         // Ключовата дума `self` се отнася до текущия модул – в този случай `my`.
         // Извикването `self::function()` и извикването `function()` са едно и
@@ -40,11 +40,11 @@ mod my {
         self::cool::function();
         
         // Ключовата дума `super` се отнася до родителския обхват
-        // (извън модула`my`).
+        // (извън модула `my`).
         super::function();
         
         // Това ще създаде прякор root_function за `cool::function` в обхвата
-        // на целия *кош*. В този случай обхвата на коша е най-външния обхват.
+        // на целия *кош*. В този случай обхватът на коша е най-външният обхват.
         {
             use crate::cool::function as root_function;
             root_function();

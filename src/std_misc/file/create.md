@@ -21,7 +21,7 @@ fn main() {
     let path = Path::new("lorem_ipsum.txt");
     let display = path.display();
 
-    // Отваряме файл само за четене. Връща `io::Result<File>`.
+    // Отваряме файл само за писане. Връща `io::Result<File>`.
     let mut file = match File::create(&path) {
         Err(why) => panic!("Неуспех при създаване на {}: {}", display, why),
         Ok(file) => file,

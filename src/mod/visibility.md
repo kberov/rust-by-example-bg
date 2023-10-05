@@ -35,7 +35,7 @@ mod my_mod {
             println!("извикахме `my_mod::nested::private_function()`");
         }
 
-        // Функции, обявени чрез синтаксиса `pub(in път)`, са видими само в
+        // Функции, обявени чрез изписването `pub(in път)`, са видими само в
         // подадения път. `път` трябва да бъде родителски или прародителски модул
         pub(in crate::my_mod) fn public_function_in_my_mod() {
             print!("извикахме `my_mod::nested::public_function_in_my_mod()`, \

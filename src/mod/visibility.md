@@ -49,7 +49,7 @@ mod my_mod {
             println!("извикахме `my_mod::nested::public_function_in_nested()`");
         }
 
-        // Функции, обявени чрез синтаксиса `pub(super)`,
+        // Функции, обявени чрез изписването `pub(super)`,
         //са видими само в родителския модул.
         pub(super) fn public_function_in_super_mod() {
             println!("извикахме `my_mod::nested::public_function_in_super_mod()`");

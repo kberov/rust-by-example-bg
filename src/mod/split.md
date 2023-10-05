@@ -20,7 +20,7 @@ $ tree .
 mod my;
 
 fn function() {
-    println!("called `function()`");
+    println!("извикахме `function()`");
 }
 
 fn main() {
@@ -44,15 +44,15 @@ mod inaccessible;
 pub mod nested;
 
 pub fn function() {
-    println!("called `my::function()`");
+    println!("извикахме `my::function()`");
 }
 
 fn private_function() {
-    println!("called `my::private_function()`");
+    println!("извикахме `my::private_function()`");
 }
 
 pub fn indirect_access() {
-    print!("called `my::indirect_access()`, that\n> ");
+    print!("извикахме `my::indirect_access()`, that\n> ");
 
     private_function();
 }
@@ -62,12 +62,12 @@ pub fn indirect_access() {
 
 ```rust,ignore
 pub fn function() {
-    println!("called `my::nested::function()`");
+    println!("извикахме `my::nested::function()`");
 }
 
 #[allow(dead_code)]
 fn private_function() {
-    println!("called `my::nested::private_function()`");
+    println!("извикахме `my::nested::private_function()`");
 }
 ```
 
@@ -76,7 +76,7 @@ fn private_function() {
 ```rust,ignore
 #[allow(dead_code)]
 pub fn public_function() {
-    println!("called `my::inaccessible::public_function()`");
+    println!("извикахме `my::inaccessible::public_function()`");
 }
 ```
 

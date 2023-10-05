@@ -6,7 +6,7 @@
 
 Важно е да отбележим обаче, че и двата атрибута **не влияят на компилирането**,
 когато използваме Cargo. И понеже Cargo се ползва в повечето проекти на Ръждьо,
-това означава, че рядко се срещат тези атрибути в истински проекти.
+това означава, че тези атрибути рядко се срещат в истински проекти.
 
 В lib.rs
 
@@ -17,21 +17,20 @@
 #![crate_name = "rary"]
 
 pub fn public_function() {
-    println!("called rary's `public_function()`");
+    println!("извикахме rary's `public_function()`");
 }
 
 fn private_function() {
-    println!("called rary's `private_function()`");
+    println!("извикахме rary's `private_function()`");
 }
 
 pub fn indirect_access() {
-    print!("called rary's `indirect_access()`, that\n ");
-
+    print!("извикахме rary's `indirect_access()`, that\n> ");
     private_function();
 }
 ```
 
-Когато ползваме атрибута `crate_type` вече няма нужда да подаваме флага
+Когато ползваме атрибута `crate_type`, вече няма нужда да подаваме флага
 `--crate-type` на `rustc`.
 
 ```shell

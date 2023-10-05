@@ -23,13 +23,13 @@ fn main() {
 use deeply::nested::function as other_function;
 
 fn function() {
-    println!("called `function()`");
+    println!("извикахме `function()`");
 }
 
 mod deeply {
     pub mod nested {
         pub fn function() {
-            println!("called `deeply::nested::function()`");
+            println!("извикахме `deeply::nested::function()`");
         }
     }
 }
@@ -38,7 +38,7 @@ fn main() {
     // Улеснен достъп до `deeply::nested::function`
     other_function();
 
-    println!("Entering block");
+    println!("Влизане в блока");
     {
         // Това е същото като `use deeply::nested::function as function`.
         // Тази `function()` ще засенчи другата.
@@ -48,11 +48,11 @@ fn main() {
         // засенчаването на `function()` е само в този блок.
         function();
 
-        println!("Leaving block");
+        println!("Напускане на блока");
     }
 
     function();
 }
 ```
 
-[^imports]: вмасяне (на имена (модули и функции)) в текущия блок (код или файл) на обхват (б.пр.)
+[^imports]: внасяне (на имена (модули и функции)) в текущия блок (код или файл) на обхват (б.пр.)

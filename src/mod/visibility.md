@@ -7,7 +7,7 @@
 ```rust,editable
 // Модул с име `my_mod`
 mod my_mod {
-    // Единиците в модулите по подразбиране имат частна видимост
+    // Единиците в модулите имат частна видимост по подразбиране
     // (не са видими отвън).
     fn private_function() {
         println!("извикахме `my_mod::private_function()`");
@@ -35,23 +35,24 @@ mod my_mod {
             println!("извикахме `my_mod::nested::private_function()`");
         }
 
-        // Функции, обявени чрез `pub(in път)` са видими само в подадения път.
-        // `път` трябва да бъде родителски или прародителски модул
+        // Функции, обявени чрез изписването `pub(in път)`, са видими само в
+        // подадения път. `път` трябва да бъде родителски или прародителски модул
         pub(in crate::my_mod) fn public_function_in_my_mod() {
             print!("извикахме `my_mod::nested::public_function_in_my_mod()`, \
             която извика\n> ");
             public_function_in_nested();
         }
 
-        // Функции, обявени чрез `pub(self)` са видими само в текущия модул,
-        // което е същото като да ги оставим частни.
+        // Функции, обявени чрез изписването `pub(self)`, са видими само
+        // в текущия модул, което е същото като да ги оставим частни.
         pub(self) fn public_function_in_nested() {
             println!("извикахме `my_mod::nested::public_function_in_nested()`");
         }
 
-        // Функции, обявени чрез `pub(super)` са видими само в родителския модул.
+        // Функции, обявени чрез изписването `pub(super)`,
+        //са видими само в родителския модул.
         pub(super) fn public_function_in_super_mod() {
-            println!("called `my_mod::nested::public_function_in_super_mod()`");
+            println!("извикахме `my_mod::nested::public_function_in_super_mod()`");
         }
     }
 
@@ -100,33 +101,33 @@ fn main() {
     my_mod::nested::function();
     my_mod::call_public_function_in_my_mod();
 
-    // Единиците, обявени чрез `pub(crate)` могат да се извикат отвсякъде
+    // Единиците, обявени чрез `pub(crate)`, могат да се извикат отвсякъде
     // в същия кош.
     my_mod::public_function_in_crate();
 
-    // Единиците, обявени чрез `pub(in path)` могат да се извикват
+    // Единиците, обявени чрез `pub(in path)`, могат да се извикват
     // само в указания модул
     // Грешка! Функцията `public_function_in_my_mod` е частна
     //my_mod::nested::public_function_in_my_mod();
     // ЗАДАЧА ^ Разкоментирйте този ред
 
-    // Частните единици за даден модул не могат да се достъпят пряко, дори да
-    // са вложени в общ модул:
+    // Частните единици за даден модул не могат да се достъпят пряко,
+    // дори да са вложени в общ модул:
     // Грешка! `private_function` е частна
     //my_mod::private_function();
-    // ЗАДАЧА ^ Try uncommenting this line
+    // ЗАДАЧА ^ Разкоментирйте този ред
 
-    // Грешка! `private_function` е частна.
+    // Грешка! `private_function` е частна
     //my_mod::nested::private_function();
-    // ЗАДАЧА ^ Разкоментирйте този ред.
+    // ЗАДАЧА ^ Разкоментирйте този ред
 
-    // Грешка! `private_nested` е частен модул.
+    // Грешка! `private_nested` е частен модул
     //my_mod::private_nested::function();
-    // ЗАДАЧА ^ Разкоментирйте този ред.
+    // ЗАДАЧА ^ Разкоментирйте този ред
 
     // Грешка! `private_nested` е частен модул
     //my_mod::private_nested::restricted_function();
-    // ЗАДАЧА ^ Разкоментирйте този ред.
+    // ЗАДАЧА ^ Разкоментирйте този ред
 }
 ```
 

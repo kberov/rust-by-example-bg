@@ -47,7 +47,7 @@ fn main() {
 
 ### See also:
 
-[functions returning references][fn], [`impl`][methods], and [`struct`][structs]
+[функции, връщащи препратки][fn], [`impl`][methods] и [`struct`][structs]
 
 
 [fn]: ../scope/lifetime/fn.md

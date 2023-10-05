@@ -42,4 +42,4 @@ fn main() {
 ### Вижте също:
 
 [Разнородни поредици](../../primitives/tuples.md),
-[Броячи](../../custom_types/enum.md)
+[Броители](../../custom_types/enum.md)

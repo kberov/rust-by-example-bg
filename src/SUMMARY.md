@@ -13,7 +13,7 @@
     - [Поредици и отрязъци](primitives/array.md)
 - [Потребителски типове](custom_types.md)
     - [Структури](custom_types/structs.md)
-    - [Броячи](custom_types/enum.md)
+    - [Броители](custom_types/enum.md)
         - [use](custom_types/enum/enum_use.md)
         - [Като в C](custom_types/enum/c_like.md)
         - [Проверка: свързан списък](custom_types/enum/testcase_linked_list.md)

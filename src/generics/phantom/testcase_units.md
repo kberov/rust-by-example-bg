@@ -26,7 +26,7 @@ impl<U> Add for T<U> {
 use std::marker::PhantomData;
 use std::ops::Add;
 
-/// Създаваме празни броячи, като единични типове.
+/// Създаваме празни броители, като единични типове.
 #[derive(Debug, Clone, Copy)]
 enum Инч {}
 #[derive(Debug, Clone, Copy)]

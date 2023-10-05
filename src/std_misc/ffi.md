@@ -58,9 +58,8 @@ impl fmt::Debug for Complex {
 
 ## Б.пр.
 
-[^FFI]: премяна за чужди функции (ПЧФ) – foreign function interface
-  (FFI). приложна програмна премяна (ППП) – application programming
+[^FFI]: външност за чужди функции (ПЧФ) – foreign function interface
+  (FFI). приложна програмна външност (ППП) – application programming
   interface (API)
 
 [^extern]: външен – extern
-

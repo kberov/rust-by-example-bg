@@ -43,7 +43,7 @@ mod my_mod {
             public_function_in_nested();
         }
 
-        // Функции, обявени чрез синтаксиса `pub(self)`, са видими само
+        // Функции, обявени чрез изписването `pub(self)`, са видими само
         // в текущия модул, което е същото като да ги оставим частни.
         pub(self) fn public_function_in_nested() {
             println!("извикахме `my_mod::nested::public_function_in_nested()`");

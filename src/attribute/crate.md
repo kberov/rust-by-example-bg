@@ -26,7 +26,6 @@ fn private_function() {
 
 pub fn indirect_access() {
     print!("извикахме rary's `indirect_access()`, that\n> ");
-
     private_function();
 }
 ```

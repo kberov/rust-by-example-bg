@@ -13,7 +13,7 @@
 изчерпателна документация в [Книгата за
 Cargo](https://doc.rust-lang.org/cargo/).
 
-[^cargo]: cargo – товар
+[^cargo]: товар, карго – cargo
 
 [^official]: представителното – official
 

@@ -156,7 +156,7 @@
         - [Обгръщане на грешки](error/multiple_error_types/wrap_error.md)
     - [Обхождане на `Result`ати](error/iter_result.md)
 - [Стандартни типове](std.md)
-    - [Box, кама̀ра и куп](std/box.md)
+    - [Box, стълп и куп](std/box.md)
     - [Вектори](std/vec.md)
     - [Низове](std/str.md)
     - [`Option`](std/option.md)

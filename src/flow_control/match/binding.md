@@ -27,7 +27,7 @@ fn main() {
 }
 ```
 
-Можете да ползвате обвързване за разлагане на варианти на броячи, например `Option`:
+Можете да ползвате обвързване за разлагане на варианти на броители, например `Option`:
 
 ```rust,editable
 fn some_number() -> Option<u32> {
@@ -48,7 +48,7 @@ fn main() {
 ```
 
 ### See also:
-[функции][functions], [броячи][enums] и [`Option`][option]
+[функции][functions], [броители][enums] и [`Option`][option]
 
 [functions]: ../../fn.md
 [enums]: ../../custom_types/enum.md

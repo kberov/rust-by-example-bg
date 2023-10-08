@@ -71,7 +71,7 @@ fn main() {
 
 ### See also:
 
-[`struct`][structs] и [`отличители`][traits]
+[Структури][structs] и [Отличители][traits]
 
 [structs]: ../../custom_types/structs.md
 [traits]: ../../trait.md

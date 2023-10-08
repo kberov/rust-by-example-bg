@@ -68,7 +68,7 @@ fn main() {
 
 ### See also:
 
-[Derive], [struct] и [TupleStructs]
+[Derive], [struct] и [Подредени структури][TupleStructs]
 
 [Derive]: ../trait/derive.md
 [struct]: ../custom_types/structs.md

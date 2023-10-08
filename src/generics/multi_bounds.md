@@ -1,7 +1,7 @@
 # Множество предели
 
 Повече предели за отделен тип може да се приложат чрез знака `+`.
-Обикновено различните типове се отделят с `,`.
+Обикновено различните типове се отделят със `,`.
 
 ```rust,editable
 use std::fmt::{Debug, Display};
@@ -31,7 +31,7 @@ fn main() {
 
 ### See also:
 
-[`std::fmt`][fmt] and [`trait`s][traits]
+[`std::fmt`][fmt] и [`отличители`][traits]
 
 [fmt]: ../hello/print.md
 [traits]: ../trait.md

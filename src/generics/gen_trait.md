@@ -38,7 +38,7 @@ fn main() {
 
 ### See also:
 
-[`Drop`][Drop], [`struct`][structs] и [`trait`][traits]
+[`Drop`][Drop], [`struct`][structs] и [`отличители`][traits]
 
 [Drop]: https://doc.rust-lang.org/std/ops/trait.Drop.html
 [structs]: ../custom_types/structs.md

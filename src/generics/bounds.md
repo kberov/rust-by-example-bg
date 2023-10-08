@@ -77,7 +77,7 @@ fn main() {
 
 ### See also:
 
-[`std::fmt`][fmt], [`struct`s][structs] и [`trait`s][traits]
+[`std::fmt`][fmt], [`struct`s][structs] и [`отличители`][traits]
 
 [fmt]: ../hello/print.md
 [methods]: ../fn/methods.md

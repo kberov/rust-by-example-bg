@@ -48,7 +48,7 @@ fn main() {
 
 ### See also:
 
-[RFC][where], [`struct`][struct] и [`отличители`][trait]
+[RFC][where], [Структури][struct] и [Отличители][trait]
 
 [struct]: ../custom_types/structs.md
 [trait]: ../trait.md

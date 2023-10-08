@@ -60,7 +60,7 @@ fn main() {
 }
 ```
 
-# Б.пр.
+## Б.пр.
 
 [^generics]: обобщения – generics
 

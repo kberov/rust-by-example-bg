@@ -64,7 +64,7 @@ fn main() {
 
 [^immut_ref]: неменѝма препратка – immutable reference
 
-### See also:
+### Вижте също:
 [`static`][static]
 
 [static]: ../lifetime/static_lifetime.md

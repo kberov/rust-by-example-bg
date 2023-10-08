@@ -71,7 +71,7 @@ fn main() {
 
 [^coercion]: мълчаливо привеждане насила (от един тип към друг) – coercion 
 
-### See also:
+### Вижте също:
 
 [generics][generics] and [closures][closures]
 

@@ -140,7 +140,7 @@ fn cat(path: &Path) -> io::Result<String> {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`cfg!`][cfg]
 

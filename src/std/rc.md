@@ -56,7 +56,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [std::rc][1] and [std::sync::arc][2].
 

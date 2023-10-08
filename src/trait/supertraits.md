@@ -47,7 +47,7 @@ fn main() {}
   отличител.
 
 
-### See also:
+### Вижте също:
 
 [The Ръждьо Programming Language chapter on supertraits][trpl_supertraits]
 

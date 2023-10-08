@@ -37,7 +37,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`std::cmp::Eq`][eq], [`std::marker::Copy`][copy] и [Отличители][traits]
 

@@ -51,7 +51,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [Обобщения][generics] и [методи][methods]
 

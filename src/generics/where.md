@@ -46,7 +46,7 @@ fn main() {
 
 [^where_clause]  условие „където” – `where` clause (б.пр.)
 
-### See also:
+### Вижте също:
 
 [RFC][where], [Структури][struct] и [Отличители][trait]
 

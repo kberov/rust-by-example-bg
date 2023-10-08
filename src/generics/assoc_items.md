@@ -12,7 +12,7 @@
 [^assoc_items]: придадени единици (типове, функции, методи) – такива, които се
   прикрепят/добавят/придават към други типове – associated items (types, functions, methods)
 
-### See also:
+### Вижте също:
 
 [RFC][RFC], [Разлагане (бележки)](../../flow_control/match/destructuring.md)
 

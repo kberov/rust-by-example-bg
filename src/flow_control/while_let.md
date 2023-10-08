@@ -54,7 +54,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`enum`][enum], [`Option`][option] и [RFC][while_let_rfc]
 

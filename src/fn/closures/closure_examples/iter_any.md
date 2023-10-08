@@ -56,7 +56,7 @@ fn main() {
 
 [^yield]: произвеждам, давам, нося – yield. https://eurodict.com/dictionary/yield-82257
 
-### See also:
+### Вижте също:
 
 [`std::iter::Iterator::any`][any]
 

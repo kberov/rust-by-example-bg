@@ -45,7 +45,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [функции, връщащи препратки][fn], [`impl`][methods] и [`struct`][structs]
 

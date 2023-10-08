@@ -75,7 +75,7 @@ fn main() {
 
 [^bounds]: предели, граници – bounds
 
-### See also:
+### Вижте също:
 
 [`std::fmt`][fmt], [`struct`s][structs] и [`отличители`][traits]
 

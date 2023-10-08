@@ -55,7 +55,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [Dynamic dispatch][dynamic_dispatch] and [`Error` trait][error]
 

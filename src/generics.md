@@ -68,7 +68,7 @@ fn main() {
 
 [^concrete]: точен, даден, определен; конкретен – concrete
 
-### See also:
+### Вижте също:
 
 [`structs`][structs]
 

@@ -68,7 +68,7 @@ fn main() {
 
 [^prelude]: встъпление, предисловие – prelude. `именовано::пространство::prelude::*` 
 
-### See also:
+### Вижте също:
 
 [OsStr][1] и [Metadata][2].
 

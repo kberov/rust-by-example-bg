@@ -41,7 +41,7 @@ fn main() {
 
 [^elision]: пропускане, изпускане, скриване (елизия) – elision
 
-### See also:
+### Вижте също:
 
 [elision][elision]
 

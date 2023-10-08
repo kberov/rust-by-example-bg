@@ -78,7 +78,7 @@ fn main() {
 [^unit] Игра на думи: мерна единица, единичен тип – unit. Вижте [Unit_type в
  Wikipedia](https://en.wikipedia.org/wiki/Unit_type) 
 
-### See also:
+### Вижте също:
 
 [Borrowing (`&`)], [Bounds (`X: Y`)], [enum], [impl & self],
 [Overloading], [ref], [Traits (`X for Y`)] и [TupleStructs].

@@ -36,7 +36,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`Drop`][Drop], [`struct`][structs] и [Отличители][traits]
 

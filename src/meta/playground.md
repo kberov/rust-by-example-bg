@@ -40,7 +40,7 @@ fn main() {
 раздел в Игралната площадка на Ръждьо. Тази способност се включва, ако ползваме
 атрибута `#[doc]`, наречен [`html_playground_url`][html-playground-url].
 
-### See also:
+### Вижте също:
 
 - [Игралната площадка на Ръждьо][rust-playground]
 - [rust-playground][rust-playground]

@@ -31,7 +31,7 @@ fn main() {
 
 [^bounds]: предели – bounds
 
-### See also:
+### Вижте също:
 
 [`Fn`][fn], [`FnMut`][fn_mut] и [`FnOnce`][fn_once]
 

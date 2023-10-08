@@ -109,7 +109,7 @@ fn main() {
 
 [^destructor]: унищожител – destructor.
 
-### See also:
+### Вижте също:
 
 [Box][box]
 

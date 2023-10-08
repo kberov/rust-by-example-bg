@@ -148,7 +148,7 @@ fn main() {
 
 [^spaces]: празнота, празно пространство – space, white-space
 
-### See also:
+### Вижте също:
 * [Нишки][thread]
 * [Вектори][vectors] и [Повторители][iterators]
 * [Затваряния][closures], [move][move] semantics и [`move` closures][move_closure]

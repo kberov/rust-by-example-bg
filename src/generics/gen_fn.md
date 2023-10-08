@@ -55,7 +55,7 @@ fn main() {
 
 овладявам – take ownership
 
-### See also:
+### Вижте също:
 
 [functions][fn] и [`struct`s][structs]
 

@@ -43,7 +43,7 @@ fn main() {
 
 [^literals]: буквал (буквална стойност) – literal (literal value)
 
-### See also:
+### Вижте също:
 
 [Справочника][ref], [документацията за `cfg!`][cfg] и [macro_rules!][macros].
 

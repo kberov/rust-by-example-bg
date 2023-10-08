@@ -21,7 +21,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [methods]
 

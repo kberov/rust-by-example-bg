@@ -39,7 +39,7 @@ fn main() {
 
 ### See also:
 
-[`std::cmp::Eq`][eq], [`std::marker::Copy`][copy] и [`отличители`][traits]
+[`std::cmp::Eq`][eq], [`std::marker::Copy`][copy] и [Отличители][traits]
 
 [eq]: https://doc.rust-lang.org/std/cmp/trait.Eq.html
 [copy]: https://doc.rust-lang.org/std/marker/trait.Copy.html

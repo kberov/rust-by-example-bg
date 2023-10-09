@@ -55,7 +55,7 @@ fn main() {
 }
 ```
 
-## Бел. Прев.
+## Б. пр.
 
 [^statements]: изявления – statements
 
@@ -66,4 +66,3 @@ fn main() {
 [^unit]: празна единична стойност – `()`, като `void` в едни , а null,Null,nil
   в други езици. Вижте [Unit_type в
   Wikipedia](https://en.wikipedia.org/wiki/Unit_type)
-

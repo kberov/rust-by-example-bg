@@ -113,7 +113,7 @@ error[E0597]: `i` does not live long enough
    | - `i` dropped here while still borrowed
 ```
 
-### See also:
+### Вижте също:
 
 [`'static` constants][static_const]
 

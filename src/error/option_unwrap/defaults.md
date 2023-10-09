@@ -124,7 +124,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`closures`][closures], [`get_or_insert`][get_or_insert], [`get_or_insert_with`][get_or_insert_with], ,[`moved variables`][moved], [`or`][or], [`or_else`][or_else]
 

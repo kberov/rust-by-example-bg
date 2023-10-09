@@ -43,7 +43,7 @@ https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md),
 [static]: ../scope/lifetime/static_lifetime.md
 [unsafe]: ../unsafe.md
 
-## Б.пр.
+## Б. пр.
 
 [^constants]: константи, непроменливи – constants
 

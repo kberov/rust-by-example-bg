@@ -66,7 +66,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`std::iter::Iterator::find`][find]
 

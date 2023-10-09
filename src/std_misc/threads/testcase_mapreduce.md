@@ -132,7 +132,7 @@ fn main() {
 ограничен брой парчета, определящи се от статична константа в началото на
 програмата.
 
-## Б.пр.
+## Б. пр.
 
 [^map_reduce]: съответствие-намаляване – map-reduce? ЗАДАЧА: да се преведе и
   обясни на български: https://en.wikipedia.org/wiki/MapReduce
@@ -148,7 +148,7 @@ fn main() {
 
 [^spaces]: празнота, празно пространство – space, white-space
 
-### See also:
+### Вижте също:
 * [Нишки][thread]
 * [Вектори][vectors] и [Повторители][iterators]
 * [Затваряния][closures], [move][move] semantics и [`move` closures][move_closure]

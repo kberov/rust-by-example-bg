@@ -486,11 +486,10 @@ These allow the compiler to better optimize code using `asm!`, for example by el
 
 See the [reference](https://doc.rust-lang.org/stable/reference/inline-assembly.html) for the full list of available options and their effects.
 
-## Б.пр.
+## Б. пр.
 
 [^inline_asm]: вписан асемблер – inline assembly
 
 [^instruction]: нареждане – instruction
 
 [^template]: низов образец – template string
-

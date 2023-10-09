@@ -63,7 +63,7 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^elided]: неявно указан, пропуснат – elided (elision) 
 
@@ -71,7 +71,7 @@ fn main() {
 
 [^coercion]: мълчаливо привеждане насила (от един тип към друг) – coercion 
 
-### See also:
+### Вижте също:
 
 [generics][generics] and [closures][closures]
 

@@ -85,7 +85,7 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^range]: редица – range. https://bg.wikipedia.org/wiki/Редица
 

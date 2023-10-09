@@ -113,7 +113,8 @@ fn main() {
 Display: 3.3 + 7.2i
 Debug: Complex { real: 3.3, imag: 7.2 }
 ```
-## Бел. прев.
+
+## Б. пр.
 
 [^containers]: обобщени съдържащи типове – generic containers
 

@@ -40,7 +40,6 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^identifier]: наименование – identifier
-

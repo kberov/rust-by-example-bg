@@ -42,7 +42,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`io::Result`][io_result]
 

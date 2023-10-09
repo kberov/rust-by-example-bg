@@ -8,7 +8,7 @@
 * [Разлагане на указатели][refs]
 * [Разлагане на структури][struct]
 
-## Б.пр.
+## Б. пр.
 [^destructuring]: разлагам – destructure, разлагане (на обекти в отделни променливи) – destructuring
 
 [^items]: единици – items. Ето определението за *единици* от [„The Rust Reference”][rust_ref_book]:

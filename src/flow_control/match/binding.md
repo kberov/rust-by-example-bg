@@ -47,7 +47,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 [функции][functions], [броители][enums] и [`Option`][option]
 
 [functions]: ../../fn.md

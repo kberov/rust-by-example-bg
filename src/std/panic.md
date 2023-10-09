@@ -57,7 +57,6 @@ thread '<main>' panicked at 'division by zero', panic.rs:5
 ```
 <!-- REUSE-IgnoreEnd -->
 
-## Б.пр.
+## Б. пр.
 
 [^runtime]: средата за изпълнение – the runtime
-

@@ -72,7 +72,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [closures][closures], [`Option`][option], [`Option::and_then()`][and_then], and [`Option::flatten()`][flatten]
 

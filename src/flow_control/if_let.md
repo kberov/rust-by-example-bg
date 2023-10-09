@@ -123,12 +123,12 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^derive]: про-извежда, съм прозводен на – [derive][derive]
 
 
-### See also:
+### Вижте също:
 
 [`enum`][enum], [`Option`][option] и [RFC][if_let_rfc]
 

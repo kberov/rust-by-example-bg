@@ -49,7 +49,7 @@ fn main() {
     println!("Sum: {:?}", sum);
 }
 ```
-## Б.пр.
+## Б. пр.
 
 разбор – parsing
 

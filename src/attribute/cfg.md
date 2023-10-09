@@ -39,7 +39,7 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^literals]: буквал (буквална стойност) – literal (literal value)
 

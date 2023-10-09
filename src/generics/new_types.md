@@ -53,7 +53,7 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^newtype]: Изразът за нов тип – New Type Idiom/Pattern
 

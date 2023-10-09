@@ -74,6 +74,6 @@ test test::sub_assign ... ok
 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^DRY]: НСП (Не Се Повтаряй!) – DRY (Don't Repeat Yourself)

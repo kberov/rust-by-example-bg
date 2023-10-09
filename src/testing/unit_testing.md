@@ -257,7 +257,7 @@ running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
-## Б.пр.
+## Б. пр.
 
 [^assert]: потвърждавам – assert
 

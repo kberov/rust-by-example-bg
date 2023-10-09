@@ -55,7 +55,7 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^asynchronous]: неедновременни – asynchronous; https://www.etymonline.com/word/synchronous https://www.etymonline.com/word/asynchronous
 

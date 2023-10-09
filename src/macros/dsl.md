@@ -45,7 +45,7 @@ fn main() {
 от правописа на `macro_rules!`, а има и  `()`, и `[]`.
 
 
-## Б.пр.
+## Б. пр.
 
 [^intuitive]: самовиден (очевиден, саморазбиращ се) – [intuitive][intuitive] (self-evident). 
 

@@ -9,7 +9,7 @@
 [doc]: meta/doc.md
 [playground]: meta/playground.md
 
-## Б.пр.
+## Б. пр.
 
 [^meta]: отвъд, след, мета – meta. Заглавието на английски е „Meta”. Ако се
   опитаме да разтълкуваме значението на тази дума като потърсим назад в
@@ -19,4 +19,3 @@
   [meta](https://www.etymonline.com/search?q=meta).
 
 [^playground]: игрална площадка, пясъчник – playground, sandbox
-

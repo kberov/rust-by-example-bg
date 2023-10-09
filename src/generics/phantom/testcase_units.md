@@ -73,7 +73,7 @@ fn main() {
     //let one_feter = one_foot + one_meter;
 }
 ```
-## Б.пр.
+## Б. пр.
 
 [^unit] Игра на думи: мерна единица, единичен тип – unit. Вижте [Unit_type в
  Wikipedia](https://en.wikipedia.org/wiki/Unit_type) 

@@ -56,7 +56,7 @@ impl fmt::Debug for Complex {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^FFI]: външност за чужди функции (ВЧФ) – foreign function interface
   (FFI). приложна програмна външност (ППВ) – application programming

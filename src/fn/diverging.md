@@ -69,7 +69,7 @@ fn main() {
 като мрежовите сървъри; или функциите, които прекъсват текущия процес – например
 `exit()`.
 
-## Б.пр.
+## Б. пр.
 
 [^diverging]: Разклоняващи функции – diverging, защото разклоняват програмния поток, а и
 често се използват в изрази за сравнение `match`, които се разклоняват именно
@@ -82,6 +82,3 @@ fn main() {
   Type that Never Returns”][never_type].
 
 [never_type]: https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html?highlight=Never#the-never-type-that-never-returns
-
-
-

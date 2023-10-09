@@ -58,7 +58,7 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^mut_ref]: менѝма препратка – mutable reference
 

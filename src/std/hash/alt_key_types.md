@@ -84,7 +84,7 @@ fn main(){
     try_logon(&accounts, "j.everyman", "password123");
 }
 ```
-## Б.пр.
+## Б. пр.
 
 
 [^collection]: набор, сбирка, колекция – collection

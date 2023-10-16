@@ -92,7 +92,7 @@ RGB (0, 0, 0) 0x000000
 
 [`std::fmt`][fmt]
 
-[^buffer]: склад – buffer
+[^buffer]: склад (за временно съхранение) – buffer
 
 [rgb_color]: https://www.rapidtables.com/web/color/RGB_Color.html#rgb-format
 [named_parameters]: https://doc.rust-lang.org/std/fmt/#named-parameters

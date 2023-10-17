@@ -123,7 +123,7 @@ fn main() {
 
 [^iterator]: повторител, итератор – iterator
 
-[^range]: редица (от .. до) – range; означението за редица – range notation
+[^range]: редица (от .. до) – range; означението за редица – range notation. https://bg.wikipedia.org/wiki/Редица
 
 [^collection]: сбирка – collection. Колекция, набор.
 

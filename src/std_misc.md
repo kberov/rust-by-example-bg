@@ -12,7 +12,7 @@
 
 [^channels]: канали – channels
 
-[^file_io]: В/И (вход и и изход) – (input and output) I/O 
+[^file_io]: В/И (вход и изход) – (input and output) I/O 
 
 
 ### Вижте също:

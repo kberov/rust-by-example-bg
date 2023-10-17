@@ -6,7 +6,7 @@
 
 - _указател към данните_[^pointer_to_data];
 - _дължина_[^length];
-- _вместимост_[^capacity].
+- _вместимост_.
 
 
 Вместимостта показва, колко памет (в брой членове) е запазена за вектора.
@@ -78,9 +78,5 @@ fn main() {
 [^pointer_to_data]: указател към данни – pointer to data
 
 [^length]: дължина – length
-
-[^capacity]: вместимост – capacity
-
-
 
 [vec]: https://doc.rust-lang.org/std/vec/

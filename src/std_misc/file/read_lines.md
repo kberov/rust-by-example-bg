@@ -41,7 +41,7 @@ fn read_lines(filename: &str) -> Vec<String> {
 ## По-ефикасен подход
 
 Тук предаваме владението на отворения `File` на структура от тип `BufReader`.
-`BufReader` използва вътрешен _склад_[^buffer]. Така се намалява
+`BufReader` използва вътрешен *склад*. Така се намалява
 междинното[^intermediate] заделяне на памет[^allocations].
 
 Също така обновяваме[^update] `read_lines` да връща повторител вместо да заделя
@@ -90,8 +90,6 @@ $ rustc read_lines.rs && ./read_lines
 може да създаде особено големи затруднения с производителността.
 
 ## Б. пр.
-
-[^buffer]: склад – buffer
 
 [^intermediate]: междинно – intermediate
 

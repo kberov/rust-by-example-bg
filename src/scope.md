@@ -12,4 +12,4 @@
 
 [^borrowing]: заемка, заемане (вземане на заем) – borrowing
 
-[^lifetime]: живот (трайност) – lifetime
+[^lifetime]: живот (на променлива) – lifetime

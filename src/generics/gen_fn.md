@@ -51,11 +51,11 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 овладявам – take ownership
 
-### See also:
+### Вижте също:
 
 [functions][fn] и [`struct`s][structs]
 

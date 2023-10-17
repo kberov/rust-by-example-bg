@@ -6,10 +6,10 @@
 кога променливите биват създадени и унищожени.
 
 
-## Б.пр.
+## Б. пр.
 
 [^ownership]: владение, собственост – ownership,  овладяване – to take ownership
 
 [^borrowing]: заемка, заемане (вземане на заем) – borrowing
 
-[^lifetime]: живот (трайност) – lifetime
+[^lifetime]: живот (на променлива) – lifetime

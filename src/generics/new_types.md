@@ -53,11 +53,11 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^newtype]: Изразът за нов тип – New Type Idiom/Pattern
 
-### See also:
+### Вижте също:
 
 [`structs`][struct],
 ["…a Generic Array using Newtype Pattern"](https://rsdlt.github.io/posts/rust-use-newtype-pattern-display-trait-array-generics/)

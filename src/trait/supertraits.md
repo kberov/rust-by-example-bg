@@ -39,7 +39,7 @@ fn comp_sci_student_greeting(student: &dyn CompSciStudent) -> String {
 fn main() {}
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^supertrait]: надотличител – supertrait. Подобно на „надклас” в други езици
   „надотличител”-ят е надмножество на друг отличител. А всяка
@@ -47,7 +47,7 @@ fn main() {}
   отличител.
 
 
-### See also:
+### Вижте също:
 
 [The Ръждьо Programming Language chapter on supertraits][trpl_supertraits]
 

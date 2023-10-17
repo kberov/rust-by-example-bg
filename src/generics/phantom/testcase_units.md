@@ -45,7 +45,7 @@ impl<Единица> Add for Дължина<Единица> {
 
     // add() връща нова структура `Дължина`, съдържаща сбора.
     fn add(self, rhs: Дължина<Единица>) -> Дължина<Единица> {
-        // `+` извиква осъществяването `f64` за `Add`.
+        // `+` извиква осъществяването на отличителя `Add` за `f64`.
         Дължина(self.0 + rhs.0, PhantomData)
     }
 }
@@ -73,12 +73,12 @@ fn main() {
     //let one_feter = one_foot + one_meter;
 }
 ```
-## Б.пр.
+## Б. пр.
 
 [^unit] Игра на думи: мерна единица, единичен тип – unit. Вижте [Unit_type в
  Wikipedia](https://en.wikipedia.org/wiki/Unit_type) 
 
-### See also:
+### Вижте също:
 
 [Borrowing (`&`)], [Bounds (`X: Y`)], [enum], [impl & self],
 [Overloading], [ref], [Traits (`X for Y`)] и [TupleStructs].

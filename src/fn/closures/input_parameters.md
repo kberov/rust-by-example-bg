@@ -82,7 +82,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`std::mem::drop`][drop], [`Fn`][fn], [`FnMut`][fnmut], [Generics][generics], [where][where] и [`FnOnce`][fnonce]
 

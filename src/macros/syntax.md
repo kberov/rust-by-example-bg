@@ -11,10 +11,8 @@
 [overloading]: overload.md
 [repetition]: repeat.md
 
-## Б.пр.
+## Б. пр.
 
 [^PD]: образци и обозначители – patterns and designators
 
 [^overloading]: презаписване – overloading
-
-

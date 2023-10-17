@@ -5,9 +5,9 @@
 
 Отличителят изисква само един метод за следващия (`next`) член. Той може да се
 опише на ръка в блок за осъществяване (`impl`) или да се ползва автоматично
-(както е в списъците и редиците[^range]).
+(както е в поредиците и редиците).
 
-За удобство, в общия случай конструкцията `for` превръща някои набори в
+За удобство, в общия случай конструкцията `for` превръща някои сбирки в
 повторители с помощта на метода [`.into_iter()`][intoiter].
 
 ```rust,editable
@@ -85,9 +85,6 @@ fn main() {
 }
 ```
 
-## Б.пр.
-
-[^range]: редица – range. https://bg.wikipedia.org/wiki/Редица
 
 [intoiter]: https://doc.rust-lang.org/std/iter/trait.IntoIterator.html
 [iter]: https://doc.rust-lang.org/core/iter/trait.Iterator.html

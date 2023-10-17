@@ -57,12 +57,12 @@ fn main() {
 }
 ```
 
-## Б.пр.
+## Б. пр.
 
 [^fully_qualified]: пълнокачествен правопис – fully qualified syntax. Такова
   описание на нещатата, което не оставя неясноти.
 
-### See also:
+### Вижте също:
 
 [The Ръждьо Programming Language chapter on Fully Qualified syntax][trpl_fqsyntax]
 

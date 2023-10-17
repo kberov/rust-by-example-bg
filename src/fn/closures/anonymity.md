@@ -43,7 +43,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [Подробен разбор][thorough_analysis], [`Fn`][fn], [`FnMut`][fn_mut]
 и [`FnOnce`][fn_once]

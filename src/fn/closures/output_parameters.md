@@ -47,7 +47,7 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
 [`Fn`][fn], [`FnMut`][fnmut], [Обобщения][generics] и [impl ИмеНаОтличител][impltrait].
 

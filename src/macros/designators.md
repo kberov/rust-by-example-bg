@@ -66,7 +66,7 @@ fn main() {
 
 [Reference]: https://doc.rust-lang.org/reference/macros-by-example.html
 
-## Б.пр.
+## Б. пр.
 
 [^designator]: обозначител – designator
 

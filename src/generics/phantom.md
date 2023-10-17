@@ -59,16 +59,16 @@ fn main() {
 }
 ```
 
-# Б.пр.
+## Б. пр.
 
 [^phantom_type]: параметър от призрачен тип – phantom type parameter.
  В примера отново използваме азбука, за да покажем поддръжката на Ръждьо за
  уникод и по-ясно да различм внесения PhantomData от нашите потребителски
  типове, които можем да наречем всякак.
 
-### See also:
+### Вижте също:
 
-[Derive], [struct] и [TupleStructs]
+[Derive], [struct] и [Подредени структури][TupleStructs]
 
 [Derive]: ../trait/derive.md
 [struct]: ../custom_types/structs.md

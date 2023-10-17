@@ -5,7 +5,7 @@
 отбелязване на типа.
 
 * `const`: Неменѝма стойност (общият случай).
-* `static`: Възможно менѝма (`mut`) променлива със статичен живот[^lifetime] –
+* `static`: Възможно менѝма (`mut`) променлива със статичен живот –
   [`'static`][static]. Статичният живот е отгатнат[^inferred] и не е нужно да
   се указва изрично. Достъпът до или промяната на менѝма статична променлива е
   *опасно*[^unsafe] ([`unsafe`][unsafe]) действие.
@@ -43,11 +43,9 @@ https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md),
 [static]: ../scope/lifetime/static_lifetime.md
 [unsafe]: ../unsafe.md
 
-## Б.пр.
+## Б. пр.
 
 [^constants]: константи, непроменливи – constants
-
-[^lifetime]: живот (на променливите) – lifetime
 
 [^inferred]: отгатнат – inferred
 

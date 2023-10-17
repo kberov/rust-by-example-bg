@@ -69,9 +69,9 @@ fn main() {
 }
 ```
 
-### See also:
+### Вижте също:
 
-[`struct`][structs] и [`отличители`][traits]
+[Структури][structs] и [Отличители][traits]
 
 [structs]: ../../custom_types/structs.md
 [traits]: ../../trait.md

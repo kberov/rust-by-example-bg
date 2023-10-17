@@ -60,7 +60,7 @@ fn main() {
 }
 ```
 
-# Б.пр.
+## Б. пр.
 
 [^generics]: обобщения – generics
 
@@ -68,7 +68,7 @@ fn main() {
 
 [^concrete]: точен, даден, определен; конкретен – concrete
 
-### See also:
+### Вижте също:
 
 [`structs`][structs]
 

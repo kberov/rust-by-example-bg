@@ -183,7 +183,7 @@
     - [Действия с файловата уредба](std_misc/fs.md)
     - [Аргументи на програмата](std_misc/arg.md)
         - [Разбор на аргументи](std_misc/arg/matching.md)
-    - [Премени за чужди функции](std_misc/ffi.md)
+    - [Външности за чужди функции](std_misc/ffi.md)
 - [Тестване](testing.md)
     - [Поединично тестване](testing/unit_testing.md)
     - [Тестове в документацията](testing/doc_testing.md)

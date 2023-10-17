@@ -23,6 +23,6 @@ fn main() {
 
 ### Вижте също:
 
-[methods]
+[Методи][methods]
 
 [methods]: ../../fn/methods.md

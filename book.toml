@@ -9,7 +9,7 @@ editor = "ace"
 line-numbers = true
 
 [output.html.fold]
-enable = true
+enable = false
 
 [output.html]
 git-repository-url = "https://github.com/kberov/rust-by-example-bg"

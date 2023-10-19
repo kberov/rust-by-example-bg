@@ -13,6 +13,8 @@
 изчерпателна документация в [Книгата за
 Cargo](https://doc.rust-lang.org/cargo/).
 
+## Б. пр.
+
 [^cargo]: товар, карго – cargo
 
 [^official]: представителното – official

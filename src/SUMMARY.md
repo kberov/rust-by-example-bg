@@ -99,7 +99,7 @@
     - [Параметри от призрачен тип](generics/phantom.md)
         - [Проверка: разясняване на единичния тип](generics/phantom/testcase_units.md)
 - [Правила за обхват](scope.md)
-    - [ПИИ](scope/raii.md)
+    - [ПДИ](scope/raii.md)
     - [Владение и премествания](scope/move.md)
         - [Менѝмост](scope/move/mut.md)
         - [Частични премествания](scope/move/partial_move.md)

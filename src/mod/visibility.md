@@ -73,7 +73,7 @@ mod my_mod {
     mod private_nested {
         #[allow(dead_code)]
         pub fn function() {
-            println!("извикавхме `my_mod::private_nested::function()`");
+            println!("извикахме `my_mod::private_nested::function()`");
         }
 
         // Частните родителски единици продължават да ограничават видимостта на

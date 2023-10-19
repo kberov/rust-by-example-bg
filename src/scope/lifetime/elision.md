@@ -10,7 +10,7 @@
 пропускането вижте [„Lifetime Elision”][elision] в книгата.
 
 ```rust,editable
-// `elided_input` and `annotated_input` всъщност имат едно и също обявление, защото
+// `elided_input` и `annotated_input` всъщност имат едно и също обявление, защото
 // животът на `elided_input` е отгатнат от компилатора:
 fn elided_input(x: &i32) {
     println!("`elided_input`: {}", x);

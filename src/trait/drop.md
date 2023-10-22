@@ -16,7 +16,7 @@ struct Droppable {
     name: &'static str,
 }
 
-// Това нищожно въплъщение на `drop` отпечатва в конзолата.
+// Това простичко въплъщение на `drop` отпечатва в конзолата.
 impl Drop for Droppable {
     fn drop(&mut self) {
         println!("> Dropping {}", self.name);
@@ -47,7 +47,7 @@ fn main() {
     drop(_a);
     // ЗАДАЧА ^ Коментирайте този ред
 
-    println!("end of the main function");
+    println!("край на главната функция");
 
     // `_a` няма да бъде освободена отново тук, понеже вече е освободена ръчно
 }

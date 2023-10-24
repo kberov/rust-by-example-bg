@@ -12,7 +12,7 @@ macro_rules! assert_equal_len {
     // признаци(опознавателни).
     ($a:expr, $b:expr, $func:ident, $op:tt) => {
         assert!($a.len() == $b.len(),
-                "{:?}: разлика в размерите: {:?} {:?} {:?}",
+                "{:?}: несъответсвие в размерите: {:?} {:?} {:?}",
                 stringify!($func),
                 ($a.len(),),
                 stringify!($op),
@@ -33,7 +33,7 @@ macro_rules! op {
     };
 }
 
-// Осъществяваме функциите `add_assign`, `mul_assign`, and `sub_assign`.
+// Осъществяваме функциите `add_assign`, `mul_assign` и `sub_assign`.
 op!(add_assign, Add, +=, add);
 op!(mul_assign, Mul, *=, mul);
 op!(sub_assign, Sub, -=, sub);
@@ -57,7 +57,7 @@ mod test {
         };
     }
 
-    // Тестваме `add_assign`, `mul_assign`, and `sub_assign`.
+    // Тестваме `add_assign`, `mul_assign` и `sub_assign`.
     test!(add_assign, 1u32, 2u32, 3u32);
     test!(mul_assign, 2u32, 3u32, 6u32);
     test!(sub_assign, 3u32, 2u32, 1u32);

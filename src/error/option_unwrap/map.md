@@ -1,9 +1,9 @@
 # Съчетатели: `map`
 
-`match` върши работа за обработка на избори (`Option`). Ако го ползвате много,
-обаче, може да ви се види досадно, особено за действия, които работят само
+`match` върши работа за обработка на избори (`Option`). Ако обаче го ползвате много,
+може да ви се види досадно, особено за действия, които работят само
 с определени входни данни. В тези случаи можем да ползваме
-[_съчетатели_][combinators][^combinators], за управление на програмния поток
+[_съчетатели_][combinators][^combinators] за управление на програмния поток
 като отделни части.
 
 `Option` има вграден метод, наречен `map()` (съпоставяне, сравнение), който е
@@ -11,7 +11,7 @@
 извиквания на `map()` може да се наредят последователно за постигане на повече
 гъвкавост.
 
-В следния пример функцията `process()` в много сбит вид замества всички функции
+В следния пример функцията `process()` в много сбит вид замества всички функции,
 използвани преди това.
  
 ```rust,editable
@@ -41,25 +41,25 @@ fn chop(peeled: Option<Peeled>) -> Option<Chopped> {
     }
 }
 
-// Готвим. Тук показваме ка се ползва `map()` вместо `match` за обрабитка на
-// различните случаи.
+// Готвим. Тук показваме как вместо `match` за обработка на
+// различните случаи се ползва `map()`.
 fn cook(chopped: Option<Chopped>) -> Option<Cooked> {
     chopped.map(|Chopped(food)| Cooked(food))
 }
 
 // Една функция за белене, рязане и готвене – всичко това последователно.
-// Навръзваме няколко извиквания на `map()` за да опростим кода.
+// Навръзваме няколко извиквания на `map()`, за да опростим кода.
 fn process(food: Option<Food>) -> Option<Cooked> {
     food.map(|f| Peeled(f))
         .map(|Peeled(f)| Chopped(f))
         .map(|Chopped(f)| Cooked(f))
 }
 
-// Проверяваме има ли храна преди да се опиттаме да ядем!
+// Проверяваме има ли храна, преди да се опитаме да ядем!
 fn eat(food: Option<Cooked>) {
     match food {
         Some(food) => println!("Мммм… Обичам {:?}!", food),
-        None       => println!("О, не! не става за ядене."),
+        None       => println!("О, не! Не става за ядене."),
     }
 }
 
@@ -70,7 +70,7 @@ fn main() {
 
     let cooked_apple = cook(chop(peel(apple)));
     let cooked_carrot = cook(chop(peel(carrot)));
-    // Да опитаме по простичката `process()` сега.
+    // Сега да опитаме по-простичко изглеждащата `process()`.
     let cooked_potato = process(potato);
 
     eat(cooked_apple);
@@ -87,7 +87,7 @@ fn main() {
 
 ### Вижте също:
 
-[closures][closures], [`Option`][option], [`Option::map()`][map]
+[затваряния][closures], [`Option`][option], [`Option::map()`][map]
 
 [combinators]: https://doc.rust-lang.org/reference/glossary.html#combinator
 [closures]: ../../fn/closures.md

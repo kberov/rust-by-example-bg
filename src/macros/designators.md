@@ -17,7 +17,7 @@ macro_rules! create_function {
     };
 }
 
-// Създаваме функции, именувани `foo` и `bar` с горния макрос.
+// Създаваме функции, именувани `foo` и `bar`, чрез горния макрос.
 create_function!(foo);
 create_function!(bar);
 
@@ -26,7 +26,7 @@ macro_rules! print_result {
     // като низ заедно с изхода от него.
     // Обозначителят `expr` се използва за изрази.
     ($expression:expr) => {
-        // `stringify!` ще превърне израза *както си е* в низ.
+        // `stringify!` ще преобразува израза *както си е* в низ.
         println!("{:?} = {:?}",
                  stringify!($expression),
                  $expression);

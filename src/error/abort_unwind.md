@@ -1,9 +1,9 @@
 # `abort` и `unwind`
 
-Предният раздел показа `panic`. Различните пътища, по които поема кода, могат
-да бъдат компилирани условно в зависимост от настройката за `panic`. Сега
-възможните стойности са "разгъване" (`unwind`) и „преждевременно прекратяване”
-(`abort`). 
+Предният раздел показа механизма за обработка на грешки `panic`.
+Различните пътища, по които поема кодът, могат да бъдат компилирани условно
+в зависимост от настройката за `panic`. Текущите налични стойности са
+„размотаване“ (`unwind`) и „преждевременно прекратяване” (`abort`). 
 
 
 Ако разработим предния пример с лимонадата, можем изрично да ползваме
@@ -12,12 +12,12 @@
 ```rust,editable,mdbook-runnable
 
 fn drink(beverage: &str) {
-   // You shouldn't drink too much sugary beverages.
+   // Не бива да пиете твърде много сладки напитки.
     if beverage == "lemonade" {
-        if cfg!(panic="abort"){ println!("This is not your party. Run!!!!");}
-        else{ println!("Spit it out!!!!");}
+        if cfg!(panic="abort"){ println!("Това не е вашият купон. Беж!!!!");}
+        else{ println!("Изплюйте!!!!");}
     }
-    else{ println!("Some refreshing {} is all I need.", beverage); }
+    else{ println!("Просто ми трябва нещо освежаващо като {}.", beverage); }
 }
 
 fn main() {
@@ -31,14 +31,14 @@ fn main() {
 ```rust,editable
 
 #[cfg(panic = "unwind")]
-fn ah(){ println!("Spit it out!!!!");}
+fn ah(){ println!("Изплюйте!!!!");}
 
 #[cfg(not(panic="unwind"))]
-fn ah(){ println!("This is not your party. Run!!!!");}
+fn ah(){ println!("Това не е вашият купон. Беж!!!!");}
 
 fn drink(beverage: &str){
     if beverage == "lemonade"{ ah();}
-    else{println!("Some refreshing {} is all I need.", beverage);}
+    else{println!("Просто ми трябва нещо освежаващо като {}.", beverage);}
 }
 
 fn main() {

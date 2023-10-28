@@ -32,8 +32,8 @@ fn give_adult(drink: Option<&str>) {
     // Указваме поведение за всеки от случаите.
     match drink {
         Some("лимонада") => println!("Ъъъ! Много сладко."),
-        Some(inner)   => println!("{}? Колко любезно.", inner),
-        None          => println!("Няма питие? Е, добре."),
+        Some(inner) => println!("{}? Колко любезно.", inner),
+        None => println!("Няма питие? Е, добре."),
     }
 }
 
@@ -42,15 +42,17 @@ fn give_adult(drink: Option<&str>) {
 fn drink(drink: Option<&str>) {
     // `unwrap` връща `panic`, когато получи `None`.
     let вътре = drink.unwrap();
-    if вътре == "лимонада" { panic!("AAAaaaaa!!!!"); }
+    if вътре == "лимонада" {
+        panic!("AAAaaaaa!!!!");
+    }
 
     println!("Обичам {}!!!!", вътре);
 }
 
 fn main() {
-    let water  = Some("вода");
+    let water = Some("вода");
     let lemonade = Some("лимонада");
-    let void  = None;
+    let void = None;
 
     give_adult(water);
     give_adult(lemonade);

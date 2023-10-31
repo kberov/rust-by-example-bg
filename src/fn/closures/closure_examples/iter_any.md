@@ -25,18 +25,18 @@ fn main() {
     let vec2 = vec![4, 5, 6];
 
     // `iter()` за вектори дава `&i32`.   Разлагаме към `i32`.
-    println!("2 in vec1: {}", vec1.iter().any(|&x| x == 2));
+    println!("2 във vec1: {}", vec1.iter().any(|&x| x == 2));
     // `into_iter()` за вектори дава `i32`.    Няма нужда от разлагане.
-    println!("2 in vec2: {}", vec2.into_iter().any(|x| x == 2));
+    println!("2 във vec2: {}", vec2.into_iter().any(|x| x == 2));
 
     // `iter()` само заема `vec1` и членовете му, така че могат да бъдат
     // ползвани пак
     println!("vec1 len: {}", vec1.len());
-    println!("First element of vec1 is: {}", vec1[0]);
+    println!("Първият член от vec1 е: {}", vec1[0]);
     // `into_iter()` премества `vec2` и членовете му, та не може да се ползват
-    // вече
-    // println!("First element of vec2 is: {}", vec2[0]);
-    // println!("vec2 len: {}", vec2.len());
+    // вече.
+    // println!("Първият член от vec2 е: {}", vec2[0]);
+    // println!("дължина на vec2: {}", vec2.len());
     // ЗАДАЧА: разкоментирайте двата реда горе и вижте грешките при компилиране
 
     let array1 = [1, 2, 3];

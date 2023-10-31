@@ -3,14 +3,15 @@
 Има няколко начина за разгъване на `Option` и връщане на стойност по
 подразбиране, ако проверяваната стойност е `None`. За да изберем най-подходящия
 начин, трябва да преценим следното:
-* дали искаме алчно или лениво изчисление?
+* дали ни е нужно алчно или лениво изчисление на подадения запасен аргумент?
 * дали трябва да запазим първоначалната празна стойност, или да я променим на място?
 
-##  `or()` може да се използва верижно, изчислява алчно, не пипа празната стойност
+##  методът `or` – верижен, алчен, не пипа празната стойност
 
-`or()` може да се изпълнява верижно и изчислява аргументите си алчно, както се
-вижда от следващия пример. Забележете, че понеже аргументите се оценяват алчно,
-стойностите на подадените на `or` аругменти биват преместени.
+`pub fn or(self, optb: Option<T>) -> Option<T>` може да се изпълнява верижно
+(няколко пъти последователно), а запасният му аргумент се изчислява алчно, както
+се вижда от следващия пример. Забележете, че понеже аргументът бива оценен
+алчно, стойността на подадената на `or` променлива бива преместена.
 
 ```rust,editable
 #[derive(Debug)] 
@@ -35,10 +36,11 @@ fn main() {
  }
 ```
 
-##  `or_else()` може да се извиква верижно, изчислява лениво, не пипа празната стойност
+##  методът `or_else` – верижен, ленив, не пипа празната стойност
 
-Друга възможност е да ползвате `or_else`. Тя се извиква също верижно и оценява
-аргументите си лениво. Вижте следния пример.
+Друга възможност е да ползвате `pub fn or_else<F>(self, f: F) -> Option<T> where F: FnOnce() -> Option<T>,`.
+Той също може да бъде извикан верижно, а подаденият му като запасен аргумент,
+който е функция или затваряне, бива изчислен лениво. Вижте следния пример.
 
 ```rust,editable
 #[derive(Debug)] 
@@ -65,12 +67,13 @@ fn main() {
 }
 ```
 
-##  `get_or_insert()` Изчислява аргументите си алчно, променя празната стойност на място
+##  методът `get_or_insert` – алчен, променя празната стойност на място
 
 За да се подсигурим, че даден `Избор` съдържа стойност, можем да ползваме
-`get_or_insert`, за да го променим на място, като му дадем стойност по
-подразбиране. Забележете, че `get_or_insert` изчислява параметъра си алчно,
-така че стойността на променливата `apple` е преместена:
+`pub fn get_or_insert(&mut self, value: T) -> &mut T`, за да го променим на място,
+като му дадем стойност по подразбиране. Забележете, че `get_or_insert`
+изчислява запасния аргумент алчно, така че стойността на променливата `apple`
+бива преместена:
 
 ```rust,editable
 #[derive(Debug)]
@@ -90,10 +93,11 @@ fn main() {
 }
 ```
 
-##  `get_or_insert_with()` изчислява аргументите си лениво, променя празната стойност на място
+## методът `get_or_insert_with` – ленив, променя празната стойност на място
 
 Вместо изрично да подаваме стойност за връщане, можем да подадем затваряне на
-`get_or_insert_with`, както следва:
+`pub fn get_or_insert_with<F>(&mut self, f: F) -> &mut T where F: FnOnce() -> T,`,
+както следва:
 
 ```rust,editable
 #[derive(Debug)] 
@@ -107,7 +111,7 @@ fn main() {
     };
     let first_available_fruit = my_fruit
         .get_or_insert_with(get_lemon_as_fallback);
-    println!("first_available_fruit is: {:?}", first_available_fruit);
+    println!("first_available_fruit е: {:?}", first_available_fruit);
     println!("my_fruit е: {:?}", my_fruit);
     // Предоставяме лимон в запас
     // first_available_fruit is: Lemon
@@ -115,21 +119,21 @@ fn main() {
 
     // Ако Option има стойност, тя не се променя и затварянето не се извиква
     let mut my_apple = Some(Fruit::Apple);
-    let should_be_apple = my_apple.get_or_insert_with(get_lemon_as_fallback);
-    println!("should_be_apple is: {:?}", should_be_apple);
-    println!("my_apple is unchanged: {:?}", my_apple);
+    let ше_да_е_ябълка = my_apple.get_or_insert_with(get_lemon_as_fallback);
+    println!("ше_да_е_ябълка е: {:?}", ше_да_е_ябълка);
+    println!("my_apple не е променена: {:?}", my_apple);
     // Изходът е, както следва. Забележете, че затварянето
     // `get_lemon_as_fallback` не е извикано.
-    // should_be_apple is: Apple
-    // my_apple is unchanged: Some(Apple)
+    // ше_да_е_ябълка is: Apple
+    // my_apple не е променена: Some(Apple)
 }
 ```
 
 ### Вижте също:
 
-[`closures`][closures], [`get_or_insert`][get_or_insert], [`get_or_insert_with`][get_or_insert_with], ,[`moved variables`][moved], [`or`][or], [`or_else`][or_else]
+[Затваряния][closures], [`get_or_insert`][get_or_insert], [`get_or_insert_with`][get_or_insert_with], [`moved variables`][moved], [`or`][or], [`or_else`][or_else]
 
-[closures]: https://doc.rust-lang.org/book/ch13-01-closures.html
+[closures]: ../../fn/closures.md
 [get_or_insert]: https://doc.rust-lang.org/core/option/enum.Option.html#method.get_or_insert
 [get_or_insert_with]: https://doc.rust-lang.org/core/option/enum.Option.html#method.get_or_insert_with
 [moved]: https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html

@@ -9,7 +9,7 @@
 различните типове грешки така, че да са съставими и лесни  за взаимодействие.
 
 В следващия код две извиквания на `unwrap` създават различни типове грешки.
-`Vec::first` връща `Option`, докато `parse::<i32>` връща стойост от тип
+`Vec::first` връща `Option`, докато `parse::<i32>` връща стойност от тип
 `Result<i32, ParseIntError>`:
 
 ```rust,editable,ignore,mdbook-runnable
@@ -23,12 +23,12 @@ fn main() {
     let empty = vec![];
     let strings = vec!["tofu", "93", "18"];
 
-    println!("The first doubled is {}", double_first(numbers));
+    println!("Първото удвоено е {}", double_first(numbers));
 
-    println!("The first doubled is {}", double_first(empty));
+    println!("Първото удвоено е {}", double_first(empty));
     // Грешка 1: входният вектор е празен
 
-    println!("The first doubled is {}", double_first(strings));
+    println!("Първото удвоено е {}", double_first(strings));
     // Грешка 2: първата стойност не може да бъде сведена до число
 }
 ```

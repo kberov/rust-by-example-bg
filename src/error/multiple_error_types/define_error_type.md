@@ -35,7 +35,7 @@ struct DoubleError;
 // без да променим нашите типове така, че те да носят тези данни със себе си.
 impl fmt::Display for DoubleError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "invalid first item to double")
+        write!(f, "Първият член не може да бъде удвоен.")
     }
 }
 
@@ -53,8 +53,8 @@ fn double_first(vec: Vec<&str>) -> Result<i32> {
 
 fn print(result: Result<i32>) {
     match result {
-        Ok(n) => println!("The first doubled is {}", n),
-        Err(e) => println!("Error: {}", e),
+        Ok(n) => println!("Първото удвоено е {}", n),
+        Err(e) => println!("Грешка: {}", e),
     }
 }
 

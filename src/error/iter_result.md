@@ -9,13 +9,13 @@ fn main() {
         .into_iter()
         .map(|s| s.parse::<i32>())
         .collect();
-    println!("Results: {:?}", numbers);
+    println!("Резултати: {:?}", numbers);
 }
 ```
 
 Да видим как може да се подходи.
 
-## Да пропускаме провалените опити с помощта на `filter_map()`
+## Да пропускаме неуспешно обработените единици с помощта на `filter_map()`
 
 `filter_map` извиква функция и филтрира резултатите, които са `None`.
 
@@ -26,7 +26,7 @@ fn main() {
         .into_iter()
         .filter_map(|s| s.parse::<i32>().ok())
         .collect();
-    println!("Results: {:?}", numbers);
+    println!("Резултати: {:?}", numbers);
 }
 ```
 
@@ -44,8 +44,8 @@ fn main() {
         .map(|s| s.parse::<u8>())
         .filter_map(|r| r.map_err(|e| errors.push(e)).ok())
         .collect();
-    println!("Numbers: {:?}", numbers);
-    println!("Errors: {:?}", errors);
+    println!("Числа: {:?}", numbers);
+    println!("Грешки: {:?}", errors);
 }
 ```
 
@@ -63,7 +63,7 @@ fn main() {
         .into_iter()
         .map(|s| s.parse::<i32>())
         .collect();
-    println!("Results: {:?}", numbers);
+    println!("Резултати: {:?}", numbers);
 }
 ```
 
@@ -78,8 +78,8 @@ fn main() {
         .into_iter()
         .map(|s| s.parse::<i32>())
         .partition(Result::is_ok);
-    println!("Numbers: {:?}", numbers);
-    println!("Errors: {:?}", errors);
+    println!("Числа: {:?}", numbers);
+    println!("Грешки: {:?}", errors);
 }
 ```
 
@@ -95,7 +95,7 @@ fn main() {
         .partition(Result::is_ok);
     let numbers: Vec<_> = numbers.into_iter().map(Result::unwrap).collect();
     let errors: Vec<_> = errors.into_iter().map(Result::unwrap_err).collect();
-    println!("Numbers: {:?}", numbers);
-    println!("Errors: {:?}", errors);
+    println!("Числа: {:?}", numbers);
+    println!("Грешки: {:?}", errors);
 }
 ```

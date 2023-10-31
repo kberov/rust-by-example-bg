@@ -34,14 +34,15 @@ mdbook serve
 
 [CONTRIBUTING.md]: https://github.com/kberov/rust-by-example-bg/blob/master/CONTRIBUTING.md
 
-## Преводи на други езици
+## Преводи
 
-* [Chinese](https://github.com/rust-lang-cn/rust-by-example-cn)
-* [Japanese](https://github.com/rust-lang-ja/rust-by-example-ja)
-* [French](https://github.com/Songbird0/FR_RBE)
-* [Russian](https://github.com/ruRust/rust-by-example)
-* [Vietnamese](https://github.com/EyesCrypto-Insights/rust-by-example-vn)
-* [Portuguese](https://github.com/nazarepiedady/rust-com-exemplos)
+* [български](https://github.com/kberov/rust-by-example-bg)
+* [китайски](https://github.com/rust-lang-cn/rust-by-example-cn)
+* [японски](https://github.com/rust-lang-ja/rust-by-example-ja)
+* [френски](https://github.com/Songbird0/FR_RBE)
+* [руски](https://github.com/ruRust/rust-by-example)
+* [виетнамски](https://github.com/EyesCrypto-Insights/rust-by-example-vn)
+* [португалски](https://github.com/nazarepiedady/rust-com-exemplos)
 
 ## За този превод
 

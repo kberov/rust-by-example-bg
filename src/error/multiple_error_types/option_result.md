@@ -17,12 +17,12 @@ fn main() {
     let empty = vec![];
     let strings = vec!["tofu", "93", "18"];
 
-    println!("The first doubled is {:?}", double_first(numbers));
+    println!("Първото удвоено е {:?}", double_first(numbers));
 
-    println!("The first doubled is {:?}", double_first(empty));
+    println!("Първото удвоено е {:?}", double_first(empty));
     // Грешка 1: входният вектор е празен
 
-    println!("The first doubled is {:?}", double_first(strings));
+    println!("Първото удвоено е {:?}", double_first(strings));
     // Грешка 2: първата стойност не може да бъде сведена до число
 }
 ```
@@ -48,9 +48,9 @@ fn main() {
     let empty = vec![];
     let strings = vec!["tofu", "93", "18"];
 
-    println!("The first doubled is {:?}", double_first(numbers));
-    println!("The first doubled is {:?}", double_first(empty));
-    println!("The first doubled is {:?}", double_first(strings));
+    println!("Първото удвоено е {:?}", double_first(numbers));
+    println!("Първото удвоено е {:?}", double_first(empty));
+    println!("Първото удвоено е {:?}", double_first(strings));
 }
 ```
 

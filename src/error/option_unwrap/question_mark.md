@@ -8,8 +8,8 @@
 ```rust,editable
 fn next_birthday(current_age: Option<u8>) -> Option<String> {
 	// Ако `current_age` е `None`, това връща `None`.
-	// Ако `current_age` е `Some`, вътрешната стойност от тип `u8` бива
-    // присвоена на `next_age`
+	// Ако `current_age` е `Some`, вътрешната стойност от тип `u8` + 1
+    // бива присвоена на `next_age`
     let next_age: u8 = current_age? + 1;
     Some(format!("Следващата година ще съм на {} години.", next_age))
 }

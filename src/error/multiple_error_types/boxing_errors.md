@@ -21,7 +21,7 @@ struct EmptyVec;
 
 impl fmt::Display for EmptyVec {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Невъзможно е да се удвои първия член.")
+        write!(f, "Първият член не може да бъде удвоен.")
     }
 }
 

@@ -5,7 +5,7 @@
     - [Форматиран изход](hello/print.md)
         - [Debug](hello/print/print_debug.md)
         - [Display](hello/print/print_display.md)
-            - [Проверка: Списък](hello/print/print_display/testcase_list.md)
+            - [Проверка: List](hello/print/print_display/testcase_list.md)
         - [Форматиране](hello/print/fmt.md)
 - [Първични типове](primitives.md)
     - [Буквални стойности и оператори](primitives/literals.md)

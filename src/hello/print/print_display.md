@@ -1,4 +1,4 @@
-# За показване (Display)
+# Display
 
 `fmt::Debug` рядко показва данните по желания начин. Често е по-добре сами
 да нагодим начина на показване. Осъществяването става така:
@@ -31,8 +31,8 @@ impl fmt::Display for Structure {
 типове? Например ако `std` осъществеше един единствен начин за показване за
 всички `Vec<T>`, какъв щеше да е той? Би ли бил някой от тези двата?
 
-* `Vec<path>`: `/:/etc:/home/username:/bin` (split on `:`)
-* `Vec<number>`: `1,2,3` (split on `,`)
+* `Vec<path>`: `/:/etc:/home/username:/bin` (разделяме с `:`)
+* `Vec<number>`: `1,2,3` (разделяме със `,`)
 
 Не, защото няма съвършен начин за показване на всички типове и библиотеката
 `std` не налага никакъв. `fmt::Display` не е осъществен за `Vec<T>` и за
@@ -45,8 +45,8 @@ impl fmt::Display for Structure {
 ```rust,editable
 use std::fmt; // Внасяме `fmt`.
 
-// Структура, съдържаща две числа. Ще изведем `Debug`, за да сравним изгледа 
-// с осъществения `Display`.
+// Структура, съдържаща две числа. Ще я направим производна на `Debug`,
+// за да сравним изгледа с осъществения от нас `Display`.
 #[derive(Debug)]
 struct MinMax(i64, i64);
 
@@ -68,7 +68,7 @@ struct Point2D {
 // По подобен начин осъществяваме `Display` за `Point2D`.
 impl fmt::Display for Point2D {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        // Показваме само `x` and `y`.
+        // Показваме само `x` и `y`.
         write!(f, "x: {}, y: {}", self.x, self.y)
     }
 }
@@ -83,7 +83,7 @@ fn main() {
     let big_range =   MinMax(-300, 300);
     let small_range = MinMax(-3, 3);
 
-    println!("Голямата поредица е {big}, а малката е {small}",
+    println!("Големият порядък е {big}, а малкият е {small}",
              small = small_range,
              big = big_range);
 
@@ -129,7 +129,8 @@ Debug: Complex { real: 3.3, imag: 7.2 }
 
 ### Вижте също:
 
-[`derive`][derive], [`std::fmt`][fmt], [`macros`][macros], [`struct`][structs], [`trait`][traits] и [`use`][use]
+[Производни][derive], [`std::fmt`][fmt], [`macro_rules!`][macros],
+[Структури][structs], [Отличители][traits] и [Обявлението `use`][use]
 
 [derive]: ../../trait/derive.md
 [fmt]: https://doc.rust-lang.org/std/fmt/

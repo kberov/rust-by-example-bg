@@ -1,6 +1,6 @@
 # Съчетатели: `and_then`
 
-Описахме `map()` като начин за верижно изпълнение и опростяване  на изявления
+Описахме `map()` като начин за верижно изпълнение и опростяване на изявления
 `match`. Но ако използваме `map()` с функция, която връща `Option<T>`,
 получаваме вгнезден избор `Option<Option<T>>`. В такива случаи, ако имаме
 верижно изпълнение, може да стане объркващо. Тук идва редът на друг съчетател,
@@ -11,7 +11,7 @@
 резултата. Ако изборът (`Option`) е `None`, тогава връща `None`.
 
 В следващия пример `cookable_v3()` връща `Option<Food>`. 
-Ако ползваме `map()` вместо `and_then()` щяхме да получим 
+Ако ползвахме `map()` вместо `and_then()`, щяхме да получим 
 `Option<Option<Food>>`, което е неподходящ тип за `eat()`.
 
 ```rust,editable
@@ -28,7 +28,7 @@ fn have_ingredients(food: Food) -> Option<Food> {
     }
 }
 
-// Имаме рецепти за всичко освен Кордон Блю.
+// Имаме рецепти за всичко освен за Кордон Бльо.
 fn have_recipe(food: Food) -> Option<Food> {
     match food {
         Food::CordonBleu => None,
@@ -36,7 +36,7 @@ fn have_recipe(food: Food) -> Option<Food> {
     }
 }
 
-// За да направим ястие, ни трябват състваки и рецепта.
+// За да направим ястие, ни трябват и рецептата, и съставките.
 // Можем да представим логиката като верига от съвпадения `match`:
 fn cookable_v1(food: Food) -> Option<Food> {
     match have_recipe(food) {
@@ -58,8 +58,8 @@ fn cookable_v2(food: Food) -> Option<Food> {
 
 fn eat(food: Food, day: Day) {
     match cookable_v3(food) {
-        Some(food) => println!("Yay! On {:?} we get to eat {:?}.", day, food),
-        None       => println!("Oh no. We don't get to eat on {:?}?", day),
+        Some(food) => println!("Еха! В {:?} ще ядем {:?}.", day, food),
+        None       => println!("О, не. Няма да ядем в {:?}?", day),
     }
 }
 
@@ -74,7 +74,7 @@ fn main() {
 
 ### Вижте също:
 
-[closures][closures], [`Option`][option], [`Option::and_then()`][and_then], and [`Option::flatten()`][flatten]
+[затваряния][closures], [`Option`][option], [`Option::and_then()`][and_then] и [`Option::flatten()`][flatten]
 
 [closures]: ../../fn/closures.md
 [option]: https://doc.rust-lang.org/std/option/enum.Option.html

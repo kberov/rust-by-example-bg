@@ -1,13 +1,13 @@
 # Грешки в Кутии
 
 Един начин за писане на прост код, запазвайки първоначалните грешки, е да
-ползваме [`Кутии`][box]. За съжаление в този случай истинската грешка става
+ползваме [`Кутии`][box]. За съжаление, в този случай истинската грешка става
 известна едва по време на изпълнение и не е [определена
 статично][dynamic_dispatch].
 
 С помощта на стандартната библиотека можем да слагаме нашите грешки в кутии.
-`Box` може да превръща от всеки тип, осъществяващ отличителя `Error` в обект от
-тип `Box<Error>` чрез [`From`][from].
+`Box` може да превръща от всеки тип, осъществяващ отличителя `Error`, в обект от
+тип `Box<Error>` посредством [`From`][from].
 
 ```rust,editable
 use std::error;
@@ -57,7 +57,7 @@ fn main() {
 
 ### Вижте също:
 
-[Dynamic dispatch][dynamic_dispatch] and [`Error` trait][error]
+[Dynamic dispatch][dynamic_dispatch] и [`Error` trait][error]
 
 [box]: https://doc.rust-lang.org/std/boxed/struct.Box.html
 [dynamic_dispatch]: https://doc.rust-lang.org/book/ch17-02-trait-objects.html#trait-objects-perform-dynamic-dispatch

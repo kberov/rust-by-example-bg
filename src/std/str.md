@@ -134,7 +134,7 @@ fn main() {
     // В байтовите низове може да има избягвания на байтове…
     let escaped = b"\x52\x75\x73\x74 as bytes";
     // …но не и на знаци от уникод
-    // let escaped = b"\u{211D} is not allowed";
+    // let escaped = b"\u{211D} не е позволен";
     println!("Някои избегнати байтове: {:?}", escaped);
 
 

@@ -59,4 +59,4 @@ fn main() {
 
 [^asynchronous]: неедновременни – asynchronous; https://www.etymonline.com/word/synchronous https://www.etymonline.com/word/asynchronous
 
-[^communication]: общуване – communication
+[^communication]: общуване, съобщаване – communication

@@ -51,7 +51,7 @@ fn main() {
     });
 
     println!("`mkdir -p a/c/d`");
-    // Рекурсивно създаваме директория. Връща `io::Result<()>`.
+    // Рекурсивно (възвратно) създаваме директория. Връща `io::Result<()>`.
     fs::create_dir_all("a/c/d").unwrap_or_else(|why| {
         println!("! {:?}", why.kind());
     });

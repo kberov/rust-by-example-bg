@@ -15,7 +15,7 @@ enum WebEvent {
     // празна единица `unit`;
     PageLoad,
     PageUnload,
-    // списъчна структура `tuple`;
+    // разнородна поредица `tuple`;
     KeyPress(char),
     Paste(String),
     // или C-образна стурктура (като тези в езика C).

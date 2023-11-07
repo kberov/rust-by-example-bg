@@ -17,7 +17,7 @@ fn main() {
     for i in 0..NTHREADS {
         // Създаваме друга нишка.
         children.push(thread::spawn(move || {
-            println!("this is thread number {}", i);
+            println!("това е нишка номер {}", i);
         }));
     }
 

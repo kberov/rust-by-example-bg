@@ -1,7 +1,7 @@
 # Дъщерни процеси 
 
 Структурата `process::Output` представлява изходът от завършил дъщерен процес,
-а структурата `process::Command` е създател на процеси.
+а структурата `process::Command` е строител на процеси.
 
 ```rust,editable,ignore
 use std::process::Command;
@@ -20,7 +20,7 @@ fn main() {
     } else {
         let s = String::from_utf8_lossy(&output.stderr);
 
-        print!("rustc не успя а стандартната грешка беше:\n{}", s);
+        print!("rustc не успя, а стандартната грешка беше:\n{}", s);
     }
 }
 ```
